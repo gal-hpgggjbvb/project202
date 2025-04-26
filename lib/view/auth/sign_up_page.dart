@@ -83,7 +83,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   children: [
                     Expanded(
                       child: MaterialButton(onPressed: (){
-                        Get.to(() => HomePage()) ;
+                        Get.to(() => const HomePage()) ;
                       },
                         color: Colors.blue,
                         child: const Text("SignUp", style: TextStyle(

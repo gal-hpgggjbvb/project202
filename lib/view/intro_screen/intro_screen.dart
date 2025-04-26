@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:project2/view/auth/sign_in_page.dart';
@@ -19,7 +20,27 @@ final List<CustomIntroPage> introPages = [
 ] ;
 class _IntroScreenState extends State<IntroScreen> {
 
+  @override
+  void initState(){
+    super.initState();
+    //to lock screen rotate
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]) ;
+  }
 
+  // @override
+  // void dispose(){
+  //   //to return rotation
+  //   SystemChrome.setPreferredOrientations([
+  //     DeviceOrientation.portraitUp,
+  //     DeviceOrientation.portraitDown,
+  //     DeviceOrientation.landscapeLeft,
+  //     DeviceOrientation.landscapeRight,
+  //   ]) ;
+  //   super.dispose();
+  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

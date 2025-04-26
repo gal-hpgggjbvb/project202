@@ -18,6 +18,11 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
     //to hide system buttons
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+    //to lock screen rotate
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]) ;
     Future.delayed(const Duration(seconds: 2), () {
       Get.off(() => const IntroScreen()) ;
     });
@@ -25,10 +30,17 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   void dispose() {
-    super.dispose();
     //to return system buttons
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: SystemUiOverlay.values);
+    //to return rotation
+    // SystemChrome.setPreferredOrientations([
+    //   DeviceOrientation.portraitUp,
+    //   DeviceOrientation.portraitDown,
+    //   DeviceOrientation.landscapeLeft,
+    //   DeviceOrientation.landscapeRight,
+    // ]) ;
+    super.dispose();
   }
 
   @override
@@ -55,7 +67,6 @@ class _SplashScreenState extends State<SplashScreen>
                 fontSize: 40,
                 fontFamily: "Dancing_Script"),
           )),
-
         ],
       ),
     );
