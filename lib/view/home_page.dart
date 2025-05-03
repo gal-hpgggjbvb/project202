@@ -1,7 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http ;
+import 'package:project2/main.dart';
+import 'package:project2/view/auth/sign_in_page.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -16,6 +19,20 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.blue,),
+      drawer:  Drawer(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            InkWell(
+              onTap: (){
+                sharedpref!.clear() ;
+                Get.off(() => const SignInPage()) ;
+              },
+              child: const Text("sign out"),
+            ) ,
+          ],
+        ),
+      ),
       body: ListView.builder(
         itemCount: users.length,
         itemBuilder: (context, index) {

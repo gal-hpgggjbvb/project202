@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:project2/middleware/route_middleware.dart';
+import 'package:project2/view/home_page.dart';
 import 'package:project2/view/splash_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+//this variable to go to homepage or login page middleware
+SharedPreferences? sharedpref ;
+void main() async{
   // Lock the app to portrait mode
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -11,6 +16,9 @@ void main() {
     DeviceOrientation.landscapeLeft,
     DeviceOrientation.landscapeRight,
   ]);
+  //this for middleware
+  WidgetsFlutterBinding.ensureInitialized();
+  sharedpref = await SharedPreferences.getInstance() ;
     runApp(const MyApp());}
 
 class MyApp extends StatelessWidget {
@@ -22,7 +30,13 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       theme: ThemeData(fontFamily: "Satoshi"),
       debugShowCheckedModeBanner: false,
-      home: const SplashScreen() ,
+      //home: const SplashScreen() ,
+      getPages: [
+        GetPage(name: "/", page: () => const SplashScreen() , middlewares: [
+          RouteMiddleware() ,
+        ]) ,
+        GetPage(name: "/home", page:() => const HomePage()) ,
+      ],
     );
   }
 }

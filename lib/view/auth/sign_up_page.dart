@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:project2/main.dart';
 import 'package:project2/view/auth/sign_in_page.dart';
 
 import '../home_page.dart';
@@ -84,6 +85,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     Expanded(
                       child: MaterialButton(onPressed: (){
                         Get.to(() => const HomePage()) ;
+                        sharedpref!.setString("id", "1") ;
                       },
                         color: Colors.blue,
                         child: const Text("SignUp", style: TextStyle(
