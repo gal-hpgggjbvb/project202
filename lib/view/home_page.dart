@@ -14,6 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   List<dynamic> users = [] ;
+
   SettingsServices controller = Get.put(SettingsServices()) ;
   @override
   Widget build(BuildContext context) {
@@ -35,40 +36,56 @@ class _HomePageState extends State<HomePage> {
       ),
       body: ListView.builder(
         itemCount: users.length,
-        itemBuilder: (context, index) {
+          itemBuilder: (context , index){
           final user = users[index] ;
-          //final email = user['email'] ;
-          final name = user['user']['name'] ;
-          //final picture = user['picture']['large'] ;
-          return ListTile(
-            leading: CircleAvatar(child: Text('${index+1}')),
-            title: Text('$name'),
-            //subtitle: Text(email),
-            //trailing: CircleAvatar(child: Image.network(picture),),
-          ) ;
-        },
-      ),
+          final email = user['email'] ;
+          final nat = user['nat'] ;
+          final name = user['name']['last'] ;
+          final photourl = user['picture']['large'] ;
+        return ListTile(
+          title: Text(name),
+          subtitle: Text(email),
+          leading: Image.network(photourl),
+          // leading: CircleAvatar(
+          //     child: Text('${index+1}')),
+          trailing: Text(nat),
+        );
+      }),
       floatingActionButton: FloatingActionButton(
         onPressed: fetchUsers ,
       ),
     );
   }
   void fetchUsers() async{
-    print("here users ********************************") ;
-    const url = 'https://api.postman.com/collections/35174432-9a643374-4e58-4fb9-bb52-1e1e8a8d964d?access_key=PMAT-01JDJ7Q60YY9CT16S2AJ5M29NZ' ;
+    print("fetch called") ;
+    const url = "https://randomuser.me/api/?results=2" ;
     final uri = Uri.parse(url) ;
     final response = await http.get(uri) ;
     final body = response.body ;
     final json = jsonDecode(body) ;
     setState(() {
-      users = json['data'] ;
+      users = json['results'] ;
     });
-    print('users fetched ***********************************') ;
+    print("fetch completed") ;
   }
 }
 
 
-
+// ListView.builder(
+// itemCount: users.length,
+// itemBuilder: (context, index) {
+// final user = users[index] ;
+// //final email = user['email'] ;
+// final name = user['user']['name'] ;
+// //final picture = user['picture']['large'] ;
+// return ListTile(
+// leading: CircleAvatar(child: Text('${index+1}')),
+// title: Text('$name'),
+// //subtitle: Text(email),
+// //trailing: CircleAvatar(child: Image.network(picture),),
+// ) ;
+// },
+// ),
 
 // import 'dart:ui';
 //
