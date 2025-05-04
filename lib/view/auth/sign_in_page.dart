@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:project2/main.dart';
+import 'package:project2/services/settings_services.dart';
 import 'package:project2/view/auth/sign_up_page.dart';
 import 'package:project2/view/home_page.dart';
 
@@ -14,6 +15,7 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
 
+  SettingsServices controller = Get.put(SettingsServices()) ;
   @override
   void initState(){
     super.initState();
@@ -105,7 +107,7 @@ class _SignInPageState extends State<SignInPage> {
                         Expanded(
                           child: MaterialButton(onPressed: (){
                             Get.to(() =>  const HomePage()) ;
-                            sharedpref!.setString("id", "1") ;
+                            controller.sharedpref.setString("id", "1") ;
                           },
                             color: Colors.blue,
                             child: const Text("SignIn", style: TextStyle(

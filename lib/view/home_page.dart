@@ -1,9 +1,8 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http ;
-import 'package:project2/main.dart';
+import 'package:project2/services/settings_services.dart';
 import 'package:project2/view/auth/sign_in_page.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,6 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   List<dynamic> users = [] ;
+  SettingsServices controller = Get.put(SettingsServices()) ;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             InkWell(
               onTap: (){
-                sharedpref!.clear() ;
+                controller.sharedpref.clear() ;
                 Get.off(() => const SignInPage()) ;
               },
               child: const Text("sign out"),

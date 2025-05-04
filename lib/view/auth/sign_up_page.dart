@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:project2/main.dart';
+import 'package:project2/services/settings_services.dart';
 import 'package:project2/view/auth/sign_in_page.dart';
 
 import '../home_page.dart';
@@ -19,6 +20,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController emailcontroller = TextEditingController();
   final TextEditingController passwordcontroller = TextEditingController();
   bool _obscureText = true ;
+  SettingsServices controller = Get.put(SettingsServices()) ;
   @override
   Widget build(BuildContext context) {
     //double width = MediaQuery.of(context).size.width;
@@ -85,7 +87,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     Expanded(
                       child: MaterialButton(onPressed: (){
                         Get.to(() => const HomePage()) ;
-                        sharedpref!.setString("id", "1") ;
+                        controller.sharedpref.setString("id", "1") ;
                       },
                         color: Colors.blue,
                         child: const Text("SignUp", style: TextStyle(
