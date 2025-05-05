@@ -50,6 +50,7 @@ dependencies:
   introduction_screen: ^3.1.14
   another_flutter_splash_screen: ^1.2.1
   popover: ^0.3.0+1
+  dio: ^5.8.0+1
 
 dev_dependencies:
   flutter_test:
