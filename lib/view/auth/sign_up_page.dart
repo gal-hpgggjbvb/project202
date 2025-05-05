@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
-import 'package:project2/main.dart';
+import 'package:project2/controller/sign_up_controller.dart';
 import 'package:project2/services/settings_services.dart';
 import 'package:project2/view/auth/sign_in_page.dart';
-
 import '../home_page.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -16,11 +14,10 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
 
-  final TextEditingController usernamecontroller = TextEditingController();
-  final TextEditingController emailcontroller = TextEditingController();
-  final TextEditingController passwordcontroller = TextEditingController();
-  bool _obscureText = true ;
-  SettingsServices controller = Get.put(SettingsServices()) ;
+  bool _obscureText1 = true ;
+  bool _obscureText2 = true ;
+  SignUpController signUpController = Get.put(SignUpController()) ;
+  SettingsServices serviceController = Get.put(SettingsServices()) ;
   @override
   Widget build(BuildContext context) {
     //double width = MediaQuery.of(context).size.width;
@@ -32,89 +29,145 @@ class _SignUpPageState extends State<SignUpPage> {
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: ListView(
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                //todo
-                SizedBox(
-                  child: Lottie.asset("images/Animation - 1729504255945.json"),
-                ) ,
-                const Text("Hello.." , style: TextStyle(fontSize: 30 , fontWeight: FontWeight.w600),) ,
-                const Text("Let's Make a New Account" , style: TextStyle(fontSize: 25 , fontWeight: FontWeight.w400),) ,
-                const SizedBox(height: 12,) ,
-                TextField(
-                  controller: usernamecontroller,
-                  decoration: const InputDecoration(
-                      focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue)
-                      ),
-                      hintText: "Your Name"),
-                  maxLength: 20,
-                  onChanged: (val){},
-                ) ,
-                TextField(
-                  controller: emailcontroller,
-                  decoration: const InputDecoration(
-                      focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue)
-                      ),
-                      hintText: "Your Email"),
-                  onChanged: (val){},
-                ) ,
-                const SizedBox(height: 25,) ,
-                TextField(
-                  controller: passwordcontroller,
-                  obscureText: _obscureText,
-                  maxLength: 20,
-                  decoration: InputDecoration(
-                      focusColor: Colors.red ,
-                      focusedBorder: const UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue)
-                      ),
-                      hintText: "Your Password" ,
-                      suffixIcon: IconButton(
-                        icon: Icon(_obscureText? Icons.visibility : Icons.visibility_off) ,
-                        onPressed: (){
-                          _obscureText = !_obscureText ;
-                          setState(() { });
-                        },)
-                  ),
-                  onChanged: (val){},
-                ) ,
-                const SizedBox(height: 20,) ,
-                Row(
-                  children: [
-                    Expanded(
-                      child: MaterialButton(onPressed: (){
-                        Get.to(() => const HomePage()) ;
-                        controller.sharedpref.setString("id", "1") ;
-                      },
-                        color: Colors.blue,
-                        child: const Text("SignUp", style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20 , fontWeight: FontWeight.w400),),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text("Already Have An Account?", style: TextStyle(
-                      //color: Colors.white,fontSize: 25 , fontWeight: FontWeight.w600
-                    ),
-                    ),
-                    TextButton(onPressed: (){
-                      Get.to(() => const SignInPage()) ;
+            Form(
+              key: signUpController.signUpFormKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //todo
+                  // SizedBox(
+                  //   child: Lottie.asset("images/Animation - 1729504255945.json"),
+                  // ) ,
+                  const SizedBox(height: 70,) ,
+                  const Text("Hello.." , style: TextStyle(fontSize: 30 , fontWeight: FontWeight.w600),) ,
+                  const Text("Let's Make a New Account" , style: TextStyle(fontSize: 25 , fontWeight: FontWeight.w400),) ,
+                  const SizedBox(height: 40,) ,
+                  //todo text-field for user name
+                  TextFormField(
+                    controller: signUpController.usernameController,
+                    decoration: const InputDecoration(
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.blue)),
+                        hintText: "Your Name"),
+                    maxLength: 20,
+                    // onChanged: (val){},
+                    validator: (value){
+                      if(value!.isEmpty){
+                        return "this field can't be empty" ;
+                      }
                     },
-                      child: const Text("Sign In", style: TextStyle(
-                        color: Colors.blue,
-                      ),
-                      ),
+                  ) ,
+                  //todo text-field for email
+                  TextFormField(
+                    controller: signUpController.emailController,
+                    decoration: const InputDecoration(
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.blue)),
+                        hintText: "Your Email"),
+                    // onChanged: (val){},
+                    validator: (value){
+                      if(value!.isEmpty){
+                        return "this field can't be empty" ;
+                      }
+                    },
+                  ) ,
+                  const SizedBox(height: 25,) ,
+                  //todo text-field for password
+                  TextFormField(
+                    controller: signUpController.passwordController,
+                    obscureText: _obscureText1,
+                    // maxLength: 20,
+                    decoration: InputDecoration(
+                        focusColor: Colors.red ,
+                        focusedBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.blue)),
+                        hintText: "Your Password" ,
+                        suffixIcon: IconButton(
+                          icon: Icon(_obscureText1? Icons.visibility : Icons.visibility_off) ,
+                          onPressed: (){
+                            _obscureText1 = !_obscureText1 ;
+                            setState(() { });
+                          },)
                     ),
-                  ],
-                ),
-              ],
+                    // onChanged: (val){},
+                    validator: (value){
+                      if(value!.isEmpty){
+                        return "this field can't be empty" ;
+                      }
+                    },
+                  ) ,
+                  const SizedBox(height: 10,) ,
+                  //todo text-field for password confirm
+                  TextFormField(
+                    controller: signUpController.passwordConfirmController,
+                    obscureText: _obscureText2,
+                    // maxLength: 20,
+                    decoration: InputDecoration(
+                        focusColor: Colors.red ,
+                        focusedBorder: const UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.blue)),
+                        hintText: "Confirm Password" ,
+                        suffixIcon: IconButton(
+                          icon: Icon(_obscureText2? Icons.visibility : Icons.visibility_off) ,
+                          onPressed: (){
+                            _obscureText2 = !_obscureText2 ;
+                            setState(() { });
+                          },)
+                    ),
+                    // onChanged: (val){},
+                    validator: (value){
+                      if(value!.isEmpty){
+                        return "this field can't be empty" ;
+                      }
+                      //todo try change it to text to operate
+                      if(value != signUpController.passwordController.text){
+                        return "your password doesn't match" ;
+                      }
+                    },
+                  ) ,
+                  const SizedBox(height: 220,) ,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: MaterialButton(onPressed: (){
+                          // Get.to(() =>  const HomePage()) ;
+                          if(signUpController.signUpFormKey.currentState!.validate()){
+                            //to keep in homepage when start again
+                            serviceController.sharedpref.setString("id", "1") ;
+                            Get.to(() => const HomePage()) ;
+                          }
+                          else{
+                            print("not valid ***************************") ;
+                            // print("${signInController.emailController}") ;
+                          }
+                          },
+                          color: Colors.blue,
+                          child: const Text("SignUp", style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20 , fontWeight: FontWeight.w400),),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Already Have An Account?", style: TextStyle(
+                        //color: Colors.white,fontSize: 25 , fontWeight: FontWeight.w600
+                      ),
+                      ),
+                      TextButton(onPressed: (){
+                        Get.to(() => const SignInPage()) ;
+                      },
+                        child: const Text("Sign In", style: TextStyle(
+                          color: Colors.blue,
+                        ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         ),

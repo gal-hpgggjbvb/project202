@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http ;
+import 'package:project2/model/user_data.dart';
 import 'package:project2/services/settings_services.dart';
 import 'package:project2/view/auth/sign_in_page.dart';
 class HomePage extends StatefulWidget {
@@ -13,7 +14,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  List<dynamic> users = [] ;
+  List<UserData> users = [] ;
 
   SettingsServices controller = Get.put(SettingsServices()) ;
   @override
@@ -38,17 +39,17 @@ class _HomePageState extends State<HomePage> {
         itemCount: users.length,
           itemBuilder: (context , index){
           final user = users[index] ;
-          final email = user['email'] ;
-          final nat = user['nat'] ;
-          final name = user['name']['last'] ;
-          final photourl = user['picture']['large'] ;
+
+          final email = user.email ;
+          final nat = user.nat ;
+
         return ListTile(
-          title: Text(name),
+          title: Text(nat),
           subtitle: Text(email),
-          leading: Image.network(photourl),
-          // leading: CircleAvatar(
-          //     child: Text('${index+1}')),
-          trailing: Text(nat),
+          // leading: Image.network(photourl),
+          leading: CircleAvatar(
+              child: Text('${index+1}')),
+          // trailing: Text(nat),
         );
       }),
       floatingActionButton: FloatingActionButton(
@@ -63,8 +64,15 @@ class _HomePageState extends State<HomePage> {
     final response = await http.get(uri) ;
     final body = response.body ;
     final json = jsonDecode(body) ;
+    final results = json['results'] as List<dynamic> ;
+    final transformed = results.map((e) {
+      return UserData(
+          nat: e['nat'],
+          email: e['email'] ,
+      ) ;
+    }).toList() ;
     setState(() {
-      users = json['results'] ;
+      users = transformed ;
     });
     print("fetch completed") ;
   }
