@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:project2/cache/cache_helper.dart';
 import 'package:project2/middleware/route_middleware.dart';
+import 'package:project2/services/services_locator.dart';
 import 'package:project2/services/settings_services.dart';
 import 'package:project2/view/home_page.dart';
 import 'package:project2/view/splash_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-void main() async{
+void main() async {
   // Lock the app to portrait mode
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -17,12 +18,14 @@ void main() async{
   ]);
   //this for middleware
   WidgetsFlutterBinding.ensureInitialized();
-  await initServices() ;
-    runApp(const MyApp());
+  await initServices();
+  //to take one object of the class
+  await getIt<CacheHelper>().init() ;
+  runApp(const MyApp());
 }
 
-Future initServices() async{
-  await Get.putAsync(() => SettingsServices().init()) ;
+Future initServices() async {
+  await Get.putAsync(() => SettingsServices().init());
 }
 
 class MyApp extends StatelessWidget {
@@ -36,10 +39,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       //home: const SplashScreen() ,
       getPages: [
-        GetPage(name: "/", page: () => const SplashScreen() , middlewares: [
-          RouteMiddleware() ,
-        ]) ,
-        GetPage(name: "/home", page:() => const HomePage()) ,
+        GetPage(name: "/", page: () => const SplashScreen(), middlewares: [
+          RouteMiddleware(),
+        ]),
+        GetPage(name: "/home", page: () => const HomePage()),
       ],
     );
   }
