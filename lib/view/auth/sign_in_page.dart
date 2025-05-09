@@ -1,7 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:project2/api/dio_consumer.dart';
 import 'package:project2/controller/sign_in_controller.dart';
 import 'package:project2/controller/sign_status.dart';
 import 'package:project2/services/settings_services.dart';
@@ -29,7 +31,7 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   bool _obscureText = true; // For toggling password visibility icon
-  SignInController signInController = Get.put(SignInController());
+  SignInController signInController = Get.put(SignInController(DioConsumer(Dio())));
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +128,10 @@ class _SignInPageState extends State<SignInPage> {
                         builder: (controller) {
                           return MaterialButton(
                             onPressed: () {
-                              controller.signSuccess();
+                              controller.signSuccess() ;
+                              controller.signLoading() ;
+                              controller.signFailure() ;
+                              // signInController.signIn() ;
                               // // Get.to(() =>  const HomePage()) ;
                               // if(signInController.signInFormKey.currentState!.validate()){
                               //   //to keep in homepage when start again

@@ -20,7 +20,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initServices();
   //to take one object of the class
-  await getIt<CacheHelper>().init() ;
+  await CacheHelper().init() ;
+  // await getIt<CacheHelper>().init() ;
   runApp(const MyApp());
 }
 
