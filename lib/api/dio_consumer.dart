@@ -1,13 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:project2/api/api_consumer.dart';
+import 'package:project2/api/end_points.dart';
 import 'package:project2/model/errors/exceptions.dart';
 
 class DioConsumer extends ApiConsumer {
   final Dio dio;
 
-  DioConsumer(this.dio) {
-    //to make one time used base url
-    // dio.options.baseUrl = "" ;
+  DioConsumer({required this.dio}) {
+    //to make one time used base url (Version1)
+    // dio.options.baseUrl = "https://food-api-omega.vercel.app/api/v1/" ;
+    //to make one time used base url (V2)
+    // dio.options.baseUrl = EndPoint.baseUrl ;
     //to add my interceptor
     //dio.interceptors.add(ApiInterceptor()) ;
     //to print my request info

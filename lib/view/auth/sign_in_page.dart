@@ -31,7 +31,7 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   bool _obscureText = true; // For toggling password visibility icon
-  SignInController signInController = Get.put(SignInController(DioConsumer(Dio())));
+  SignInController signInController = Get.put(SignInController(DioConsumer(dio: Dio())));
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,11 @@ class _SignInPageState extends State<SignInPage> {
       //for keyboard when shows up
       resizeToAvoidBottomInset: true,
       //appBar: AppBar(),
-      body: Padding(
+      body:
+    //   GetBuilder<SignInController>(
+    //     init: SignInController(),
+    // builder: (controller) =>
+      Padding(
         padding: const EdgeInsets.only(
           left: 15.0,
           right: 15.0,
@@ -48,7 +52,8 @@ class _SignInPageState extends State<SignInPage> {
         child: ListView(
           children: [
             SizedBox(
-              child: Lottie.asset("images/Animation - 1729504255945.json"),
+              // child: Lottie.asset("images/Animation - 1729504255945.json"),
+              child: Image.asset("images/astronomy-1.jpg"),
             ),
             Form(
               key: signInController.signInFormKey,
@@ -128,10 +133,12 @@ class _SignInPageState extends State<SignInPage> {
                         builder: (controller) {
                           return MaterialButton(
                             onPressed: () {
-                              controller.signSuccess() ;
-                              controller.signLoading() ;
-                              controller.signFailure() ;
-                              // signInController.signIn() ;
+                              // controller.signSuccess() ;
+                              // controller.signLoading() ;
+                              // controller.signFailure() ;
+                              if(signInController.signInFormKey.currentState!.validate()){
+                                signInController.signIn() ;
+                              }
                               // // Get.to(() =>  const HomePage()) ;
                               // if(signInController.signInFormKey.currentState!.validate()){
                               //   //to keep in homepage when start again
