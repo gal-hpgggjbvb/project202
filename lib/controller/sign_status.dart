@@ -3,6 +3,9 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 class SignStatus extends GetxController {
+
+  late final String errorMessage ;
+
   signSuccess() {
     Get.snackbar("title Done", "message here");
   }
@@ -22,10 +25,33 @@ class SignStatus extends GetxController {
   }
 
   signFailure() {
+    // final String errorMessage ;
     Get.snackbar(
       "title Error",
       "message here",
       snackPosition: SnackPosition.BOTTOM,
     );
   }
+}
+class SignFailed{
+  final int status ;
+  final String errorMessage ;
+
+  SignFailed({required this.status , required this.errorMessage}){
+    Get.snackbar(
+      status.toString() ,
+      errorMessage,
+      snackPosition: SnackPosition.BOTTOM,
+    );
+  }
+
+  // signFailure() {
+  //   // final String errorMessage ;
+  //   Get.snackbar(
+  //     "title Error",
+  //     errorMessage,
+  //     snackPosition: SnackPosition.BOTTOM,
+  //   );
+  // }
+
 }

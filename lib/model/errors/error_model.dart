@@ -7,7 +7,7 @@ class ErrorModel{
   factory ErrorModel.fromJson(Map<String,dynamic> jsonData) {
     return ErrorModel(
         status: jsonData['status'],
-        errorMessage: jsonData['ErrorMessage']
+        errorMessage: jsonData['ErrorMessage'] ,
     ) ;
   }
 }
