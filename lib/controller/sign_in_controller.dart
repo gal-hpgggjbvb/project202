@@ -28,9 +28,11 @@ class SignInController extends GetxController {
 
   SignInModel? user;
   ErrorModel? errorModel ;
+
   signIn() async {
     try {
-      // signStatus.signLoading();
+      // signStatus.loading = true ;
+      signStatus.signLoading();
       final response = await api.post("https://food-api-omega.vercel.app/api/v1/user/signin", data: {
         "email": emailController.text,
         "password": passwordController.text,
@@ -42,8 +44,10 @@ class SignInController extends GetxController {
       final String v = CacheHelper().getData(key: 'id') ;
       print('ID is : $v') ;
       // print(response) ;
+      signStatus.loading = false ;
       signStatus.signSuccess();
     } on ServerExceptions catch (e) {
+      signStatus.loading = false ;
       // SignFailed(errorMessage: e.errorModel.errorMessage);
       SignFailed(status: e.errorModel.status,errorMessage: e.errorModel.errorMessage);
       // signStatus.signFailure();

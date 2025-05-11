@@ -9,6 +9,8 @@ import 'package:project2/controller/sign_status.dart';
 import 'package:project2/services/settings_services.dart';
 import 'package:project2/view/auth/sign_up_page.dart';
 
+// SignStatus signStatus = Get.put(SignStatus()) ;
+
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
 
@@ -151,7 +153,12 @@ class _SignInPageState extends State<SignInPage> {
                               // }
                             },
                             color: Colors.blue,
-                            child: const Text(
+                            padding: const EdgeInsets.all(5),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                            child: controller.loading == true ? const CircularProgressIndicator(
+                              color: Colors.white,
+                            ) :
+                            const Text(
                               "SignIn",
                               style: TextStyle(
                                   color: Colors.white,

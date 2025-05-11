@@ -1,27 +1,43 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:project2/api/dio_consumer.dart';
+import 'package:project2/controller/sign_in_controller.dart';
+
+SignInController signInController = Get.put(SignInController(DioConsumer(dio: Dio()))) ;
 
 class SignStatus extends GetxController {
 
-  late final String errorMessage ;
-
+  //late final String errorMessage ;
+  bool loading = false ;
   signSuccess() {
+    loading = false ;
     Get.snackbar("title Done", "message here");
+    update() ;
   }
 
   signLoading() {
+    loading = true ;
+    update() ;
     // return CircularProgressIndicator() ;
 
-    Get.defaultDialog(
-      title: "",
-      barrierDismissible: true,
-      contentPadding: const EdgeInsets.only(bottom: 25),
-      content: const SpinKitWave(
-        color: Colors.green,
-        size: 30,
-      ),
-    );
+    // if(loading){
+    //   Get.defaultDialog(
+    //     title: "",
+    //     barrierDismissible: true,
+    //     contentPadding: const EdgeInsets.only(bottom: 25),
+    //     content: const SpinKitWave(
+    //       color: Colors.green,
+    //       size: 30,
+    //     ),
+    //   );
+    // }
+
+    // else if(loading == false){
+    //   Get.back() ;
+    // }
+
   }
 
   signFailure() {
@@ -33,7 +49,7 @@ class SignStatus extends GetxController {
     );
   }
 }
-class SignFailed{
+class SignFailed extends SignStatus{
   final int status ;
   final String errorMessage ;
 
