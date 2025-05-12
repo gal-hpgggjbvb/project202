@@ -54,8 +54,8 @@ class _SignInPageState extends State<SignInPage> {
         child: ListView(
           children: [
             SizedBox(
-              // child: Lottie.asset("images/Animation - 1729504255945.json"),
-              child: Image.asset("images/astronomy-1.jpg"),
+              child: Lottie.asset("images/Animation - 1729504255945.json"),
+              // child: Image.asset("images/astronomy-1.jpg"),
             ),
             Form(
               key: signInController.signInFormKey,
@@ -120,6 +120,9 @@ class _SignInPageState extends State<SignInPage> {
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "this field can't be empty";
+                      }
+                      else if(value.length < 8){
+                        return "password must be at least 8 characters" ;
                       }
                     },
                   ),
