@@ -1,11 +1,5 @@
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:get/get.dart';
-import 'package:project2/api/dio_consumer.dart';
-import 'package:project2/controller/sign_in_controller.dart';
 
-SignInController signInController = Get.put(SignInController(DioConsumer(dio: Dio()))) ;
+import 'package:get/get.dart';
 
 class SignStatus extends GetxController {
 
@@ -41,15 +35,19 @@ class SignStatus extends GetxController {
   }
 
   signFailure() {
+    loading = false ;
+    update() ;
     // final String errorMessage ;
-    Get.snackbar(
-      "title Error",
-      "message here",
-      snackPosition: SnackPosition.BOTTOM,
-    );
+    // Get.snackbar(
+    //   "title Error",
+    //   "message here",
+    //   snackPosition: SnackPosition.BOTTOM,
+    // );
   }
+
 }
-class SignFailed extends SignStatus{
+
+class SignFailed {
   final int status ;
   final String errorMessage ;
 
@@ -59,15 +57,6 @@ class SignFailed extends SignStatus{
       errorMessage,
       snackPosition: SnackPosition.BOTTOM,
     );
+    // update() ;
   }
-
-  // signFailure() {
-  //   // final String errorMessage ;
-  //   Get.snackbar(
-  //     "title Error",
-  //     errorMessage,
-  //     snackPosition: SnackPosition.BOTTOM,
-  //   );
-  // }
-
 }

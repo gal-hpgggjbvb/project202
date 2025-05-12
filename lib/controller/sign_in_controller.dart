@@ -39,18 +39,19 @@ class SignInController extends GetxController {
       });
       user = SignInModel.fromJson(response) ;
       final decodedToken = JwtDecoder.decode(user!.token) ;
-      CacheHelper().saveData(key: 'token', value: user!.token) ;
-      CacheHelper().saveData(key: 'id', value: decodedToken['id']) ;
+      // CacheHelper().saveData(key: 'token', value: user!.token) ;
+      // CacheHelper().saveData(key: 'id', value: decodedToken['id']) ;
       final String v = CacheHelper().getData(key: 'id') ;
       print('ID is : $v') ;
       // print(response) ;
-      signStatus.loading = false ;
+      //  signStatus.loading = false ;
       signStatus.signSuccess();
     } on ServerExceptions catch (e) {
-      signStatus.loading = false ;
+      // signStatus.loading = false ;
       // SignFailed(errorMessage: e.errorModel.errorMessage);
       SignFailed(status: e.errorModel.status,errorMessage: e.errorModel.errorMessage);
-      // signStatus.signFailure();
+       signStatus.signFailure();
+      // update() ;
     }
   }
 }

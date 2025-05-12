@@ -38,7 +38,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       theme: ThemeData(fontFamily: "Satoshi"),
       debugShowCheckedModeBanner: false,
-      //home: const SplashScreen() ,
+      home: const SplashScreen() ,
+      // initialRoute: "/",
       getPages: [
         GetPage(name: "/", page: () => const SplashScreen(), middlewares: [
           RouteMiddleware(),

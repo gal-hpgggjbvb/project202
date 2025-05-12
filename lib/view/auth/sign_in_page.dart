@@ -156,8 +156,7 @@ class _SignInPageState extends State<SignInPage> {
                             padding: const EdgeInsets.all(5),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                             child: controller.loading == true ? const CircularProgressIndicator(
-                              color: Colors.white,
-                            ) :
+                              color: Colors.white,) :
                             const Text(
                               "SignIn",
                               style: TextStyle(
