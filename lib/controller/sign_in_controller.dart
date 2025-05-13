@@ -31,20 +31,18 @@ class SignInController extends GetxController {
 
   signIn() async {
     try {
-      // signStatus.loading = true ;
       signStatus.signLoading();
       final response = await api.post("https://food-api-omega.vercel.app/api/v1/user/signin", data: {
         "email": emailController.text,
         "password": passwordController.text,
       });
-      user = SignInModel.fromJson(response) ;
-      final decodedToken = JwtDecoder.decode(user!.token) ;
+      // user = SignInModel.fromJson(response) ;
+      // final decodedToken = JwtDecoder.decode(user!.token) ;
       // CacheHelper().saveData(key: 'token', value: user!.token) ;
       // CacheHelper().saveData(key: 'id', value: decodedToken['id']) ;
-      final String v = CacheHelper().getData(key: 'id') ;
-      print('ID is : $v') ;
-      // print(response) ;
-      //  signStatus.loading = false ;
+      // final String v = CacheHelper().getData(key: 'id') ;
+      // print('ID is : $v') ;
+
       signStatus.signSuccess();
     } on ServerExceptions catch (e) {
       // signStatus.loading = false ;

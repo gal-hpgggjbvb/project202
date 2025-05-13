@@ -1,5 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project2/api/dio_consumer.dart';
 import 'package:project2/controller/sign_up_controller.dart';
 import 'package:project2/services/settings_services.dart';
 import 'package:project2/view/auth/sign_in_page.dart';
@@ -16,7 +18,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   bool _obscureText1 = true ;
   bool _obscureText2 = true ;
-  SignUpController signUpController = Get.put(SignUpController()) ;
+  SignUpController signUpController = Get.put(SignUpController(api: DioConsumer(dio: Dio()))) ;
   SettingsServices serviceController = Get.put(SettingsServices()) ;
   @override
   Widget build(BuildContext context) {
@@ -99,7 +101,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   const SizedBox(height: 10,) ,
                   //todo text-field for password confirm
                   TextFormField(
-                    controller: signUpController.passwordConfirmController,
+                    controller: signUpController.confirmPasswordController,
                     obscureText: _obscureText2,
                     // maxLength: 20,
                     decoration: InputDecoration(
@@ -125,23 +127,27 @@ class _SignUpPageState extends State<SignUpPage> {
                       }
                     },
                   ) ,
-                  const SizedBox(height: 220,) ,
+                  const SizedBox(height: 200,) ,
                   Row(
                     children: [
                       Expanded(
                         child: MaterialButton(onPressed: (){
-                          // Get.to(() =>  const HomePage()) ;
-                          if(signUpController.signUpFormKey.currentState!.validate()){
-                            //to keep in homepage when start again
-                            serviceController.sharedpref.setString("id", "1") ;
-                            Get.to(() => const HomePage()) ;
-                          }
-                          else{
-                            print("not valid ***************************") ;
-                            // print("${signInController.emailController}") ;
-                          }
+
+
+                          // // Get.to(() =>  const HomePage()) ;
+                          // if(signUpController.signUpFormKey.currentState!.validate()){
+                          //   //to keep in homepage when start again
+                          //   serviceController.sharedpref.setString("id", "1") ;
+                          //   Get.to(() => const HomePage()) ;
+                          // }
+                          // else{
+                          //   print("not valid ***************************") ;
+                          //   // print("${signInController.emailController}") ;
+                          // }
                           },
                           color: Colors.blue,
+                          padding: const EdgeInsets.all(5),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                           child: const Text("SignUp", style: TextStyle(
                               color: Colors.white,
                               fontSize: 20 , fontWeight: FontWeight.w400),),
