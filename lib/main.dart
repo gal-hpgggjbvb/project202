@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:project2/cache/cache_helper.dart';
 import 'package:project2/middleware/route_middleware.dart';
-import 'package:project2/services/services_locator.dart';
 import 'package:project2/services/settings_services.dart';
 import 'package:project2/view/home_page.dart';
 import 'package:project2/view/splash_screen.dart';
@@ -18,16 +17,18 @@ void main() async {
   ]);
   //this for middleware
   WidgetsFlutterBinding.ensureInitialized();
-  await initServices();
-  //to take one object of the class
+  // await initServices();
+
   await CacheHelper().init() ;
+  //to take one object of the class
   // await getIt<CacheHelper>().init() ;
   runApp(const MyApp());
 }
 
-Future initServices() async {
-  await Get.putAsync(() => SettingsServices().init());
-}
+// Future initServices() async {
+//   // await Get.putAsync(() => CacheHelper().init()) ;
+//   await Get.putAsync(() => SettingsServices().init());
+// }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -38,12 +39,13 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       theme: ThemeData(fontFamily: "Satoshi"),
       debugShowCheckedModeBanner: false,
-      home: const SplashScreen() ,
-      // initialRoute: "/",
+      // home: const SplashScreen() ,
+       initialRoute:CacheHelper().getData(key: 'signed') == 'signed' ? "/home" : "/",
       getPages: [
-        GetPage(name: "/", page: () => const SplashScreen(), middlewares: [
-          RouteMiddleware(),
-        ]),
+        GetPage(name: "/", page: () => const SplashScreen(),
+            // middlewares:  [
+          // RouteMiddleware(),]
+        ),
         GetPage(name: "/home", page: () => const HomePage()),
       ],
     );

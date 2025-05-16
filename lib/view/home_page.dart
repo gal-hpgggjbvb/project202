@@ -1,10 +1,10 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http ;
+import 'package:project2/cache/cache_helper.dart';
 import 'package:project2/model/user_data.dart';
-import 'package:project2/services/settings_services.dart';
 import 'package:project2/view/auth/sign_in_page.dart';
+import 'package:project2/view/user_home.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -13,71 +13,62 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<UserData> users = [];
 
-  List<UserData> users = [] ;
+  // SettingsServices controller = Get.put(SettingsServices());
 
-  SettingsServices controller = Get.put(SettingsServices()) ;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.blue,),
-      drawer:  Drawer(
+      appBar: AppBar(
+        backgroundColor: Colors.blue,
+      ),
+      drawer: Drawer(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             InkWell(
-              onTap: (){
-                controller.sharedpref.clear() ;
-                Get.off(() => const SignInPage()) ;
+              onTap: () {
+                // controller.sharedpref.clear();
+                CacheHelper().clearData();
+                // CacheHelper().saveData(key: 'signed', value: 2) ;
+                Get.off(() => const SignInPage());
               },
               child: const Text("sign out"),
-            ) ,
+            ),
           ],
         ),
       ),
-      body: ListView.builder(
-        itemCount: users.length,
-          itemBuilder: (context , index){
-          final user = users[index] ;
-
-          final email = user.email ;
-          final nat = user.nat ;
-
-        return ListTile(
-          title: Text(nat),
-          subtitle: Text(email),
-          // leading: Image.network(photourl),
-          leading: CircleAvatar(
-              child: Text('${index+1}')),
-          // trailing: Text(nat),
-        );
-      }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: fetchUsers ,
+      body: Center(
+        child: MaterialButton(
+          onPressed: () => Get.to(() => const UserHome()),
+          color: Colors.green,
+          child: const Text("Go to UserHome"),
+        ),
       ),
     );
   }
-  void fetchUsers() async{
-    print("fetch called") ;
-    const url = "https://randomuser.me/api/?results=2" ;
-    final uri = Uri.parse(url) ;
-    final response = await http.get(uri) ;
-    final body = response.body ;
-    final json = jsonDecode(body) ;
-    final results = json['results'] as List<dynamic> ;
-    final transformed = results.map((e) {
-      return UserData(
-          nat: e['nat'],
-          email: e['email'] ,
-      ) ;
-    }).toList() ;
-    setState(() {
-      users = transformed ;
-    });
-    print("fetch completed") ;
-  }
-}
 
+// void fetchUsers() async{
+//   print("fetch called") ;
+//   const url = "https://randomuser.me/api/?results=2" ;
+//   final uri = Uri.parse(url) ;
+//   final response = await http.get(uri) ;
+//   final body = response.body ;
+//   final json = jsonDecode(body) ;
+//   final results = json['results'] as List<dynamic> ;
+//   final transformed = results.map((e) {
+//     return UserData(
+//         nat: e['nat'],
+//         email: e['email'] ,
+//     ) ;
+//   }).toList() ;
+//   setState(() {
+//     users = transformed ;
+//   });
+//   print("fetch completed") ;
+// }
+}
 
 // ListView.builder(
 // itemCount: users.length,
@@ -292,7 +283,6 @@ class _HomePageState extends State<HomePage> {
 //     );
 //   }
 // }
-
 
 // import 'package:flutter/material.dart';
 //

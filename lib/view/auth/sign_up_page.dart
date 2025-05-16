@@ -2,9 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project2/api/dio_consumer.dart';
+import 'package:project2/cache/cache_helper.dart';
 import 'package:project2/controller/sign_up_controller.dart';
 import 'package:project2/services/settings_services.dart';
 import 'package:project2/view/auth/sign_in_page.dart';
+
 import '../home_page.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -14,12 +16,15 @@ class SignUpPage extends StatefulWidget {
   State<SignUpPage> createState() => _SignUpPageState();
 }
 
+SignUpController signUpController = Get.put(SignUpController(api: DioConsumer(dio: Dio()))) ;
+// SettingsServices serviceController = Get.put(SettingsServices());
 class _SignUpPageState extends State<SignUpPage> {
+  bool _obscureText1 = true;
 
-  bool _obscureText1 = true ;
-  bool _obscureText2 = true ;
-  SignUpController signUpController = Get.put(SignUpController(api: DioConsumer(dio: Dio()))) ;
-  SettingsServices serviceController = Get.put(SettingsServices()) ;
+  bool _obscureText2 = true;
+
+
+
   @override
   Widget build(BuildContext context) {
     //double width = MediaQuery.of(context).size.width;
@@ -31,6 +36,9 @@ class _SignUpPageState extends State<SignUpPage> {
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: ListView(
           children: [
+            ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image.asset("images/4 - Copy.jpg")),
             Form(
               key: signUpController.signUpFormKey,
               child: Column(
@@ -40,10 +48,20 @@ class _SignUpPageState extends State<SignUpPage> {
                   // SizedBox(
                   //   child: Lottie.asset("images/Animation - 1729504255945.json"),
                   // ) ,
-                  const SizedBox(height: 70,) ,
-                  const Text("Hello.." , style: TextStyle(fontSize: 30 , fontWeight: FontWeight.w600),) ,
-                  const Text("Let's Make a New Account" , style: TextStyle(fontSize: 25 , fontWeight: FontWeight.w400),) ,
-                  const SizedBox(height: 40,) ,
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  const Text(
+                    "Hello..",
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+                  ),
+                  const Text(
+                    "Let's Make a New Account",
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400),
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
                   //todo text-field for user name
                   TextFormField(
                     controller: signUpController.usernameController,
@@ -53,12 +71,12 @@ class _SignUpPageState extends State<SignUpPage> {
                         hintText: "Your Name"),
                     maxLength: 20,
                     // onChanged: (val){},
-                    validator: (value){
-                      if(value!.isEmpty){
-                        return "this field can't be empty" ;
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "this field can't be empty";
                       }
                     },
-                  ) ,
+                  ),
                   //todo text-field for email
                   TextFormField(
                     controller: signUpController.emailController,
@@ -67,90 +85,108 @@ class _SignUpPageState extends State<SignUpPage> {
                             borderSide: BorderSide(color: Colors.blue)),
                         hintText: "Your Email"),
                     // onChanged: (val){},
-                    validator: (value){
-                      if(value!.isEmpty){
-                        return "this field can't be empty" ;
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "this field can't be empty";
                       }
                     },
-                  ) ,
-                  const SizedBox(height: 25,) ,
+                  ),
+                  const SizedBox(height: 20,),
                   //todo text-field for password
                   TextFormField(
                     controller: signUpController.passwordController,
                     obscureText: _obscureText1,
                     // maxLength: 20,
                     decoration: InputDecoration(
-                        focusColor: Colors.red ,
+                        focusColor: Colors.red,
                         focusedBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.blue)),
-                        hintText: "Your Password" ,
+                        hintText: "Your Password",
                         suffixIcon: IconButton(
-                          icon: Icon(_obscureText1? Icons.visibility : Icons.visibility_off) ,
-                          onPressed: (){
-                            _obscureText1 = !_obscureText1 ;
-                            setState(() { });
-                          },)
-                    ),
+                          icon: Icon(_obscureText1
+                              ? Icons.visibility
+                              : Icons.visibility_off),
+                          onPressed: () {
+                            _obscureText1 = !_obscureText1;
+                            setState(() {});
+                          },
+                        )),
                     // onChanged: (val){},
-                    validator: (value){
-                      if(value!.isEmpty){
-                        return "this field can't be empty" ;
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "this field can't be empty";
                       }
                     },
-                  ) ,
-                  const SizedBox(height: 10,) ,
-                  //todo text-field for password confirm
+                  ),
+                  const SizedBox(height: 20,),
+
+                  //todo text-field for confirm password
                   TextFormField(
                     controller: signUpController.confirmPasswordController,
                     obscureText: _obscureText2,
                     // maxLength: 20,
                     decoration: InputDecoration(
-                        focusColor: Colors.red ,
+                        focusColor: Colors.red,
                         focusedBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.blue)),
-                        hintText: "Confirm Password" ,
+                        hintText: "Confirm Password",
                         suffixIcon: IconButton(
-                          icon: Icon(_obscureText2? Icons.visibility : Icons.visibility_off) ,
-                          onPressed: (){
-                            _obscureText2 = !_obscureText2 ;
-                            setState(() { });
-                          },)
-                    ),
+                          icon: Icon(_obscureText2
+                              ? Icons.visibility
+                              : Icons.visibility_off),
+                          onPressed: () {
+                            _obscureText2 = !_obscureText2;
+                            setState(() {});
+                          },
+                        )),
                     // onChanged: (val){},
-                    validator: (value){
-                      if(value!.isEmpty){
-                        return "this field can't be empty" ;
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "this field can't be empty";
                       }
-                      //todo try change it to text to operate
-                      if(value != signUpController.passwordController.text){
-                        return "your password doesn't match" ;
+                      //todo try change it to (text) to operate
+                      if (value != signUpController.passwordController.text) {
+                        return "your password doesn't match";
                       }
                     },
-                  ) ,
-                  const SizedBox(height: 200,) ,
+                  ),
+                  const SizedBox(
+                    height: 45,
+                  ),
                   Row(
                     children: [
                       Expanded(
-                        child: MaterialButton(onPressed: (){
+                        child: MaterialButton(
+                          onPressed: () {
+                            CacheHelper().saveData(key: 'signed', value: "signed") ;
+                            Get.to(() => const HomePage());
 
+                            // if(signUpController.signUpFormKey.currentState!.validate()){
+                            // //   //to keep in homepage when start again
+                            // //   serviceController.sharedpref.setString("id", "1") ;
+                            //   CacheHelper().saveData(key: 'name', value: signUpController.usernameController) ;
+                            //   CacheHelper().saveData(key: 'email', value: signUpController.emailController) ;
+                            //   CacheHelper().saveData(key: 'password', value: signUpController.passwordController) ;
+                            //   CacheHelper().saveData(key: 'signed', value: true) ;
+                            //   Get.to(() => const HomePage()) ;
+                            // }
 
-                          // // Get.to(() =>  const HomePage()) ;
-                          // if(signUpController.signUpFormKey.currentState!.validate()){
-                          //   //to keep in homepage when start again
-                          //   serviceController.sharedpref.setString("id", "1") ;
-                          //   Get.to(() => const HomePage()) ;
-                          // }
-                          // else{
-                          //   print("not valid ***************************") ;
-                          //   // print("${signInController.emailController}") ;
-                          // }
+                            // else{
+                            //   print("not valid ***************************") ;
+                            //   // print("${signInController.emailController}") ;
+                            // }
                           },
                           color: Colors.blue,
                           padding: const EdgeInsets.all(5),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                          child: const Text("SignUp", style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20 , fontWeight: FontWeight.w400),),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          child: const Text(
+                            "SignUp",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w400),
+                          ),
                         ),
                       ),
                     ],
@@ -158,16 +194,21 @@ class _SignUpPageState extends State<SignUpPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Already Have An Account?", style: TextStyle(
-                        //color: Colors.white,fontSize: 25 , fontWeight: FontWeight.w600
+                      const Text(
+                        "Already Have An Account?",
+                        style: TextStyle(
+                            //color: Colors.white,fontSize: 25 , fontWeight: FontWeight.w600
+                            ),
                       ),
-                      ),
-                      TextButton(onPressed: (){
-                        Get.to(() => const SignInPage()) ;
-                      },
-                        child: const Text("Sign In", style: TextStyle(
-                          color: Colors.blue,
-                        ),
+                      TextButton(
+                        onPressed: () {
+                          Get.to(() => const SignInPage());
+                        },
+                        child: const Text(
+                          "Sign In",
+                          style: TextStyle(
+                            color: Colors.blue,
+                          ),
                         ),
                       ),
                     ],
@@ -177,12 +218,10 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
           ],
         ),
-
       ),
-    ) ;
+    );
   }
 }
-
 
 // Scaffold(
 // backgroundColor: Colors.white,

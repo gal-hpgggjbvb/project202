@@ -19,7 +19,7 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  SettingsServices controller = Get.put(SettingsServices());
+  // SettingsServices controller = Get.put(SettingsServices());
 
   @override
   void initState() {
