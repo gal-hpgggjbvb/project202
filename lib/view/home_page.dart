@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project2/cache/cache_helper.dart';
+import 'package:project2/custom_widgets/custom_card.dart';
 import 'package:project2/model/user_data.dart';
 import 'package:project2/view/auth/sign_in_page.dart';
 import 'package:project2/view/user_home.dart';
@@ -13,9 +14,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<UserData> users = [];
+  // List<UserData> users = [];
 
   // SettingsServices controller = Get.put(SettingsServices());
+
+  List categories = [
+    { 'title': 'Food' , 'image': 'images/4 - Copy.jpg' } ,
+    { 'title': 'Food' , 'image': 'images/4 - Copy.jpg' } ,
+    { 'title': 'Food' , 'image': 'images/4 - Copy.jpg' } ,
+    { 'title': 'Food' , 'image': 'images/4 - Copy.jpg' } ,
+    // { 'title': 'Pharmacy' , 'image': 'images/astronomy-1.jpg' } ,
+    { 'title': 'Food' , 'image': 'images/4 - Copy.jpg' } ,
+    { 'title': 'Pharmacy' , 'image': 'images/astronomy-1.jpg' } ,
+    { 'title': 'Food' , 'image': 'images/4 - Copy.jpg' } ,
+  ] ;
 
   @override
   Widget build(BuildContext context) {
@@ -27,25 +39,75 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            InkWell(
-              onTap: () {
+            //todo sign-out button
+            MaterialButton(
+              shape: ContinuousRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
+              color: Colors.red,
+              onPressed: () {
                 // controller.sharedpref.clear();
                 CacheHelper().clearData();
                 // CacheHelper().saveData(key: 'signed', value: 2) ;
                 Get.off(() => const SignInPage());
               },
-              child: const Text("sign out"),
+              child: const Text(
+                "sign out",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
+            // InkWell(
+            //   onTap: () {
+            //     // controller.sharedpref.clear();
+            //     CacheHelper().clearData();
+            //     // CacheHelper().saveData(key: 'signed', value: 2) ;
+            //     Get.off(() => const SignInPage());
+            //   },
+            //   child: const Text("sign out"),
+            // ),
           ],
         ),
       ),
-      body: Center(
-        child: MaterialButton(
-          onPressed: () => Get.to(() => const UserHome()),
-          color: Colors.green,
-          child: const Text("Go to UserHome"),
-        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.to(() => const UserHome());
+        },
       ),
+      body: ListWheelScrollView.useDelegate(
+        overAndUnderCenterOpacity: 0.9,
+          // scrollBehavior: ScrollBehavior(),
+          itemExtent: 150,
+          //to correct selected category position
+          physics: const FixedExtentScrollPhysics(),
+          // onSelectedItemChanged: (index) =>
+          //   showToast('selected item: ${index + 1}'),
+          //0.00 --> 0.01
+          perspective: 0.003,
+          diameterRatio: 2.0,
+          squeeze: 1.0,
+          // offAxisFraction: 1.0,
+          useMagnifier: true,
+          magnification: 1.2,
+          // instead of children
+          childDelegate: ListWheelChildBuilderDelegate(
+            childCount: categories.length,
+             builder: (BuildContext context, int index) =>
+                 CustomCard(title: categories[index]['title'], image: categories[index]['image']),
+
+          ),
+          // children: [
+          //   CustomCard(title: 'Food', image: 'images/4 - Copy.jpg',) ,
+          //   CustomCard(title: 'Food', image: 'images/4 - Copy.jpg',) ,
+          //   CustomCard(title: categories[0]['title'], image: categories[0]['image']) ,
+          // ]
+      ),
+
+      // Center(
+      //   child: MaterialButton(
+      //     onPressed: () => Get.to(() => const UserHome()),
+      //     color: Colors.green,
+      //     child: const Text("Go to UserHome"),
+      //   ),
+      // ),
     );
   }
 

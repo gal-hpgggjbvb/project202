@@ -158,9 +158,12 @@ class _SignUpPageState extends State<SignUpPage> {
                       Expanded(
                         child: MaterialButton(
                           onPressed: () {
-                            CacheHelper().saveData(key: 'signed', value: "signed") ;
-                            Get.to(() => const HomePage());
-
+                            if(signUpController.signUpFormKey.currentState!.validate()){
+                              CacheHelper().saveData(key: 'signed', value: "signed") ;
+                              CacheHelper().saveData(key: 'name', value: signUpController.usernameController.text) ;
+                              CacheHelper().saveData(key: 'email', value: signUpController.emailController.text) ;
+                              Get.to(() => const HomePage());
+                            }
                             // if(signUpController.signUpFormKey.currentState!.validate()){
                             // //   //to keep in homepage when start again
                             // //   serviceController.sharedpref.setString("id", "1") ;
