@@ -9,6 +9,8 @@ import 'package:project2/controller/sign_status.dart';
 import 'package:project2/services/settings_services.dart';
 import 'package:project2/view/auth/sign_up_page.dart';
 
+import '../home_page.dart';
+
 // SignStatus signStatus = Get.put(SignStatus()) ;
 
 class SignInPage extends StatefulWidget {
@@ -54,8 +56,8 @@ class _SignInPageState extends State<SignInPage> {
         child: ListView(
           children: [
             SizedBox(
-              child: Lottie.asset("images/Animation - 1729504255945.json"),
-              // child: Image.asset("images/astronomy-1.jpg"),
+              // child: Lottie.asset("images/Animation - 1729504255945.json"),
+              child: Image.asset("images/astronomy-1.jpg"),
             ),
             Form(
               key: signInController.signInFormKey,
@@ -141,10 +143,12 @@ class _SignInPageState extends State<SignInPage> {
                               // controller.signSuccess() ;
                               // controller.signLoading() ;
                               // controller.signFailure() ;
-                              if(signInController.signInFormKey.currentState!.validate()){
-                                signInController.signIn() ;
-                              }
-                              // // Get.to(() =>  const HomePage()) ;
+
+                              // if(signInController.signInFormKey.currentState!.validate()){
+                              //   signInController.signIn() ;
+                              // }
+
+                              Get.to(() =>  const HomePage()) ;
                               // if(signInController.signInFormKey.currentState!.validate()){
                               //   //to keep in homepage when start again
                               //   controller.sharedpref.setString("id", "1") ;

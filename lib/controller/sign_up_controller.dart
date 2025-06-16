@@ -43,7 +43,7 @@ class SignUpController extends GetxController {
       signStatus.signSuccess();
     } on ServerExceptions catch (e) {
       SignFailed(
-          status: e.errorModel.status, errorMessage: e.errorModel.errorMessage);
+          status: e.errorModel.status, errorMessage: e.errorModel.error);
       signStatus.signFailure();
     }
   }

@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -32,7 +33,10 @@ class SignInController extends GetxController {
   signIn() async {
     try {
       signStatus.signLoading();
-      final response = await api.post("https://food-api-omega.vercel.app/api/v1/user/signin", data: {
+      //todo change end point 10.0.2.2 for emulator chatgpt
+      final response = await api.post("http://10.0.2.2:8000/api/auth/login",
+          isFormData: true ,
+          data: {
         "email": emailController.text,
         "password": passwordController.text,
       });
@@ -42,17 +46,37 @@ class SignInController extends GetxController {
       // CacheHelper().saveData(key: 'id', value: decodedToken['id']) ;
       // final String v = CacheHelper().getData(key: 'id') ;
       // print('ID is : $v') ;
-
+      print(response) ;
       signStatus.signSuccess();
-    } on ServerExceptions catch (e) {
+    }on ServerExceptions catch (e) {
+      // print('error******************************************') ;
+      // print(e.toString()) ;
       // signStatus.loading = false ;
       // SignFailed(errorMessage: e.errorModel.errorMessage);
-      SignFailed(status: e.errorModel.status,errorMessage: e.errorModel.errorMessage);
+      SignFailed(status: e.errorModel.status,errorMessage: e.errorModel.error);
        signStatus.signFailure();
       // update() ;
     }
   }
 }
+// signIn() async {
+//   try {
+//     signStatus.signLoading();
+//     final response = await Dio().post("http://127.0.0.1:8000/api/auth/login",
+//         data: FormData.fromMap({
+//           "email": emailController.text,
+//           'password': passwordController.text,
+//         })
+//     );
+//
+//     print(response) ;
+//     signStatus.signSuccess();
+//   } catch (e) {
+//     signStatus.signFailure();
+//     print(e.toString()) ;
+//   }
+// }
+
 
 // signIn() async {
 //   try {

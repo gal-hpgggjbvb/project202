@@ -9,6 +9,6 @@ class SignInModel {
   factory SignInModel.fromJson(Map<String, dynamic> jsonData) {
     return SignInModel(
         message: jsonData['message'],
-        token: jsonData['token']);
+        token: jsonData['access_token']);
   }
 }
