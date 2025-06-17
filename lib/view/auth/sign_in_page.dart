@@ -2,16 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 import 'package:project2/api/dio_consumer.dart';
 import 'package:project2/cache/cache_helper.dart';
 import 'package:project2/controller/sign_in_controller.dart';
 import 'package:project2/controller/sign_status.dart';
-import 'package:project2/services/settings_services.dart';
+import 'package:project2/custom_widgets/custom_textformfield.dart';
 import 'package:project2/view/auth/sign_up_page.dart';
 import 'package:project2/view/hidden_drawer.dart';
-
-import '../home_page.dart';
 
 // SignStatus signStatus = Get.put(SignStatus()) ;
 
@@ -37,7 +34,8 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   bool _obscureText = true; // For toggling password visibility icon
-  SignInController signInController = Get.put(SignInController(DioConsumer(dio: Dio())));
+  SignInController signInController =
+      Get.put(SignInController(DioConsumer(dio: Dio())));
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +44,10 @@ class _SignInPageState extends State<SignInPage> {
       resizeToAvoidBottomInset: true,
       //appBar: AppBar(),
       body:
-    //   GetBuilder<SignInController>(
-    //     init: SignInController(),
-    // builder: (controller) =>
-      Padding(
+          //   GetBuilder<SignInController>(
+          //     init: SignInController(),
+          // builder: (controller) =>
+          Padding(
         padding: const EdgeInsets.only(
           left: 15.0,
           right: 15.0,
@@ -82,22 +80,34 @@ class _SignInPageState extends State<SignInPage> {
                     "Email",
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                   ),
-                  //todo email text_field
-                  TextFormField(
-                    controller: signInController.emailController,
-                    decoration: const InputDecoration(
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.blue)),
-                        hintText: "Your Email"),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "this field can't be empty";
-                      }
-                    },
-                  ),
+                  CustomTextFormField(
+                      controller: signInController.emailController,
+                      textInputType: TextInputType.emailAddress,
+                      hintText: 'Your Email'),
+
+                  // const Text(
+                  //   "Email",
+                  //   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                  // ),
+                  // //todo email text_field
+                  // TextFormField(
+                  //   controller: signInController.emailController,
+                  //   keyboardType: TextInputType.emailAddress,
+                  //   decoration: const InputDecoration(
+                  //       focusedBorder: UnderlineInputBorder(
+                  //           borderSide: BorderSide(color: Colors.blue)),
+                  //       hintText: "Your Email"),
+                  //   validator: (value) {
+                  //     if (value!.isEmpty) {
+                  //       return "this field can't be empty";
+                  //     }
+                  //   },
+                  // ),
+
                   const SizedBox(
                     height: 30,
                   ),
+
                   const Text(
                     "Password",
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
@@ -124,14 +134,14 @@ class _SignInPageState extends State<SignInPage> {
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "this field can't be empty";
-                      }
-                      else if(value.length < 8){
-                        return "password must be at least 8 characters" ;
+                      } else if (value.length < 8) {
+                        return "password must be at least 8 characters";
                       }
                     },
                   ),
+
                   const SizedBox(
-                    height: 20,
+                    height: 150,
                   ),
                   //todo sign in button
                   Row(
@@ -151,10 +161,19 @@ class _SignInPageState extends State<SignInPage> {
                               //   signInController.signIn() ;
                               // }
 
-                              Get.to(() =>  const HiddenDrawer()) ;
-                              CacheHelper().saveData(key: 'signed', value: 'signed') ;
-                              CacheHelper().saveData(key: 'email', value: signInController.emailController.text) ;
-                              CacheHelper().saveData(key: 'password', value: signInController.passwordController.text) ;
+                              if(signInController.signInFormKey.currentState!.validate()) {
+                                Get.to(() => const HiddenDrawer());
+                                CacheHelper()
+                                    .saveData(key: 'signed', value: 'signed');
+                                CacheHelper().saveData(
+                                    key: 'email',
+                                    value: signInController.emailController
+                                        .text);
+                                CacheHelper().saveData(
+                                    key: 'password',
+                                    value:
+                                    signInController.passwordController.text);
+                              }
 
                               // if(signInController.signInFormKey.currentState!.validate()){
                               //   //to keep in homepage when start again
@@ -168,16 +187,19 @@ class _SignInPageState extends State<SignInPage> {
                             },
                             color: Colors.blue,
                             padding: const EdgeInsets.all(5),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                            child: controller.loading == true ? const CircularProgressIndicator(
-                              color: Colors.white,) :
-                            const Text(
-                              "SignIn",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w400),
-                            ),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            child: controller.loading == true
+                                ? const CircularProgressIndicator(
+                                    color: Colors.white,
+                                  )
+                                : const Text(
+                                    "SignIn",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w400),
+                                  ),
                           );
                         },
                       )),

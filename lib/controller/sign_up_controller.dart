@@ -18,6 +18,9 @@ class SignUpController extends GetxController {
   //sign up user name
   TextEditingController usernameController = TextEditingController();
 
+  //sign up user number
+  TextEditingController usernumberController = TextEditingController();
+
   //sign up email
   TextEditingController emailController = TextEditingController();
 
@@ -36,6 +39,7 @@ class SignUpController extends GetxController {
           isFormData: true,
           data: {
             'name': usernameController.text,
+            'number': usernumberController,
             'email': emailController.text,
             'password': passwordController,
             'confirmPassword': confirmPasswordController,

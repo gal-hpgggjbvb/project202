@@ -4,8 +4,11 @@ import 'package:get/get.dart';
 import 'package:project2/api/dio_consumer.dart';
 import 'package:project2/cache/cache_helper.dart';
 import 'package:project2/controller/sign_up_controller.dart';
+import 'package:project2/custom_widgets/custom_textformfield.dart';
+import 'package:project2/custom_widgets/custom_textield.dart';
 import 'package:project2/services/settings_services.dart';
 import 'package:project2/view/auth/sign_in_page.dart';
+import 'package:project2/view/hidden_drawer.dart';
 
 import '../home_page.dart';
 
@@ -49,7 +52,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   //   child: Lottie.asset("images/Animation - 1729504255945.json"),
                   // ) ,
                   const SizedBox(
-                    height: 40,
+                    height: 20,
                   ),
                   const Text(
                     "Hello..",
@@ -60,37 +63,41 @@ class _SignUpPageState extends State<SignUpPage> {
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400),
                   ),
                   const SizedBox(
-                    height: 40,
+                    height: 20,
                   ),
                   //todo text-field for user name
-                  TextFormField(
-                    controller: signUpController.usernameController,
-                    decoration: const InputDecoration(
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.blue)),
-                        hintText: "Your Name"),
-                    maxLength: 20,
-                    // onChanged: (val){},
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "this field can't be empty";
-                      }
-                    },
-                  ),
+                  CustomTextField(
+                      controller: signUpController.usernameController,
+                      textInputType: TextInputType.text,
+                      hintText: 'Your Name',
+                    maxLength: 20,) ,
+
+                  //todo text-field for user number
+                  CustomTextField(
+                      controller: signUpController.usernumberController,
+                      textInputType: TextInputType.number,
+                      hintText: 'Your Number',
+                    maxLength: 10,) ,
+
                   //todo text-field for email
-                  TextFormField(
-                    controller: signUpController.emailController,
-                    decoration: const InputDecoration(
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.blue)),
-                        hintText: "Your Email"),
-                    // onChanged: (val){},
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "this field can't be empty";
-                      }
-                    },
-                  ),
+                  CustomTextFormField(
+                      controller: signUpController.emailController,
+                      textInputType: TextInputType.emailAddress,
+                      hintText: 'Your Email') ,
+
+                  // TextFormField(
+                  //   controller: signUpController.emailController,
+                  //   decoration: const InputDecoration(
+                  //       focusedBorder: UnderlineInputBorder(
+                  //           borderSide: BorderSide(color: Colors.blue)),
+                  //       hintText: "Your Email"),
+                  //   // onChanged: (val){},
+                  //   validator: (value) {
+                  //     if (value!.isEmpty) {
+                  //       return "this field can't be empty";
+                  //     }
+                  //   },
+                  // ),
                   const SizedBox(height: 20,),
                   //todo text-field for password
                   TextFormField(
@@ -115,7 +122,10 @@ class _SignUpPageState extends State<SignUpPage> {
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "this field can't be empty";
+                      }else if (value.length < 8) {
+                        return "password must be at least 8 characters";
                       }
+
                     },
                   ),
                   const SizedBox(height: 20,),
@@ -161,8 +171,9 @@ class _SignUpPageState extends State<SignUpPage> {
                             if(signUpController.signUpFormKey.currentState!.validate()){
                               CacheHelper().saveData(key: 'signed', value: "signed") ;
                               CacheHelper().saveData(key: 'name', value: signUpController.usernameController.text) ;
+                              CacheHelper().saveData(key: 'number', value: signUpController.usernumberController.text) ;
                               CacheHelper().saveData(key: 'email', value: signUpController.emailController.text) ;
-                              Get.to(() => const HomePage());
+                              Get.to(() => const HiddenDrawer());
                             }
                             // if(signUpController.signUpFormKey.currentState!.validate()){
                             // //   //to keep in homepage when start again

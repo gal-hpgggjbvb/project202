@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class CustomCard extends StatelessWidget {
-
   final String title;
 
   final String image;
@@ -11,11 +10,9 @@ class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 10 , bottom: 3),
+      padding: const EdgeInsets.only(top: 10, bottom: 3),
       child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30)
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         child: Container(
           // margin: EdgeInsets.all(10),
           padding: const EdgeInsets.all(20),
@@ -28,11 +25,11 @@ class CustomCard extends StatelessWidget {
             ),
           ),
           child: ListTile(
-
             leading: Text(
               title,
-              style: const TextStyle(color: Colors.black),),
-            onTap: (){},
+              style: const TextStyle(color: Colors.black),
+            ),
+            onTap: () {},
           ),
         ),
       ),

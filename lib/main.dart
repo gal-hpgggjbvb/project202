@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:project2/cache/cache_helper.dart';
 import 'package:project2/middleware/route_middleware.dart';
 import 'package:project2/services/settings_services.dart';
+import 'package:project2/view/auth/sign_in_page.dart';
+import 'package:project2/view/auth/sign_up_page.dart';
 import 'package:project2/view/hidden_drawer.dart';
 import 'package:project2/view/home_page.dart';
 import 'package:project2/view/intro_screen/intro_screen.dart';
@@ -45,7 +47,7 @@ class MyApp extends StatelessWidget {
       // home: const SplashScreen() ,
 
       // home: const HiddenDrawer() ,
-      // initialRoute: '/drawer',
+      // initialRoute: '/signup',
 
       //  initialRoute:CacheHelper().getData(key: 'signed') == 'signed' ? "/home" : "/",
       //  initialRoute:CacheHelper().getData(key: 'signed') == 'signed' ? "/drawer" : "/",
@@ -56,6 +58,8 @@ class MyApp extends StatelessWidget {
             ] ,
         ),
         GetPage(name: "/intro", page: () => const IntroScreen()),
+        GetPage(name: "/signup", page: () => const SignUpPage()),
+        GetPage(name: "/signin", page: () => const SignInPage()),
         GetPage(name: "/home", page: () => const HomePage()),
         GetPage(name: "/user", page: () => const UserPage()),
         GetPage(name: "/drawer", page: () => const HiddenDrawer()),

@@ -79,13 +79,18 @@ class _UserPageState extends State<UserPage> {
                   //       fontSize: 20, fontWeight: FontWeight.w500),
                   // ),
                   Text(
-                    'name here :|' ,
+                    '${CacheHelper().getData(key: 'name')} :<' ,
                     style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.w500),
+                        fontSize: 20, fontWeight: FontWeight.w300),
+                  ),
+                  Text(
+                    'number : ${CacheHelper().getData(key: 'number')}' ,
+                    style: const TextStyle(
+                        fontSize: 15, fontWeight: FontWeight.w300),
                   ),
                   Text(
                     CacheHelper().getData(key: 'email'),
-                    style: const TextStyle(fontSize: 15),
+                    style: const TextStyle(fontSize: 20,fontWeight: FontWeight.w500),
                   ),
                 ],
               ),
@@ -125,6 +130,20 @@ class _UserPageState extends State<UserPage> {
                 child: image == null ? Text('data') :
                 Image.file(image! , height: 200, width: 200,),
               ) ,
+              MaterialButton(
+                shape: ContinuousRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                color: Colors.blue,
+                onPressed: () {
+                  print(CacheHelper().getData(key: 'name')) ;
+                  print(CacheHelper().getData(key: 'number')) ;
+                  print(CacheHelper().getData(key: 'email')) ;
+                },
+                child: const Text(
+                  "sign out",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
             ],
           ),
         ),
