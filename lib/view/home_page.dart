@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project2/cache/cache_helper.dart';
-import 'package:project2/custom_widgets/custom_card.dart';
-import 'package:project2/model/user_data.dart';
 import 'package:project2/view/auth/sign_in_page.dart';
 import 'package:project2/view/user_home.dart';
+import 'package:project2/view/user_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,17 +16,6 @@ class _HomePageState extends State<HomePage> {
   // List<UserData> users = [];
 
   // SettingsServices controller = Get.put(SettingsServices());
-
-  List categories = [
-    { 'title': 'Food' , 'image': 'images/4 - Copy.jpg' } ,
-    { 'title': 'Food' , 'image': 'images/4 - Copy.jpg' } ,
-    { 'title': 'Food' , 'image': 'images/4 - Copy.jpg' } ,
-    { 'title': 'Food' , 'image': 'images/4 - Copy.jpg' } ,
-    // { 'title': 'Pharmacy' , 'image': 'images/astronomy-1.jpg' } ,
-    { 'title': 'Food' , 'image': 'images/4 - Copy.jpg' } ,
-    { 'title': 'Pharmacy' , 'image': 'images/astronomy-1.jpg' } ,
-    { 'title': 'Food' , 'image': 'images/4 - Copy.jpg' } ,
-  ] ;
 
   @override
   Widget build(BuildContext context) {
@@ -69,84 +57,19 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.to(() => const UserHome());
+          Get.to(() => const UserPage());
         },
       ),
-      body: ListWheelScrollView.useDelegate(
-        overAndUnderCenterOpacity: 0.9,
-          // scrollBehavior: ScrollBehavior(),
-          itemExtent: 150,
-          //to correct selected category position
-          physics: const FixedExtentScrollPhysics(),
-          // onSelectedItemChanged: (index) =>
-          //   showToast('selected item: ${index + 1}'),
-          //0.00 --> 0.01
-          perspective: 0.003,
-          diameterRatio: 2.0,
-          squeeze: 1.0,
-          // offAxisFraction: 1.0,
-          useMagnifier: true,
-          magnification: 1.2,
-          // instead of children
-          childDelegate: ListWheelChildBuilderDelegate(
-            childCount: categories.length,
-             builder: (BuildContext context, int index) =>
-                 CustomCard(title: categories[index]['title'], image: categories[index]['image']),
-
-          ),
-          // children: [
-          //   CustomCard(title: 'Food', image: 'images/4 - Copy.jpg',) ,
-          //   CustomCard(title: 'Food', image: 'images/4 - Copy.jpg',) ,
-          //   CustomCard(title: categories[0]['title'], image: categories[0]['image']) ,
-          // ]
+      body: Center(
+        child: MaterialButton(
+          onPressed: () => Get.to(() => const UserPage()),
+          color: Colors.green,
+          child: const Text("Go to UserPage"),
+        ),
       ),
-
-      // Center(
-      //   child: MaterialButton(
-      //     onPressed: () => Get.to(() => const UserHome()),
-      //     color: Colors.green,
-      //     child: const Text("Go to UserHome"),
-      //   ),
-      // ),
     );
   }
-
-// void fetchUsers() async{
-//   print("fetch called") ;
-//   const url = "https://randomuser.me/api/?results=2" ;
-//   final uri = Uri.parse(url) ;
-//   final response = await http.get(uri) ;
-//   final body = response.body ;
-//   final json = jsonDecode(body) ;
-//   final results = json['results'] as List<dynamic> ;
-//   final transformed = results.map((e) {
-//     return UserData(
-//         nat: e['nat'],
-//         email: e['email'] ,
-//     ) ;
-//   }).toList() ;
-//   setState(() {
-//     users = transformed ;
-//   });
-//   print("fetch completed") ;
-// }
 }
-
-// ListView.builder(
-// itemCount: users.length,
-// itemBuilder: (context, index) {
-// final user = users[index] ;
-// //final email = user['email'] ;
-// final name = user['user']['name'] ;
-// //final picture = user['picture']['large'] ;
-// return ListTile(
-// leading: CircleAvatar(child: Text('${index+1}')),
-// title: Text('$name'),
-// //subtitle: Text(email),
-// //trailing: CircleAvatar(child: Image.network(picture),),
-// ) ;
-// },
-// ),
 
 // import 'dart:ui';
 //

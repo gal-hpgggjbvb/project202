@@ -4,8 +4,11 @@ import 'package:get/get.dart';
 import 'package:project2/cache/cache_helper.dart';
 import 'package:project2/middleware/route_middleware.dart';
 import 'package:project2/services/settings_services.dart';
+import 'package:project2/view/hidden_drawer.dart';
 import 'package:project2/view/home_page.dart';
+import 'package:project2/view/intro_screen/intro_screen.dart';
 import 'package:project2/view/splash_screen.dart';
+import 'package:project2/view/user_page.dart';
 
 void main() async {
   // Lock the app to portrait mode
@@ -40,13 +43,22 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(fontFamily: "Satoshi"),
       debugShowCheckedModeBanner: false,
       // home: const SplashScreen() ,
-       initialRoute:CacheHelper().getData(key: 'signed') == 'signed' ? "/home" : "/",
+
+      // home: const HiddenDrawer() ,
+      // initialRoute: '/drawer',
+
+      //  initialRoute:CacheHelper().getData(key: 'signed') == 'signed' ? "/home" : "/",
+      //  initialRoute:CacheHelper().getData(key: 'signed') == 'signed' ? "/drawer" : "/",
       getPages: [
         GetPage(name: "/", page: () => const SplashScreen(),
-            // middlewares:  [
-          // RouteMiddleware(),]
+            middlewares:  [
+          RouteMiddleware(),
+            ] ,
         ),
+        GetPage(name: "/intro", page: () => const IntroScreen()),
         GetPage(name: "/home", page: () => const HomePage()),
+        GetPage(name: "/user", page: () => const UserPage()),
+        GetPage(name: "/drawer", page: () => const HiddenDrawer()),
       ],
     );
   }

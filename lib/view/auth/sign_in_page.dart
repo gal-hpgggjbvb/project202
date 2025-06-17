@@ -4,10 +4,12 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:project2/api/dio_consumer.dart';
+import 'package:project2/cache/cache_helper.dart';
 import 'package:project2/controller/sign_in_controller.dart';
 import 'package:project2/controller/sign_status.dart';
 import 'package:project2/services/settings_services.dart';
 import 'package:project2/view/auth/sign_up_page.dart';
+import 'package:project2/view/hidden_drawer.dart';
 
 import '../home_page.dart';
 
@@ -144,11 +146,16 @@ class _SignInPageState extends State<SignInPage> {
                               // controller.signLoading() ;
                               // controller.signFailure() ;
 
+                              //todo here the working two lines
                               // if(signInController.signInFormKey.currentState!.validate()){
                               //   signInController.signIn() ;
                               // }
 
-                              Get.to(() =>  const HomePage()) ;
+                              Get.to(() =>  const HiddenDrawer()) ;
+                              CacheHelper().saveData(key: 'signed', value: 'signed') ;
+                              CacheHelper().saveData(key: 'email', value: signInController.emailController.text) ;
+                              CacheHelper().saveData(key: 'password', value: signInController.passwordController.text) ;
+
                               // if(signInController.signInFormKey.currentState!.validate()){
                               //   //to keep in homepage when start again
                               //   controller.sharedpref.setString("id", "1") ;

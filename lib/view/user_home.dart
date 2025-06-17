@@ -28,8 +28,8 @@ class _UserHomeState extends State<UserHome> {
      setState(() {
        image = File(pickedFile!.path) ;
      });
-
    }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
