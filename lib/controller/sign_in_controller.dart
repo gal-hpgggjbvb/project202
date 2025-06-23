@@ -64,6 +64,9 @@ class SignInController extends GetxController {
       // print('2*****************************************************') ;
       // print(CacheHelper().getData(key: 'token')) ;
       signStatus.signSuccess();
+      CacheHelper().saveData(key: 'done', value: true) ;
+      print('lookhereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee') ;
+      print(CacheHelper().getData(key: 'done')) ;
       // Get.off(() => const Drawer()) ;
     }on ServerExceptions catch (e) {
       // print('error******************************************') ;

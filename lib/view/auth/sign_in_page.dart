@@ -151,7 +151,7 @@ class _SignInPageState extends State<SignInPage> {
                         init: SignStatus(),
                         builder: (controller) {
                           return MaterialButton(
-                            onPressed: () {
+                            onPressed: () async {
                               // controller.signSuccess() ;
                               // controller.signLoading() ;
                               // controller.signFailure() ;
@@ -159,7 +159,7 @@ class _SignInPageState extends State<SignInPage> {
                               //todo here final code
                               if(signInController.signInFormKey.currentState!.validate()){
                                 CacheHelper().saveData(key: 'password', value: signInController.passwordController) ;
-                                signInController.signIn() ;
+                                await signInController.signIn() ;
                                 // if(signStatus.done){
                                 //   CacheHelper().saveData(key: 'signed', value: true) ;
                                 //   Get.offAll(() => const HiddenDrawer()) ;
@@ -167,21 +167,21 @@ class _SignInPageState extends State<SignInPage> {
                                 //   // setState(() {});
                                 // }
 
-                                  Future.delayed(const Duration(seconds: 3), () {
+                                  // Future.delayed(const Duration(seconds: 3), () {
+                                  //   CacheHelper().saveData(key: 'signed', value: true) ;
+                                  //   CacheHelper().saveData(key: 'done', value: false) ;
+                                  //   Get.offAll(() => const HiddenDrawer()) ;
+                                  // });
+                                print('hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
+                                print(CacheHelper().getData(key: 'done')) ;
+                                if(CacheHelper().getData(key: 'done')){
+                                  Future.delayed(const Duration(seconds: 2), () {
                                     CacheHelper().saveData(key: 'signed', value: true) ;
                                     CacheHelper().saveData(key: 'done', value: false) ;
                                     Get.offAll(() => const HiddenDrawer()) ;
 
                                   });
-
-                                // if(CacheHelper().getData(key: 'done')){
-                                //   Future.delayed(const Duration(seconds: 2), () {
-                                //     CacheHelper().saveData(key: 'signed', value: true) ;
-                                //     CacheHelper().saveData(key: 'done', value: false) ;
-                                //     Get.offAll(() => const HiddenDrawer()) ;
-                                //
-                                //   });
-                                // }
+                                }
                               }
 
 
