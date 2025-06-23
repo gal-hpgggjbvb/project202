@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'package:project2/view/home_page.dart';
 import 'package:project2/view/settings_page.dart';
+import 'package:project2/view/sign_out_page.dart';
 import 'package:project2/view/user_page.dart';
 
 class HiddenDrawer extends StatefulWidget {
@@ -39,6 +40,13 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
             selectedStyle: TextStyle(),
           ),
           const SettingsPage()),
+      ScreenHiddenDrawer(
+          ItemHiddenMenu(
+            name: 'Log Out',
+            baseStyle: TextStyle(),
+            selectedStyle: TextStyle(),
+          ),
+          const SignOutPage()),
     ];
   }
 

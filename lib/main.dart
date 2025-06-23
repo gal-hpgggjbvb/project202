@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // home: const SplashScreen() ,
 
-      // home: const HiddenDrawer() ,
+      home: const SignInPage() ,
       // initialRoute: '/signup',
 
       //  initialRoute:CacheHelper().getData(key: 'signed') == 'signed' ? "/home" : "/",
@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
             ] ,
         ),
         GetPage(name: "/intro", page: () => const IntroScreen()),
-        GetPage(name: "/signup", page: () => const SignUpPage()),
+        // GetPage(name: "/signup", page: () => const SignUpPage()),
         GetPage(name: "/signin", page: () => const SignInPage()),
         GetPage(name: "/home", page: () => const HomePage()),
         GetPage(name: "/user", page: () => const UserPage()),

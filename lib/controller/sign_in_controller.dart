@@ -34,45 +34,65 @@ class SignInController extends GetxController {
     try {
       signStatus.signLoading();
       //todo change end point 10.0.2.2 for emulator chatgpt
-      final response = await api.post("http://10.0.2.2:8000/api/auth/login",
+      //todo check your internet connection
+      final response = await api.post("http://10.0.2.2:8000/api/login",
+      // final response = await api.post("http://127.0.0.1:8000/api/login",
           isFormData: true ,
           data: {
         "email": emailController.text,
         "password": passwordController.text,
       });
-      // user = SignInModel.fromJson(response) ;
-      // final decodedToken = JwtDecoder.decode(user!.token) ;
-      // CacheHelper().saveData(key: 'token', value: user!.token) ;
-      // CacheHelper().saveData(key: 'id', value: decodedToken['id']) ;
+
+      user = SignInModel.fromJson(response) ;
+      final decodedToken = JwtDecoder.decode(user!.token) ;
+      CacheHelper().saveData(key: 'token', value: user!.token) ;
+      CacheHelper().saveData(key: 'id', value: decodedToken['prv']) ;
+      CacheHelper().saveData(key: 'phone', value: decodedToken['phone']) ;
+      CacheHelper().saveData(key: 'email', value: decodedToken['email']) ;
+      CacheHelper().saveData(key: 'role', value: decodedToken['role']) ;
+
       // final String v = CacheHelper().getData(key: 'id') ;
+      // final String y = CacheHelper().getData(key: 'token') ;
       // print('ID is : $v') ;
-      print(response) ;
+      // print('token is : $y') ;
+      // print(decodedToken['role']) ;
+      // print(decodedToken['phone']) ;
+      // print(decodedToken['email']) ;
+
+      // print(response) ;
+      // print('2*****************************************************') ;
+      // print(CacheHelper().getData(key: 'token')) ;
       signStatus.signSuccess();
     }on ServerExceptions catch (e) {
       // print('error******************************************') ;
       // print(e.toString()) ;
       // signStatus.loading = false ;
       // SignFailed(errorMessage: e.errorModel.errorMessage);
-      SignFailed(status: e.errorModel.status,errorMessage: e.errorModel.error);
+      // SignFailed(status: e.errorModel.status,errorMessage: e.errorModel.message);
+      SignFailed(errorMessage: e.errorModel.message);
+      // print(CacheHelper().getData(key: 'status'));
+      // print(CacheHelper().getData(key: 'message'));
        signStatus.signFailure();
       // update() ;
     }
   }
+
+
+
 }
 // signIn() async {
 //   try {
-//     signStatus.signLoading();
-//     final response = await Dio().post("http://127.0.0.1:8000/api/auth/login",
-//         data: FormData.fromMap({
+//     // signStatus.signLoading();
+//     print('============================================');
+//     final response = await Dio().post("https://food-api-omega.vercel.app/api/v1/user/signin",
+//         data: {
 //           "email": emailController.text,
-//           'password': passwordController.text,
-//         })
-//     );
+//           "password": passwordController.text,
+//         });
 //
 //     print(response) ;
 //     signStatus.signSuccess();
 //   } catch (e) {
-//     signStatus.signFailure();
 //     print(e.toString()) ;
 //   }
 // }

@@ -160,20 +160,30 @@ class _SignInPageState extends State<SignInPage> {
                               // if(signInController.signInFormKey.currentState!.validate()){
                               //   signInController.signIn() ;
                               // }
-
-                              if(signInController.signInFormKey.currentState!.validate()) {
-                                Get.to(() => const HiddenDrawer());
-                                CacheHelper()
-                                    .saveData(key: 'signed', value: 'signed');
-                                CacheHelper().saveData(
-                                    key: 'email',
-                                    value: signInController.emailController
-                                        .text);
-                                CacheHelper().saveData(
-                                    key: 'password',
-                                    value:
-                                    signInController.passwordController.text);
+                              if(signInController.signInFormKey.currentState!.validate()){
+                                CacheHelper().saveData(key: 'password', value: signInController.passwordController) ;
+                                signInController.signIn() ;
+                                if(signStatus.done){
+                                  Future.delayed(const Duration(seconds: 2), () {
+                                    Get.off(() => const HiddenDrawer()) ;
+                                  });
+                                }
                               }
+
+
+                              // if(signInController.signInFormKey.currentState!.validate()) {
+                              //   Get.to(() => const HiddenDrawer());
+                              //   CacheHelper()
+                              //       .saveData(key: 'signed', value: 'signed');
+                              //   CacheHelper().saveData(
+                              //       key: 'email',
+                              //       value: signInController.emailController
+                              //           .text);
+                              //   CacheHelper().saveData(
+                              //       key: 'password',
+                              //       value:
+                              //       signInController.passwordController.text);
+                              // }
 
                               // if(signInController.signInFormKey.currentState!.validate()){
                               //   //to keep in homepage when start again
@@ -216,7 +226,7 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                       TextButton(
                         onPressed: () {
-                          Get.to(() => const SignUpPage());
+                          // Get.to(() => const SignUpPage());
                         },
                         child: const Text(
                           "Register",

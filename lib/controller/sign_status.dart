@@ -5,9 +5,11 @@ class SignStatus extends GetxController {
 
   //late final String errorMessage ;
   bool loading = false ;
+  bool done = false ;
   signSuccess() {
     loading = false ;
-    Get.snackbar("title Done", "message here");
+    Get.snackbar("signin successful", "welcome");
+    done = true ;
     update() ;
   }
 
@@ -48,15 +50,27 @@ class SignStatus extends GetxController {
 }
 
 class SignFailed {
-  final int status ;
   final String errorMessage ;
 
-  SignFailed({required this.status , required this.errorMessage}){
+  SignFailed({required this.errorMessage}){
     Get.snackbar(
-      status.toString() ,
+      'signin failed: ' ,
       errorMessage,
       snackPosition: SnackPosition.BOTTOM,
     );
     // update() ;
   }
 }
+// class SignFailed {
+//   final int status ;
+//   final String errorMessage ;
+//
+//   SignFailed({required this.status , required this.errorMessage}){
+//     Get.snackbar(
+//       status.toString() ,
+//       errorMessage,
+//       snackPosition: SnackPosition.BOTTOM,
+//     );
+//     // update() ;
+//   }
+// }
