@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'package:project2/view/home_page.dart';
+import 'package:project2/view/profile_page.dart';
 import 'package:project2/view/settings_page.dart';
 import 'package:project2/view/sign_out_page.dart';
 import 'package:project2/view/user_page.dart';
@@ -19,6 +20,13 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
   void initState() {
     super.initState();
     _pages = [
+      ScreenHiddenDrawer(
+          ItemHiddenMenu(
+            name: 'Profile',
+            baseStyle: TextStyle(),
+            selectedStyle: TextStyle(),
+          ),
+          const ProfilePage()),
       ScreenHiddenDrawer(
           ItemHiddenMenu(
             name: 'HomePage',
@@ -54,8 +62,9 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
   Widget build(BuildContext context) {
     return HiddenDrawerMenu(
         backgroundColorMenu: Colors.white ,
+        backgroundColorAppBar: Colors.blue,
         screens: _pages,
-        initPositionSelected: 0,
+        initPositionSelected: 1,
       // disableAppBarDefault: false,
       slidePercent: 50,
       contentCornerRadius: 30,

@@ -13,7 +13,7 @@ class RouteMiddleware  extends GetMiddleware{
     //   return const RouteSettings(name: "home") ;
     // }
 
-    if (CacheHelper().getData(key: 'signed') == 'signed'){
+    if (CacheHelper().getData(key: 'signed') == true){
       return const RouteSettings(name: "/drawer") ;
     }
 

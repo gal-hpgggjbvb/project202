@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // home: const SplashScreen() ,
 
-      home: const SignInPage() ,
+      // home: const SignInPage() ,
       // initialRoute: '/signup',
 
       //  initialRoute:CacheHelper().getData(key: 'signed') == 'signed' ? "/home" : "/",

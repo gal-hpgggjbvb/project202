@@ -156,18 +156,32 @@ class _SignInPageState extends State<SignInPage> {
                               // controller.signLoading() ;
                               // controller.signFailure() ;
 
-                              //todo here the working two lines
-                              // if(signInController.signInFormKey.currentState!.validate()){
-                              //   signInController.signIn() ;
-                              // }
+                              //todo here final code
                               if(signInController.signInFormKey.currentState!.validate()){
                                 CacheHelper().saveData(key: 'password', value: signInController.passwordController) ;
                                 signInController.signIn() ;
-                                if(signStatus.done){
-                                  Future.delayed(const Duration(seconds: 2), () {
-                                    Get.off(() => const HiddenDrawer()) ;
+                                // if(signStatus.done){
+                                //   CacheHelper().saveData(key: 'signed', value: true) ;
+                                //   Get.offAll(() => const HiddenDrawer()) ;
+                                //   signStatus.done = false ;
+                                //   // setState(() {});
+                                // }
+
+                                  Future.delayed(const Duration(seconds: 3), () {
+                                    CacheHelper().saveData(key: 'signed', value: true) ;
+                                    CacheHelper().saveData(key: 'done', value: false) ;
+                                    Get.offAll(() => const HiddenDrawer()) ;
+
                                   });
-                                }
+
+                                // if(CacheHelper().getData(key: 'done')){
+                                //   Future.delayed(const Duration(seconds: 2), () {
+                                //     CacheHelper().saveData(key: 'signed', value: true) ;
+                                //     CacheHelper().saveData(key: 'done', value: false) ;
+                                //     Get.offAll(() => const HiddenDrawer()) ;
+                                //
+                                //   });
+                                // }
                               }
 
 
@@ -226,7 +240,7 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                       TextButton(
                         onPressed: () {
-                          // Get.to(() => const SignUpPage());
+                          Get.off(() => const SignUpPage());
                         },
                         child: const Text(
                           "Register",

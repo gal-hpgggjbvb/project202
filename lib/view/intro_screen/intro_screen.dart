@@ -57,7 +57,7 @@ class _IntroScreenState extends State<IntroScreen> {
             done: const Text("Done", style: TextStyle( color: Colors.blue,fontWeight: FontWeight.w700)),
             // On Done button pressed
             onDone: () {
-              Get.to(() => const SignInPage()) ;
+              Get.off(() => const SignInPage()) ;
             },
             // On Skip button pressed
             onSkip: () {

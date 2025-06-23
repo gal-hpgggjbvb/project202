@@ -47,6 +47,7 @@ class SignInController extends GetxController {
       final decodedToken = JwtDecoder.decode(user!.token) ;
       CacheHelper().saveData(key: 'token', value: user!.token) ;
       CacheHelper().saveData(key: 'id', value: decodedToken['prv']) ;
+      CacheHelper().saveData(key: 'name', value: decodedToken['name']) ;
       CacheHelper().saveData(key: 'phone', value: decodedToken['phone']) ;
       CacheHelper().saveData(key: 'email', value: decodedToken['email']) ;
       CacheHelper().saveData(key: 'role', value: decodedToken['role']) ;
@@ -63,6 +64,7 @@ class SignInController extends GetxController {
       // print('2*****************************************************') ;
       // print(CacheHelper().getData(key: 'token')) ;
       signStatus.signSuccess();
+      // Get.off(() => const Drawer()) ;
     }on ServerExceptions catch (e) {
       // print('error******************************************') ;
       // print(e.toString()) ;

@@ -1,15 +1,17 @@
 
 import 'package:get/get.dart';
+import 'package:project2/cache/cache_helper.dart';
 
 class SignStatus extends GetxController {
 
   //late final String errorMessage ;
   bool loading = false ;
-  bool done = false ;
+  // bool done = false ;
   signSuccess() {
     loading = false ;
     Get.snackbar("signin successful", "welcome");
-    done = true ;
+    // done = true ;
+    CacheHelper().saveData(key: 'done', value: true) ;
     update() ;
   }
 

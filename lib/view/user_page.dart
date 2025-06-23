@@ -79,17 +79,17 @@ class _UserPageState extends State<UserPage> {
                   //       fontSize: 20, fontWeight: FontWeight.w500),
                   // ),
                   Text(
-                    '${CacheHelper().getData(key: 'name')} :<' ,
+                    '${CacheHelper().getData(key: 'name') ?? 'name here'} :<' ,
                     style: const TextStyle(
                         fontSize: 20, fontWeight: FontWeight.w300),
                   ),
                   Text(
-                    'number : ${CacheHelper().getData(key: 'number')}' ,
+                    'number : ${CacheHelper().getData(key: 'number') ?? 'name here'}' ,
                     style: const TextStyle(
                         fontSize: 15, fontWeight: FontWeight.w300),
                   ),
                   Text(
-                    CacheHelper().getData(key: 'email'),
+                    CacheHelper().getData(key: 'email') ?? 'name here',
                     style: const TextStyle(fontSize: 20,fontWeight: FontWeight.w500),
                   ),
                 ],
@@ -104,7 +104,7 @@ class _UserPageState extends State<UserPage> {
                   // controller.sharedpref.clear();
                   CacheHelper().clearData();
                   // CacheHelper().saveData(key: 'signed', value: 2) ;
-                  Get.off(() => const SignInPage());
+                  Get.offAll(() => const SignInPage());
                 },
                 child: const Text(
                   "sign out",
@@ -150,9 +150,9 @@ class _UserPageState extends State<UserPage> {
       ),
       body: Center(
         child: MaterialButton(
-          onPressed: () => Get.to(() => const HomePage()),
+          onPressed: () {},
           color: Colors.green,
-          child: const Text("Go to HomePage"),
+          child: const Text("Make an Order"),
         ),
       ),
     );
