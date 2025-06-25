@@ -26,6 +26,7 @@ class OrderController extends GetxController {
   TextEditingController destinationController = TextEditingController();
 
     bool order = false ;
+    OrderModel? orderModel ;
     makeOrder() async {
       try {
         final response = await api.post("http://10.0.2.2:8000/api/store_order",
@@ -40,9 +41,11 @@ class OrderController extends GetxController {
             'source': sourceController.text,
             'destination': destinationController.text,
           }
-        ) ;
-        // print('*******************something here*****************') ;
-        // print(response.statusCode.toString()) ;
+        );
+        orderModel = OrderModel.fromJson(response) ;
+        print('status ${orderModel!.status}');
+        print(orderModel!.message);
+        print('*******************something here*****************') ;
 
         // print(response) ;
 

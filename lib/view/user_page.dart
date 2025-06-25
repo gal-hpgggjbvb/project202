@@ -238,9 +238,10 @@ class _UserPageState extends State<UserPage> {
                           BorderRadius.vertical(top: Radius.circular(20))),
                   builder: (context) => Center(
                         child: ListView(
-                          padding: EdgeInsets.all(30),
+                          padding: const EdgeInsets.all(30),
                           children: [
                             const Center(child: Text('Make an Order')),
+                            const SizedBox(height: 15,) ,
                             CustomOrderField(
                               controller: orderController.objectNameController,
                               hintText: 'type here',
@@ -256,6 +257,7 @@ class _UserPageState extends State<UserPage> {
                               hintText: 'type here',
                               labelText: 'destination location',
                             ),
+                            const SizedBox(height: 15,) ,
                             //todo bottomsheet button
                             Center(
                               child: MaterialButton(
@@ -263,6 +265,8 @@ class _UserPageState extends State<UserPage> {
                                   await CacheHelper().saveData(key: 'orderBool', value: true);
                                   await orderController.makeOrder();
                                 },
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20)),
                                 color: Colors.blueAccent,
                                 child: const Text("Make an Order"),
                               ),
