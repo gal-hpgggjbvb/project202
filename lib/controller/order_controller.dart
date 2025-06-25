@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project2/api/api_consumer.dart';
 import 'package:project2/cache/cache_helper.dart';
@@ -15,15 +16,29 @@ class OrderController extends GetxController {
   //   'destination': 'lattakia',
   // });
   // FormData formData = FormData() ;
+  GlobalKey<ScaffoldState> scaffoldKey =GlobalKey();
+
+  //order object name
+  TextEditingController objectNameController = TextEditingController();
+  //source name from where
+  TextEditingController sourceController = TextEditingController();
+  //destination name to where
+  TextEditingController destinationController = TextEditingController();
+
     bool order = false ;
     makeOrder() async {
       try {
         final response = await api.post("http://10.0.2.2:8000/api/store_order",
         isFormData: true ,
+          // data: {
+          //   'order_name': 'something',
+          //   'source': 'place1',
+          //   'destination': 'place2',
+          // }
           data: {
-            'order_name': 'something',
-            'source': 'place1',
-            'destination': 'place2',
+            'order_name': objectNameController.text,
+            'source': sourceController.text,
+            'destination': destinationController.text,
           }
         ) ;
         // print('*******************something here*****************') ;

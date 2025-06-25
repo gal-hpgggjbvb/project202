@@ -19,7 +19,7 @@ class DioConsumer extends ApiConsumer {
     //to add my interceptor
     dio.interceptors.add(ApiInterceptor()) ;
 
-    //todo here send token
+    // here send token
     // String tok = CacheHelper().getData(key: 'token') ;
     // dio.options.headers['Authorization'] = "Bearer $tok" ;
 

@@ -4,11 +4,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:project2/api/api_consumer.dart';
 import 'package:project2/api/dio_consumer.dart';
 import 'package:project2/controller/order_controller.dart';
+import 'package:project2/custom_widgets/custom_order_field.dart';
 import 'package:project2/view/auth/sign_in_page.dart';
-import 'package:project2/view/home_page.dart';
 
 import '../cache/cache_helper.dart';
 
@@ -20,21 +19,23 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
-
-  File? image ;
+  File? image;
 
   Future<void> pickImageFromGallery() async {
     final ImagePicker imagePicker = ImagePicker();
-    final pickedFile = await imagePicker.pickImage(source: ImageSource.gallery) ;
+    final pickedFile = await imagePicker.pickImage(source: ImageSource.gallery);
     // if(image == null) return ;
 
     // final imageTemporary = File(image!.path) ;
     setState(() {
-      image = File(pickedFile!.path) ;
+      image = File(pickedFile!.path);
     });
   }
-  OrderController orderController = Get.put(OrderController(DioConsumer(dio: Dio()))) ;
-  bool val = false ;
+
+  OrderController orderController =
+      Get.put(OrderController(DioConsumer(dio: Dio())));
+
+  bool val = false;
 
   @override
   Widget build(BuildContext context) {
@@ -57,25 +58,32 @@ class _UserPageState extends State<UserPage> {
                   child: Image.asset(
                     "images/4 - Copy.jpg",
                     fit: BoxFit.cover,
-                  ) ,
-                ) ,
+                  ),
+                ),
               ),
-              const SizedBox(height: 10,) ,
+              const SizedBox(
+                height: 10,
+              ),
               InkWell(
-                onTap: (){
-                  pickImageFromGallery() ;
+                onTap: () {
+                  pickImageFromGallery();
                 },
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(100),
                   child: SizedBox(
                       height: 120,
                       width: 120,
-                      child: image == null ? Image.asset("images/4 - Copy.jpg", fit: BoxFit.cover,) :
-                      Image.file(image!)
-                  ) ,
+                      child: image == null
+                          ? Image.asset(
+                              "images/4 - Copy.jpg",
+                              fit: BoxFit.cover,
+                            )
+                          : Image.file(image!)),
                 ),
               ),
-              const SizedBox(height: 20,),
+              const SizedBox(
+                height: 20,
+              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -85,22 +93,25 @@ class _UserPageState extends State<UserPage> {
                   //       fontSize: 20, fontWeight: FontWeight.w500),
                   // ),
                   Text(
-                    '${CacheHelper().getData(key: 'name') ?? 'name here'} :<' ,
+                    '${CacheHelper().getData(key: 'name') ?? 'name here'} :<',
                     style: const TextStyle(
                         fontSize: 20, fontWeight: FontWeight.w300),
                   ),
                   Text(
-                    'number : ${CacheHelper().getData(key: 'number') ?? 'name here'}' ,
+                    'number : ${CacheHelper().getData(key: 'number') ?? 'name here'}',
                     style: const TextStyle(
                         fontSize: 15, fontWeight: FontWeight.w300),
                   ),
                   Text(
                     CacheHelper().getData(key: 'email') ?? 'name here',
-                    style: const TextStyle(fontSize: 20,fontWeight: FontWeight.w500),
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.w500),
                   ),
                 ],
               ),
-              const SizedBox(height: 30,),
+              const SizedBox(
+                height: 30,
+              ),
               //todo sign-out button
               MaterialButton(
                 shape: ContinuousRectangleBorder(
@@ -118,14 +129,16 @@ class _UserPageState extends State<UserPage> {
                 ),
               ),
 
-              const SizedBox(height: 30,),
+              const SizedBox(
+                height: 30,
+              ),
               //todo pick image button
               MaterialButton(
                 shape: ContinuousRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
                 color: Colors.green,
                 onPressed: () {
-                  pickImageFromGallery() ;
+                  pickImageFromGallery();
                 },
                 child: const Text(
                   "pick profile image",
@@ -133,17 +146,22 @@ class _UserPageState extends State<UserPage> {
                 ),
               ),
               Center(
-                child: image == null ? Text('data') :
-                Image.file(image! , height: 200, width: 200,),
-              ) ,
+                child: image == null
+                    ? Text('data')
+                    : Image.file(
+                        image!,
+                        height: 200,
+                        width: 200,
+                      ),
+              ),
               MaterialButton(
                 shape: ContinuousRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
                 color: Colors.blue,
                 onPressed: () {
-                  print(CacheHelper().getData(key: 'name')) ;
-                  print(CacheHelper().getData(key: 'number')) ;
-                  print(CacheHelper().getData(key: 'email')) ;
+                  print(CacheHelper().getData(key: 'name'));
+                  print(CacheHelper().getData(key: 'number'));
+                  print(CacheHelper().getData(key: 'email'));
                 },
                 child: const Text(
                   "sign out",
@@ -157,14 +175,14 @@ class _UserPageState extends State<UserPage> {
       body: Column(
         children: [
           Center(
-            child:MaterialButton(
-                  onPressed: () async {
-                    await CacheHelper().saveData(key: 'orderBool', value: true) ;
-                    await orderController.makeOrder() ;
-                  },
-                  color: Colors.green,
-                  child: const Text("Make an Order"),
-                ) ,
+            child: MaterialButton(
+              onPressed: () async {
+                await CacheHelper().saveData(key: 'orderBool', value: true);
+                await orderController.makeOrder();
+              },
+              color: Colors.green,
+              child: const Text("Make an Order"),
+            ),
             // GetBuilder<OrderController>(
             //   init: OrderController(DioConsumer(dio: Dio())),
             //   builder: (controller) {
@@ -181,7 +199,7 @@ class _UserPageState extends State<UserPage> {
           MaterialButton(
             onPressed: () async {
               print('_____________________________________________');
-              print(CacheHelper().getData(key: 'token')) ;
+              print(CacheHelper().getData(key: 'token'));
               print('_____________________________________________');
             },
             color: Colors.green,
@@ -189,33 +207,93 @@ class _UserPageState extends State<UserPage> {
           ),
           MaterialButton(
             onPressed: () async {
-              val = !val ;
-              CacheHelper().saveData(key: 'value', value: !val) ;
+              val = !val;
+              CacheHelper().saveData(key: 'value', value: !val);
             },
             color: Colors.green,
             child: const Text("change value "),
           ),
           MaterialButton(
             onPressed: () async {
-              print(CacheHelper().getData(key: 'value')) ;
+              print(CacheHelper().getData(key: 'value'));
             },
             color: Colors.green,
             child: const Text("print value "),
           ),
           MaterialButton(
             onPressed: () async {
-              print(CacheHelper().getData(key: 'orderBool')) ;
+              print(CacheHelper().getData(key: 'orderBool'));
             },
             color: Colors.green,
             child: const Text("print order bool "),
+          ),
+
+          ElevatedButton(
+            onPressed: () {
+              showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: false,
+                  shape: const RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.vertical(top: Radius.circular(20))),
+                  builder: (context) => Center(
+                        child: ListView(
+                          padding: EdgeInsets.all(30),
+                          children: [
+                            const Center(child: Text('Make an Order')),
+                            CustomOrderField(
+                              controller: orderController.objectNameController,
+                              hintText: 'type here',
+                              labelText: 'what do you want to deliver',
+                            ),
+                            CustomOrderField(
+                              controller: orderController.sourceController,
+                              hintText: 'type here',
+                              labelText: 'source location',
+                            ),
+                            CustomOrderField(
+                              controller: orderController.destinationController,
+                              hintText: 'type here',
+                              labelText: 'destination location',
+                            ),
+                            //todo bottomsheet button
+                            Center(
+                              child: MaterialButton(
+                                onPressed: () async {
+                                  await CacheHelper().saveData(key: 'orderBool', value: true);
+                                  await orderController.makeOrder();
+                                },
+                                color: Colors.blueAccent,
+                                child: const Text("Make an Order"),
+                              ),
+                            ),
+                            const SizedBox(height: 500,) ,
+                            const Text('bottomsheet ends here')
+                          ],
+                        ),
+                      ));
+            },
+            child: const Text("show bottomsheet "),
+          ),
+
+          MaterialButton(
+            onPressed: () {
+              showModalBottomSheet(
+                  context: context,
+                  builder: (context) => Container(
+                        color: Colors.redAccent,
+                        width: 100,
+                        height: 100,
+                      ));
+            },
+            color: Colors.greenAccent,
+            child: const Text("show bottomsheet "),
           ),
         ],
       ),
     );
   }
 }
-
-
 
 // import 'dart:io';
 //
