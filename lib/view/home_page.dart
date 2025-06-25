@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project2/cache/cache_helper.dart';
 import 'package:project2/view/auth/sign_in_page.dart';
-import 'package:project2/view/user_home.dart';
 import 'package:project2/view/user_page.dart';
 
 class HomePage extends StatefulWidget {

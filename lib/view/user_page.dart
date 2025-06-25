@@ -1,8 +1,12 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:project2/api/api_consumer.dart';
+import 'package:project2/api/dio_consumer.dart';
+import 'package:project2/controller/order_controller.dart';
 import 'package:project2/view/auth/sign_in_page.dart';
 import 'package:project2/view/home_page.dart';
 
@@ -29,6 +33,8 @@ class _UserPageState extends State<UserPage> {
       image = File(pickedFile!.path) ;
     });
   }
+  OrderController orderController = Get.put(OrderController(DioConsumer(dio: Dio()))) ;
+  bool val = false ;
 
   @override
   Widget build(BuildContext context) {
@@ -148,18 +154,66 @@ class _UserPageState extends State<UserPage> {
           ),
         ),
       ),
-      body: Center(
-        child: MaterialButton(
-          onPressed: () {},
-          color: Colors.green,
-          child: const Text("Make an Order"),
-        ),
+      body: Column(
+        children: [
+          Center(
+            child:MaterialButton(
+                  onPressed: () async {
+                    await CacheHelper().saveData(key: 'orderBool', value: true) ;
+                    await orderController.makeOrder() ;
+                  },
+                  color: Colors.green,
+                  child: const Text("Make an Order"),
+                ) ,
+            // GetBuilder<OrderController>(
+            //   init: OrderController(DioConsumer(dio: Dio())),
+            //   builder: (controller) {
+            //     return MaterialButton(
+            //       onPressed: () async {
+            //         await orderController.makeOrder() ;
+            //       },
+            //       color: Colors.green,
+            //       child: const Text("Make an Order"),
+            //     ) ;
+            //   },
+            // ),
+          ),
+          MaterialButton(
+            onPressed: () async {
+              print('_____________________________________________');
+              print(CacheHelper().getData(key: 'token')) ;
+              print('_____________________________________________');
+            },
+            color: Colors.green,
+            child: const Text("print token "),
+          ),
+          MaterialButton(
+            onPressed: () async {
+              val = !val ;
+              CacheHelper().saveData(key: 'value', value: !val) ;
+            },
+            color: Colors.green,
+            child: const Text("change value "),
+          ),
+          MaterialButton(
+            onPressed: () async {
+              print(CacheHelper().getData(key: 'value')) ;
+            },
+            color: Colors.green,
+            child: const Text("print value "),
+          ),
+          MaterialButton(
+            onPressed: () async {
+              print(CacheHelper().getData(key: 'orderBool')) ;
+            },
+            color: Colors.green,
+            child: const Text("print order bool "),
+          ),
+        ],
       ),
     );
   }
 }
-
-
 
 
 

@@ -178,6 +178,7 @@ class _SignInPageState extends State<SignInPage> {
                                   Future.delayed(const Duration(seconds: 2), () {
                                     CacheHelper().saveData(key: 'signed', value: true) ;
                                     CacheHelper().saveData(key: 'done', value: false) ;
+                                    // controller.loading = true ;
                                     Get.offAll(() => const HiddenDrawer()) ;
 
                                   });
