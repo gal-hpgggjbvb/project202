@@ -63,7 +63,7 @@ class SignInController extends GetxController {
       // print(response) ;
       // print('2*****************************************************') ;
       // print(CacheHelper().getData(key: 'token')) ;
-      signStatus.signSuccess();
+      signStatus.signSuccess('signin successful' , 'welcome');
       CacheHelper().saveData(key: 'done', value: true) ;
       print('lookhereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee') ;
       print(CacheHelper().getData(key: 'done')) ;

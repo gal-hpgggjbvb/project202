@@ -180,12 +180,9 @@ class _SignInPageState extends State<SignInPage> {
                                     CacheHelper().saveData(key: 'done', value: false) ;
                                     // controller.loading = true ;
                                     Get.offAll(() => const HiddenDrawer()) ;
-
                                   });
                                 }
                               }
-
-
                               // if(signInController.signInFormKey.currentState!.validate()) {
                               //   Get.to(() => const HiddenDrawer());
                               //   CacheHelper()

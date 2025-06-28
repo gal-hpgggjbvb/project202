@@ -7,9 +7,10 @@ class SignStatus extends GetxController {
   //late final String errorMessage ;
   bool loading = false ;
   // bool done = false ;
-  signSuccess() {
+  signSuccess(String title , String message) {
     loading = false ;
-    Get.snackbar("signin successful", "welcome");
+    // Get.snackbar("signin successful", "welcome");
+    Get.snackbar(title, message);
     // done = true ;
     CacheHelper().saveData(key: 'done', value: true) ;
     update() ;
