@@ -40,6 +40,7 @@ class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // resizeToAvoidBottomInset: true,
       appBar: AppBar(
         backgroundColor: Colors.blue,
       ),
@@ -172,126 +173,143 @@ class _UserPageState extends State<UserPage> {
           ),
         ),
       ),
-      body: Column(
+      body: ListView(
         children: [
-          Center(
-            child: MaterialButton(
-              onPressed: () async {
-                await CacheHelper().saveData(key: 'orderBool', value: true);
-                await orderController.makeOrder();
-              },
-              color: Colors.green,
-              child: const Text("Make an Order"),
-            ),
-            // GetBuilder<OrderController>(
-            //   init: OrderController(DioConsumer(dio: Dio())),
-            //   builder: (controller) {
-            //     return MaterialButton(
-            //       onPressed: () async {
-            //         await orderController.makeOrder() ;
-            //       },
-            //       color: Colors.green,
-            //       child: const Text("Make an Order"),
-            //     ) ;
-            //   },
-            // ),
-          ),
-          MaterialButton(
-            onPressed: () async {
-              print('_____________________________________________');
-              print(CacheHelper().getData(key: 'token'));
-              print('_____________________________________________');
-            },
-            color: Colors.green,
-            child: const Text("print token "),
-          ),
-          MaterialButton(
-            onPressed: () async {
-              val = !val;
-              CacheHelper().saveData(key: 'value', value: !val);
-            },
-            color: Colors.green,
-            child: const Text("change value "),
-          ),
-          MaterialButton(
-            onPressed: () async {
-              print(CacheHelper().getData(key: 'value'));
-            },
-            color: Colors.green,
-            child: const Text("print value "),
-          ),
-          MaterialButton(
-            onPressed: () async {
-              print(CacheHelper().getData(key: 'orderBool'));
-            },
-            color: Colors.green,
-            child: const Text("print order bool "),
-          ),
+          Column(
+            children: [
+              Center(
+                child: MaterialButton(
+                  onPressed: () async {
+                    await CacheHelper().saveData(key: 'orderBool', value: true);
+                    await orderController.makeOrder();
+                  },
+                  color: Colors.green,
+                  child: const Text("Make an Order"),
+                ),
+                // GetBuilder<OrderController>(
+                //   init: OrderController(DioConsumer(dio: Dio())),
+                //   builder: (controller) {
+                //     return MaterialButton(
+                //       onPressed: () async {
+                //         await orderController.makeOrder() ;
+                //       },
+                //       color: Colors.green,
+                //       child: const Text("Make an Order"),
+                //     ) ;
+                //   },
+                // ),
+              ),
+              MaterialButton(
+                onPressed: () async {
+                  print('_____________________________________________');
+                  print(CacheHelper().getData(key: 'token'));
+                  print('_____________________________________________');
+                },
+                color: Colors.green,
+                child: const Text("print token "),
+              ),
+              MaterialButton(
+                onPressed: () async {
+                  val = !val;
+                  CacheHelper().saveData(key: 'value', value: !val);
+                },
+                color: Colors.green,
+                child: const Text("change value "),
+              ),
+              MaterialButton(
+                onPressed: () async {
+                  print(CacheHelper().getData(key: 'value'));
+                },
+                color: Colors.green,
+                child: const Text("print value "),
+              ),
+              MaterialButton(
+                onPressed: () async {
+                  print(CacheHelper().getData(key: 'orderBool'));
+                },
+                color: Colors.green,
+                child: const Text("print order bool "),
+              ),
 
-          ElevatedButton(
-            onPressed: () {
-              showModalBottomSheet(
-                  context: context,
-                  isScrollControlled: false,
-                  shape: const RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(20))),
-                  builder: (context) => Center(
-                        child: ListView(
-                          padding: const EdgeInsets.all(30),
-                          children: [
-                            const Center(child: Text('Make an Order')),
-                            const SizedBox(height: 15,) ,
-                            CustomOrderField(
-                              controller: orderController.objectNameController,
-                              hintText: 'type here',
-                              labelText: 'what do you want to deliver',
-                            ),
-                            CustomOrderField(
-                              controller: orderController.sourceController,
-                              hintText: 'type here',
-                              labelText: 'source location',
-                            ),
-                            CustomOrderField(
-                              controller: orderController.destinationController,
-                              hintText: 'type here',
-                              labelText: 'destination location',
-                            ),
-                            const SizedBox(height: 15,) ,
-                            //todo bottomsheet button
-                            Center(
-                              child: MaterialButton(
-                                onPressed: () async {
-                                  await CacheHelper().saveData(key: 'orderBool', value: true);
-                                  await orderController.makeOrder();
-                                },
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20)),
-                                color: Colors.blueAccent,
-                                child: const Text("Make an Order"),
+              ElevatedButton(
+                onPressed: () {
+                  showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: false,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.vertical(top: Radius.circular(20))),
+                      builder: (context) => Center(
+                            child: Form(
+                              key: orderController.orderFormKey,
+                              child: ListView(
+                                padding: const EdgeInsets.all(30),
+                                children: [
+                                  const Center(child: Text('Make an Order')),
+                                  const SizedBox(height: 15,) ,
+                                  CustomOrderField(
+                                    controller: orderController.objectNameController,
+                                    hintText: 'type here',
+                                    labelText: 'what do you want to deliver',
+                                  ),
+                                  CustomOrderField(
+                                    controller: orderController.sourceController,
+                                    hintText: 'type here',
+                                    labelText: 'pickup location',
+                                  ),
+                                  CustomOrderField(
+                                    controller: orderController.destinationController,
+                                    hintText: 'type here',
+                                    labelText: 'drop location',
+                                  ),
+                                  const SizedBox(height: 15,) ,
+                                  //todo bottomsheet button
+                                  Center(
+                                    child: MaterialButton(
+                                      onPressed: () async {
+                                        // if(orderController.orderFormKey.currentState!.validate()){
+                                        //   await CacheHelper().saveData(key: 'orderBool', value: true);
+                                        //   await orderController.makeOrder();
+                                        // }
+                                        await CacheHelper().saveData(key: 'orderBool', value: true);
+                                        await orderController.makeOrder();
+                                      },
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(20)),
+                                      color: Colors.blue[200],
+                                      child: const Text("Make an Order"),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 400,) ,
+                                  const Text('bottomsheet ends here')
+                                ],
                               ),
                             ),
-                            const SizedBox(height: 500,) ,
-                            const Text('bottomsheet ends here')
-                          ],
-                        ),
-                      ));
-            },
-            child: const Text("show bottomsheet "),
-          ),
+                          ));
+                },
+                child: const Text("show bottomsheet "),
+              ),
+              //todo another way
+              const SizedBox(height: 90,) ,
+              CustomOrderField(controller: orderController.objectNameController,
+                  hintText: 'another way for order ui',
+                  labelText: 'another way') ,
 
-          MaterialButton(
-            onPressed: () {
-              showModalBottomSheet(
-                  context: context,
-                  builder: (context) => Container(
-                        color: Colors.redAccent,
-                        width: 100,
-                        height: 100,
-                      ));
-            },
-            color: Colors.greenAccent,
-            child: const Text("show bottomsheet "),
+              MaterialButton(
+                onPressed: () async {
+                  print('status code is : =================${await CacheHelper().getData(key: 'responseStatusCode')}') ;
+                  // showModalBottomSheet(
+                  //     context: context,
+                  //     builder: (context) => Container(
+                  //           color: Colors.redAccent,
+                  //           width: 100,
+                  //           height: 100,
+                  //         ));
+                },
+                color: Colors.greenAccent,
+                child: const Text("show response status code "),
+              ),
+            ],
           ),
         ],
       ),

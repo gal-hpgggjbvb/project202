@@ -53,7 +53,7 @@ class SignUpController extends GetxController {
           });
       print('**********response******************************');
       print(response) ;
-      signStatus.signSuccess();
+      // signStatus.signSuccess();
     } on ServerExceptions2 catch (e) {
       print('**********error1******************************');
       // SignFailed(errorMessage: signUpErrorModel?.email ?? 'something');
