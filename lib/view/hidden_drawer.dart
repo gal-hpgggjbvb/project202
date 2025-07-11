@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'package:project2/view/home_page.dart';
-import 'package:project2/view/profile_page.dart';
+import 'package:project2/view/user_view/profile_page.dart';
 import 'package:project2/view/settings_page.dart';
 import 'package:project2/view/sign_out_page.dart';
-import 'package:project2/view/user_page.dart';
+import 'package:project2/view/user_view/user_page.dart';
 
 class HiddenDrawer extends StatefulWidget {
   const HiddenDrawer({super.key});

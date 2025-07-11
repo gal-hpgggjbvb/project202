@@ -54,7 +54,8 @@ class _SplashScreenState extends State<SplashScreen>
                     begin: Alignment.topRight,
                     end: Alignment.bottomLeft,
                     colors: [
-                  Color(0xff105ffc),
+                  // Color(0xff105ffc),
+                  Color(0xfffc6310),
                   Color(0xffffffff),
                 ])),
             //child: Lottie.asset(name),

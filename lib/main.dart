@@ -10,7 +10,7 @@ import 'package:project2/view/hidden_drawer.dart';
 import 'package:project2/view/home_page.dart';
 import 'package:project2/view/intro_screen/intro_screen.dart';
 import 'package:project2/view/splash_screen.dart';
-import 'package:project2/view/user_page.dart';
+import 'package:project2/view/user_view/user_page.dart';
 
 void main() async {
   // Lock the app to portrait mode

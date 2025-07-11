@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../cache/cache_helper.dart';
+import '../../cache/cache_helper.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});

@@ -10,8 +10,8 @@ class ApiInterceptor extends Interceptor{
     // bool order = CacheHelper().getData(key: 'order') ;
 
     //todo send token via header
-    if(CacheHelper().getData(key: 'orderBool') ?? false){
-      print('h=**********here true ******************') ;
+    if(CacheHelper().getData(key: 'sendToken') ?? false){
+      print('h=**********api interceptors true ******************') ;
         String tok = CacheHelper().getData(key: 'token') ;
         options.headers['Authorization'] = "Bearer $tok" ;
         CacheHelper().saveData(key: 'orderBool', value: false) ;

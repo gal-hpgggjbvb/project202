@@ -1,13 +1,13 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project2/api/api_consumer.dart';
 import 'package:project2/cache/cache_helper.dart';
 import 'package:project2/controller/sign_status.dart';
+import 'package:project2/model/errors/error_model.dart';
 import 'package:project2/model/errors/exceptions.dart';
-import 'package:project2/model/errors/order_error_model.dart';
-import 'package:project2/model/order_model.dart';
+
+import '../../model/user/order/add_order_model.dart';
 
 class OrderController extends GetxController {
   final ApiConsumer api;
@@ -31,10 +31,10 @@ class OrderController extends GetxController {
   TextEditingController destinationController = TextEditingController();
 
     bool order = false ;
-    OrderModel? orderModel ;
-    OrderErrorModel? orderErrorModel ;
+    AddOrder? addOrder ;
+    ErrorModel? errorModel ;
     makeOrder() async {
-      print('*******************1 here*****************') ;
+      // print('*******************1 here*****************') ;
       try {
         final response = await api.post("http://10.0.2.2:8000/api/store_order",
         isFormData: true ,
@@ -49,24 +49,24 @@ class OrderController extends GetxController {
             'destination': destinationController.text,
           }
         );
-        print('*******************2 here*****************') ;
+        // print('*******************2 here*****************') ;
         print(await CacheHelper().getData(key:'StatusCode')) ;
-        orderModel = OrderModel.fromJson(response) ;
-        print('status ${orderModel!.status}');
-        print(orderModel!.message);
-        print('*******************3 here*****************') ;
+        addOrder = AddOrder.fromJson(response) ;
+        print('status ${addOrder!.status}');
+        print(addOrder!.message);
+        // print('*******************3 here*****************') ;
 
         // print(response) ;
 
         // CacheHelper().saveData(key: 'orderMessage', value: orderModel?.message);
         // print(CacheHelper().getData(key: 'orderMessage')) ;
         SignStatus().signSuccess('order added successfully', '') ;
-      } on DioException catch (e) {
-          print('Error status code: ${e.response?.statusCode}');
-          print('Error data: ${e.response?.data}');
-        print('*******************something2 here*****************') ;
-        SignFailed(errorMessage:'eeee') ;
-        print('*******************something3 here*****************') ;
+      } on ServerExceptions catch (e) {
+          // print('Error status code: ${e.response?.statusCode}');
+          // print('Error data: ${e.response?.data}');
+        // print('*******************something2 here*****************') ;
+        SignFailed(errorMessage: e.errorModel.message) ;
+        // print('*******************something3 here*****************') ;
         print(e.toString()) ;
       }
     }
