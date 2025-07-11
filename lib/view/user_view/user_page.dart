@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:project2/api/dio_consumer.dart';
 import 'package:project2/controller/user_controller/fetch_orders_controller.dart';
 import 'package:project2/controller/user_controller/order_controller.dart';
+import 'package:project2/custom_widgets/custom_expansiontile.dart';
 import 'package:project2/custom_widgets/custom_order_card.dart';
 import 'package:project2/custom_widgets/custom_order_field.dart';
 import 'package:project2/view/auth/sign_in_page.dart';
@@ -202,9 +203,7 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          // print('*********************************') ;
-          await CacheHelper()
-              .saveData(key: 'sendToken', value: true);
+          await CacheHelper().saveData(key: 'sendToken', value: true);
           await fetchOrdersController.fetchOrders();
         },
       ),
@@ -223,7 +222,8 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
                             .saveData(key: 'sendToken', value: true);
                         await orderController.makeOrder();
                       },
-                      color: Colors.green,
+                      // color: Colors.orange[300],
+                      color: Color(0xFFFFA641),
                       child: const Text("Make an Order"),
                     ),
                     // GetBuilder<OrderController>(
@@ -241,11 +241,9 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
                   ),
                   MaterialButton(
                     onPressed: () async {
-                      print(
-                          '_____________________________________________');
+                      print('_____________________________________________');
                       print(CacheHelper().getData(key: 'token'));
-                      print(
-                          '_____________________________________________');
+                      print('_____________________________________________');
                     },
                     color: Colors.green,
                     child: const Text("print token "),
@@ -272,7 +270,7 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
                     color: Colors.green,
                     child: const Text("print order bool "),
                   ),
-
+                  //todo bottom sheet button
                   ElevatedButton(
                     onPressed: () {
                       showModalBottomSheet(
@@ -334,7 +332,7 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
                                               borderRadius:
                                               BorderRadius.circular(
                                                   20)),
-                                          color: Colors.blue[200],
+                                          color: Colors.orange[200],
                                           child:
                                           const Text("Make an Order"),
                                         ),
@@ -383,6 +381,8 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
           Center(
               child: RefreshIndicator(
                 onRefresh: fetchOrdersController.refreshTab2,
+                color: Colors.orangeAccent,
+                backgroundColor: Colors.white,
                 child: GetBuilder<FetchOrdersController>(
                 init: FetchOrdersController(DioConsumer(dio: Dio())),
                 builder: (controller) {
@@ -390,79 +390,15 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
                   return ListView.builder(
                     itemCount: controller.users.length,
                     itemBuilder: (context , i){
-                      return Card(
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-                        child: ExpansionTile(
-                          //on expansion shape
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-                          collapsedShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-                          // collapsedBackgroundColor: Colors.orangeAccent,
-                          collapsedBackgroundColor: Colors.orangeAccent,
-                          title: Text('Order ID: ${controller.users[i].id}'),
-                          subtitle: Text('subtitle'),
-                          leading: Text('leading'),
-                          // trailing: Text('trailing'),
-                           children: [
-                             Column(
-                               mainAxisAlignment: MainAxisAlignment.center,
-                               children: [
-                                 Row(
-                                   // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
-                                   children: [
-                                     Padding(
-                                       padding: const EdgeInsets.only(left: 50.0),
-                                       child: Text('OrderId :           '),
-                                     ) ,Text('${controller.users[i].id}') ,
-                                   ],
-                                 ) ,
-                                 Row(
-                                   // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
-                                   children: [
-                                     Padding(
-                                       padding: const EdgeInsets.only(left: 50.0),
-                                       child: Text('OrderName :     '),
-                                     ) ,Text(controller.users[i].orderName) ,
-                                   ],
-                                 ) ,
-                                 Row(
-                                   // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
-                                   children: [
-                                     Padding(
-                                       padding: const EdgeInsets.only(left: 50.0),
-                                       child: Text('source :             '),
-                                     ) ,Text(controller.users[i].source) ,
-                                      ],
-                                 ) ,
-                                 Row(
-                                   // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
-                                   children: [
-                                     Padding(
-                                       padding: const EdgeInsets.only(left: 50.0),
-                                       child: Text('destination :      '),
-                                     ) ,Text(controller.users[i].destination) ,
-                                   ],
-                                 ) ,
-                                 Row(
-                                   // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
-                                   children: [
-                                     Padding(
-                                       padding: const EdgeInsets.only(left: 50.0),
-                                       child: Text('status :              '),
-                                     ) ,Text(controller.users[i].status) ,
-                                   ],
-                                 ) ,
-                               ],
-                             )
-                           ],
-
-
-                        ),
-                      );
+                      return CustomExpansionTile(leading: controller.users[i].id,
+                          title: controller.users[i].orderName,
+                          trailing: controller.users[i].status,
+                          id: controller.users[i].id,
+                          name: controller.users[i].orderName,
+                          source: controller.users[i].source,
+                          destination: controller.users[i].destination,
+                          status: controller.users[i].status,
+                          created: controller.users[i].createdAt) ;
                         // ListTile(
                         // leading: Text('Order ID: ${controller.users[i].id}'),
                       // ) ;

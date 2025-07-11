@@ -6,6 +6,8 @@ import 'package:project2/controller/sign_status.dart';
 import 'package:project2/model/errors/exceptions.dart';
 import 'package:project2/model/user/order/fetch_orders_model.dart';
 
+import '../../cache/cache_helper.dart';
+
 class FetchOrdersController extends GetxController {
   final ApiConsumer api;
 
@@ -27,6 +29,7 @@ class FetchOrdersController extends GetxController {
   // orders.value = ordersList.map((e) => Order.fromJson(e)).toList();
   Future<void> refreshTab2() async {
     // await Future.delayed(const Duration(seconds: 1)) ;
+    await CacheHelper().saveData(key: 'sendToken', value: true);
     await fetchOrders() ;
   }
 
@@ -62,4 +65,22 @@ class FetchOrdersController extends GetxController {
     //todo to update tab2 -refresh-
     update();
   }
+
+
+  deleteOrder() async {
+    try {
+      await CacheHelper().saveData(key: 'sendToken', value: true);
+      final orderId = await CacheHelper().getData(key: 'orderId') ;
+      final response = await api.delete('http://10.0.2.2:8000/api/orders/$orderId') ;
+      print('delete response here ***********************************') ;
+      print(response) ;
+      SignStatus().signSuccess('order deleted successfully', '') ;
+    } on ServerExceptions catch (e) {
+      SignFailed(errorMessage: e.errorModel.message) ;
+    }
+    fetchOrders() ;
+    update() ;
+  }
+  
 }
+

@@ -26,12 +26,12 @@ class CustomOrderField extends StatelessWidget {
         // keyboardType: textInputType,
         decoration: InputDecoration(
             labelText: labelText,
-            labelStyle: const TextStyle(color: Colors.blue),
+            labelStyle: const TextStyle(color: Colors.orangeAccent),
             border: const OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.blue),
+                borderSide: BorderSide(color: Colors.orangeAccent),
             borderRadius: BorderRadius.all(Radius.circular(25)),),
             focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.blue),
+              borderSide: BorderSide(color: Colors.orangeAccent),
               borderRadius: BorderRadius.all(Radius.circular(25)),
             ),
             hintText: hintText,
