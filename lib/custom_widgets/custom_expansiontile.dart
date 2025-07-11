@@ -133,7 +133,10 @@ class CustomExpansionTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   MaterialButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      await CacheHelper().saveData(key: 'orderId', value: id) ;
+                      await fetchOrdersController.editOrder() ;
+                    },
                     // color: Colors.blue,
                     padding: const EdgeInsets.all(5),
                     shape: RoundedRectangleBorder(

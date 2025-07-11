@@ -35,6 +35,7 @@ class FetchOrdersController extends GetxController {
 
   fetchOrders() async {
     try {
+      await CacheHelper().saveData(key: 'sendToken', value: true) ;
       final response = await api.get(
         'http://10.0.2.2:8000/api/orders/my_orders',
       );
@@ -78,9 +79,32 @@ class FetchOrdersController extends GetxController {
     } on ServerExceptions catch (e) {
       SignFailed(errorMessage: e.errorModel.message) ;
     }
+    print('try fetching after delete here ************************************') ;
+    // refreshTab2() ;
     fetchOrders() ;
     update() ;
   }
   
+  editOrder() async {
+    try {
+      await CacheHelper().saveData(key: 'sendToken', value: true) ;
+      final orderId = await CacheHelper().getData(key: 'orderId') ;
+      // print('try to respond here *****************') ;
+      final response = await api.put('http://10.0.2.2:8000/api/orders/57',
+      data: {
+        "order_name": "laptop",
+        "source": "Lattakia",
+        "destination": "Damascus"
+      });
+
+      print(response) ;
+      SignStatus().signSuccess('order edited successfully', '') ;
+    } on ServerExceptions catch (e) {
+      SignFailed(errorMessage: e.errorModel.message) ;
+    }
+    print('try  fetching after edit here ************************************') ;
+    fetchOrders() ;
+    update() ;
+  }
 }
 
