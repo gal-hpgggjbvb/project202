@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:project2/api/api_consumer.dart';
 import 'package:project2/api/api_interceptors.dart';
+import 'package:project2/api/end_points.dart';
 import 'package:project2/cache/cache_helper.dart';
 import 'package:project2/model/errors/exceptions.dart';
 
@@ -16,7 +17,7 @@ class DioConsumer extends ApiConsumer {
     // dio.options.baseUrl = "http://10.0.2.2:8000/api/" ;
 
     //to add my interceptor
-    dio.interceptors.add(ApiInterceptor());
+    dio.interceptors.add(ApiInterceptor()) ;
 
     // here send token
     // String tok = CacheHelper().getData(key: 'token') ;
@@ -65,7 +66,7 @@ class DioConsumer extends ApiConsumer {
         data: isFormData ? FormData.fromMap(data) : data,
         queryParameters: queryParameters,
       );
-      CacheHelper().saveData(key: 'StatusCode', value: response.statusCode);
+      CacheHelper().saveData(key: 'StatusCode', value: response.statusCode) ;
       return response.data;
     } on DioException catch (e) {
       handleDioExceptions(e);
@@ -100,25 +101,6 @@ class DioConsumer extends ApiConsumer {
   }) async {
     try {
       final response = await dio.delete(
-        path,
-        data: isFormData ? FormData.fromMap(data) : data,
-        queryParameters: queryParameters,
-      );
-      return response.data;
-    } on DioException catch (e) {
-      handleDioExceptions(e);
-    }
-  }
-
-  @override
-  Future put(
-      String path, {
-        data,
-        Map<String, dynamic>? queryParameters,
-        bool isFormData = false,
-      }) async {
-    try {
-      final response = await dio.put(
         path,
         data: isFormData ? FormData.fromMap(data) : data,
         queryParameters: queryParameters,

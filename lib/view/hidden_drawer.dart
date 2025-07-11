@@ -64,7 +64,7 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
         backgroundColorMenu: Colors.white ,
         backgroundColorAppBar: Colors.blue,
         screens: _pages,
-        initPositionSelected: 1,
+        initPositionSelected: 2,
       // disableAppBarDefault: false,
       slidePercent: 50,
       contentCornerRadius: 30,
