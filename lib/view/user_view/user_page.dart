@@ -373,6 +373,14 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
                     color: Colors.greenAccent,
                     child: const Text("show response status code "),
                   ),
+                  MaterialButton(
+                    onPressed: () {
+                      print('order id here **************************') ;
+                      print(CacheHelper().getData(key: 'orderId')) ;
+                    },
+                    color: Colors.greenAccent,
+                    child: const Text("show order id "),
+                  ),
                 ],
               ),
             ],

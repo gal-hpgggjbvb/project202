@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project2/api/api_consumer.dart';
 import 'package:project2/controller/sign_status.dart';
@@ -15,6 +16,14 @@ class FetchOrdersController extends GetxController {
 
   FetchOrdersModel? fetchOrdersModel;
 
+  //order edit form key
+  GlobalKey<FormState> editFormKey = GlobalKey() ;
+  //order edit name
+  TextEditingController editNameController = TextEditingController();
+  //order edit source
+  TextEditingController editSourceController = TextEditingController();
+  //order edit destination
+  TextEditingController editDestinationController = TextEditingController();
   // var ordersList = <Orders>[];
   List<dynamic> users = [] ;
 
@@ -90,11 +99,12 @@ class FetchOrdersController extends GetxController {
       await CacheHelper().saveData(key: 'sendToken', value: true) ;
       final orderId = await CacheHelper().getData(key: 'orderId') ;
       // print('try to respond here *****************') ;
-      final response = await api.put('http://10.0.2.2:8000/api/orders/57',
+      // final response = await api.put('http://10.0.2.2:8000/api/orders/57',
+      final response = await api.put('http://10.0.2.2:8000/api/orders/$orderId',
       data: {
-        "order_name": "laptop",
-        "source": "Lattakia",
-        "destination": "Damascus"
+        "order_name": editNameController.text,
+        "source": editSourceController.text,
+        "destination": editDestinationController.text,
       });
 
       print(response) ;
