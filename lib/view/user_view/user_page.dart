@@ -327,6 +327,7 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
                                             await orderController
                                                 .makeOrder();
                                             // Get.back();
+                                            Navigator.pop(context) ;
                                           },
                                           shape: RoundedRectangleBorder(
                                               borderRadius:

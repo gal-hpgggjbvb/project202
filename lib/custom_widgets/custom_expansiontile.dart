@@ -180,6 +180,7 @@ class CustomExpansionTile extends StatelessWidget {
                                           onPressed: () async {
                                             await CacheHelper().saveData(key: 'orderId', value: id) ;
                                             await fetchOrdersController.editOrder() ;
+                                            Navigator.pop(context) ;
                                           },
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
