@@ -2,15 +2,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project2/api/dio_consumer.dart';
-import 'package:project2/cache/cache_helper.dart';
-import 'package:project2/controller/sign_up_controller.dart';
+import 'package:project2/controller/auth/sign_status.dart';
+import 'package:project2/controller/auth/sign_up_controller.dart';
 import 'package:project2/custom_widgets/custom_textformfield.dart';
 import 'package:project2/custom_widgets/custom_textield.dart';
-import 'package:project2/services/settings_services.dart';
 import 'package:project2/view/auth/sign_in_page.dart';
-import 'package:project2/view/hidden_drawer.dart';
 
-import '../home_page.dart';
+import '../../cache/cache_helper.dart';
+import '../hidden_drawer.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -19,14 +18,14 @@ class SignUpPage extends StatefulWidget {
   State<SignUpPage> createState() => _SignUpPageState();
 }
 
-SignUpController signUpController = Get.put(SignUpController(api: DioConsumer(dio: Dio()))) ;
+SignUpController signUpController =
+    Get.put(SignUpController(api: DioConsumer(dio: Dio())));
+
 // SettingsServices serviceController = Get.put(SettingsServices());
 class _SignUpPageState extends State<SignUpPage> {
   bool _obscureText1 = true;
 
   bool _obscureText2 = true;
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -67,23 +66,25 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   //todo text-field for user name
                   CustomTextField(
-                      controller: signUpController.usernameController,
-                      textInputType: TextInputType.text,
-                      hintText: 'Your Name',
-                    maxLength: 20,) ,
+                    controller: signUpController.usernameController,
+                    textInputType: TextInputType.text,
+                    hintText: 'Your Name',
+                    maxLength: 20,
+                  ),
 
                   //todo text-field for user number
                   CustomTextField(
-                      controller: signUpController.usernumberController,
-                      textInputType: TextInputType.number,
-                      hintText: 'Your Number',
-                    maxLength: 10,) ,
+                    controller: signUpController.usernumberController,
+                    textInputType: TextInputType.number,
+                    hintText: 'Your Number',
+                    maxLength: 10,
+                  ),
 
                   //todo text-field for email
                   CustomTextFormField(
                       controller: signUpController.emailController,
                       textInputType: TextInputType.emailAddress,
-                      hintText: 'Your Email') ,
+                      hintText: 'Your Email'),
 
                   // TextFormField(
                   //   controller: signUpController.emailController,
@@ -98,12 +99,15 @@ class _SignUpPageState extends State<SignUpPage> {
                   //     }
                   //   },
                   // ),
-                  const SizedBox(height: 20,),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   //todo text-field for password
                   TextFormField(
                     controller: signUpController.passwordController,
                     obscureText: _obscureText1,
                     // maxLength: 20,
+                    textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
                         focusColor: Colors.red,
                         focusedBorder: const UnderlineInputBorder(
@@ -122,19 +126,21 @@ class _SignUpPageState extends State<SignUpPage> {
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "this field can't be empty";
-                      }else if (value.length < 8) {
+                      } else if (value.length < 8) {
                         return "password must be at least 8 characters";
                       }
-
                     },
                   ),
-                  const SizedBox(height: 20,),
+                  const SizedBox(
+                    height: 20,
+                  ),
 
                   //todo text-field for confirm password
                   TextFormField(
                     controller: signUpController.confirmPasswordController,
                     obscureText: _obscureText2,
                     // maxLength: 20,
+                    textInputAction: TextInputAction.next,
                     decoration: InputDecoration(
                         focusColor: Colors.red,
                         focusedBorder: const UnderlineInputBorder(
@@ -166,50 +172,68 @@ class _SignUpPageState extends State<SignUpPage> {
                   Row(
                     children: [
                       Expanded(
-                        child: MaterialButton(
-                          onPressed: () {
-                            if(signUpController.signUpFormKey.currentState!.validate()){
-                              signUpController.signUp();
-                              // if(signStatus.done){
-                              //   CacheHelper().saveData(key: 'signed', value: true) ;
-                              //   Get.offAll(() => const HiddenDrawer()) ;
-                              //   // setState(() {});
-                              // }
+                        child: GetBuilder<SignStatus>(
+                          init: SignStatus(),
+                          builder: (controller){
+                            return MaterialButton(
+                              onPressed: () async {
+                                if (signUpController.signUpFormKey.currentState!
+                                    .validate()) {
+                                  await signUpController.signUp();
+                                  if(await CacheHelper().getData(key: 'done')){
+                                    Future.delayed(const Duration(seconds: 2), () {
+                                      CacheHelper().saveData(key: 'signed', value: true) ;
+                                      CacheHelper().saveData(key: 'done', value: false) ;
+                                      // controller.loading = true ;
+                                      Get.offAll(() => const HiddenDrawer()) ;
+                                    });
+                                  }
+                                  // if(signStatus.done){
+                                  //   CacheHelper().saveData(key: 'signed', value: true) ;
+                                  //   Get.offAll(() => const HiddenDrawer()) ;
+                                  //   // setState(() {});
+                                  // }
 
-                              // CacheHelper().saveData(key: 'signed', value: true) ;
-                              // CacheHelper().saveData(key: 'name', value: signUpController.usernameController.text) ;
-                              // CacheHelper().saveData(key: 'phone', value: signUpController.usernumberController.text) ;
-                              // CacheHelper().saveData(key: 'email', value: signUpController.emailController.text) ;
-                              // CacheHelper().saveData(key: 'password', value: signUpController.passwordController.text) ;
-                              // Get.offAll(() => const HiddenDrawer());
-                            }
-                            // if(signUpController.signUpFormKey.currentState!.validate()){
-                            // //   //to keep in homepage when start again
-                            // //   serviceController.sharedpref.setString("id", "1") ;
-                            //   CacheHelper().saveData(key: 'name', value: signUpController.usernameController) ;
-                            //   CacheHelper().saveData(key: 'email', value: signUpController.emailController) ;
-                            //   CacheHelper().saveData(key: 'password', value: signUpController.passwordController) ;
-                            //   CacheHelper().saveData(key: 'signed', value: true) ;
-                            //   Get.to(() => const HomePage()) ;
-                            // }
+                                  // CacheHelper().saveData(key: 'signed', value: true) ;
+                                  // CacheHelper().saveData(key: 'name', value: signUpController.usernameController.text) ;
+                                  // CacheHelper().saveData(key: 'phone', value: signUpController.usernumberController.text) ;
+                                  // CacheHelper().saveData(key: 'email', value: signUpController.emailController.text) ;
+                                  // CacheHelper().saveData(key: 'password', value: signUpController.passwordController.text) ;
+                                  // Get.offAll(() => const HiddenDrawer());
+                                }
+                                // if(signUpController.signUpFormKey.currentState!.validate()){
+                                // //   //to keep in homepage when start again
+                                // //   serviceController.sharedpref.setString("id", "1") ;
+                                //   CacheHelper().saveData(key: 'name', value: signUpController.usernameController) ;
+                                //   CacheHelper().saveData(key: 'email', value: signUpController.emailController) ;
+                                //   CacheHelper().saveData(key: 'password', value: signUpController.passwordController) ;
+                                //   CacheHelper().saveData(key: 'signed', value: true) ;
+                                //   Get.to(() => const HomePage()) ;
+                                // }
 
-                            // else{
-                            //   print("not valid ***************************") ;
-                            //   // print("${signInController.emailController}") ;
-                            // }
-                          },
-                          color: Colors.blue,
-                          padding: const EdgeInsets.all(5),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          child: const Text(
-                            "SignUp",
-                            style: TextStyle(
+                                // else{
+                                //   print("not valid ***************************") ;
+                                //   // print("${signInController.emailController}") ;
+                                // }
+                              },
+                              color: Colors.blue,
+                              padding: const EdgeInsets.all(5),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: controller.loading == true
+                                  ? const CircularProgressIndicator(
                                 color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ),
+                              )
+                                  : const Text(
+                                "SignUp",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            );
+                          },
+                        )
                       ),
                     ],
                   ),
@@ -224,7 +248,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       TextButton(
                         onPressed: () {
-                          Get.to(() => const SignInPage());
+                          Get.off(() => const SignInPage());
                         },
                         child: const Text(
                           "Sign In",

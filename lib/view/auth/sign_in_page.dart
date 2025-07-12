@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:project2/api/dio_consumer.dart';
 import 'package:project2/cache/cache_helper.dart';
-import 'package:project2/controller/sign_in_controller.dart';
-import 'package:project2/controller/sign_status.dart';
+import 'package:project2/controller/auth/sign_in_controller.dart';
+import 'package:project2/controller/auth/sign_status.dart';
 import 'package:project2/custom_widgets/custom_textformfield.dart';
 import 'package:project2/view/auth/sign_up_page.dart';
 import 'package:project2/view/hidden_drawer.dart';
@@ -172,8 +172,8 @@ class _SignInPageState extends State<SignInPage> {
                                   //   CacheHelper().saveData(key: 'done', value: false) ;
                                   //   Get.offAll(() => const HiddenDrawer()) ;
                                   // });
-                                print('hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
-                                print(CacheHelper().getData(key: 'done')) ;
+                                // print('hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
+                                // print(CacheHelper().getData(key: 'done')) ;
                                 if(CacheHelper().getData(key: 'done')){
                                   Future.delayed(const Duration(seconds: 2), () {
                                     CacheHelper().saveData(key: 'signed', value: true) ;

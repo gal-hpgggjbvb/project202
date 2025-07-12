@@ -1,12 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:project2/api/api_consumer.dart';
-import 'package:project2/controller/sign_status.dart';
+import 'package:project2/controller/auth/sign_status.dart';
+import 'package:project2/model/auth/sign_up_model.dart';
 import 'package:project2/model/errors/exceptions.dart';
 import 'package:project2/model/errors/sign_up_error_model.dart';
 
-import '../model/errors/exception_2.dart';
+import '../../cache/cache_helper.dart';
+import '../../model/errors/exception_2.dart';
 
 SignStatus signStatus = Get.put(SignStatus());
 
@@ -35,8 +38,10 @@ class SignUpController extends GetxController {
 
   SignUpErrorModel? signUpErrorModel ;
 
+  SignUpModel? user ;
+
   signUp() async {
-    print('************************trying**********');
+    // print('************************trying**********');
     try {
       // signStatus.signLoading();
       final response = await api.post(
@@ -51,16 +56,24 @@ class SignUpController extends GetxController {
             'password_confirmation': confirmPasswordController.text,
             'role':'normal',
           });
-      print('**********response******************************');
+      user = SignUpModel.fromJson(response) ;
+      final decodedToken = JwtDecoder.decode(user!.token) ;
+      CacheHelper().saveData(key: 'token', value: user!.token) ;
+      CacheHelper().saveData(key: 'id', value: decodedToken['prv']) ;
+      CacheHelper().saveData(key: 'name', value: decodedToken['name']) ;
+      CacheHelper().saveData(key: 'phone', value: decodedToken['phone']) ;
+      CacheHelper().saveData(key: 'email', value: decodedToken['email']) ;
+      CacheHelper().saveData(key: 'role', value: decodedToken['role']) ;
+      // print('**********response******************************');
       print(response) ;
-      // signStatus.signSuccess();
-    } on ServerExceptions2 catch (e) {
-      print('**********error1******************************');
+      signStatus.signSuccess('sign up successfully', 'Welcome') ;
+    } on ServerExceptions catch (e) {
+      // print('**********error1******************************');
       // SignFailed(errorMessage: signUpErrorModel?.email ?? 'something');
-      SignFailed(errorMessage: e.signUpErrorModel.email);
-      print('**********error2******************************');
-      print(e.toString()) ;
-      signStatus.signFailure();
+      SignFailed(errorMessage: e.errorModel.message);
+      // print('**********error2******************************');
+      // print(e.toString()) ;
+      // signStatus.signFailure();
     }
   }
 }

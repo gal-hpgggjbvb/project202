@@ -1,24 +1,23 @@
-
 import 'package:get/get.dart';
 import 'package:project2/cache/cache_helper.dart';
 
 class SignStatus extends GetxController {
-
   //late final String errorMessage ;
-  bool loading = false ;
+  bool loading = false;
+
   // bool done = false ;
-  signSuccess(String title , String message) {
-    loading = false ;
+  signSuccess(String title, String message) {
+    loading = false;
     // Get.snackbar("signin successful", "welcome");
     Get.snackbar(title, message);
     // done = true ;
-    CacheHelper().saveData(key: 'done', value: true) ;
-    update() ;
+    CacheHelper().saveData(key: 'done', value: true);
+    update();
   }
 
   signLoading() {
-    loading = true ;
-    update() ;
+    loading = true;
+    update();
     // return CircularProgressIndicator() ;
 
     // if(loading){
@@ -36,12 +35,11 @@ class SignStatus extends GetxController {
     // else if(loading == false){
     //   Get.back() ;
     // }
-
   }
 
   signFailure() {
-    loading = false ;
-    update() ;
+    loading = false;
+    update();
     // final String errorMessage ;
     // Get.snackbar(
     //   "title Error",
@@ -49,15 +47,14 @@ class SignStatus extends GetxController {
     //   snackPosition: SnackPosition.BOTTOM,
     // );
   }
-
 }
 
 class SignFailed {
-  final String errorMessage ;
+  final String errorMessage;
 
-  SignFailed({required this.errorMessage}){
+  SignFailed({required this.errorMessage}) {
     Get.snackbar(
-      'signin failed: ' ,
+      'signin failed: ',
       errorMessage,
       snackPosition: SnackPosition.BOTTOM,
     );

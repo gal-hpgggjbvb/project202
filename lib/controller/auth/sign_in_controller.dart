@@ -6,10 +6,10 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:project2/api/api_consumer.dart';
 import 'package:project2/api/end_points.dart';
 import 'package:project2/cache/cache_helper.dart';
-import 'package:project2/controller/sign_status.dart';
+import 'package:project2/controller/auth/sign_status.dart';
 import 'package:project2/model/errors/error_model.dart';
 import 'package:project2/model/errors/exceptions.dart';
-import 'package:project2/model/sign_in_model.dart';
+import 'package:project2/model/auth/sign_in_model.dart';
 
 SignStatus signStatus = Get.put(SignStatus());
 
@@ -64,9 +64,9 @@ class SignInController extends GetxController {
       // print('2*****************************************************') ;
       // print(CacheHelper().getData(key: 'token')) ;
       signStatus.signSuccess('signin successful' , 'welcome');
-      CacheHelper().saveData(key: 'done', value: true) ;
-      print('lookhereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee') ;
-      print(CacheHelper().getData(key: 'done')) ;
+      // CacheHelper().saveData(key: 'done', value: true) ;
+      // print('lookhereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee') ;
+      // print(CacheHelper().getData(key: 'done')) ;
       // Get.off(() => const Drawer()) ;
     }on ServerExceptions catch (e) {
       // print('error******************************************') ;
