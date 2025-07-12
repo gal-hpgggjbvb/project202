@@ -139,63 +139,71 @@ class CustomExpansionTile extends StatelessWidget {
                     onPressed: () async {
                       showModalBottomSheet(
                           context: context,
-                          isScrollControlled: false,
+                          isScrollControlled: true,
                           shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.vertical(
                                   top: Radius.circular(20))),
                           builder: (context) =>
-                              Center(
-                                child: Form(
-                                  key: fetchOrdersController.editFormKey,
-                                  child: ListView(
-                                    padding: const EdgeInsets.all(30),
-                                    children: [
-                                       Center(
-                                          child: Text('Edit Order $id')),
-                                      const SizedBox(
-                                        height: 15,
-                                      ),
-                                      CustomOrderField(
-                                        controller: fetchOrdersController.editNameController,
-                                        hintText: 'type here',
-                                        labelText:
-                                        'what do you want to deliver',
-                                      ),
-                                      CustomOrderField(
-                                        controller: fetchOrdersController.editSourceController,
-                                        hintText: 'type here',
-                                        labelText: 'pickup location',
-                                      ),
-                                      CustomOrderField(
-                                        controller: fetchOrdersController.editDestinationController,
-                                        hintText: 'type here',
-                                        labelText: 'drop location',
-                                      ),
-                                      const SizedBox(
-                                        height: 15,
-                                      ),
-                                      //todo bottom sheet button
-                                      Center(
-                                        child: MaterialButton(
-                                          onPressed: () async {
-                                            await CacheHelper().saveData(key: 'orderId', value: id) ;
-                                            await fetchOrdersController.editOrder() ;
-                                            Navigator.pop(context) ;
-                                          },
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                              BorderRadius.circular(
-                                                  20)),
-                                          color: Colors.orange[200],
-                                          child:
-                                          const Text("Edit my Order"),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                                ),
+
+                                child: SizedBox(
+                                  //to control bottom sheet height
+                                  height: MediaQuery.of(context).size.height * 0.50,
+                                  child: Form(
+                                    key: fetchOrdersController.editFormKey,
+                                    child: ListView(
+                                      padding: const EdgeInsets.all(30),
+                                      children: [
+                                        Center(
+                                            child: Text('Edit Order $id')),
+                                        const SizedBox(
+                                          height: 15,
                                         ),
-                                      ),
-                                      const SizedBox(
-                                        height: 400,
-                                      ),
-                                      const Text('bottomsheet ends here')
-                                    ],
+                                        CustomOrderField(
+                                          controller: fetchOrdersController.editNameController,
+                                          hintText: 'type here',
+                                          labelText:
+                                          'what do you want to deliver',
+                                        ),
+                                        CustomOrderField(
+                                          controller: fetchOrdersController.editSourceController,
+                                          hintText: 'type here',
+                                          labelText: 'pickup location',
+                                        ),
+                                        CustomOrderField(
+                                          controller: fetchOrdersController.editDestinationController,
+                                          hintText: 'type here',
+                                          labelText: 'drop location',
+                                        ),
+                                        const SizedBox(
+                                          height: 15,
+                                        ),
+                                        //todo bottom sheet button
+                                        Center(
+                                          child: MaterialButton(
+                                            onPressed: () async {
+                                              await CacheHelper().saveData(key: 'orderId', value: id) ;
+                                              await fetchOrdersController.editOrder() ;
+                                              Navigator.pop(context) ;
+                                            },
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(
+                                                    20)),
+                                            color: Colors.orange[200],
+                                            child:
+                                            const Text("Edit my Order"),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 400,
+                                        ),
+                                        const Text('bottomsheet ends here')
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ));

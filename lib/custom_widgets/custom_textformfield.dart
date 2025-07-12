@@ -20,6 +20,7 @@ class CustomTextFormField extends StatelessWidget {
         TextFormField(
           controller: controller,
           keyboardType: textInputType,
+          textInputAction: TextInputAction.next,
           decoration:  InputDecoration(
               focusedBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.blue)),

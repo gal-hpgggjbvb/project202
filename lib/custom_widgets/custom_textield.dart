@@ -22,6 +22,7 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       keyboardType: textInputType,
+      textInputAction: TextInputAction.next,
       maxLength: maxLength,
       decoration: InputDecoration(
           focusedBorder: const UnderlineInputBorder(

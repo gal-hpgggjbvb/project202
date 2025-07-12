@@ -275,74 +275,80 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
                     onPressed: () {
                       showModalBottomSheet(
                           context: context,
-                          isScrollControlled: false,
+                          isScrollControlled: true,
                           shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.vertical(
                                   top: Radius.circular(20))),
                           builder: (context) =>
-                              Center(
-                                child: Form(
-                                  key: orderController.orderFormKey,
-                                  child: ListView(
-                                    padding: const EdgeInsets.all(30),
-                                    children: [
-                                      const Center(
-                                          child: Text('Make an Order')),
-                                      const SizedBox(
-                                        height: 15,
-                                      ),
-                                      CustomOrderField(
-                                        controller: orderController
-                                            .objectNameController,
-                                        hintText: 'type here',
-                                        labelText:
-                                        'what do you want to deliver',
-                                      ),
-                                      CustomOrderField(
-                                        controller: orderController
-                                            .sourceController,
-                                        hintText: 'type here',
-                                        labelText: 'pickup location',
-                                      ),
-                                      CustomOrderField(
-                                        controller: orderController
-                                            .destinationController,
-                                        hintText: 'type here',
-                                        labelText: 'drop location',
-                                      ),
-                                      const SizedBox(
-                                        height: 15,
-                                      ),
-                                      //todo bottomsheet button
-                                      Center(
-                                        child: MaterialButton(
-                                          onPressed: () async {
-                                            // if(orderController.orderFormKey.currentState!.validate()){
-                                            //   await CacheHelper().saveData(key: 'orderBool', value: true);
-                                            //   await orderController.makeOrder();
-                                            // }
-                                            await CacheHelper().saveData(
-                                                key: 'sendToken',
-                                                value: true);
-                                            await orderController
-                                                .makeOrder();
-                                            // Get.back();
-                                            Navigator.pop(context) ;
-                                          },
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                              BorderRadius.circular(
-                                                  20)),
-                                          color: Colors.orange[200],
-                                          child:
-                                          const Text("Make an Order"),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                                ),
+
+                                child: SizedBox(
+                                  //to control bottom sheet height
+                                  height: MediaQuery.of(context).size.height * 0.50,
+                                  child: Form(
+                                    key: orderController.orderFormKey,
+                                    child: ListView(
+                                      padding: const EdgeInsets.all(30),
+                                      children: [
+                                        const Center(
+                                            child: Text('Make an Order')),
+                                        const SizedBox(
+                                          height: 15,
                                         ),
-                                      ),
-                                      const SizedBox(
-                                        height: 400,
-                                      ),
-                                      const Text('bottomsheet ends here')
-                                    ],
+                                        CustomOrderField(
+                                          controller: orderController
+                                              .objectNameController,
+                                          hintText: 'type here',
+                                          labelText:
+                                          'what do you want to deliver',
+                                        ),
+                                        CustomOrderField(
+                                          controller: orderController
+                                              .sourceController,
+                                          hintText: 'type here',
+                                          labelText: 'pickup location',
+                                        ),
+                                        CustomOrderField(
+                                          controller: orderController
+                                              .destinationController,
+                                          hintText: 'type here',
+                                          labelText: 'drop location',
+                                        ),
+                                        const SizedBox(
+                                          height: 15,
+                                        ),
+                                        //todo bottomsheet button
+                                        Center(
+                                          child: MaterialButton(
+                                            onPressed: () async {
+                                              // if(orderController.orderFormKey.currentState!.validate()){
+                                              //   await CacheHelper().saveData(key: 'orderBool', value: true);
+                                              //   await orderController.makeOrder();
+                                              // }
+                                              await CacheHelper().saveData(
+                                                  key: 'sendToken',
+                                                  value: true);
+                                              await orderController
+                                                  .makeOrder();
+                                              // Get.back();
+                                              Navigator.pop(context) ;
+                                            },
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(
+                                                    20)),
+                                            color: Colors.orange[200],
+                                            child:
+                                            const Text("Make an Order"),
+                                          ),
+                                        ),
+                                        // const SizedBox(height: 40,),
+                                        // const Text('bottomsheet ends here')
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ));

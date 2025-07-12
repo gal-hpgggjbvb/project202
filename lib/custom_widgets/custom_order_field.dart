@@ -24,6 +24,8 @@ class CustomOrderField extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         // keyboardType: textInputType,
+        //Add this to your TextFields to let users jump to next field with the keyboard
+        textInputAction: TextInputAction.next,
         decoration: InputDecoration(
             labelText: labelText,
             labelStyle: const TextStyle(color: Colors.orangeAccent),
