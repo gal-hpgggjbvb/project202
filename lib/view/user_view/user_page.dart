@@ -43,14 +43,27 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
   bool val = false;
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
   TabController? tabController;
-  List<dynamic>? userss ;
 
   @override
   void initState() {
     tabController = TabController(length: 2, vsync: this);
+    //to listen to change in tabs
+    tabController!.addListener(() {
+      if(tabController!.indexIsChanging){
+        return;
+      }
+      if(tabController!.index == 1){
+        print('second tab here ------------------------------') ;
+        fetchOrdersController.refreshTab2() ;
+      }
+    }) ;
     super.initState();
   }
-
+@override
+  void dispose() {
+    tabController?.dispose() ;
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,10 +73,10 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
         backgroundColor: Colors.white,
         bottom: TabBar(
           controller: tabController,
-          indicatorPadding: EdgeInsets.symmetric(horizontal: 5),
+          indicatorPadding: const EdgeInsets.symmetric(horizontal: 5),
           indicatorSize: TabBarIndicatorSize.tab,
           indicatorColor: Colors.deepOrangeAccent,
-          tabs: [
+          tabs: const [
             Tab(text: "add order"),
             Tab(text: "my orders"),
           ],
@@ -393,37 +406,55 @@ class _UserPageState extends State<UserPage> with SingleTickerProviderStateMixin
             ],
           ),
           //todo my orders page -second tab-
-          Center(
-              child: RefreshIndicator(
-                onRefresh: fetchOrdersController.refreshTab2,
-                color: Colors.orangeAccent,
-                backgroundColor: Colors.white,
-                child: GetBuilder<FetchOrdersController>(
-                init: FetchOrdersController(DioConsumer(dio: Dio())),
-                builder: (controller) {
-                  userss = controller.users ;
-                  return ListView.builder(
-                    itemCount: controller.users.length,
-                    itemBuilder: (context , i){
-                      return CustomExpansionTile(leading: controller.users[i].id,
-                          title: controller.users[i].orderName,
-                          trailing: controller.users[i].status,
-                          id: controller.users[i].id,
-                          name: controller.users[i].orderName,
-                          source: controller.users[i].source,
-                          destination: controller.users[i].destination,
-                          status: controller.users[i].status,
-                          created: controller.users[i].createdAt) ;
-                        // ListTile(
-                        // leading: Text('Order ID: ${controller.users[i].id}'),
-                      // ) ;
+          GetBuilder<FetchOrdersController>(
+            init: fetchOrdersController,
+            builder: (controller) {
+              if (controller.orderList.isEmpty) {
+                return RefreshIndicator(
+                  onRefresh: controller.refreshTab2,
+                  color: Colors.orangeAccent,
+                  backgroundColor: Colors.white,
+                  child: ListView(
+                    physics: const AlwaysScrollableScrollPhysics(), // 👈 important!
+                    children: const [
+                      SizedBox(height: 300), // 👈 fake height to enable scroll
+                      Center(child: Text('No orders yet...' , style: TextStyle(fontSize: 15),)),
+                    ],
+                  ),
+                );
+              }
+              else {
+                return RefreshIndicator(
+                  onRefresh: () async {
+                    print("Refresh triggered!");
+                    await controller.refreshTab2();
+                  },
+                  color: Colors.orangeAccent,
+                  backgroundColor: Colors.white,
+                  child: ListView.builder(
+                    //to scroll always chat
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    itemCount: controller.orderList.length,
+                    itemBuilder: (context, i) {
+                      return CustomExpansionTile(
+                        leading: controller.orderList[i].id,
+                        title: controller.orderList[i].orderName,
+                        trailing: controller.orderList[i].status,
+                        id: controller.orderList[i].id,
+                        name: controller.orderList[i].orderName,
+                        source: controller.orderList[i].source,
+                        destination: controller.orderList[i].destination,
+                        status: controller.orderList[i].status,
+                        created: controller.orderList[i].createdAt,
+                      );
                     },
-                  ) ;
-                }
-                    ),
-              ),
-          ),
-              ],
+                  ),
+                );
+              }
+            },
+          )
+
+        ],
       ),
     );
   }

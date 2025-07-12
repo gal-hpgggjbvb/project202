@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project2/api/api_consumer.dart';
 import 'package:project2/cache/cache_helper.dart';
-import 'package:project2/controller/sign_status.dart';
+import 'package:project2/controller/auth/sign_status.dart';
 import 'package:project2/model/errors/error_model.dart';
 import 'package:project2/model/errors/exceptions.dart';
 

@@ -67,8 +67,8 @@ class CustomExpansionTile extends StatelessWidget {
               Row(
                 // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 50.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 50.0),
                     child: Text('OrderId :           '),
                   ),
                   Text('${id}'),
@@ -77,8 +77,8 @@ class CustomExpansionTile extends StatelessWidget {
               Row(
                 // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 50.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 50.0),
                     child: Text('OrderName :     '),
                   ),
                   Text(name),
@@ -87,8 +87,8 @@ class CustomExpansionTile extends StatelessWidget {
               Row(
                 // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 50.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 50.0),
                     child: Text('source :             '),
                   ),
                   Text(source),
@@ -97,8 +97,8 @@ class CustomExpansionTile extends StatelessWidget {
               Row(
                 // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 50.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 50.0),
                     child: Text('destination :      '),
                   ),
                   Text(destination),
@@ -107,8 +107,8 @@ class CustomExpansionTile extends StatelessWidget {
               Row(
                 // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 50.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 50.0),
                     child: Text('status :              '),
                   ),
                   Text(status),
@@ -117,8 +117,8 @@ class CustomExpansionTile extends StatelessWidget {
               Row(
                 // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 50.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 50.0),
                     child: Text('Createdat :        '),
                   ),
                   Text('$created'),
