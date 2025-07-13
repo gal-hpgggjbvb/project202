@@ -14,9 +14,9 @@ class IntroScreen extends StatefulWidget {
 
 final _introkey = GlobalKey<IntroductionScreenState>() ;
 final List<CustomIntroPage> introPages = [
-  const CustomIntroPage(title: 'Title of introduction page', body: 'Welcome to this app', img: 'Animation - 1729504255945.json',) ,
-  const CustomIntroPage(title: 'Title of introduction page', body: 'Welcome to this app', img: 'Animation - 1729504255945.json',) ,
-  const CustomIntroPage(title: 'Title of introduction page', body: 'Welcome to this app', img: 'Animation - 1729504255945.json',) ,
+  const CustomIntroPage(title: 'Anytime Anywhere', body: 'Fast, Reliable, and Easy Deliveries — Anytime, Anywhere.', img: 'Animation - 1729504255945.json',) ,
+  const CustomIntroPage(title: 'Your Order is Safe', body: 'Every Order Handled with Care and Precision.', img: 'Animation - 1729504255945.json',) ,
+  const CustomIntroPage(title: 'Our Community', body: 'Join Thousands Who Trust Us to Deliver What Matters.', img: 'Animation - 1729504255945.json',) ,
 ] ;
 class _IntroScreenState extends State<IntroScreen> {
 
@@ -52,9 +52,9 @@ class _IntroScreenState extends State<IntroScreen> {
             key: _introkey,
             rawPages: introPages ,
             showSkipButton: true,
-            skip: const Text("Skip", style: TextStyle( color: Colors.blue,fontWeight: FontWeight.w700)),
-            next: const Text("Next", style: TextStyle( color: Colors.blue,fontWeight: FontWeight.w700)),
-            done: const Text("Done", style: TextStyle( color: Colors.blue,fontWeight: FontWeight.w700)),
+            skip: const Text("Skip", style: TextStyle( color: Colors.orange,fontWeight: FontWeight.w700)),
+            next: const Text("Next", style: TextStyle( color: Colors.orange,fontWeight: FontWeight.w700)),
+            done: const Text("Done", style: TextStyle( color: Colors.orange,fontWeight: FontWeight.w700)),
             // On Done button pressed
             onDone: () {
               Get.off(() => const SignInPage()) ;
@@ -67,7 +67,8 @@ class _IntroScreenState extends State<IntroScreen> {
             dotsDecorator: DotsDecorator(
               size: const Size.square(10.0),
               activeSize: const Size(30.0, 10.0),
-              activeColor: const Color(0xff5BC6FF),
+              // activeColor: const Color(0xff5BC6FF),
+              activeColor: Colors.orange,
               color: Colors.black26,
               //space between dots
               spacing: const EdgeInsets.symmetric(horizontal: 3.0),

@@ -20,13 +20,17 @@ class SignUpPage extends StatefulWidget {
 
 SignUpController signUpController =
     Get.put(SignUpController(api: DioConsumer(dio: Dio())));
-
+// SignUpController? signUpController ;
 // SettingsServices serviceController = Get.put(SettingsServices());
 class _SignUpPageState extends State<SignUpPage> {
   bool _obscureText1 = true;
 
   bool _obscureText2 = true;
-
+  // @override
+  // void initState() {
+  //   signUpController = Get.put(SignUpController(api: DioConsumer(dio: Dio()))) ;
+  //   super.initState();
+  // }
   @override
   Widget build(BuildContext context) {
     //double width = MediaQuery.of(context).size.width;
@@ -129,6 +133,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       } else if (value.length < 8) {
                         return "password must be at least 8 characters";
                       }
+                      return null;
                     },
                   ),
                   const SizedBox(
@@ -164,77 +169,81 @@ class _SignUpPageState extends State<SignUpPage> {
                       if (value != signUpController.passwordController.text) {
                         return "your password doesn't match";
                       }
+                      return null;
                     },
                   ),
                   const SizedBox(
                     height: 45,
                   ),
+                  //todo sign up button
                   Row(
                     children: [
                       Expanded(
-                        child: GetBuilder<SignStatus>(
-                          init: SignStatus(),
-                          builder: (controller){
-                            return MaterialButton(
-                              onPressed: () async {
-                                if (signUpController.signUpFormKey.currentState!
-                                    .validate()) {
-                                  await signUpController.signUp();
-                                  if(await CacheHelper().getData(key: 'done')){
-                                    Future.delayed(const Duration(seconds: 2), () {
-                                      CacheHelper().saveData(key: 'signed', value: true) ;
-                                      CacheHelper().saveData(key: 'done', value: false) ;
-                                      // controller.loading = true ;
-                                      Get.offAll(() => const HiddenDrawer()) ;
-                                    });
-                                  }
-                                  // if(signStatus.done){
-                                  //   CacheHelper().saveData(key: 'signed', value: true) ;
-                                  //   Get.offAll(() => const HiddenDrawer()) ;
-                                  //   // setState(() {});
-                                  // }
-
-                                  // CacheHelper().saveData(key: 'signed', value: true) ;
-                                  // CacheHelper().saveData(key: 'name', value: signUpController.usernameController.text) ;
-                                  // CacheHelper().saveData(key: 'phone', value: signUpController.usernumberController.text) ;
-                                  // CacheHelper().saveData(key: 'email', value: signUpController.emailController.text) ;
-                                  // CacheHelper().saveData(key: 'password', value: signUpController.passwordController.text) ;
-                                  // Get.offAll(() => const HiddenDrawer());
+                          child: GetBuilder<SignStatus>(
+                        init: SignStatus(),
+                        builder: (controller) {
+                          return MaterialButton(
+                            onPressed: () async {
+                              if (signUpController.signUpFormKey.currentState!
+                                  .validate()) {
+                                await signUpController.signUp();
+                                if (await CacheHelper().getData(key: 'done')) {
+                                  Future.delayed(const Duration(seconds: 2),
+                                      () {
+                                    CacheHelper()
+                                        .saveData(key: 'signed', value: true);
+                                    CacheHelper()
+                                        .saveData(key: 'done', value: false);
+                                    // controller.loading = true ;
+                                    Get.offAll(() => const HiddenDrawer());
+                                  });
                                 }
-                                // if(signUpController.signUpFormKey.currentState!.validate()){
-                                // //   //to keep in homepage when start again
-                                // //   serviceController.sharedpref.setString("id", "1") ;
-                                //   CacheHelper().saveData(key: 'name', value: signUpController.usernameController) ;
-                                //   CacheHelper().saveData(key: 'email', value: signUpController.emailController) ;
-                                //   CacheHelper().saveData(key: 'password', value: signUpController.passwordController) ;
+                                // if(signStatus.done){
                                 //   CacheHelper().saveData(key: 'signed', value: true) ;
-                                //   Get.to(() => const HomePage()) ;
+                                //   Get.offAll(() => const HiddenDrawer()) ;
+                                //   // setState(() {});
                                 // }
 
-                                // else{
-                                //   print("not valid ***************************") ;
-                                //   // print("${signInController.emailController}") ;
-                                // }
-                              },
-                              color: Colors.blue,
-                              padding: const EdgeInsets.all(5),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: controller.loading == true
-                                  ? const CircularProgressIndicator(
-                                color: Colors.white,
-                              )
-                                  : const Text(
-                                "SignUp",
-                                style: TextStyle(
+                                // CacheHelper().saveData(key: 'signed', value: true) ;
+                                // CacheHelper().saveData(key: 'name', value: signUpController.usernameController.text) ;
+                                // CacheHelper().saveData(key: 'phone', value: signUpController.usernumberController.text) ;
+                                // CacheHelper().saveData(key: 'email', value: signUpController.emailController.text) ;
+                                // CacheHelper().saveData(key: 'password', value: signUpController.passwordController.text) ;
+                                // Get.offAll(() => const HiddenDrawer());
+                              }
+                              // if(signUpController.signUpFormKey.currentState!.validate()){
+                              // //   //to keep in homepage when start again
+                              // //   serviceController.sharedpref.setString("id", "1") ;
+                              //   CacheHelper().saveData(key: 'name', value: signUpController.usernameController) ;
+                              //   CacheHelper().saveData(key: 'email', value: signUpController.emailController) ;
+                              //   CacheHelper().saveData(key: 'password', value: signUpController.passwordController) ;
+                              //   CacheHelper().saveData(key: 'signed', value: true) ;
+                              //   Get.to(() => const HomePage()) ;
+                              // }
+
+                              // else{
+                              //   print("not valid ***************************") ;
+                              //   // print("${signInController.emailController}") ;
+                              // }
+                            },
+                            color: Colors.blue,
+                            padding: const EdgeInsets.all(5),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            child: controller.loading == true
+                                ? const CircularProgressIndicator(
                                     color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            );
-                          },
-                        )
-                      ),
+                                  )
+                                : const Text(
+                                    "SignUp",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                          );
+                        },
+                      )),
                     ],
                   ),
                   Row(

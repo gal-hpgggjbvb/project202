@@ -20,17 +20,21 @@ class CustomIntroPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: 50 , right: 10 , left: 10),
+            padding: const EdgeInsets.only(bottom: 50, right: 10, left: 10),
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(25),
                 child: Lottie.asset("images/$img")),
+                // child: Image.asset("images/$img")),
           ),
           Text(title, style: const TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.w500,
-                ),
+              fontSize: 25,
+              fontWeight: FontWeight.w500,
+              color: Colors.black
           ),
-          Text(body , style: const TextStyle( fontSize: 15,fontWeight: FontWeight.w300),),
+          ),
+          Text(body, style: const TextStyle(fontSize: 15,
+              fontWeight: FontWeight.w300,
+              color: Colors.black),),
           const SizedBox(height: 50,),
         ],
       ),

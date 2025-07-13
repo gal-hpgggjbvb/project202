@@ -43,7 +43,7 @@ class SignUpController extends GetxController {
   signUp() async {
     // print('************************trying**********');
     try {
-      // signStatus.signLoading();
+      signStatus.signLoading();
       final response = await api.post(
           // "https://food-api-omega.vercel.app/api/v1/user/signup",
           "http://10.0.2.2:8000/api/register",
@@ -73,7 +73,7 @@ class SignUpController extends GetxController {
       SignFailed(errorMessage: e.errorModel.message);
       // print('**********error2******************************');
       // print(e.toString()) ;
-      // signStatus.signFailure();
+      signStatus.signFailure();
     }
   }
 }
