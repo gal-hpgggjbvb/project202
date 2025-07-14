@@ -62,7 +62,7 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
   Widget build(BuildContext context) {
     return HiddenDrawerMenu(
         backgroundColorMenu: Colors.white ,
-        backgroundColorAppBar: Colors.blue,
+        backgroundColorAppBar: Colors.orange,
         screens: _pages,
         initPositionSelected: 2,
       // disableAppBarDefault: false,
