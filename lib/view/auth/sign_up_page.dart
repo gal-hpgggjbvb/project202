@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:project2/api/dio_consumer.dart';
 import 'package:project2/controller/auth/sign_status.dart';
 import 'package:project2/controller/auth/sign_up_controller.dart';
@@ -43,12 +44,14 @@ class _SignUpPageState extends State<SignUpPage> {
           child: SingleChildScrollView(
             child: Column(
               children: [
+
                 SizedBox(
-                  height: 100,
+                  height: 150,
                   width: 400,
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
-                      child: Image.asset("images/4 - Copy.jpg",fit: BoxFit.cover,)),
+                      child: Image.asset("images/registerimage.png",fit: BoxFit.cover,)),
+                      // child: Lottie.asset("images/register_typing_animation.json",fit: BoxFit.cover,)),
                 ),
                 Form(
                   key: signUpController.signUpFormKey,

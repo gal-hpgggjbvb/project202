@@ -1,5 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:project2/custom_widgets/custom_setting_item.dart';
 import 'package:project2/view/auth/sign_in_page.dart';
@@ -102,6 +103,29 @@ class _SettingsPageState extends State<SettingsPage> {
                 iconBackgroundColor: Colors.green,
                 onTap: () => Get.to(() => const TermsPage()),
               ),
+              //todo contact
+              CustomSettingItem(
+                  title: 'Contact Us',
+                  icon: Icons.mail,
+                iconColor: Colors.white,
+                iconBackgroundColor: Colors.blue,
+                onTap: () {
+                    AwesomeDialog(
+                      context: context,
+                      dialogType: DialogType.noHeader,
+                      animType: AnimType.topSlide,
+                      title: "Contact Us at :",
+                      desc: "deliverysupport@gmail.com",
+                      btnOkText: "Copy Email",
+                      btnCancelText: "Close",
+                      btnCancelOnPress: () {},
+                      btnOkOnPress: () {
+                        Clipboard.setData(const ClipboardData(text: "deliverysupport@gmail.com"));
+                        Get.snackbar("Copied", "Support email copied");
+                      },
+                    ).show();
+                },
+              ),
               //todo delete account
               CustomSettingItem(
                 title: 'Delete Account',
@@ -163,9 +187,9 @@ class _SettingsPageState extends State<SettingsPage> {
               // const SizedBox(height: 50,),
               //todo app version
               const ListTile(title: Text('Version  1.0.0' , style: TextStyle(fontSize: 20),),),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                child: const Divider(height: 0,),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.0),
+                child: Divider(height: 0,),
               ),
               const Text('Version  1.0.0' , style: TextStyle(fontSize: 15),),
 
