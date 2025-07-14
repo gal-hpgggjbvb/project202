@@ -137,7 +137,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 textInputType: TextInputType.emailAddress,
                 hintText: 'Email',
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 40),
 
               CustomTextFormField(
                 controller: editProfileController.editPasswordController,

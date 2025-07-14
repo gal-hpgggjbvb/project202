@@ -120,7 +120,7 @@ class _SignInPageState extends State<SignInPage> {
                       //todo password text_field
                       CustomTextFormField(
                         controller: signInController.passwordController,
-                        textInputType: TextInputType.text,
+                        textInputType: TextInputType.visiblePassword,
                         hintText: 'Your Password',
                         isPassword: true,
                       ),
@@ -200,6 +200,7 @@ class _SignInPageState extends State<SignInPage> {
                                   // }
                                 },
                                 color: Colors.orange,
+                                elevation: 10,
                                 padding: const EdgeInsets.all(5),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20)),

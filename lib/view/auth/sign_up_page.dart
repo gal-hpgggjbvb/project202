@@ -77,7 +77,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       //todo text-field for user name -used custom textfield before-
                       CustomTextFormField(
-                        controller: signUpController.usernumberController,
+                        controller: signUpController.usernameController,
                         textInputType: TextInputType.text,
                         hintText: 'Your Name',
                         maxLength: 20,
@@ -220,6 +220,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   // }
                                 },
                                 color: Colors.orange,
+                                elevation: 10,
                                 padding: const EdgeInsets.all(5),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20)),

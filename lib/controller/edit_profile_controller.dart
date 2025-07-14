@@ -42,11 +42,13 @@ class EditProfileController extends GetxController {
       image.value = File(picked.path); // update image
     }
     CacheHelper().saveData(key: 'imagePath', value: image.value!.path);
+    SignStatus().signSuccess('Profile Image Updated', '') ;
     update();
   }
   void deleteImage() {
     image.value = null; // reset to null
     CacheHelper().removeData(key: 'image_path');
+    SignStatus().signSuccess('Profile Image Removed', '') ;
     update() ;
   }
 
