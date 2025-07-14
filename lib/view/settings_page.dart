@@ -160,8 +160,13 @@ class _SettingsPageState extends State<SettingsPage> {
                     ).show();
                   }
               ),
-              const SizedBox(height: 50,),
+              // const SizedBox(height: 50,),
               //todo app version
+              const ListTile(title: Text('Version  1.0.0' , style: TextStyle(fontSize: 20),),),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                child: const Divider(height: 0,),
+              ),
               const Text('Version  1.0.0' , style: TextStyle(fontSize: 15),),
 
             ],
