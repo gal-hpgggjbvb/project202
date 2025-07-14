@@ -6,28 +6,41 @@ import 'package:project2/view/auth/sign_in_page.dart';
 import 'package:project2/view/intro_screen/custom_intro_page.dart';
 
 class IntroScreen extends StatefulWidget {
-   const IntroScreen({super.key});
+  const IntroScreen({super.key});
 
   @override
   State<IntroScreen> createState() => _IntroScreenState();
 }
 
-final _introkey = GlobalKey<IntroductionScreenState>() ;
-final List<CustomIntroPage> introPages = [
-  const CustomIntroPage(title: 'Anytime Anywhere', body: 'Fast, Reliable, and Easy Deliveries — Anytime, Anywhere.', img: 'Animation - 1729504255945.json',) ,
-  const CustomIntroPage(title: 'Your Order is Safe', body: 'Every Order Handled with Care and Precision.', img: 'Animation - 1729504255945.json',) ,
-  const CustomIntroPage(title: 'Our Community', body: 'Join Thousands Who Trust Us to Deliver What Matters.', img: 'Animation - 1729504255945.json',) ,
-] ;
-class _IntroScreenState extends State<IntroScreen> {
+final _introkey = GlobalKey<IntroductionScreenState>();
 
+final List<CustomIntroPage> introPages = [
+  const CustomIntroPage(
+    title: 'Anytime Anywhere',
+    body: 'Fast, Reliable, and Easy Deliveries — Anytime, Anywhere.',
+    img: 'Delivery motorcycle.json',
+  ),
+  const CustomIntroPage(
+    title: 'Your Order is Safe',
+    body: 'Every Order Handled with Care and Precision.',
+    img: 'Animation - 1729504169221.json',
+  ),
+  const CustomIntroPage(
+    title: 'Our Community',
+    body: 'Join Thousands Who Trust Us to Deliver What Matters.',
+    img: 'Animation - 1729504047372.json',
+  ),
+];
+
+class _IntroScreenState extends State<IntroScreen> {
   @override
-  void initState(){
+  void initState() {
     super.initState();
     //to lock screen rotate
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
-    ]) ;
+    ]);
   }
 
   // @override
@@ -50,18 +63,24 @@ class _IntroScreenState extends State<IntroScreen> {
           height: MediaQuery.of(context).size.height,
           child: IntroductionScreen(
             key: _introkey,
-            rawPages: introPages ,
+            rawPages: introPages,
             showSkipButton: true,
-            skip: const Text("Skip", style: TextStyle( color: Colors.orange,fontWeight: FontWeight.w700)),
-            next: const Text("Next", style: TextStyle( color: Colors.orange,fontWeight: FontWeight.w700)),
-            done: const Text("Done", style: TextStyle( color: Colors.orange,fontWeight: FontWeight.w700)),
+            skip: const Text("Skip",
+                style: TextStyle(
+                    color: Colors.orange, fontWeight: FontWeight.w700)),
+            next: const Text("Next",
+                style: TextStyle(
+                    color: Colors.orange, fontWeight: FontWeight.w700)),
+            done: const Text("Done",
+                style: TextStyle(
+                    color: Colors.orange, fontWeight: FontWeight.w700)),
             // On Done button pressed
             onDone: () {
-              Get.off(() => const SignInPage()) ;
+              Get.off(() => const SignInPage());
             },
             // On Skip button pressed
             onSkip: () {
-              _introkey.currentState?.skipToEnd() ;
+              _introkey.currentState?.skipToEnd();
               setState(() {});
             },
             dotsDecorator: DotsDecorator(
@@ -73,12 +92,11 @@ class _IntroScreenState extends State<IntroScreen> {
               //space between dots
               spacing: const EdgeInsets.symmetric(horizontal: 3.0),
               activeShape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25.0) ,
+                borderRadius: BorderRadius.circular(25.0),
               ),
             ),
           ),
-        )
-    );
+        ));
   }
 }
 //todo
