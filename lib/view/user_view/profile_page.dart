@@ -10,6 +10,7 @@ import 'package:project2/custom_widgets/custom_listtile.dart';
 import 'package:project2/view/edit_profile_page.dart';
 
 import '../../cache/cache_helper.dart';
+import '../../controller/profile_controller.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -41,7 +42,9 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Column(
+          child: GetBuilder<EditProfileController>(
+            builder: (controller) =>
+            Column(
             children: [
               const SizedBox(height: 30),
               // InkWell(
@@ -58,11 +61,13 @@ class _ProfilePageState extends State<ProfilePage> {
               //   ),
               // ),
               // const SizedBox(height: 20),
-              Obx(() => CircleAvatar(
+              Obx(
+                () => CircleAvatar(
                   radius: 60,
                   backgroundImage: editProfileController.image.value != null
                       ? FileImage(editProfileController.image.value!)
-                      : const AssetImage("images/profileimage1.jpg") as ImageProvider,
+                      : const AssetImage("images/profileimage1.jpg")
+                          as ImageProvider,
                   // child: const Align(
                   //   alignment: Alignment.bottomRight,
                   // child: CircleAvatar(
@@ -126,7 +131,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
 
-              const SizedBox(height: 110),
+              const SizedBox(height: 100),
               // Push version to bottom visually
 
               // App Version Text
@@ -135,14 +140,14 @@ class _ProfilePageState extends State<ProfilePage> {
                 style: TextStyle(fontSize: 13, color: Colors.grey),
               ),
               const SizedBox(height: 10),
-              MaterialButton(
-                onPressed: () {
-                  print(CacheHelper().getData(key: 'name'));
-                },
-                child: Text('print'),
-              ),
+              // MaterialButton(
+              //   onPressed: () {
+              //     print(CacheHelper().getData(key: 'name'));
+              //   },
+              //   child: Text('print'),
+              // ),
             ],
-          ),
+          ),)
         ),
       ),
     );

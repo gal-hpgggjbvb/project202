@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:project2/api/dio_consumer.dart';
 import 'package:project2/controller/edit_profile_controller.dart';
-
 import '../custom_widgets/custom_textformfield.dart';
 
 class EditProfilePage extends StatefulWidget {
@@ -25,9 +24,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   Future<void> pickImageFromGallery() async {
     final ImagePicker imagePicker = ImagePicker();
     final pickedFile = await imagePicker.pickImage(source: ImageSource.gallery);
-    // if(image == null) return ;
 
-    // final imageTemporary = File(image!.path) ;
     setState(() {
       image = File(pickedFile!.path);
     });
@@ -36,9 +33,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(title: const Text("Edit Profile"),backgroundColor: Colors.orange,),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(15),
+        //The keyboard to auto-close when tapping outside
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Form(
           key: editProfileController.editProfileFormKey,
           child: Column(
@@ -151,7 +151,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 // onPressed: controller.saveProfile,
                 onPressed: () async {
                   await editProfileController.editProfile();
-                  Get.back() ;
+                  // Get.back() ;
                 },
                 icon: const Icon(Icons.save, color: Colors.white),
                 label: const Text("Save Changes",

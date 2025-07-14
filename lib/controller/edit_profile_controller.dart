@@ -42,10 +42,12 @@ class EditProfileController extends GetxController {
       image.value = File(picked.path); // update image
     }
     CacheHelper().saveData(key: 'imagePath', value: image.value!.path);
+    update();
   }
   void deleteImage() {
     image.value = null; // reset to null
     CacheHelper().removeData(key: 'image_path');
+    update() ;
   }
 
   @override
@@ -88,5 +90,6 @@ class EditProfileController extends GetxController {
       print('here failed  **********************************************') ;
       SignFailed(errorMessage: e.errorModel.message);
     }
+    update();
   }
 }
