@@ -148,6 +148,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       btnOkText: "Delete Account",
                       btnOkOnPress: () async {
                         // Clear user session
+                        //must be delete account from data base
                         await CacheHelper().clearData(); // or just remove "signed", "token", etc.
                         Get.offAll(() => const SignInPage()); // Replace with your auth page
                       },
@@ -175,8 +176,9 @@ class _SettingsPageState extends State<SettingsPage> {
                         btnCancelOnPress: () {},
                         btnOkText: "Sign Out",
                         btnOkOnPress: () async {
-                          await CacheHelper().removeData(key: 'signed'); // or just remove "signed", "token", etc.
-                          await CacheHelper().removeData(key: 'token'); // or just remove "signed", "token", etc.
+                          await CacheHelper().clearData() ;
+                          // await CacheHelper().removeData(key: 'signed'); // or just remove "signed", "token", etc.
+                          // await CacheHelper().removeData(key: 'token'); // or just remove "signed", "token", etc.
                           Get.offAll(() => const SignInPage()); // Replace with your auth page
                         },
                         btnOkColor: Colors.red,

@@ -1,14 +1,19 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:project2/api/dio_consumer.dart';
 import 'package:project2/cache/cache_helper.dart';
 import 'package:project2/controller/user_controller/fetch_orders_controller.dart';
+import 'package:project2/controller/user_controller/order_controller.dart';
 import 'package:project2/custom_widgets/custom_order_field.dart';
 
 FetchOrdersController fetchOrdersController =
     Get.put(FetchOrdersController(DioConsumer(dio: Dio())));
+OrderController orderController =
+    Get.put(OrderController(DioConsumer(dio: Dio())));
 
 class CustomExpansionTile extends StatelessWidget {
   final int leading;
@@ -53,9 +58,12 @@ class CustomExpansionTile extends StatelessWidget {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
         // collapsedBackgroundColor: Colors.orangeAccent,
         collapsedBackgroundColor: Colors.orangeAccent,
-        leading: Text('Order ID: ${leading}'),
+        leading: Text('Order ID: $leading'),
         title: Text(
-          '   Order Name: $title',
+            title.length>15 ? 
+            '   Order Name: \n    ${title.substring(0,15)}...' :
+          '   Order Name: \n    $title',
+          // '   Order Name: ${title.substring(0,1)}...',
         ),
         // subtitle: const Text(''),
         // trailing: Text('trailing'),
@@ -64,6 +72,7 @@ class CustomExpansionTile extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              //todo id
               Row(
                 // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -71,41 +80,54 @@ class CustomExpansionTile extends StatelessWidget {
                     padding: EdgeInsets.only(left: 50.0),
                     child: Text('OrderId :           '),
                   ),
-                  Text('${id}'),
+                  Text('$id'),
                 ],
               ),
+              // const Padding(padding: EdgeInsets.symmetric(vertical: 8.0,horizontal: 30), child: Divider(height: 0.0,),),
+              //todo order name
               Row(
                 // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Padding(
                     padding: EdgeInsets.only(left: 50.0),
                     child: Text('OrderName :     '),
                   ),
-                  Text(name),
+                  Expanded(child: Text(name,
+                  // softWrap: true,
+                  //   overflow: TextOverflow.visible,
+                  //   maxLines: null,
+                  )),
                 ],
               ),
+              //todo source name
               Row(
                 // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Padding(
                     padding: EdgeInsets.only(left: 50.0),
                     child: Text('source :             '),
                   ),
-                  Text(source),
+                  Expanded(child: Text(source)),
                 ],
               ),
+              //todo destination name
               Row(
                 // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Padding(
                     padding: EdgeInsets.only(left: 50.0),
                     child: Text('destination :      '),
                   ),
-                  Text(destination),
+                  Expanded(child: Text(destination)),
                 ],
               ),
+              //todo status
               Row(
                 // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Padding(
                     padding: EdgeInsets.only(left: 50.0),
@@ -114,8 +136,10 @@ class CustomExpansionTile extends StatelessWidget {
                   Text(status),
                 ],
               ),
+              //todo createdat
               Row(
                 // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Padding(
                     padding: EdgeInsets.only(left: 50.0),
@@ -131,6 +155,7 @@ class CustomExpansionTile extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 8.0),
                 child: Divider(),
               ),
+              //todo buttons
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -164,6 +189,7 @@ class CustomExpansionTile extends StatelessWidget {
                                         ),
                                         CustomOrderField(
                                           controller: fetchOrdersController.editNameController,
+                                          // controller: orderController.objectNameController,
                                           hintText: 'type here',
                                           labelText:
                                           'what do you want to deliver',
@@ -218,7 +244,7 @@ class CustomExpansionTile extends StatelessWidget {
                     child: const Text(
                       "Edit",
                       style: TextStyle(
-                          color: Colors.red,
+                          color: Colors.blue,
                           fontSize: 15,
                           fontWeight: FontWeight.w400),
                     ),

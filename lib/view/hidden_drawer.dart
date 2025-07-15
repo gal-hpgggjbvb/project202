@@ -20,41 +20,49 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
   void initState() {
     super.initState();
     _pages = [
+      //todo profile page
       ScreenHiddenDrawer(
           ItemHiddenMenu(
             name: 'Profile',
             baseStyle: TextStyle(),
             selectedStyle: TextStyle(),
+            colorLineSelected: Colors.orange,
           ),
           const ProfilePage()),
+      // ScreenHiddenDrawer(
+      //     ItemHiddenMenu(
+      //       name: 'HomePage',
+      //       baseStyle: TextStyle(),
+      //       selectedStyle: TextStyle(),
+      //       colorLineSelected: Colors.orange,
+      //     ),
+      //     const HomePage()),
+      //todo main page
       ScreenHiddenDrawer(
           ItemHiddenMenu(
-            name: 'HomePage',
+            name: 'Main Page',
             baseStyle: TextStyle(),
             selectedStyle: TextStyle(),
-          ),
-          const HomePage()),
-      ScreenHiddenDrawer(
-          ItemHiddenMenu(
-            name: 'UserPage',
-            baseStyle: TextStyle(),
-            selectedStyle: TextStyle(),
+            colorLineSelected: Colors.orange,
           ),
           const UserPage()),
+      //todo settings page
       ScreenHiddenDrawer(
           ItemHiddenMenu(
             name: 'Settings',
             baseStyle: TextStyle(),
             selectedStyle: TextStyle(),
+            colorLineSelected: Colors.orange,
           ),
           const SettingsPage()),
-      ScreenHiddenDrawer(
-          ItemHiddenMenu(
-            name: 'Log Out',
-            baseStyle: TextStyle(),
-            selectedStyle: TextStyle(),
-          ),
-          const SignOutPage()),
+      // ScreenHiddenDrawer(
+      //     ItemHiddenMenu(
+      //       name: 'Log Out',
+      //       baseStyle: TextStyle(),
+      //       selectedStyle: TextStyle(),
+      //       colorLineSelected: Colors.orange,
+      //     ),
+      //     const SignOutPage()),
     ];
   }
 
@@ -64,7 +72,8 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
         backgroundColorMenu: Colors.white ,
         backgroundColorAppBar: Colors.orange,
         screens: _pages,
-        initPositionSelected: 2,
+        //todo i will try use a condition here (normal/driver)
+        initPositionSelected: 1,
       // disableAppBarDefault: false,
       slidePercent: 50,
       contentCornerRadius: 30,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project2/api/api_consumer.dart';
 import 'package:project2/controller/auth/sign_status.dart';
+import 'package:project2/functions/show_success_dialog.dart';
 import 'package:project2/model/errors/exceptions.dart';
 import 'package:project2/model/user/order/fetch_orders_model.dart';
 
@@ -86,6 +87,7 @@ class FetchOrdersController extends GetxController {
 
       print(response);
       SignStatus().signSuccess('order edited successfully', '');
+      // showSuccessDialog( Get.context ,title: 'Your Order Updated Successfully', desc: 'Done',onOk: (){}) ;
     } on ServerExceptions catch (e) {
       SignFailed(errorMessage: e.errorModel.message);
     }
