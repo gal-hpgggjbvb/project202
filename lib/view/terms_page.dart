@@ -13,11 +13,12 @@ class TermsPage extends StatefulWidget {
 
 class _TermsPageState extends State<TermsPage> {
   bool accepted = false;
+  bool acceptedTerms = false;
 
   @override
   void initState() {
     super.initState();
-    accepted = CacheHelper().getData(key: 'acceptedTerms') ?? false;
+    acceptedTerms = CacheHelper().getData(key: 'acceptedTerms') ?? false;
   }
   @override
   Widget build(BuildContext context) {
@@ -84,7 +85,7 @@ class _TermsPageState extends State<TermsPage> {
                 Row(
                   children: [
                     Checkbox(
-                      value: accepted,
+                      value: acceptedTerms ? acceptedTerms : accepted,
                       activeColor: Colors.orange,
                       onChanged: (val) {
                         setState(() => accepted = val ?? false);
@@ -94,11 +95,13 @@ class _TermsPageState extends State<TermsPage> {
                      Expanded(
                       child: Text(
                         // accepted ? "You already accepted the terms." :
+                        acceptedTerms ?
+                        "You already accepted the terms." :
                         "I have read and accept the Terms and Privacy Policy.",
                         style: TextStyle(
                           fontSize: 14,
                           color:
-                          accepted ? Colors.green :
+                          acceptedTerms || accepted ? Colors.green :
                           Colors.black87,
                         ),
                       ),
