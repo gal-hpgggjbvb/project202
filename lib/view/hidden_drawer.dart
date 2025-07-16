@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'package:project2/view/home_page.dart';
+import 'package:project2/view/notifications_page.dart';
 import 'package:project2/view/user_view/profile_page.dart';
 import 'package:project2/view/settings_page.dart';
 import 'package:project2/view/sign_out_page.dart';
@@ -24,8 +25,8 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
       ScreenHiddenDrawer(
           ItemHiddenMenu(
             name: 'Profile',
-            baseStyle: TextStyle(),
-            selectedStyle: TextStyle(),
+            baseStyle: const TextStyle(),
+            selectedStyle: const TextStyle(fontSize: 18),
             colorLineSelected: Colors.orange,
           ),
           const ProfilePage()),
@@ -41,17 +42,26 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
       ScreenHiddenDrawer(
           ItemHiddenMenu(
             name: 'Main Page',
-            baseStyle: TextStyle(),
-            selectedStyle: TextStyle(),
+            baseStyle: const TextStyle(),
+            selectedStyle: const TextStyle(fontSize: 18),
             colorLineSelected: Colors.orange,
           ),
           const UserPage()),
+      //todo notifications page
+      ScreenHiddenDrawer(
+          ItemHiddenMenu(
+            name: 'Notifications',
+            baseStyle: const TextStyle(),
+            selectedStyle: const TextStyle(fontSize: 18),
+            colorLineSelected: Colors.orange,
+          ),
+          const NotificationsPage()),
       //todo settings page
       ScreenHiddenDrawer(
           ItemHiddenMenu(
             name: 'Settings',
-            baseStyle: TextStyle(),
-            selectedStyle: TextStyle(),
+            baseStyle: const TextStyle(),
+            selectedStyle: const TextStyle(fontSize: 18),
             colorLineSelected: Colors.orange,
           ),
           const SettingsPage()),
