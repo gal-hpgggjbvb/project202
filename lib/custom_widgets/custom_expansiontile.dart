@@ -56,8 +56,8 @@ class CustomExpansionTile extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
         collapsedShape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-        // collapsedBackgroundColor: Colors.orangeAccent,
-        collapsedBackgroundColor: Colors.orangeAccent,
+        collapsedBackgroundColor: Colors.orange.shade300,
+        backgroundColor: Colors.deepOrange[50],
         leading: Text('Order ID: $leading'),
         title: Text(
             title.length>15 ? 
@@ -173,7 +173,6 @@ class CustomExpansionTile extends StatelessWidget {
                                 padding: EdgeInsets.only(
                                   bottom: MediaQuery.of(context).viewInsets.bottom,
                                 ),
-
                                 child: SizedBox(
                                   //to control bottom sheet height
                                   height: MediaQuery.of(context).size.height * 0.50,
