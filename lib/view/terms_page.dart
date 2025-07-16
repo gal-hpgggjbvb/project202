@@ -116,6 +116,7 @@ class _TermsPageState extends State<TermsPage> {
                       context: context,
                       dialogType: DialogType.success,
                       animType: AnimType.scale,
+                      dismissOnTouchOutside: false,
                       title: "Accepted!",
                       desc: "Thank you for agreeing to the terms.",
                       btnOkOnPress: () {
