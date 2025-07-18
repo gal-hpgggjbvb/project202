@@ -17,17 +17,17 @@ final _introkey = GlobalKey<IntroductionScreenState>();
 final List<CustomIntroPage> introPages = [
   const CustomIntroPage(
     title: 'Anytime Anywhere',
-    body: 'Fast, Reliable, and Easy Deliveries — Anytime, Anywhere.',
+    body: 'Fast, Reliable, and Easy Deliveries — \n       — Anytime, Anywhere.',
     img: 'Delivery motorcycle.json',
   ),
   const CustomIntroPage(
     title: 'Your Order is Safe',
-    body: 'Every Order Handled with Care and Precision.',
+    body: 'Every Order Handled with Care and \n                      Precision.',
     img: 'Animation - 1729504169221.json',
   ),
   const CustomIntroPage(
     title: 'Our Community',
-    body: 'Join Thousands Who Trust Us to Deliver What Matters.',
+    body: 'Join Thousands Who Trust Us to Deliver \n                  What Matters.',
     img: 'Animation - 1729504047372.json',
   ),
 ];
@@ -67,12 +67,15 @@ class _IntroScreenState extends State<IntroScreen> {
             showSkipButton: true,
             skip: const Text("Skip",
                 style: TextStyle(
+                    fontFamily: "Satoshi",
                     color: Colors.orange, fontWeight: FontWeight.w700)),
             next: const Text("Next",
                 style: TextStyle(
+                    fontFamily: "Satoshi",
                     color: Colors.orange, fontWeight: FontWeight.w700)),
             done: const Text("Done",
                 style: TextStyle(
+                    fontFamily: "Satoshi",
                     color: Colors.orange, fontWeight: FontWeight.w700)),
             // On Done button pressed
             onDone: () {

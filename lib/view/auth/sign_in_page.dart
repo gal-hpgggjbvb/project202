@@ -8,6 +8,7 @@ import 'package:project2/cache/cache_helper.dart';
 import 'package:project2/controller/auth/sign_in_controller.dart';
 import 'package:project2/controller/auth/sign_status.dart';
 import 'package:project2/custom_widgets/custom_textformfield.dart';
+import 'package:project2/functions/add_space.dart';
 import 'package:project2/view/auth/sign_up_page.dart';
 import 'package:project2/view/hidden_drawer.dart';
 
@@ -51,6 +52,7 @@ class _SignInPageState extends State<SignInPage> {
         ),
         child: SafeArea(
           child: SingleChildScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             child: Column(
               children: [
                 SizedBox(
@@ -70,52 +72,39 @@ class _SignInPageState extends State<SignInPage> {
                       const Text(
                         "Let's Sign You In",
                         style: TextStyle(
-                            fontSize: 25, fontWeight: FontWeight.w600),
+                            fontFamily: "Satoshi",
+                            fontSize: 25,
+                            fontWeight: FontWeight.w600),
                       ),
                       const Text(
                         "Welcome Back.",
                         style: TextStyle(
-                            fontSize: 25, fontWeight: FontWeight.w500),
+                            fontFamily: "Satoshi",
+                            fontSize: 25,
+                            fontWeight: FontWeight.w500),
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
+                      addVerticalSpace(20),
                       const Text(
                         "Email",
                         style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.w600),
+                            fontFamily: "Satoshi",
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600),
                       ),
                       //todo email field
                       CustomTextFormField(
                           controller: signInController.emailController,
                           textInputType: TextInputType.emailAddress,
                           hintText: 'Your Email'),
-                      // const Text(
-                      //   "Email",
-                      //   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-                      // ),
-                      // //todo email text_field
-                      // TextFormField(
-                      //   controller: signInController.emailController,
-                      //   keyboardType: TextInputType.emailAddress,
-                      //   decoration: const InputDecoration(
-                      //       focusedBorder: UnderlineInputBorder(
-                      //           borderSide: BorderSide(color: Colors.blue)),
-                      //       hintText: "Your Email"),
-                      //   validator: (value) {
-                      //     if (value!.isEmpty) {
-                      //       return "this field can't be empty";
-                      //     }
-                      //   },
-                      // ),
-                      const SizedBox(
-                        height: 30,
-                      ),
+
+                      addVerticalSpace(30),
 
                       const Text(
                         "Password",
                         style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.w600),
+                            fontFamily: "Satoshi",
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600),
                       ),
                       //todo password text_field
                       CustomTextFormField(
@@ -124,9 +113,9 @@ class _SignInPageState extends State<SignInPage> {
                         hintText: 'Your Password',
                         isPassword: true,
                       ),
-                      const SizedBox(
-                        height: 90,
-                      ),
+
+                      addVerticalSpace(100),
+
                       //todo sign in button
                       Row(
                         children: [
@@ -199,8 +188,10 @@ class _SignInPageState extends State<SignInPage> {
                                   //   // print("${signInController.emailController}") ;
                                   // }
                                 },
-                                color: Colors.orange,
+                                // color: Colors.orange,
+                                color: context.theme.colorScheme.background,
                                 elevation: 10,
+                                height: 45,
                                 padding: const EdgeInsets.all(5),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20)),
@@ -211,6 +202,7 @@ class _SignInPageState extends State<SignInPage> {
                                     : const Text(
                                         "SignIn",
                                         style: TextStyle(
+                                            fontFamily: "Satoshi",
                                             color: Colors.white,
                                             fontSize: 20,
                                             fontWeight: FontWeight.w400),
@@ -220,23 +212,30 @@ class _SignInPageState extends State<SignInPage> {
                           )),
                         ],
                       ),
+
+                      addVerticalSpace(10),
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text(
                             "Don't Have An Account?",
                             style: TextStyle(
-                                //color: Colors.white,fontSize: 25 , fontWeight: FontWeight.w600
-                                ),
+                              fontFamily: "Satoshi",
+                              // color: Colors.white,
+                              fontSize: 15,
+                              // fontWeight: FontWeight.w600
+                            ),
                           ),
                           TextButton(
                             onPressed: () {
                               Get.off(() => const SignUpPage());
                             },
-                            child: const Text(
+                            child: Text(
                               "Register",
                               style: TextStyle(
-                                  color: Colors.orange,
+                                  fontFamily: "Satoshi",
+                                  color: context.theme.colorScheme.background,
                                   fontWeight: FontWeight.bold),
                             ),
                           ),

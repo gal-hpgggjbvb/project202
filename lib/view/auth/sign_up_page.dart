@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 import 'package:project2/api/dio_consumer.dart';
 import 'package:project2/controller/auth/sign_status.dart';
 import 'package:project2/controller/auth/sign_up_controller.dart';
 import 'package:project2/custom_widgets/custom_textformfield.dart';
+import 'package:project2/functions/add_space.dart';
 import 'package:project2/view/auth/sign_in_page.dart';
 
 import '../../cache/cache_helper.dart';
@@ -24,13 +24,6 @@ SignUpController signUpController =
 // SignUpController? signUpController ;
 // SettingsServices serviceController = Get.put(SettingsServices());
 class _SignUpPageState extends State<SignUpPage> {
-  // bool _obscureText1 = true;
-  // bool _obscureText2 = true;
-  // @override
-  // void initState() {
-  //   signUpController = Get.put(SignUpController(api: DioConsumer(dio: Dio()))) ;
-  //   super.initState();
-  // }
   @override
   Widget build(BuildContext context) {
     //double width = MediaQuery.of(context).size.width;
@@ -42,16 +35,19 @@ class _SignUpPageState extends State<SignUpPage> {
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: SafeArea(
           child: SingleChildScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             child: Column(
               children: [
-
                 SizedBox(
                   height: 150,
                   width: 400,
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
-                      child: Image.asset("images/registerimage.png",fit: BoxFit.cover,)),
-                      // child: Lottie.asset("images/register_typing_animation.json",fit: BoxFit.cover,)),
+                      child: Image.asset(
+                        "images/registerimage.png",
+                        fit: BoxFit.cover,
+                      )),
+                  // child: Lottie.asset("images/register_typing_animation.json",fit: BoxFit.cover,)),
                 ),
                 Form(
                   key: signUpController.signUpFormKey,
@@ -62,22 +58,26 @@ class _SignUpPageState extends State<SignUpPage> {
                       // SizedBox(
                       //   child: Lottie.asset("images/Animation - 1729504255945.json"),
                       // ) ,
-                      const SizedBox(
-                        height: 20,
-                      ),
+
+                      addVerticalSpace(20),
+
                       const Text(
                         "Hello..",
                         style: TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.w600),
+                            fontFamily: "Satoshi",
+                            fontSize: 30,
+                            fontWeight: FontWeight.w600),
                       ),
                       const Text(
                         "Let's Make a New Account",
                         style: TextStyle(
-                            fontSize: 25, fontWeight: FontWeight.w400),
+                            fontFamily: "Satoshi",
+                            fontSize: 25,
+                            fontWeight: FontWeight.w400),
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
+
+                      addVerticalSpace(20),
+
                       //todo text-field for user name -used custom textfield before-
                       CustomTextFormField(
                         controller: signUpController.usernameController,
@@ -113,9 +113,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       //     }
                       //   },
                       // ),
-                      const SizedBox(
-                        height: 20,
-                      ),
+                      addVerticalSpace(20),
+
                       //todo text-field for password
                       CustomTextFormField(
                         controller: signUpController.passwordController,
@@ -152,9 +151,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       //     return null;
                       //   },
                       // ),
-                      const SizedBox(
-                        height: 20,
-                      ),
+                      addVerticalSpace(20),
 
                       //todo text-field for confirm password
                       CustomTextFormField(
@@ -166,9 +163,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             signUpController.passwordController,
                       ),
 
-                      const SizedBox(
-                        height: 45,
-                      ),
+                      addVerticalSpace(45),
                       //todo sign up button
                       Row(
                         children: [
@@ -224,6 +219,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 },
                                 color: Colors.orange,
                                 elevation: 10,
+                                height: 45,
                                 padding: const EdgeInsets.all(5),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20)),
@@ -234,6 +230,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                     : const Text(
                                         "SignUp",
                                         style: TextStyle(
+                                            fontFamily: "Satoshi",
                                             color: Colors.white,
                                             fontSize: 20,
                                             fontWeight: FontWeight.w400),
@@ -246,11 +243,14 @@ class _SignUpPageState extends State<SignUpPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
+                          Text(
                             "Already Have An Account?",
                             style: TextStyle(
-                                //color: Colors.white,fontSize: 25 , fontWeight: FontWeight.w600
-                                ),
+                              fontFamily: "Satoshi",
+                              color: context.theme.primaryColor,
+                              fontSize: 15,
+                              // fontWeight: FontWeight.w600
+                            ),
                           ),
                           TextButton(
                             onPressed: () {
@@ -259,6 +259,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             child: const Text(
                               "Sign In",
                               style: TextStyle(
+                                fontFamily: "Satoshi",
                                 color: Colors.orange,
                                 fontWeight: FontWeight.bold,
                               ),
