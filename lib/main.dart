@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:project2/cache/cache_helper.dart';
+import 'package:project2/controller/settings_controller.dart';
 import 'package:project2/middleware/route_middleware.dart';
 import 'package:project2/services/settings_services.dart';
+import 'package:project2/theme/theme.dart';
 import 'package:project2/view/auth/sign_in_page.dart';
 import 'package:project2/view/auth/sign_up_page.dart';
 import 'package:project2/view/hidden_drawer.dart';
@@ -11,6 +13,8 @@ import 'package:project2/view/home_page.dart';
 import 'package:project2/view/intro_screen/intro_screen.dart';
 import 'package:project2/view/splash_screen.dart';
 import 'package:project2/view/user_view/user_page.dart';
+
+import 'controller/theme_controller.dart';
 
 void main() async {
   // Lock the app to portrait mode
@@ -23,18 +27,21 @@ void main() async {
   //this for middleware
   WidgetsFlutterBinding.ensureInitialized();
   // await initServices();
-
   await CacheHelper().init() ;
   //to take one object of the class
   // await getIt<CacheHelper>().init() ;
-  runApp(const MyApp());
+  runApp( const MyApp());
+  // runApp(GetBuilder<ThemeController>(
+  //     init: ThemeController(),
+  //     builder: (controller) =>
+  //     const MyApp()));
 }
 
 // Future initServices() async {
 //   // await Get.putAsync(() => CacheHelper().init()) ;
 //   await Get.putAsync(() => SettingsServices().init());
 // }
-
+ThemeController _themeController = ThemeController() ;
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -42,8 +49,25 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      theme: ThemeData(fontFamily: "Satoshi"),
       debugShowCheckedModeBanner: false,
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: _themeController.getThemeMode,
+      // theme: Themes.customLightTheme,
+      // darkTheme: Themes.customDarkTheme,
+      // darkTheme: darkMode,
+      // theme: ThemeData(
+      //   fontFamily: "Satoshi" ,
+      //   //for appbarTheme
+      //   // appBarTheme: AppBarTheme(),
+      //   //for text theme
+      //   // textTheme: const TextTheme(
+      //   //   bodySmall: TextStyle(color: Colors.orange ,fontSize: 12) ,
+      //   //   bodyMedium: TextStyle(color: Colors.blue ,fontSize: 15) ,
+      //   //   bodyLarge: TextStyle(color: Colors.blue , fontWeight: FontWeight.bold ,fontSize: 18) ,
+      //   // ),
+      // ),
+      //todo
       // home: const SplashScreen() ,
 
       // home: const SignInPage() ,
@@ -53,13 +77,14 @@ class MyApp extends StatelessWidget {
       //  initialRoute:CacheHelper().getData(key: 'signed') == 'signed' ? "/drawer" : "/",
       getPages: [
         GetPage(name: "/", page: () => const SplashScreen(),
-            middlewares:  [
-          RouteMiddleware(),
-            ] ,
+          middlewares:  [
+            RouteMiddleware(),
+          ] ,
         ),
         GetPage(name: "/intro", page: () => const IntroScreen()),
-        // GetPage(name: "/signup", page: () => const SignUpPage()),
+
         GetPage(name: "/signin", page: () => const SignInPage()),
+        GetPage(name: "/signup", page: () => const SignUpPage()),
         GetPage(name: "/home", page: () => const HomePage()),
         GetPage(name: "/user", page: () => const UserPage()),
         GetPage(name: "/drawer", page: () => const HiddenDrawer()),

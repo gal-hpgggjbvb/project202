@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:project2/custom_widgets/custom_setting_item.dart';
+import 'package:project2/theme/theme.dart';
 import 'package:project2/view/auth/sign_in_page.dart';
 import 'package:project2/view/terms_page.dart';
 
 import '../cache/cache_helper.dart';
+import '../controller/theme_controller.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -17,6 +19,7 @@ class SettingsPage extends StatefulWidget {
 
 bool activeDarkMode = false;
 bool activeNotification = false;
+ThemeController themeController =Get.put(ThemeController()) ;
 
 class _SettingsPageState extends State<SettingsPage> {
   @override
@@ -52,13 +55,24 @@ class _SettingsPageState extends State<SettingsPage> {
                     }
                     return Colors.black26;  // when switch is OFF
                   }),
-                  value: activeDarkMode,
-                  onChanged: (val) {
-                    setState(() {
-                      activeDarkMode = !activeDarkMode;
-                      //v ? v=false : v=true;
-                    });
+                  value: themeController.isDark,
+                  onChanged: (val){
+                     themeController.isDark = val ;
+                     // CacheHelper().saveData(key: 'isDark', value: val);
+                     print(val) ;
+                     // print(CacheHelper().getData(key: 'isDark')) ;
+                     print('isDark settings  ${themeController.isDark}*********************************');
+                     print('isDark cache  ${CacheHelper().getData(key: 'isDark')}*********************************');
+                     themeController.toggleTheme(val);
+                     setState(() {});
                   },
+                  // value: activeDarkMode,
+                  // onChanged: (val) {
+                  //   setState(() {
+                  //     activeDarkMode = !activeDarkMode;
+                  //     v ? v=false : v=true;
+                    // });
+                  // },
                 ),
               ),
               //todo change language pop menu
@@ -126,6 +140,36 @@ class _SettingsPageState extends State<SettingsPage> {
                     ).show();
                 },
               ),
+              //todo sign out button
+              CustomSettingItem(
+                  title: 'Sign Out',
+                  icon: Icons.logout,
+                  iconColor: Colors.white,
+                  iconBackgroundColor: Colors.red.shade500,
+                  onTap: () {
+                    AwesomeDialog(
+                        context: context,
+                        // dialogType: DialogType.warning,
+                        customHeader: const Icon(Icons.logout, color: Colors.red, size: 50),
+                        animType: AnimType.bottomSlide,
+                        title: 'Sign Out',
+                        titleTextStyle: const TextStyle(fontWeight: FontWeight.bold,
+                          fontSize: 20,),
+                        desc: 'Are you sure you want to sign out?\nYou will need to sign in again.',
+                        btnCancelText: "Cancel",
+                        btnCancelOnPress: () {},
+                        btnOkText: "Sign Out",
+                        btnOkOnPress: () async {
+                          await CacheHelper().clearData() ;
+                          // await CacheHelper().removeData(key: 'signed'); // or just remove "signed", "token", etc.
+                          // await CacheHelper().removeData(key: 'token'); // or just remove "signed", "token", etc.
+                          Get.offAll(() => const SignInPage()); // Replace with your auth page
+                        },
+                        btnOkColor: Colors.red,
+                        btnCancelColor: Colors.orangeAccent
+                    ).show();
+                  }
+              ),
               //todo delete account
               CustomSettingItem(
                 title: 'Delete Account',
@@ -139,7 +183,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       customHeader: const Icon(Icons.delete_forever,
                           color: Colors.red, size: 55),
                       animType: AnimType.bottomSlide,
-                      title: 'Delete Account',
+                      title: 'Delete Account!',
                       titleTextStyle: const TextStyle(fontWeight: FontWeight.bold,
                       fontSize: 20,color: Colors.red),
                       desc: 'Are you sure you want to delete your account?\nAll your data will be deleted!.',
@@ -156,39 +200,10 @@ class _SettingsPageState extends State<SettingsPage> {
                       btnCancelColor: Colors.orangeAccent
                     ).show();
                   }),
-              //todo sign out button
-              CustomSettingItem(
-                title: 'Sign Out',
-                icon: Icons.logout,
-                iconColor: Colors.white,
-                iconBackgroundColor: Colors.red.shade500,
-                  onTap: () {
-                    AwesomeDialog(
-                        context: context,
-                        // dialogType: DialogType.warning,
-                        customHeader: const Icon(Icons.logout, color: Colors.red, size: 50),
-                        animType: AnimType.bottomSlide,
-                        title: 'Sign Out',
-                        titleTextStyle: const TextStyle(fontWeight: FontWeight.bold,
-                            fontSize: 20,),
-                        desc: 'Are you sure you want to log out?\nYou will need to log in again.',
-                        btnCancelText: "Cancel",
-                        btnCancelOnPress: () {},
-                        btnOkText: "Sign Out",
-                        btnOkOnPress: () async {
-                          await CacheHelper().clearData() ;
-                          // await CacheHelper().removeData(key: 'signed'); // or just remove "signed", "token", etc.
-                          // await CacheHelper().removeData(key: 'token'); // or just remove "signed", "token", etc.
-                          Get.offAll(() => const SignInPage()); // Replace with your auth page
-                        },
-                        btnOkColor: Colors.red,
-                        btnCancelColor: Colors.orangeAccent
-                    ).show();
-                  }
-              ),
               // const SizedBox(height: 50,),
               //todo app version
-              const ListTile(title: Text('Version  1.0.0' , style: TextStyle(fontSize: 20),),),
+              ListTile(title: Text('Version  1.0.0' ,
+                style: context.theme.textTheme.bodyMedium,),),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15.0),
                 child: Divider(height: 0,),

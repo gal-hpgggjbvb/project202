@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 class CustomListTile extends StatelessWidget {
   final IconData iconData;
@@ -28,8 +29,9 @@ class CustomListTile extends StatelessWidget {
       children: [
         ListTile(
           leading: Icon(iconData, color: Colors.black),
-          title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-          subtitle: Text(subtitle),
+          // title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+          title: Text(title, style: context.theme.textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold)),
+          subtitle: Text(subtitle,style: context.theme.textTheme.bodySmall,),
           // visualDensity: VisualDensity.compact,
           trailing: showCopyIcon
               ? IconButton(
@@ -38,7 +40,9 @@ class CustomListTile extends StatelessWidget {
             onPressed: () {
               Clipboard.setData(ClipboardData(text: subtitle));
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('$title copied')),
+                SnackBar(content: Text('$title copied',
+                  style: context.theme.textTheme.bodySmall,),
+                backgroundColor: context.theme.colorScheme.secondary,),
               );
             },
           )

@@ -7,10 +7,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:project2/api/dio_consumer.dart';
 import 'package:project2/controller/edit_profile_controller.dart';
 import 'package:project2/custom_widgets/custom_listtile.dart';
+import 'package:project2/functions/add_space.dart';
 import 'package:project2/view/edit_profile_page.dart';
 
 import '../../cache/cache_helper.dart';
-import '../../controller/profile_controller.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -42,9 +42,8 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          child: GetBuilder<EditProfileController>(
-            builder: (controller) =>
-            Column(
+            child: GetBuilder<EditProfileController>(
+          builder: (controller) => Column(
             children: [
               const SizedBox(height: 30),
               // InkWell(
@@ -83,12 +82,15 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
 
               // Profile Info Tiles
+              //todo name
               CustomListTile(
                 iconData: Icons.person,
                 title: 'Name',
                 subtitle:
                     '${CacheHelper().getData(key: 'name') ?? 'name here'}',
               ),
+
+              //todo id
               CustomListTile(
                 iconData: Icons.badge,
                 title: 'ID',
@@ -96,11 +98,15 @@ class _ProfilePageState extends State<ProfilePage> {
                     '${CacheHelper().getData(key: 'id')?.substring(0, 7) ?? 'id'}...',
                 showCopyIcon: true,
               ),
+
+              //todo phone
               CustomListTile(
-                iconData: Icons.phone_android,
+                iconData: Icons.phone,
                 title: 'Phone',
                 subtitle: '${CacheHelper().getData(key: 'phone') ?? 'Not set'}',
               ),
+
+              //todo email
               CustomListTile(
                 iconData: Icons.email,
                 title: 'Email',
@@ -117,29 +123,31 @@ class _ProfilePageState extends State<ProfilePage> {
                   label: const Text(
                     "Edit Profile",
                     style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
+                        color: Colors.white,
+                        fontFamily: "Satoshi",
+                        fontWeight: FontWeight.bold),
                   ),
                   style: ElevatedButton.styleFrom(
                     shape: const StadiumBorder(),
                     backgroundColor: Colors.orange,
-                    elevation: 4,
+                    elevation: 10,
                     shadowColor: Colors.orangeAccent,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 32, vertical: 12),
                   ),
-                  onPressed: () => Get.to(() => EditProfilePage()),
+                  onPressed: () => Get.to(() => const EditProfilePage()),
                 ),
               ),
 
-              const SizedBox(height: 100),
+              addVerticalSpace(100),
               // Push version to bottom visually
 
-              // App Version Text
+              //todo App Version Text
               const Text(
                 'v1.0.0',
                 style: TextStyle(fontSize: 13, color: Colors.grey),
               ),
-              const SizedBox(height: 10),
+              addVerticalSpace(10),
               // MaterialButton(
               //   onPressed: () {
               //     print(CacheHelper().getData(key: 'name'));
@@ -147,8 +155,8 @@ class _ProfilePageState extends State<ProfilePage> {
               //   child: Text('print'),
               // ),
             ],
-          ),)
-        ),
+          ),
+        )),
       ),
     );
   }

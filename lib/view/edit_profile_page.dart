@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:project2/api/dio_consumer.dart';
 import 'package:project2/controller/edit_profile_controller.dart';
+import 'package:project2/functions/add_space.dart';
 import '../custom_widgets/custom_textformfield.dart';
 
 class EditProfilePage extends StatefulWidget {
@@ -34,7 +35,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: AppBar(title: const Text("Edit Profile"),backgroundColor: Colors.orange,),
+      appBar: AppBar(title: Text("Edit Profile",style: context.theme.textTheme.bodyMedium,),
+        backgroundColor: context.theme.colorScheme.background,
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(15),
         //The keyboard to auto-close when tapping outside
@@ -57,7 +60,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               //     ),
               //   ),
               // ),
-              const SizedBox(height: 20),
+              addVerticalSpace(20),
               Obx(() => GestureDetector(
                 onTap: () => editProfileController.pickImage(),
                 child: CircleAvatar(
@@ -107,45 +110,51 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   //   ),
                   // );
                 },
-
                 icon: const Icon(Icons.delete, color: Colors.red),
-                label: const Text("Remove Photo", style: TextStyle(color: Colors.red)),
+                label: Text("Remove Photo",
+                    style: context.theme.textTheme.bodySmall!.copyWith(color: Colors.red)),
               ) ,
 
+              addVerticalSpace(20),
 
-              const SizedBox(height: 20),
-
-              // Form Fields
+              //todo name field
               CustomTextFormField(
                 controller: editProfileController.editNameController,
                 textInputType: TextInputType.text,
                 hintText: 'Name',
                 maxLength: 20,
+                isPrefixIcon: true, icon: Icons.person,
               ),
-              const SizedBox(height: 12),
+              addVerticalSpace(10),
 
+              //todo phone field
               CustomTextFormField(
                 controller: editProfileController.editPhoneController,
                 textInputType: TextInputType.phone,
                 hintText: 'Phone',
                 maxLength: 10,
+                isPrefixIcon: true, icon: Icons.phone,
               ),
-              const SizedBox(height: 12),
+              addVerticalSpace(10),
 
+              //todo email field
               CustomTextFormField(
                 controller: editProfileController.editEmailController,
                 textInputType: TextInputType.emailAddress,
                 hintText: 'Email',
+                isPrefixIcon: true, icon: Icons.email,
               ),
-              const SizedBox(height: 40),
+              addVerticalSpace(35),
 
+              //todo password field
               CustomTextFormField(
                 controller: editProfileController.editPasswordController,
                 textInputType: TextInputType.text,
                 hintText: 'Password',
                 isPassword: true,
+                isPrefixIcon: true, icon: Icons.password,
               ),
-              const SizedBox(height: 100),
+              addVerticalSpace(100),
 
               ElevatedButton.icon(
                 // onPressed: controller.saveProfile,
@@ -155,7 +164,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 },
                 icon: const Icon(Icons.save, color: Colors.white),
                 label: const Text("Save Changes",
-                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: "Satoshi",
+                    fontWeight: FontWeight.bold,),),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.orange,
                   padding:

@@ -42,14 +42,15 @@ class EditProfileController extends GetxController {
       image.value = File(picked.path); // update image
     }
     CacheHelper().saveData(key: 'imagePath', value: image.value!.path);
-    SignStatus().signSuccess('Profile Image Updated', '') ;
+    SignStatus().signSuccess('Profile Image Updated', '');
     update();
   }
+
   void deleteImage() {
     image.value = null; // reset to null
     CacheHelper().removeData(key: 'image_path');
-    SignStatus().signSuccess('Profile Image Removed', '') ;
-    update() ;
+    SignStatus().signSuccess('Profile Image Removed', '');
+    update();
   }
 
   @override
@@ -67,29 +68,24 @@ class EditProfileController extends GetxController {
   editProfile() async {
     try {
       await CacheHelper().saveData(key: 'sendToken', value: true);
-      print('here send token **********************************************') ;
+      // print('here send token **********************************************') ;
       final response =
           await api.put('http://10.0.2.2:8000/api/user/profile', data: {
         'name': editNameController.text,
         'phone': editPhoneController.text,
         'email': editEmailController.text,
         'password': editPasswordController.text,
-        // 'name': 'name here',
-        // 'phone': '7878887888',
-        // 'email': 'email@gmail.com',
-        // 'password': '11110000',
       });
-      print('here save data **********************************************') ;
+      // print('here save data **********************************************') ;
       CacheHelper().saveData(key: 'name', value: editNameController.text);
       CacheHelper().saveData(key: 'phone', value: editPhoneController.text);
       CacheHelper().saveData(key: 'email', value: editEmailController.text);
-      CacheHelper()
-          .saveData(key: 'password', value: editPasswordController.text);
-      print('here sign status **********************************************') ;
+      CacheHelper().saveData(key: 'password', value: editPasswordController.text);
+      // print('here sign status **********************************************') ;
       SignStatus().signSuccess('Profile Updated Successfully', 'Done');
       print(response);
     } on ServerExceptions catch (e) {
-      print('here failed  **********************************************') ;
+      // print('here failed  **********************************************') ;
       SignFailed(errorMessage: e.errorModel.message);
     }
     update();

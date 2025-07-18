@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:project2/functions/add_space.dart';
 
 class CustomSettingItem extends StatelessWidget {
   final String title;
@@ -33,16 +35,17 @@ class CustomSettingItem extends StatelessWidget {
             ),
             child: Icon(icon, color: iconColor, size: 20),
           ),
-          title: Text(title , style: const TextStyle(fontSize: 20),),
+          // title: Text(title , style: const TextStyle(fontSize: 20),),
+          title: Text(title , style: context.theme.textTheme.bodyMedium,),
           trailing: trailing ?? const Icon(Icons.arrow_forward_ios, size: 15),
           onTap: onTap,
         ),
-        const SizedBox(height: 10,),
+        addVerticalSpace(10),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 15.0),
           child: Divider(height: 0,),
         ),
-        const SizedBox(height: 10,),
+        addVerticalSpace(10),
       ],
     );
   }

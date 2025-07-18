@@ -9,6 +9,7 @@ import 'package:project2/controller/user_controller/fetch_orders_controller.dart
 import 'package:project2/controller/user_controller/order_controller.dart';
 import 'package:project2/custom_widgets/custom_expansiontile.dart';
 import 'package:project2/custom_widgets/custom_order_field.dart';
+import 'package:project2/functions/add_space.dart';
 import 'package:project2/view/auth/sign_in_page.dart';
 
 import '../../cache/cache_helper.dart';
@@ -72,12 +73,13 @@ class _UserPageState extends State<UserPage>
         key: scaffoldKey,
         // resizeToAvoidBottomInset: true,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          // backgroundColor: Theme.of(context).appBarTheme.c,
           bottom: TabBar(
             controller: tabController,
-            indicatorPadding: const EdgeInsets.symmetric(horizontal: 5),
-            indicatorSize: TabBarIndicatorSize.tab,
-            indicatorColor: Colors.deepOrangeAccent,
+            //indicator under tab's name
+            indicatorPadding: const EdgeInsets.symmetric(horizontal: 10),
+            // indicatorSize: TabBarIndicatorSize.tab,
+            // indicatorColor: Colors.deepOrangeAccent,
             tabs: const [
               Tab(text: "add order"),
               Tab(text: "my orders"),
@@ -217,47 +219,45 @@ class _UserPageState extends State<UserPage>
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            await CacheHelper().saveData(key: 'sendToken', value: true);
-            await fetchOrdersController.fetchOrders();
+            // await CacheHelper().saveData(key: 'sendToken', value: true);
+            // await fetchOrdersController.fetchOrders();
           },
+          child: const Icon(Icons.sunny),
         ),
         body: TabBarView(
           controller: tabController,
           children: [
             //todo add order page -first tab-
             SingleChildScrollView(
+              //The keyboard to auto-close when tapping outside
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(
-                    height: 100,
-                  ),
+                  addVerticalSpace(100),
                   //todo
-                  const Text(
+                  Text(
                     'Want Something Fast ? ',
-                    style: TextStyle(
-                        color: Colors.orange,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                    style: context.theme.textTheme.bodyLarge,
+                    // style: Theme.of(context).textTheme.bodyLarge,
+                    // TextStyle(
+                    //     color: Colors.orange,
+                    //     fontSize: 20,
+                    //     fontWeight: FontWeight.bold),
                   ),
-                  const Text(
+                  Text(
                     'Just add an Order and Leave it to Us.',
-                    style: TextStyle(
-                        color: Colors.orange,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                    style: context.theme.textTheme.bodyLarge,
                   ),
-
-                  const SizedBox(
-                    height: 80,
-                  ),
+                  addVerticalSpace(80),
                   //todo add order button
                   MaterialButton(
                     onPressed: () {
                       showModalBottomSheet(
                           context: context,
                           isScrollControlled: true,
+                          // showDragHandle: true,
                           shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.vertical(
                                   top: Radius.circular(20))),
@@ -275,11 +275,13 @@ class _UserPageState extends State<UserPage>
                                     child: ListView(
                                       padding: const EdgeInsets.all(30),
                                       children: [
-                                        const Center(
-                                            child: Text('Make an Order')),
-                                        const SizedBox(
-                                          height: 15,
-                                        ),
+                                        Center(
+                                            child: Text(
+                                          'Make an Order',
+                                          style:
+                                              context.theme.textTheme.bodySmall,
+                                        )),
+                                        addVerticalSpace(15),
                                         CustomOrderField(
                                           controller: orderController
                                               .objectNameController,
@@ -299,9 +301,7 @@ class _UserPageState extends State<UserPage>
                                           hintText: 'type here',
                                           labelText: 'drop location',
                                         ),
-                                        const SizedBox(
-                                          height: 15,
-                                        ),
+                                        addVerticalSpace(15),
                                         //todo bottomsheet button
                                         Center(
                                           child: MaterialButton(
@@ -320,10 +320,37 @@ class _UserPageState extends State<UserPage>
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(20)),
-                                            color: Colors.orange[200],
-                                            child: const Text("Make an Order"),
+                                            minWidth: 100,
+                                            height: 50,
+                                            color: context
+                                                .theme.colorScheme.primary,
+                                            child: Text(
+                                              "Make an Order",
+                                              style: context
+                                                  .theme.textTheme.bodySmall!
+                                                  .copyWith(
+                                                      color: Colors.white),
+                                            ),
                                           ),
                                         ),
+                                        //todo bottomsheet button
+                                        // Center(
+                                        //   child: ElevatedButton(
+                                        //     onPressed: () async {
+                                        //       // if(orderController.orderFormKey.currentState!.validate()){
+                                        //       //   await CacheHelper().saveData(key: 'orderBool', value: true);
+                                        //       //   await orderController.makeOrder();
+                                        //       // }
+                                        //       await CacheHelper().saveData(
+                                        //           key: 'sendToken',
+                                        //           value: true);
+                                        //       await orderController.makeOrder();
+                                        //       // Get.back();
+                                        //       Navigator.pop(context);
+                                        //     },
+                                        //     child: const Text("Make an Order"),
+                                        //   ),
+                                        // ),
                                         // const SizedBox(height: 40,),
                                         // const Text('bottomsheet ends here')
                                       ],
@@ -332,109 +359,124 @@ class _UserPageState extends State<UserPage>
                                 ),
                               ));
                     },
-                    height: 100,
-                    // minWidth: 300,
-                    minWidth: double.infinity,
-                    color: Colors.orange,
-                    elevation: 10,
-                    splashColor: Colors.deepOrange,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                    textColor: Colors.white,
-                    child: const Text(
+                    color: context.theme.buttonTheme.colorScheme!.background,
+                    elevation: 15,
+                    splashColor:
+                        context.theme.buttonTheme.colorScheme!.onBackground,
+                    child: Text(
                       "add order via bottomsheet ",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: context.theme.textTheme.bodyLarge!.copyWith(
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
                     ),
                   ),
-
+                  //todo add order elevated button
                   // ElevatedButton(
                   //   onPressed: () {
-                  //     showModalBottomSheet(
-                  //         context: context,
-                  //         isScrollControlled: true,
-                  //         shape: const RoundedRectangleBorder(
-                  //             borderRadius: BorderRadius.vertical(
-                  //                 top: Radius.circular(20))),
-                  //         builder: (context) =>
-                  //             Padding(
-                  //               padding: EdgeInsets.only(
-                  //                 bottom: MediaQuery.of(context).viewInsets.bottom,
-                  //               ),
-                  //
-                  //               child: SizedBox(
-                  //                 //to control bottom sheet height
-                  //                 height: MediaQuery.of(context).size.height * 0.50,
-                  //                 child: Form(
-                  //                   key: orderController.orderFormKey,
-                  //                   child: ListView(
-                  //                     padding: const EdgeInsets.all(30),
-                  //                     children: [
-                  //                       const Center(
-                  //                           child: Text('Make an Order')),
-                  //                       const SizedBox(
-                  //                         height: 15,
-                  //                       ),
-                  //                       CustomOrderField(
-                  //                         controller: orderController
-                  //                             .objectNameController,
-                  //                         hintText: 'type here',
-                  //                         labelText:
-                  //                         'what do you want to deliver',
-                  //                       ),
-                  //                       CustomOrderField(
-                  //                         controller: orderController
-                  //                             .sourceController,
-                  //                         hintText: 'type here',
-                  //                         labelText: 'pickup location',
-                  //                       ),
-                  //                       CustomOrderField(
-                  //                         controller: orderController
-                  //                             .destinationController,
-                  //                         hintText: 'type here',
-                  //                         labelText: 'drop location',
-                  //                       ),
-                  //                       const SizedBox(
-                  //                         height: 15,
-                  //                       ),
-                  //                       //todo bottomsheet button
-                  //                       Center(
-                  //                         child: MaterialButton(
-                  //                           onPressed: () async {
-                  //                             // if(orderController.orderFormKey.currentState!.validate()){
-                  //                             //   await CacheHelper().saveData(key: 'orderBool', value: true);
-                  //                             //   await orderController.makeOrder();
-                  //                             // }
-                  //                             await CacheHelper().saveData(
-                  //                                 key: 'sendToken',
-                  //                                 value: true);
-                  //                             await orderController
-                  //                                 .makeOrder();
-                  //                             // Get.back();
-                  //                             Navigator.pop(context) ;
-                  //                           },
-                  //                           shape: RoundedRectangleBorder(
-                  //                               borderRadius:
-                  //                               BorderRadius.circular(
-                  //                                   20)),
-                  //                           color: Colors.orange[200],
-                  //                           child:
-                  //                           const Text("Make an Order"),
-                  //                         ),
-                  //                       ),
-                  //                       // const SizedBox(height: 40,),
-                  //                       // const Text('bottomsheet ends here')
-                  //                     ],
+                  //   showModalBottomSheet(
+                  //       context: context,
+                  //       isScrollControlled: true,
+                  //       shape: const RoundedRectangleBorder(
+                  //           borderRadius: BorderRadius.vertical(
+                  //               top: Radius.circular(20))),
+                  //       builder: (context) => Padding(
+                  //         padding: EdgeInsets.only(
+                  //           bottom:
+                  //           MediaQuery.of(context).viewInsets.bottom,
+                  //         ),
+                  //         child: SizedBox(
+                  //           //to control bottom sheet height
+                  //           height:
+                  //           MediaQuery.of(context).size.height * 0.50,
+                  //           child: Form(
+                  //             key: orderController.orderFormKey,
+                  //             child: ListView(
+                  //               padding: const EdgeInsets.all(30),
+                  //               children: [
+                  //                 const Center(
+                  //                     child: Text('Make an Order')),
+                  //                 const SizedBox(
+                  //                   height: 15,
+                  //                 ),
+                  //                 CustomOrderField(
+                  //                   controller: orderController
+                  //                       .objectNameController,
+                  //                   hintText: 'type here',
+                  //                   labelText:
+                  //                   'what do you want to deliver',
+                  //                 ),
+                  //                 CustomOrderField(
+                  //                   controller:
+                  //                   orderController.sourceController,
+                  //                   hintText: 'type here',
+                  //                   labelText: 'pickup location',
+                  //                 ),
+                  //                 CustomOrderField(
+                  //                   controller: orderController
+                  //                       .destinationController,
+                  //                   hintText: 'type here',
+                  //                   labelText: 'drop location',
+                  //                 ),
+                  //                 const SizedBox(
+                  //                   height: 15,
+                  //                 ),
+                  //                 //todo bottomsheet button
+                  //                 Center(
+                  //                   child: MaterialButton(
+                  //                     onPressed: () async {
+                  //                       // if(orderController.orderFormKey.currentState!.validate()){
+                  //                       //   await CacheHelper().saveData(key: 'orderBool', value: true);
+                  //                       //   await orderController.makeOrder();
+                  //                       // }
+                  //                       await CacheHelper().saveData(
+                  //                           key: 'sendToken',
+                  //                           value: true);
+                  //                       await orderController.makeOrder();
+                  //                       // Get.back();
+                  //                       Navigator.pop(context);
+                  //                     },
+                  //                     shape: RoundedRectangleBorder(
+                  //                         borderRadius:
+                  //                         BorderRadius.circular(20)),
+                  //                     color: Colors.orange[200],
+                  //                     child: const Text("Make an Order"),
                   //                   ),
                   //                 ),
-                  //               ),
-                  //             ));
-                  //   },
-                  //   child: const Text("add order via bottomsheet "),
+                  //                 //todo bottomsheet button
+                  //                 Center(
+                  //                   child: ElevatedButton(
+                  //                     onPressed: () async {
+                  //                       // if(orderController.orderFormKey.currentState!.validate()){
+                  //                       //   await CacheHelper().saveData(key: 'orderBool', value: true);
+                  //                       //   await orderController.makeOrder();
+                  //                       // }
+                  //                       await CacheHelper().saveData(
+                  //                           key: 'sendToken',
+                  //                           value: true);
+                  //                       await orderController.makeOrder();
+                  //                       // Get.back();
+                  //                       Navigator.pop(context);
+                  //                     },
+                  //                     child: const Text("Make an Order"),
+                  //                   ),
+                  //                 ),
+                  //                 // const SizedBox(height: 40,),
+                  //                 // const Text('bottomsheet ends here')
+                  //               ],
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       ));
+                  // },
+                  //   child: Text(
+                  //     "add order via bottomsheet ",
+                  //     style: context.theme.textTheme.bodyLarge!.copyWith(
+                  //       color: Colors.white,
+                  //       fontSize: 18,),
+                  //   ),
                   // ),
-                  //todo another way
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  addVerticalSpace(20),
                   MaterialButton(
                     onPressed: () async {
                       print('_____________________________________________');
@@ -447,9 +489,7 @@ class _UserPageState extends State<UserPage>
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
-                  const SizedBox(
-                    height: 90,
-                  ),
+                  addVerticalSpace(90),
                   CustomOrderField(
                       controller: orderController.objectNameController,
                       hintText: 'another way for order ui',
@@ -478,10 +518,10 @@ class _UserPageState extends State<UserPage>
                     child: ListView(
                       physics: const AlwaysScrollableScrollPhysics(),
                       // 👈 important!
-                      children: const [
-                        SizedBox(height: 300),
+                      children:  [
+                        addVerticalSpace(300),
                         // 👈 fake height to enable scroll
-                        Center(
+                        const Center(
                             child: Text(
                           'No orders yet...',
                           style: TextStyle(fontSize: 15),
@@ -494,11 +534,11 @@ class _UserPageState extends State<UserPage>
                     onRefresh: () async {
                       await controller.refreshTab2();
                     },
-                    color: Colors.orangeAccent,
-                    backgroundColor: Colors.white,
+                    color: context.theme.colorScheme.primary,
+                    backgroundColor: context.theme.colorScheme.onBackground,
                     child: ListView.builder(
                       //to scroll always chat
-                      physics: const AlwaysScrollableScrollPhysics(),
+                      physics:  AlwaysScrollableScrollPhysics(),
                       itemCount: controller.orderList.length,
                       itemBuilder: (context, i) {
                         return CustomExpansionTile(

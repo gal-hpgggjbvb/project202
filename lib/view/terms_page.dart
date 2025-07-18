@@ -1,6 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project2/functions/add_space.dart';
 
 import '../cache/cache_helper.dart';
 
@@ -108,7 +109,7 @@ class _TermsPageState extends State<TermsPage> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 10),
+                addVerticalSpace(10),
                 ElevatedButton(
                   onPressed: accepted
                       ? () {
@@ -141,7 +142,7 @@ class _TermsPageState extends State<TermsPage> {
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                 ),
-                const SizedBox(height: 16),
+                addVerticalSpace(15),
               ],
             ),
           ),

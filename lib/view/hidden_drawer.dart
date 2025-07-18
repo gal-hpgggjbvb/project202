@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'package:project2/view/home_page.dart';
 import 'package:project2/view/notifications_page.dart';
@@ -25,16 +26,17 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
       ScreenHiddenDrawer(
           ItemHiddenMenu(
             name: 'Profile',
-            baseStyle: const TextStyle(),
+            baseStyle: const TextStyle(fontSize: 15,),
             selectedStyle: const TextStyle(fontSize: 18),
             colorLineSelected: Colors.orange,
+            // colorLineSelected: context.theme.primaryColor,
           ),
           const ProfilePage()),
       // ScreenHiddenDrawer(
       //     ItemHiddenMenu(
       //       name: 'HomePage',
-      //       baseStyle: TextStyle(),
-      //       selectedStyle: TextStyle(),
+      //       baseStyle: TextStyle(fontSize: 15,),
+      //       selectedStyle: TextStyle(fontSize: 18),
       //       colorLineSelected: Colors.orange,
       //     ),
       //     const HomePage()),
@@ -42,27 +44,30 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
       ScreenHiddenDrawer(
           ItemHiddenMenu(
             name: 'Main Page',
-            baseStyle: const TextStyle(),
+            baseStyle: const TextStyle(fontSize: 15,),
             selectedStyle: const TextStyle(fontSize: 18),
             colorLineSelected: Colors.orange,
+            // colorLineSelected: context.theme.primaryColor,
           ),
           const UserPage()),
       //todo notifications page
       ScreenHiddenDrawer(
           ItemHiddenMenu(
             name: 'Notifications',
-            baseStyle: const TextStyle(),
+            baseStyle: const TextStyle(fontSize: 15,),
             selectedStyle: const TextStyle(fontSize: 18),
             colorLineSelected: Colors.orange,
+            // colorLineSelected: context.theme.primaryColor,
           ),
           const NotificationsPage()),
       //todo settings page
       ScreenHiddenDrawer(
           ItemHiddenMenu(
             name: 'Settings',
-            baseStyle: const TextStyle(),
+            baseStyle: const TextStyle(fontSize: 15,),
             selectedStyle: const TextStyle(fontSize: 18),
             colorLineSelected: Colors.orange,
+            // colorLineSelected: context.theme.primaryColor,
           ),
           const SettingsPage()),
       // ScreenHiddenDrawer(
@@ -79,8 +84,11 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
   @override
   Widget build(BuildContext context) {
     return HiddenDrawerMenu(
-        backgroundColorMenu: Colors.white ,
-        backgroundColorAppBar: Colors.orange,
+      // backgroundColorAppBar: Colors.orange,
+      // backgroundColorMenu: Colors.white,
+      // backgroundColorAppBar: Theme.of(context).primaryColor,
+      backgroundColorAppBar: context.theme.colorScheme.background,
+      backgroundColorMenu: context.theme.colorScheme.onBackground,
         screens: _pages,
         //todo i will try use a condition here (normal/driver)
         initPositionSelected: 1,
