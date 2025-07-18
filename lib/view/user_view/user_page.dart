@@ -258,6 +258,7 @@ class _UserPageState extends State<UserPage>
                           context: context,
                           isScrollControlled: true,
                           // showDragHandle: true,
+                          backgroundColor: context.theme.colorScheme.onSecondary,
                           shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.vertical(
                                   top: Radius.circular(20))),
@@ -278,8 +279,11 @@ class _UserPageState extends State<UserPage>
                                         Center(
                                             child: Text(
                                           'Make an Order',
-                                          style:
-                                              context.theme.textTheme.bodySmall,
+                                          style: TextStyle(
+                                            fontFamily: "Satoshi",
+                                            color: context.theme.primaryColor,
+                                            fontSize: 17,
+                                          ),
                                         )),
                                         addVerticalSpace(15),
                                         CustomOrderField(
@@ -326,10 +330,12 @@ class _UserPageState extends State<UserPage>
                                                 .theme.colorScheme.primary,
                                             child: Text(
                                               "Make an Order",
-                                              style: context
-                                                  .theme.textTheme.bodySmall!
-                                                  .copyWith(
-                                                      color: Colors.white),
+                                              style: TextStyle(
+                                                fontFamily: "Satoshi",
+                                                color: context.theme.colorScheme.onSecondary,
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.normal,
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -365,9 +371,11 @@ class _UserPageState extends State<UserPage>
                         context.theme.buttonTheme.colorScheme!.onBackground,
                     child: Text(
                       "add order via bottomsheet ",
-                      style: context.theme.textTheme.bodyLarge!.copyWith(
-                        color: Colors.white,
+                      style: TextStyle(
+                        fontFamily: "Satoshi",
+                        color: context.theme.colorScheme.onSecondary,
                         fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
@@ -511,20 +519,23 @@ class _UserPageState extends State<UserPage>
               init: fetchOrdersController,
               builder: (controller) {
                 if (controller.orderList.isEmpty) {
+                  //todo center text if there are no orders
                   return RefreshIndicator(
                     onRefresh: controller.refreshTab2,
                     color: Colors.orangeAccent,
                     backgroundColor: Colors.white,
                     child: ListView(
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      // 👈 important!
+                      physics: const AlwaysScrollableScrollPhysics(), // 👈 important!
                       children:  [
-                        addVerticalSpace(300),
-                        // 👈 fake height to enable scroll
-                        const Center(
+                        addVerticalSpace(300), // 👈 fake height to enable scroll
+                         Center(
                             child: Text(
                           'No orders yet...',
-                          style: TextStyle(fontSize: 15),
+                          style: TextStyle(
+                              color: context.theme.primaryColor,
+                              fontSize: 17,
+                              fontWeight: FontWeight.normal, // typing style
+                            ),
                         )),
                       ],
                     ),
@@ -538,7 +549,7 @@ class _UserPageState extends State<UserPage>
                     backgroundColor: context.theme.colorScheme.onBackground,
                     child: ListView.builder(
                       //to scroll always chat
-                      physics:  AlwaysScrollableScrollPhysics(),
+                      physics:  const AlwaysScrollableScrollPhysics(),
                       itemCount: controller.orderList.length,
                       itemBuilder: (context, i) {
                         return CustomExpansionTile(

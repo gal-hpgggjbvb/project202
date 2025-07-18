@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:get/get.dart';
 
 class CustomOrderField extends StatelessWidget {
@@ -40,17 +38,45 @@ class CustomOrderField extends StatelessWidget {
         //     hintText: hintText,
         //     // hintStyle: const TextStyle(color: Colors.blue)
         // ),
+        style: TextStyle(
+          color: context.theme.primaryColor,
+          fontSize: 17,
+          fontWeight: FontWeight.normal, // typing style
+        ),
         decoration: InputDecoration(
           labelText: labelText,
-          hintText: hintText,),
-
-        style: context.theme.textTheme.bodyMedium,
-        // style: const TextStyle(
-        //   color: Colors.deepOrange,     // Text color while typing
-        //   fontSize: 18,                 // Size of typed text
-        //   fontWeight: FontWeight.bold, // Bold, normal, etc.
-        //   fontFamily: 'Roboto',        // Use custom font if declared in pubspec.yaml
-        // ),
+          hintText: hintText,
+          hintStyle: TextStyle(
+            fontFamily: "Satoshi",
+            color: context.theme.colorScheme.secondary,
+            fontSize: 15,
+            fontWeight: FontWeight.normal,
+            // fontStyle: FontStyle.italic,
+          ),
+          labelStyle: TextStyle(
+            fontFamily: "Satoshi",
+            color: context.theme.colorScheme.primary,
+            fontSize: 15,
+            fontWeight: FontWeight.normal,
+            // fontStyle: FontStyle.italic,
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            borderSide: BorderSide(
+              color: context.theme.colorScheme.secondary,
+              width: 0.7,
+            ),
+          ),
+          // focusColor: context.theme.colorScheme.primary,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            borderSide: BorderSide(
+              color: context.theme.colorScheme.secondary,
+              width: 0.7,
+            ),
+          ),
+        ),
+        // style: context.theme.textTheme.bodyMedium,
 
         validator: (value) {
           if (value!.isEmpty) {

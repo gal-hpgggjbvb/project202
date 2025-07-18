@@ -213,7 +213,7 @@ class _SignInPageState extends State<SignInPage> {
                         ],
                       ),
 
-                      addVerticalSpace(10),
+                      // addVerticalSpace(5),
 
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

@@ -185,23 +185,25 @@ class _SignUpPageState extends State<SignUpPage> {
                                             key: 'signed', value: true);
                                         CacheHelper().saveData(
                                             key: 'done', value: false);
-                                        // controller.loading = true ;
+                                        //       controller.loading = true ;
                                         Get.offAll(() => const HiddenDrawer());
                                       });
                                     }
-                                    // if(signStatus.done){
-                                    //   CacheHelper().saveData(key: 'signed', value: true) ;
-                                    //   Get.offAll(() => const HiddenDrawer()) ;
-                                    //   // setState(() {});
-                                    // }
-
-                                    // CacheHelper().saveData(key: 'signed', value: true) ;
-                                    // CacheHelper().saveData(key: 'name', value: signUpController.usernameController.text) ;
-                                    // CacheHelper().saveData(key: 'phone', value: signUpController.usernumberController.text) ;
-                                    // CacheHelper().saveData(key: 'email', value: signUpController.emailController.text) ;
-                                    // CacheHelper().saveData(key: 'password', value: signUpController.passwordController.text) ;
-                                    // Get.offAll(() => const HiddenDrawer());
                                   }
+                                  // if(signStatus.done){
+                                  //   CacheHelper().saveData(key: 'signed', value: true) ;
+                                  //   Get.offAll(() => const HiddenDrawer()) ;
+                                  //   // setState(() {});
+                                  // }
+
+                                  // CacheHelper().saveData(key: 'signed', value: true) ;
+                                  // CacheHelper().saveData(key: 'name', value: signUpController.usernameController.text) ;
+                                  // CacheHelper().saveData(key: 'phone', value: signUpController.usernumberController.text) ;
+                                  // CacheHelper().saveData(key: 'email', value: signUpController.emailController.text) ;
+                                  // CacheHelper().saveData(key: 'password', value: signUpController.passwordController.text) ;
+                                  // Get.offAll(() => const HiddenDrawer());
+
+                                  //
                                   // if(signUpController.signUpFormKey.currentState!.validate()){
                                   // //   //to keep in homepage when start again
                                   // //   serviceController.sharedpref.setString("id", "1") ;

@@ -69,16 +69,21 @@ ThemeData lightTheme = ThemeData(
   //todo colorScheme
   colorScheme: const ColorScheme.light(
     background: Colors.orange,
-    onBackground: Colors.white,
+    onBackground: Color(0xFFFDF8F3),
     primary: Colors.orangeAccent,
     onPrimary: Colors.deepOrange,
     secondary: Colors.grey,
-    onSecondary: Colors.deepOrange,
+    onSecondary: Colors.white,
   ),
 
   //todo tabBar
   tabBarTheme: TabBarTheme(
     labelColor: Colors.black,
+    labelStyle: const TextStyle(
+      fontFamily: "Satoshi",
+      fontSize: 15,
+      fontWeight: FontWeight.w700, // typing style
+    ),
     unselectedLabelColor: Colors.grey.shade700,
     indicatorSize: TabBarIndicatorSize.tab,
     // indicator: UnderlineTabIndicator(
@@ -131,11 +136,11 @@ ThemeData lightTheme = ThemeData(
           color: Colors.black,
           fontFamily: 'Satoshi',
         ),
-        //listtile subtitle
+        //expansionTile
         bodySmall: const TextStyle(
+          fontFamily: "Satoshi",
           color: Colors.black,
           fontSize: 17,
-          fontFamily: "Satoshi",
         ),
         //expansion listTile buttons
         displaySmall: const TextStyle(
@@ -195,14 +200,14 @@ ThemeData lightTheme = ThemeData(
     backgroundColor: Colors.deepOrange.shade50,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
     collapsedShape:
-    RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
   ),
 
   //todo listTile
   listTileTheme: ListTileThemeData(
-    // style: ListTileStyle(),
+      // style: ListTileStyle(),
 
-  ),
+      ),
 
   //todo elevated button
   elevatedButtonTheme: ElevatedButtonThemeData(
@@ -276,7 +281,6 @@ ThemeData lightTheme = ThemeData(
   //todo listTile
 );
 
-
 ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   fontFamily: "Satoshi",
@@ -329,50 +333,50 @@ ThemeData darkTheme = ThemeData(
   textTheme: ThemeData.dark()
       .textTheme
       .apply(
-    fontFamily: 'Satoshi',
-    bodyColor: Colors.black, // Default text color
-    displayColor: Colors.black87, // For headings and titles
-  )
+        fontFamily: 'Satoshi',
+        bodyColor: Colors.black, // Default text color
+        displayColor: Colors.black87, // For headings and titles
+      )
       .copyWith(
-    bodyLarge: const TextStyle(
-      fontSize: 20,
-      fontWeight: FontWeight.bold,
-      color: Colors.orange,
-      fontFamily: 'Satoshi',
-    ),
-    bodyMedium: const TextStyle(
-      fontSize: 18,
-      color: Colors.white,
-      fontFamily: 'Satoshi',
-    ),
-    bodySmall: const TextStyle(
-      color: Colors.black,
-      fontSize: 17,
-      fontFamily: "Satoshi",
-    ),
-    //expansion listTile buttons
-    displaySmall: const TextStyle(
-      fontSize: 15,
-      fontWeight: FontWeight.w400,
-      color: Colors.black,
-      fontFamily: 'Satoshi',
-    ),
-    titleLarge: const TextStyle(
-      fontSize: 15,
-      fontWeight: FontWeight.normal,
-      color: Colors.black,
-      fontFamily: 'Satoshi',
-    ),
-  ),
+        bodyLarge: const TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          color: Colors.orange,
+          fontFamily: 'Satoshi',
+        ),
+        bodyMedium: const TextStyle(
+          fontSize: 18,
+          color: Colors.white,
+          fontFamily: 'Satoshi',
+        ),
+        bodySmall: const TextStyle(
+          color: Colors.black,
+          fontSize: 17,
+          fontFamily: "Satoshi",
+        ),
+        //expansion listTile buttons
+        displaySmall: const TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.w400,
+          color: Colors.black,
+          fontFamily: 'Satoshi',
+        ),
+        titleLarge: const TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.normal,
+          color: Colors.black,
+          fontFamily: 'Satoshi',
+        ),
+      ),
 
   //todo divider
   dividerTheme: const DividerThemeData(
     thickness: 0.2,
-    color: Color(0x003d3d3d),
+    color: Colors.white,
   ),
 
   // todo inputField decoration
-  inputDecorationTheme:  InputDecorationTheme(
+  inputDecorationTheme: InputDecorationTheme(
     filled: true,
     fillColor: Color(0xFFF6F6F6),
     labelStyle: TextStyle(
@@ -407,7 +411,7 @@ ThemeData darkTheme = ThemeData(
     backgroundColor: Colors.red.shade100,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
     collapsedShape:
-    RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
   ),
 
   //todo material button
@@ -423,5 +427,4 @@ ThemeData darkTheme = ThemeData(
     height: 100,
     minWidth: double.infinity,
   ),
-
 );
