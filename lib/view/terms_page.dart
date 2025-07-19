@@ -26,9 +26,14 @@ class _TermsPageState extends State<TermsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        centerTitle: true,
+        title: Text(
           "Terms & Privacy Policy",
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontFamily: "Satoshi",
+              color: context.theme.colorScheme.onSecondary,
+              fontSize: 21,
+              fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.orange,
       ),

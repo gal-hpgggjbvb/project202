@@ -5,6 +5,15 @@ import 'package:project2/theme/theme.dart';
 
 class ThemeController extends GetxController {
   bool isDark = CacheHelper().getData(key: 'isDark') ?? false;
+  // late bool isDark ;
+
+  @override
+  void onInit() {
+    isDark = CacheHelper().getData(key: 'isDark') ?? false;
+    getThemeMode;
+    super.onInit();
+    update();
+  }
   ThemeMode _themeMode = ThemeMode.light;
   // ThemeMode _themeMode = isDark ? ThemeMode.dark : ThemeMode.light;
 
@@ -23,3 +32,25 @@ class ThemeController extends GetxController {
     update();
   }
 }
+
+// class ThemeController extends GetxController {
+//   // Make isDark reactive
+//   RxBool isDark = false.obs;
+//
+//   @override
+//   void onInit() {
+//     super.onInit();
+//     bool savedTheme = CacheHelper().getData(key: 'isDark') ?? false;
+//     isDark.value = savedTheme;
+//     Get.changeThemeMode(savedTheme ? ThemeMode.dark : ThemeMode.light);
+//   }
+//
+//   ThemeMode get themeMode => isDark.value ? ThemeMode.dark : ThemeMode.light;
+//
+//   void toggleTheme() {
+//     isDark.value = !isDark.value;
+//     CacheHelper().saveData(key: 'isDark', value: isDark.value);
+//     Get.changeThemeMode(isDark.value ? ThemeMode.dark : ThemeMode.light);
+//   }
+// }
+
