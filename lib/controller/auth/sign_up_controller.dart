@@ -7,21 +7,22 @@ import 'package:project2/controller/auth/sign_status.dart';
 import 'package:project2/model/auth/sign_up_model.dart';
 import 'package:project2/model/errors/error_model.dart';
 import 'package:project2/model/errors/exceptions.dart';
-import 'package:project2/model/errors/sign_up_error_model.dart';
 
 import '../../cache/cache_helper.dart';
 import '../../view/hidden_drawer.dart';
 
 // SignStatus signStatus = Get.put(SignStatus());
-late SignStatus signStatus ;
+late SignStatus signStatus;
 
 class SignUpController extends GetxController {
   final ApiConsumer api;
-@override
-  onInit(){
-  signStatus = Get.put(SignStatus());
+
+  @override
+  onInit() {
+    signStatus = Get.put(SignStatus());
     super.onInit();
-}
+  }
+
   // SignUpController({required this.api});
   SignUpController(this.api);
 
@@ -43,10 +44,8 @@ class SignUpController extends GetxController {
   //sign up confirm password
   TextEditingController confirmPasswordController = TextEditingController();
 
-
   SignUpModel? user;
   ErrorModel? errorModel;
-
 
   signUp() async {
     // print('************************trying**********');

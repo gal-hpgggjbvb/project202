@@ -36,10 +36,11 @@ class _UserPageState extends State<UserPage>
     });
   }
 
-  OrderController orderController =
-      Get.put(OrderController(DioConsumer(dio: Dio())));
-  FetchOrdersController fetchOrdersController =
-      Get.put(FetchOrdersController(DioConsumer(dio: Dio())));
+  late OrderController orderController;
+
+  //OrderController orderController = Get.put(OrderController(DioConsumer(dio: Dio())));
+  // FetchOrdersController fetchOrdersController = Get.put(FetchOrdersController(DioConsumer(dio: Dio())));
+  late FetchOrdersController fetchOrdersController;
 
   bool val = false;
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
@@ -47,6 +48,10 @@ class _UserPageState extends State<UserPage>
 
   @override
   void initState() {
+    orderController = Get.put(OrderController(DioConsumer(dio: Dio())));
+    fetchOrdersController =
+        Get.put(FetchOrdersController(DioConsumer(dio: Dio())));
+
     tabController = TabController(length: 2, vsync: this);
     //to listen to change in tabs
     tabController!.addListener(() {

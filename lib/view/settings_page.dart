@@ -19,9 +19,16 @@ class SettingsPage extends StatefulWidget {
 
 bool activeDarkMode = false;
 bool activeNotification = false;
-ThemeController themeController = Get.put(ThemeController());
+// ThemeController themeController = Get.put(ThemeController());
+late ThemeController themeController;
 
 class _SettingsPageState extends State<SettingsPage> {
+  @override
+  void initState() {
+    themeController = Get.put(ThemeController());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -135,17 +142,20 @@ class _SettingsPageState extends State<SettingsPage> {
                   AwesomeDialog(
                     context: context,
                     dialogType: DialogType.noHeader,
-                    customHeader: const Icon(Icons.email_outlined,
-                      color: Colors.blue,size: 70,),
+                    customHeader: const Icon(
+                      Icons.email_outlined,
+                      color: Colors.blue,
+                      size: 70,
+                    ),
                     animType: AnimType.topSlide,
                     dialogBorderRadius: BorderRadius.circular(20),
                     title: "Contact Us at :",
                     titleTextStyle: TextStyle(
-                    fontFamily: "Satoshi",
-                    color: context.theme.colorScheme.onSecondary,
-                    fontSize: 17,
-                    fontWeight: FontWeight.normal, // typing style
-                  ),
+                      fontFamily: "Satoshi",
+                      color: context.theme.colorScheme.onSecondary,
+                      fontSize: 17,
+                      fontWeight: FontWeight.normal, // typing style
+                    ),
                     desc: "deliverysupport@gmail.com",
                     descTextStyle: TextStyle(
                       fontFamily: "Satoshi",
@@ -156,11 +166,11 @@ class _SettingsPageState extends State<SettingsPage> {
                     btnOkText: "Copy Email",
                     btnCancelText: "Close",
                     buttonsTextStyle: const TextStyle(
-                    fontFamily: "Satoshi",
-                    color: Colors.white,
-                    fontSize: 17,
-                    fontWeight: FontWeight.normal, // typing style
-                  ),
+                      fontFamily: "Satoshi",
+                      color: Colors.white,
+                      fontSize: 17,
+                      fontWeight: FontWeight.normal, // typing style
+                    ),
                     btnCancelOnPress: () {},
                     btnOkOnPress: () {
                       Clipboard.setData(const ClipboardData(

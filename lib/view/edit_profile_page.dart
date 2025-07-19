@@ -19,8 +19,6 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-  EditProfileController editProfileController =
-      Get.put(EditProfileController(DioConsumer(dio: Dio())));
   File? image;
 
   Future<void> pickImageFromGallery() async {
@@ -30,6 +28,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
     setState(() {
       image = File(pickedFile!.path);
     });
+  }
+
+  // EditProfileController editProfileController = Get.put(EditProfileController(DioConsumer(dio: Dio())));
+  late EditProfileController editProfileController;
+
+  @override
+  void initState() {
+    editProfileController =
+        Get.put(EditProfileController(DioConsumer(dio: Dio())));
+    super.initState();
   }
 
   @override

@@ -1,18 +1,16 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:project2/api/api_consumer.dart';
-import 'package:project2/api/end_points.dart';
 import 'package:project2/cache/cache_helper.dart';
 import 'package:project2/controller/auth/sign_status.dart';
+import 'package:project2/model/auth/sign_in_model.dart';
 import 'package:project2/model/errors/error_model.dart';
 import 'package:project2/model/errors/exceptions.dart';
-import 'package:project2/model/auth/sign_in_model.dart';
 
 // SignStatus signStatus = Get.put(SignStatus());
-late SignStatus signStatus ;
+late SignStatus signStatus;
 
 class SignInController extends GetxController {
   final ApiConsumer api;
@@ -20,7 +18,7 @@ class SignInController extends GetxController {
   SignInController(this.api);
 
   @override
-  onInit(){
+  onInit() {
     super.onInit();
     signStatus = Get.put(SignStatus());
   }
@@ -35,7 +33,7 @@ class SignInController extends GetxController {
   TextEditingController passwordController = TextEditingController();
 
   SignInModel? user;
-  ErrorModel? errorModel ;
+  ErrorModel? errorModel;
 
   signIn() async {
     try {
@@ -43,21 +41,21 @@ class SignInController extends GetxController {
       //todo change end point 10.0.2.2 for emulator chatgpt
       //todo check your internet connection
       final response = await api.post("http://10.0.2.2:8000/api/login",
-      // final response = await api.post("http://127.0.0.1:8000/api/login",
-          isFormData: true ,
+          // final response = await api.post("http://127.0.0.1:8000/api/login",
+          isFormData: true,
           data: {
-        "email": emailController.text,
-        "password": passwordController.text,
-      });
+            "email": emailController.text,
+            "password": passwordController.text,
+          });
 
-      user = SignInModel.fromJson(response) ;
-      final decodedToken = JwtDecoder.decode(user!.token) ;
-      CacheHelper().saveData(key: 'token', value: user!.token) ;
-      CacheHelper().saveData(key: 'id', value: decodedToken['prv']) ;
-      CacheHelper().saveData(key: 'name', value: decodedToken['name']) ;
-      CacheHelper().saveData(key: 'phone', value: decodedToken['phone']) ;
-      CacheHelper().saveData(key: 'email', value: decodedToken['email']) ;
-      CacheHelper().saveData(key: 'role', value: decodedToken['role']) ;
+      user = SignInModel.fromJson(response);
+      final decodedToken = JwtDecoder.decode(user!.token);
+      CacheHelper().saveData(key: 'token', value: user!.token);
+      CacheHelper().saveData(key: 'id', value: decodedToken['prv']);
+      CacheHelper().saveData(key: 'name', value: decodedToken['name']);
+      CacheHelper().saveData(key: 'phone', value: decodedToken['phone']);
+      CacheHelper().saveData(key: 'email', value: decodedToken['email']);
+      CacheHelper().saveData(key: 'role', value: decodedToken['role']);
 
       // final String v = CacheHelper().getData(key: 'id') ;
       // final String y = CacheHelper().getData(key: 'token') ;
@@ -70,12 +68,12 @@ class SignInController extends GetxController {
       // print(response) ;
       // print('2*****************************************************') ;
       // print(CacheHelper().getData(key: 'token')) ;
-      signStatus.signSuccess('signin successful' , 'welcome');
+      signStatus.signSuccess('signin successful', 'welcome');
       // CacheHelper().saveData(key: 'done', value: true) ;
       // print('lookhereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee') ;
       // print(CacheHelper().getData(key: 'done')) ;
       // Get.off(() => const Drawer()) ;
-    }on ServerExceptions catch (e) {
+    } on ServerExceptions catch (e) {
       // print('error******************************************') ;
       // print(e.toString()) ;
       // signStatus.loading = false ;
@@ -84,13 +82,10 @@ class SignInController extends GetxController {
       SignFailed(errorMessage: e.errorModel.message);
       // print(CacheHelper().getData(key: 'status'));
       // print(CacheHelper().getData(key: 'message'));
-       signStatus.signFailure();
+      signStatus.signFailure();
       // update() ;
     }
   }
-
-
-
 }
 // signIn() async {
 //   try {
@@ -109,7 +104,6 @@ class SignInController extends GetxController {
 //   }
 // }
 
-
 // signIn() async {
 //   try {
 //     // signStatus.signLoading();
@@ -124,7 +118,6 @@ class SignInController extends GetxController {
 //     signStatus.signFailure();
 //   }
 // }
-
 
 // signIn() async {
 //   try {

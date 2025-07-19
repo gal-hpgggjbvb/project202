@@ -26,16 +26,20 @@ class _ProfilePageState extends State<ProfilePage> {
   Future<void> pickImageFromGallery() async {
     final ImagePicker imagePicker = ImagePicker();
     final pickedFile = await imagePicker.pickImage(source: ImageSource.gallery);
-    // if(image == null) return ;
-
-    // final imageTemporary = File(image!.path) ;
     setState(() {
       image = File(pickedFile!.path);
     });
   }
 
-  EditProfileController editProfileController =
-      Get.put(EditProfileController(DioConsumer(dio: Dio())));
+  // EditProfileController editProfileController = Get.put(EditProfileController(DioConsumer(dio: Dio())));
+  late EditProfileController editProfileController;
+
+  @override
+  void initState() {
+    editProfileController =
+        Get.put(EditProfileController(DioConsumer(dio: Dio())));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +121,8 @@ class _ProfilePageState extends State<ProfilePage> {
               /// Edit Button
               Center(
                 child: ElevatedButton.icon(
-                  icon: Icon(Icons.edit, color: context.theme.colorScheme.secondary),
+                  icon: Icon(Icons.edit,
+                      color: context.theme.colorScheme.secondary),
                   label: Text(
                     "Edit Profile",
                     style: TextStyle(

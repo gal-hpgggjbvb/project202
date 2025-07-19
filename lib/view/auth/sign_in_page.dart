@@ -26,7 +26,8 @@ class _SignInPageState extends State<SignInPage> {
 
   // bool _obscureText = true; // For toggling password visibility icon
   // SignInController signInController = Get.put(SignInController(DioConsumer(dio: Dio())));
-  late SignInController signInController ;
+  late SignInController signInController;
+
   @override
   void initState() {
     super.initState();
@@ -37,8 +38,8 @@ class _SignInPageState extends State<SignInPage> {
       DeviceOrientation.landscapeRight,
     ]);
     signInController = Get.put(SignInController(DioConsumer(dio: Dio())));
-
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -134,13 +135,16 @@ class _SignInPageState extends State<SignInPage> {
                                     // controller.signFailure() ;
 
                                     //todo here final code
-
                                     if (signInController
                                         .signInFormKey.currentState!
                                         .validate()) {
-                                      CacheHelper().saveData(key: 'password', value: signInController.passwordController);
+                                      CacheHelper().saveData(
+                                          key: 'password',
+                                          value: signInController
+                                              .passwordController);
                                       await signInController.signIn();
-                                      if (CacheHelper().getData(key: 'signDone')) {
+                                      if (CacheHelper()
+                                          .getData(key: 'signDone')) {
                                         Future.delayed(
                                             const Duration(seconds: 2), () {
                                           CacheHelper().saveData(
@@ -153,19 +157,8 @@ class _SignInPageState extends State<SignInPage> {
                                         });
                                       }
                                     }
-                                    // await signInController.signIn();
-                                    // if (CacheHelper().getData(key: 'signDone')) {
-                                    //   Future.delayed(
-                                    //       const Duration(seconds: 2), () {
-                                    //     CacheHelper().saveData(
-                                    //         key: 'signed', value: true);
-                                    //     CacheHelper().saveData(
-                                    //         key: 'signDone', value: false);
-                                    //     // controller.loading = true ;
-                                    //     Get.offAll(
-                                    //             () => const HiddenDrawer());
-                                    //   });
-                                    // }
+
+                                    // Get.offAll(() => const HiddenDrawer());
                                   },
                                   // color: Colors.orange,
                                   color: context.theme.primaryColor,
