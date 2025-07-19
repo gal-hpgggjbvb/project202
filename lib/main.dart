@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: _themeController.getThemeMode,
-      // home: const SignInPage(),
+      // home: const SignUpPage(),
       getPages: [
         GetPage(name: "/", page: () => const SplashScreen(),
           middlewares:  [
