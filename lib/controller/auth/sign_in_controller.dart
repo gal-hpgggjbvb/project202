@@ -11,12 +11,19 @@ import 'package:project2/model/errors/error_model.dart';
 import 'package:project2/model/errors/exceptions.dart';
 import 'package:project2/model/auth/sign_in_model.dart';
 
-SignStatus signStatus = Get.put(SignStatus());
+// SignStatus signStatus = Get.put(SignStatus());
+late SignStatus signStatus ;
 
 class SignInController extends GetxController {
   final ApiConsumer api;
 
   SignInController(this.api);
+
+  @override
+  onInit(){
+    super.onInit();
+    signStatus = Get.put(SignStatus());
+  }
 
   //sign in form key
   GlobalKey<FormState> signInFormKey = GlobalKey();

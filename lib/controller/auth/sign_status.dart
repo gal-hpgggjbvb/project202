@@ -11,7 +11,7 @@ class SignStatus extends GetxController {
     // Get.snackbar("signin successful", "welcome");
     Get.snackbar(title, message);
     // done = true ;
-    CacheHelper().saveData(key: 'done', value: true);
+    CacheHelper().saveData(key: 'signDone', value: true);
     update();
   }
 

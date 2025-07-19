@@ -53,28 +53,7 @@ class MyApp extends StatelessWidget {
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: _themeController.getThemeMode,
-      // theme: Themes.customLightTheme,
-      // darkTheme: Themes.customDarkTheme,
-      // darkTheme: darkMode,
-      // theme: ThemeData(
-      //   fontFamily: "Satoshi" ,
-      //   //for appbarTheme
-      //   // appBarTheme: AppBarTheme(),
-      //   //for text theme
-      //   // textTheme: const TextTheme(
-      //   //   bodySmall: TextStyle(color: Colors.orange ,fontSize: 12) ,
-      //   //   bodyMedium: TextStyle(color: Colors.blue ,fontSize: 15) ,
-      //   //   bodyLarge: TextStyle(color: Colors.blue , fontWeight: FontWeight.bold ,fontSize: 18) ,
-      //   // ),
-      // ),
-      //todo
-      // home: const SplashScreen() ,
-
-      // home: const SignInPage() ,
-      // initialRoute: '/signup',
-
-      //  initialRoute:CacheHelper().getData(key: 'signed') == 'signed' ? "/home" : "/",
-      //  initialRoute:CacheHelper().getData(key: 'signed') == 'signed' ? "/drawer" : "/",
+      // home: const SignInPage(),
       getPages: [
         GetPage(name: "/", page: () => const SplashScreen(),
           middlewares:  [
@@ -82,7 +61,6 @@ class MyApp extends StatelessWidget {
           ] ,
         ),
         GetPage(name: "/intro", page: () => const IntroScreen()),
-
         GetPage(name: "/signin", page: () => const SignInPage()),
         GetPage(name: "/signup", page: () => const SignUpPage()),
         GetPage(name: "/home", page: () => const HomePage()),

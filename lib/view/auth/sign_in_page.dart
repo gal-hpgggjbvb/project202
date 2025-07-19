@@ -24,6 +24,9 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   // SettingsServices controller = Get.put(SettingsServices());
 
+  // bool _obscureText = true; // For toggling password visibility icon
+  // SignInController signInController = Get.put(SignInController(DioConsumer(dio: Dio())));
+  late SignInController signInController ;
   @override
   void initState() {
     super.initState();
@@ -33,12 +36,9 @@ class _SignInPageState extends State<SignInPage> {
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
+    signInController = Get.put(SignInController(DioConsumer(dio: Dio())));
+
   }
-
-  // bool _obscureText = true; // For toggling password visibility icon
-  SignInController signInController =
-      Get.put(SignInController(DioConsumer(dio: Dio())));
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -134,63 +134,37 @@ class _SignInPageState extends State<SignInPage> {
                                     // controller.signFailure() ;
 
                                     //todo here final code
+
                                     if (signInController
                                         .signInFormKey.currentState!
                                         .validate()) {
-                                      CacheHelper().saveData(
-                                          key: 'password',
-                                          value: signInController
-                                              .passwordController);
+                                      CacheHelper().saveData(key: 'password', value: signInController.passwordController);
                                       await signInController.signIn();
-                                      // if(signStatus.done){
-                                      //   CacheHelper().saveData(key: 'signed', value: true) ;
-                                      //   Get.offAll(() => const HiddenDrawer()) ;
-                                      //   signStatus.done = false ;
-                                      //   // setState(() {});
-                                      // }
-
-                                      // Future.delayed(const Duration(seconds: 3), () {
-                                      //   CacheHelper().saveData(key: 'signed', value: true) ;
-                                      //   CacheHelper().saveData(key: 'done', value: false) ;
-                                      //   Get.offAll(() => const HiddenDrawer()) ;
-                                      // });
-                                      // print('hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
-                                      // print(CacheHelper().getData(key: 'done')) ;
-                                      if (CacheHelper().getData(key: 'done')) {
+                                      if (CacheHelper().getData(key: 'signDone')) {
                                         Future.delayed(
                                             const Duration(seconds: 2), () {
                                           CacheHelper().saveData(
                                               key: 'signed', value: true);
                                           CacheHelper().saveData(
-                                              key: 'done', value: false);
+                                              key: 'signDone', value: false);
                                           // controller.loading = true ;
                                           Get.offAll(
                                               () => const HiddenDrawer());
                                         });
                                       }
                                     }
-                                    // if(signInController.signInFormKey.currentState!.validate()) {
-                                    //   Get.to(() => const HiddenDrawer());
-                                    //   CacheHelper()
-                                    //       .saveData(key: 'signed', value: 'signed');
-                                    //   CacheHelper().saveData(
-                                    //       key: 'email',
-                                    //       value: signInController.emailController
-                                    //           .text);
-                                    //   CacheHelper().saveData(
-                                    //       key: 'password',
-                                    //       value:
-                                    //       signInController.passwordController.text);
-                                    // }
-
-                                    // if(signInController.signInFormKey.currentState!.validate()){
-                                    //   //to keep in homepage when start again
-                                    //   controller.sharedpref.setString("id", "1") ;
-                                    //   Get.to(() => const HomePage()) ;
-                                    // }
-                                    // else{
-                                    //   print("not valid ***************************") ;
-                                    //   // print("${signInController.emailController}") ;
+                                    // await signInController.signIn();
+                                    // if (CacheHelper().getData(key: 'signDone')) {
+                                    //   Future.delayed(
+                                    //       const Duration(seconds: 2), () {
+                                    //     CacheHelper().saveData(
+                                    //         key: 'signed', value: true);
+                                    //     CacheHelper().saveData(
+                                    //         key: 'signDone', value: false);
+                                    //     // controller.loading = true ;
+                                    //     Get.offAll(
+                                    //             () => const HiddenDrawer());
+                                    //   });
                                     // }
                                   },
                                   // color: Colors.orange,
@@ -235,7 +209,7 @@ class _SignInPageState extends State<SignInPage> {
                           ),
                           TextButton(
                             onPressed: () {
-                              Get.off(() => const SignUpPage());
+                              Get.to(() => const SignUpPage());
                             },
                             child: Text(
                               "Register",

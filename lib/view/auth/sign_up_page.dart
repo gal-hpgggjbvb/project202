@@ -12,18 +12,26 @@ import '../../cache/cache_helper.dart';
 import '../hidden_drawer.dart';
 
 class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key});
+   const SignUpPage({super.key});
 
   @override
   State<SignUpPage> createState() => _SignUpPageState();
 }
 
-SignUpController signUpController =
-    Get.put(SignUpController(DioConsumer(dio: Dio())));
-
+late SignUpController signUpController ;
+// = Get.put(SignUpController(DioConsumer(dio: Dio())));
+// SignStatus signStatus =
+//     Get.put(SignStatus());
 // SignUpController? signUpController ;
 // SettingsServices serviceController = Get.put(SettingsServices());
+
 class _SignUpPageState extends State<SignUpPage> {
+
+  @override
+  void initState() {
+    signUpController = Get.put(SignUpController(DioConsumer(dio: Dio())));
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     //double width = MediaQuery.of(context).size.width;
@@ -190,20 +198,34 @@ class _SignUpPageState extends State<SignUpPage> {
                                         .signUpFormKey.currentState!
                                         .validate()) {
                                       await signUpController.signUp();
-                                      if (await CacheHelper()
-                                          .getData(key: 'done')) {
+                                      if (CacheHelper()
+                                          .getData(key: 'signDone')) {
                                         Future.delayed(
                                             const Duration(seconds: 2), () {
                                           CacheHelper().saveData(
                                               key: 'signed', value: true);
                                           CacheHelper().saveData(
-                                              key: 'done', value: false);
+                                              key: 'signDone', value: false);
                                           //controller.loading = true ;
                                           Get.offAll(
                                               () => const HiddenDrawer());
                                         });
                                       }
                                     }
+                                    // await signUpController.signUp();
+                                    // if (CacheHelper()
+                                    //     .getData(key: 'signDone')) {
+                                    //   Future.delayed(
+                                    //       const Duration(seconds: 2), () {
+                                    //     CacheHelper().saveData(
+                                    //         key: 'signed', value: true);
+                                    //     CacheHelper().saveData(
+                                    //         key: 'signDone', value: false);
+                                    //     //controller.loading = true ;
+                                    //     Get.offAll(() => const HiddenDrawer());
+                                    //   });
+                                    // }
+
                                     //todo from here
                                     // CacheHelper().saveData(key: 'signed', value: true) ;
                                     // CacheHelper().saveData(
