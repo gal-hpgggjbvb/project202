@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project2/cache/cache_helper.dart';
 
 class CustomOrderField extends StatelessWidget {
   final TextEditingController controller;
@@ -39,7 +40,7 @@ class CustomOrderField extends StatelessWidget {
         //     // hintStyle: const TextStyle(color: Colors.blue)
         // ),
         style: TextStyle(
-          color: context.theme.primaryColor,
+          color: context.theme.primaryColorDark,
           fontSize: 17,
           fontWeight: FontWeight.normal, // typing style
         ),
@@ -48,22 +49,26 @@ class CustomOrderField extends StatelessWidget {
           hintText: hintText,
           hintStyle: TextStyle(
             fontFamily: "Satoshi",
-            color: context.theme.colorScheme.secondary,
+            color: context.theme.colorScheme.background,
+            // color: Colors.grey,
             fontSize: 15,
             fontWeight: FontWeight.normal,
             // fontStyle: FontStyle.italic,
           ),
           labelStyle: TextStyle(
             fontFamily: "Satoshi",
-            color: context.theme.colorScheme.primary,
+            color: context.theme.primaryColor,
             fontSize: 15,
             fontWeight: FontWeight.normal,
             // fontStyle: FontStyle.italic,
           ),
+          filled: CacheHelper().getData(key: 'isDark'),
+          // filled: false,
+          fillColor: context.theme.colorScheme.onPrimary,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(25),
             borderSide: BorderSide(
-              color: context.theme.colorScheme.secondary,
+              color: context.theme.primaryColorDark,
               width: 0.7,
             ),
           ),
@@ -71,7 +76,8 @@ class CustomOrderField extends StatelessWidget {
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(25),
             borderSide: BorderSide(
-              color: context.theme.colorScheme.secondary,
+              color: context.theme.primaryColor,
+              // color: Colors.orange,
               width: 0.7,
             ),
           ),

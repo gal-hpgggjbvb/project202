@@ -62,29 +62,27 @@ class CustomExpansionTile extends StatelessWidget {
           //style: context.theme.textTheme.bodySmall,
           style: TextStyle(
             fontFamily: "Satoshi",
-            color: context.theme.primaryColor,
+            color: context.theme.colorScheme.primary,
             fontSize: 15,
             fontWeight: FontWeight.normal, // typing style
           ),
         ),
         title: Text(
-          title.length > 15
-              ? '   Order Name: \n    ${title.substring(0, 15)}...'
-              : '   Order Name: \n    $title',
+          title.length > 8
+              ? '   Order Name: \n   ${title.substring(0, 8)}...'
+              : '   Order Name: \n   $title',
           style: TextStyle(
             fontFamily: "Satoshi",
-            color: context.theme.primaryColor,
+            color: context.theme.colorScheme.primary,
             fontSize: 15,
             fontWeight: FontWeight.normal, // typing style
           ),
         ),
-        // subtitle: const Text(''),
-        // trailing: Text('trailing'),
         trailing: Text(
           'Status : $trailing',
           style: TextStyle(
             fontFamily: "Satoshi",
-            color: context.theme.primaryColor,
+            color: context.theme.colorScheme.primary,
             fontSize: 15,
             fontWeight: FontWeight.normal, // typing style
           ),
@@ -101,12 +99,24 @@ class CustomExpansionTile extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 50.0),
                     child: Text(
                       'OrderId :           ',
-                      style: context.textTheme.displaySmall,
+                      // style: context.textTheme.displaySmall,
+                      style: TextStyle(
+                        fontFamily: "Satoshi",
+                        color: context.theme.colorScheme.primary,
+                        fontSize: 15,
+                        fontWeight: FontWeight.normal, // typing style
+                      ),
                     ),
                   ),
                   Text(
                     '$id',
-                    style: context.textTheme.displaySmall,
+                    // style: context.textTheme.displaySmall,
+                    style: TextStyle(
+                      fontFamily: "Satoshi",
+                      color: context.theme.colorScheme.primary,
+                      fontSize: 15,
+                      fontWeight: FontWeight.normal, // typing style
+                    ),
                   ),
                 ],
               ),
@@ -120,7 +130,13 @@ class CustomExpansionTile extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 50.0),
                     child: Text(
                       'OrderName :     ',
-                      style: context.textTheme.displaySmall,
+                      // style: context.textTheme.displaySmall,
+                      style: TextStyle(
+                        fontFamily: "Satoshi",
+                        color: context.theme.colorScheme.primary,
+                        fontSize: 15,
+                        fontWeight: FontWeight.normal, // typing style
+                      ),
                     ),
                   ),
                   Expanded(
@@ -143,13 +159,25 @@ class CustomExpansionTile extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 50.0),
                     child: Text(
                       'Source :             ',
-                      style: context.textTheme.displaySmall,
+                      // style: context.textTheme.displaySmall,
+                      style: TextStyle(
+                        fontFamily: "Satoshi",
+                        color: context.theme.colorScheme.primary,
+                        fontSize: 15,
+                        fontWeight: FontWeight.normal, // typing style
+                      ),
                     ),
                   ),
                   Expanded(
                       child: Text(
                     source,
-                    style: context.textTheme.displaySmall,
+                    // style: context.textTheme.displaySmall,
+                    style: TextStyle(
+                      fontFamily: "Satoshi",
+                      color: context.theme.colorScheme.primary,
+                      fontSize: 15,
+                      fontWeight: FontWeight.normal, // typing style
+                    ),
                   )),
                 ],
               ),
@@ -163,7 +191,13 @@ class CustomExpansionTile extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 50.0),
                     child: Text(
                       'Destination :      ',
-                      style: context.textTheme.displaySmall,
+                      // style: context.textTheme.displaySmall,
+                      style: TextStyle(
+                        fontFamily: "Satoshi",
+                        color: context.theme.colorScheme.primary,
+                        fontSize: 15,
+                        fontWeight: FontWeight.normal, // typing style
+                      ),
                     ),
                   ),
                   Expanded(
@@ -183,7 +217,13 @@ class CustomExpansionTile extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 50.0),
                     child: Text(
                       'Status :              ',
-                      style: context.textTheme.displaySmall,
+                      // style: context.textTheme.displaySmall,
+                      style: TextStyle(
+                        fontFamily: "Satoshi",
+                        color: context.theme.colorScheme.primary,
+                        fontSize: 15,
+                        fontWeight: FontWeight.normal, // typing style
+                      ),
                     ),
                   ),
                   Text(
@@ -202,7 +242,13 @@ class CustomExpansionTile extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 50.0),
                     child: Text(
                       'Createdat :        ',
-                      style: context.textTheme.displaySmall,
+                      // style: context.textTheme.displaySmall,
+                      style: TextStyle(
+                        fontFamily: "Satoshi",
+                        color: context.theme.colorScheme.primary,
+                        fontSize: 15,
+                        fontWeight: FontWeight.normal, // typing style
+                      ),
                     ),
                   ),
                   Text(
@@ -243,13 +289,16 @@ class CustomExpansionTile extends StatelessWidget {
                                     child: ListView(
                                       padding: const EdgeInsets.all(30),
                                       children: [
-                                        Center(child: Text('Edit Order $id',
+                                        Center(
+                                            child: Text(
+                                          'Edit Order $id',
                                           style: TextStyle(
                                             fontFamily: "Satoshi",
-                                            color: context.theme.primaryColor,
+                                            color: context.theme.primaryColorDark,
                                             fontSize: 17,
                                             fontWeight: FontWeight.normal, // typing style
-                                          ),)),
+                                          ),
+                                        )),
 
                                         addVerticalSpace(15),
 
@@ -284,19 +333,25 @@ class CustomExpansionTile extends StatelessWidget {
                                                   .editOrder();
                                               Navigator.pop(context);
                                             },
-                                            minWidth: 150,height: 50,
+                                            minWidth: 150,
+                                            height: 50,
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(20)),
                                             // color: Colors.orange[200],
-                                            color: context.theme.colorScheme.primary,
-                                            child: Text("Edit my Order",
+                                            color: context
+                                                .theme.colorScheme.onBackground,
+                                            child: Text(
+                                              "Edit my Order",
                                               style: TextStyle(
                                                 fontFamily: "Satoshi",
-                                                color: context.theme.colorScheme.onSecondary,
+                                                color: context.theme.colorScheme
+                                                    .secondary,
                                                 fontSize: 15,
-                                                fontWeight: FontWeight.normal, // typing style
-                                              ),),
+                                                fontWeight: FontWeight
+                                                    .normal, // typing style
+                                              ),
+                                            ),
                                           ),
                                         ),
                                         // addVerticalSpace(20),
@@ -321,10 +376,14 @@ class CustomExpansionTile extends StatelessWidget {
                     // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                     minWidth: 5,
                     height: 10,
-                    child: Text(
+                    child: const Text(
                       "Edit",
-                      style: context.theme.textTheme.displaySmall!
-                          .copyWith(color: Colors.blue),
+                      style: TextStyle(
+                        fontFamily: "Satoshi",
+                        color: Colors.blue,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500, // typing style
+                      ),
                       // style: TextStyle(
                       //     color: Colors.blue,
                       //     fontSize: 15,
@@ -336,11 +395,30 @@ class CustomExpansionTile extends StatelessWidget {
                     onPressed: () async {
                       AwesomeDialog(
                         context: context,
+
                         dialogType: DialogType.warning,
                         animType: AnimType.rightSlide,
                         dismissOnTouchOutside: false,
-                        title: 'Delete Order with ID $id',
+                        title: 'Delete Order with ID $id ?',
+                        titleTextStyle: TextStyle(
+                          fontFamily: "Satoshi",
+                          color: context.theme.colorScheme.onSecondary,
+                          fontSize: 17,
+                          fontWeight: FontWeight.normal, // typing style
+                        ),
                         // desc: 'Dialog description here.............',
+                        // barrierColor: Colors.white.withOpacity(0.7),
+                        dialogBackgroundColor:
+                            context.theme.primaryColorLight,
+                        dialogBorderRadius: BorderRadius.circular(30),
+                        btnOkText: 'Ok',
+                        btnCancelText: 'Cansel',
+                        buttonsTextStyle: const TextStyle(
+                          fontFamily: "Satoshi",
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500, // typing style
+                        ),
                         btnCancelOnPress: () {},
                         btnOkOnPress: () async {
                           await CacheHelper()
@@ -348,21 +426,19 @@ class CustomExpansionTile extends StatelessWidget {
                           await fetchOrdersController.deleteOrder();
                         },
                       ).show();
-
-                      // await CacheHelper().saveData(key: 'orderId', value: id) ;
-                      // await fetchOrdersController.deleteOrder() ;
-                      // // print('id hereeeeeeeeeeee **************** $id') ;
-                      // // print('cach  id hereeeeeeeeeeee **************** ') ;
-                      // // print(CacheHelper().getData(key: 'orderId')) ;
                     },
                     padding: const EdgeInsets.all(5),
                     // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                     minWidth: 5,
                     height: 10,
-                    child: Text(
+                    child: const Text(
                       "Delete",
-                      style: context.theme.textTheme.displaySmall!
-                          .copyWith(color: Colors.red),
+                      style: TextStyle(
+                        fontFamily: "Satoshi",
+                        color: Colors.red,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500, // typing style
+                      ),
 
                       // style: TextStyle(
                       //     color: Colors.red,
@@ -378,147 +454,6 @@ class CustomExpansionTile extends StatelessWidget {
               // Text('data'),
             ],
           ),
-
-          //     //todo buttons
-          //     Row(
-          //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //       children: [
-          //         //todo edit button
-          //         MaterialButton(
-          //           onPressed: () async {
-          //             showModalBottomSheet(
-          //                 context: context,
-          //                 isScrollControlled: true,
-          //                 shape: const RoundedRectangleBorder(
-          //                     borderRadius: BorderRadius.vertical(
-          //                         top: Radius.circular(20))),
-          //                 builder: (context) => Padding(
-          //                       padding: EdgeInsets.only(
-          //                         bottom:
-          //                             MediaQuery.of(context).viewInsets.bottom,
-          //                       ),
-          //                       child: SizedBox(
-          //                         //to control bottom sheet height
-          //                         height:
-          //                             MediaQuery.of(context).size.height * 0.50,
-          //                         child: Form(
-          //                           key: fetchOrdersController.editFormKey,
-          //                           child: ListView(
-          //                             padding: const EdgeInsets.all(30),
-          //                             children: [
-          //                               Center(child: Text('Edit Order $id')),
-          //                               const SizedBox(
-          //                                 height: 15,
-          //                               ),
-          //                               CustomOrderField(
-          //                                 controller: fetchOrdersController
-          //                                     .editNameController,
-          //                                 // controller: orderController.objectNameController,
-          //                                 hintText: 'type here',
-          //                                 labelText:
-          //                                     'what do you want to deliver',
-          //                               ),
-          //                               CustomOrderField(
-          //                                 controller: fetchOrdersController
-          //                                     .editSourceController,
-          //                                 hintText: 'type here',
-          //                                 labelText: 'pickup location',
-          //                               ),
-          //                               CustomOrderField(
-          //                                 controller: fetchOrdersController
-          //                                     .editDestinationController,
-          //                                 hintText: 'type here',
-          //                                 labelText: 'drop location',
-          //                               ),
-          //                               addVerticalSpace(15),
-          //                               //todo bottom sheet button
-          //                               Center(
-          //                                 child: MaterialButton(
-          //                                   onPressed: () async {
-          //                                     await CacheHelper().saveData(
-          //                                         key: 'orderId', value: id);
-          //                                     await fetchOrdersController
-          //                                         .editOrder();
-          //                                     Navigator.pop(context);
-          //                                   },
-          //                                   shape: RoundedRectangleBorder(
-          //                                       borderRadius:
-          //                                           BorderRadius.circular(20)),
-          //                                   color: Colors.orange[200],
-          //                                   child: const Text("Edit my Order"),
-          //                                 ),
-          //                               ),
-          //                               const SizedBox(
-          //                                 height: 400,
-          //                               ),
-          //                               const Text('bottomsheet ends here')
-          //                             ],
-          //                           ),
-          //                         ),
-          //                       ),
-          //                     ));
-          //             //two working lines instead of bottom sheet
-          //             // await CacheHelper().saveData(key: 'orderId', value: id) ;
-          //             // await fetchOrdersController.editOrder() ;
-          //           },
-          //           // color: Colors.blue,
-          //           padding: const EdgeInsets.all(5),
-          //           shape: RoundedRectangleBorder(
-          //               borderRadius: BorderRadius.circular(20)),
-          //           child: Text(
-          //             "Edit",
-          //             style: context.theme.textTheme.displaySmall!
-          //                 .copyWith(color: Colors.blue),
-          //             // style: TextStyle(
-          //             //     color: Colors.blue,
-          //             //     fontSize: 15,
-          //             //     fontWeight: FontWeight.w400),
-          //           ),
-          //         ),
-          //         //todo delete button
-          //         MaterialButton(
-          //           onPressed: () async {
-          //             AwesomeDialog(
-          //               context: context,
-          //               dialogType: DialogType.warning,
-          //               animType: AnimType.rightSlide,
-          //               dismissOnTouchOutside: false,
-          //               title: 'Delete Order with ID $id',
-          //               // desc: 'Dialog description here.............',
-          //               btnCancelOnPress: () {},
-          //               btnOkOnPress: () async {
-          //                 await CacheHelper()
-          //                     .saveData(key: 'orderId', value: id);
-          //                 await fetchOrdersController.deleteOrder();
-          //               },
-          //             ).show();
-          //
-          //             // await CacheHelper().saveData(key: 'orderId', value: id) ;
-          //             // await fetchOrdersController.deleteOrder() ;
-          //             // // print('id hereeeeeeeeeeee **************** $id') ;
-          //             // // print('cach  id hereeeeeeeeeeee **************** ') ;
-          //             // // print(CacheHelper().getData(key: 'orderId')) ;
-          //           },
-          //           padding: const EdgeInsets.all(5),
-          //           shape: RoundedRectangleBorder(
-          //               borderRadius: BorderRadius.circular(20)),
-          //           child: Text(
-          //             "Delete",
-          //             style: context.theme.textTheme.displaySmall!
-          //                 .copyWith(color: Colors.red),
-          //
-          //             // style: TextStyle(
-          //             //     color: Colors.red,
-          //             //     fontSize: 15,
-          //             //     fontWeight: FontWeight.w400),
-          //           ),
-          //         ),
-          //       ],
-          //     ),
-          //
-          //     addVerticalSpace(5),
-          //   ],
-          // ),
         ],
       ),
     );

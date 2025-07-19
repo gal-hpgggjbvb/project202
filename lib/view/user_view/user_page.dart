@@ -106,9 +106,7 @@ class _UserPageState extends State<UserPage>
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                addVerticalSpace(10),
                 InkWell(
                   onTap: () {
                     pickImageFromGallery();
@@ -126,9 +124,7 @@ class _UserPageState extends State<UserPage>
                             : Image.file(image!)),
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+                addVerticalSpace(20),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -154,9 +150,7 @@ class _UserPageState extends State<UserPage>
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 30,
-                ),
+                addVerticalSpace(30),
                 //todo sign-out button
                 MaterialButton(
                   shape: ContinuousRectangleBorder(
@@ -239,16 +233,22 @@ class _UserPageState extends State<UserPage>
                   //todo
                   Text(
                     'Want Something Fast ? ',
-                    style: context.theme.textTheme.bodyLarge,
-                    // style: Theme.of(context).textTheme.bodyLarge,
-                    // TextStyle(
-                    //     color: Colors.orange,
-                    //     fontSize: 20,
-                    //     fontWeight: FontWeight.bold),
+                    // style: context.theme.textTheme.bodyLarge,
+                    style: TextStyle(
+                        fontFamily: "Satoshi",
+                        color: context.theme.primaryColor,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold),
                   ),
+                  addVerticalSpace(5),
                   Text(
                     'Just add an Order and Leave it to Us.',
-                    style: context.theme.textTheme.bodyLarge,
+                    // style: context.theme.textTheme.bodyLarge,
+                    style: TextStyle(
+                        fontFamily: "Satoshi",
+                        color: context.theme.primaryColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
                   ),
                   addVerticalSpace(80),
                   //todo add order button
@@ -258,7 +258,8 @@ class _UserPageState extends State<UserPage>
                           context: context,
                           isScrollControlled: true,
                           // showDragHandle: true,
-                          backgroundColor: context.theme.colorScheme.onSecondary,
+                          backgroundColor: context.theme.primaryColorLight,
+                          // Colors.green,
                           shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.vertical(
                                   top: Radius.circular(20))),
@@ -281,7 +282,8 @@ class _UserPageState extends State<UserPage>
                                           'Make an Order',
                                           style: TextStyle(
                                             fontFamily: "Satoshi",
-                                            color: context.theme.primaryColor,
+                                            color:
+                                                context.theme.primaryColorDark,
                                             fontSize: 17,
                                           ),
                                         )),
@@ -327,12 +329,13 @@ class _UserPageState extends State<UserPage>
                                             minWidth: 100,
                                             height: 50,
                                             color: context
-                                                .theme.colorScheme.primary,
+                                                .theme.colorScheme.onBackground,
                                             child: Text(
                                               "Make an Order",
                                               style: TextStyle(
                                                 fontFamily: "Satoshi",
-                                                color: context.theme.colorScheme.onSecondary,
+                                                color: context.theme.colorScheme
+                                                    .secondary,
                                                 fontSize: 17,
                                                 fontWeight: FontWeight.normal,
                                               ),
@@ -365,7 +368,7 @@ class _UserPageState extends State<UserPage>
                                 ),
                               ));
                     },
-                    color: context.theme.buttonTheme.colorScheme!.background,
+                    color: context.theme.primaryColor,
                     elevation: 15,
                     splashColor:
                         context.theme.buttonTheme.colorScheme!.onBackground,
@@ -373,7 +376,7 @@ class _UserPageState extends State<UserPage>
                       "add order via bottomsheet ",
                       style: TextStyle(
                         fontFamily: "Satoshi",
-                        color: context.theme.colorScheme.onSecondary,
+                        color: context.theme.colorScheme.secondary,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
@@ -522,20 +525,24 @@ class _UserPageState extends State<UserPage>
                   //todo center text if there are no orders
                   return RefreshIndicator(
                     onRefresh: controller.refreshTab2,
-                    color: Colors.orangeAccent,
-                    backgroundColor: Colors.white,
+                    // color: Colors.orangeAccent,
+                    color: context.theme.primaryColor,
+                    // backgroundColor: Colors.white,
+                    backgroundColor: context.theme.primaryColorLight,
                     child: ListView(
-                      physics: const AlwaysScrollableScrollPhysics(), // 👈 important!
-                      children:  [
-                        addVerticalSpace(300), // 👈 fake height to enable scroll
-                         Center(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      // 👈 important!
+                      children: [
+                        addVerticalSpace(300),
+                        // 👈 fake height to enable scroll
+                        Center(
                             child: Text(
                           'No orders yet...',
                           style: TextStyle(
-                              color: context.theme.primaryColor,
-                              fontSize: 17,
-                              fontWeight: FontWeight.normal, // typing style
-                            ),
+                            color: context.theme.primaryColorDark,
+                            fontSize: 17,
+                            fontWeight: FontWeight.normal, // typing style
+                          ),
                         )),
                       ],
                     ),
@@ -545,11 +552,11 @@ class _UserPageState extends State<UserPage>
                     onRefresh: () async {
                       await controller.refreshTab2();
                     },
-                    color: context.theme.colorScheme.primary,
-                    backgroundColor: context.theme.colorScheme.onBackground,
+                    color: context.theme.primaryColor,
+                    backgroundColor: context.theme.primaryColorLight,
                     child: ListView.builder(
                       //to scroll always chat
-                      physics:  const AlwaysScrollableScrollPhysics(),
+                      physics: const AlwaysScrollableScrollPhysics(),
                       itemCount: controller.orderList.length,
                       itemBuilder: (context, i) {
                         return CustomExpansionTile(

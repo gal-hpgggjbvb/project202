@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:project2/api/dio_consumer.dart';
 import 'package:project2/controller/edit_profile_controller.dart';
 import 'package:project2/functions/add_space.dart';
+
 import '../custom_widgets/custom_textformfield.dart';
 
 class EditProfilePage extends StatefulWidget {
@@ -35,8 +36,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: AppBar(title: Text("Edit Profile",style: context.theme.textTheme.bodyMedium,),
-        backgroundColor: context.theme.colorScheme.background,
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          "Edit Profile",
+          style: TextStyle(
+            fontFamily: "Satoshi",
+            color: context.theme.colorScheme.primary,
+            fontSize: 20,
+            fontWeight: FontWeight.w500, // typing style
+          ),
+        ),
+        backgroundColor: context.theme.primaryColor,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(15),
@@ -46,39 +57,32 @@ class _EditProfilePageState extends State<EditProfilePage> {
           key: editProfileController.editProfileFormKey,
           child: Column(
             children: [
-              // const SizedBox(height: 30),
-              // InkWell(
-              //   onTap: () => pickImageFromGallery(),
-              //   child: ClipRRect(
-              //     borderRadius: BorderRadius.circular(100),
-              //     child: SizedBox(
-              //       height: 120,
-              //       width: 120,
-              //       child: image == null
-              //           ? Image.asset("images/4 - Copy.jpg", fit: BoxFit.cover)
-              //           : Image.file(image!),
-              //     ),
-              //   ),
-              // ),
               addVerticalSpace(20),
-              Obx(() => GestureDetector(
-                onTap: () => editProfileController.pickImage(),
-                child: CircleAvatar(
-                  radius: 70,
-                  backgroundImage: editProfileController.image.value != null
-                      ? FileImage(editProfileController.image.value!)
-                      // : const AssetImage("images/profileimage.jpg") as ImageProvider,
-                      : const AssetImage("images/profileimage1.jpg") as ImageProvider,
-                  child: const Align(
-                    alignment: Alignment.bottomRight,
-                    child: CircleAvatar(
-                      radius: 15,
-                      backgroundColor: Colors.white,
-                      child: Icon(Icons.edit, size: 18,color: Colors.black,),
+              Obx(
+                () => GestureDetector(
+                  onTap: () => editProfileController.pickImage(),
+                  child: CircleAvatar(
+                    radius: 70,
+                    backgroundImage: editProfileController.image.value != null
+                        ? FileImage(editProfileController.image.value!)
+                        // : const AssetImage("images/profileimage.jpg") as ImageProvider,
+                        : const AssetImage("images/profileimage1.jpg")
+                            as ImageProvider,
+                    child: const Align(
+                      alignment: Alignment.bottomRight,
+                      child: CircleAvatar(
+                        radius: 15,
+                        backgroundColor: Colors.white,
+                        child: Icon(
+                          Icons.edit,
+                          size: 18,
+                          color: Colors.black,
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),),
+              ),
               TextButton.icon(
                 // onPressed: editProfileController.deleteImage,
                 onPressed: () {
@@ -91,7 +95,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     btnCancelOnPress: () {},
                     btnOkText: "Yes",
                     btnOkOnPress: () {
-                      editProfileController.deleteImage(); // 👈 your controller logic
+                      editProfileController
+                          .deleteImage(); // 👈 your controller logic
                     },
                   ).show();
                   // Get.defaultDialog(
@@ -112,8 +117,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 },
                 icon: const Icon(Icons.delete, color: Colors.red),
                 label: Text("Remove Photo",
-                    style: context.theme.textTheme.bodySmall!.copyWith(color: Colors.red)),
-              ) ,
+                    style: context.theme.textTheme.bodySmall!
+                        .copyWith(color: Colors.red)),
+              ),
 
               addVerticalSpace(20),
 
@@ -123,7 +129,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 textInputType: TextInputType.text,
                 hintText: 'Name',
                 maxLength: 20,
-                isPrefixIcon: true, icon: Icons.person,
+                isPrefixIcon: true,
+                icon: Icons.person,
               ),
               addVerticalSpace(10),
 
@@ -133,7 +140,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 textInputType: TextInputType.phone,
                 hintText: 'Phone',
                 maxLength: 10,
-                isPrefixIcon: true, icon: Icons.phone,
+                isPrefixIcon: true,
+                icon: Icons.phone,
               ),
               addVerticalSpace(10),
 
@@ -142,7 +150,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 controller: editProfileController.editEmailController,
                 textInputType: TextInputType.emailAddress,
                 hintText: 'Email',
-                isPrefixIcon: true, icon: Icons.email,
+                isPrefixIcon: true,
+                icon: Icons.email,
               ),
               addVerticalSpace(35),
 
@@ -152,7 +161,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 textInputType: TextInputType.text,
                 hintText: 'Password',
                 isPassword: true,
-                isPrefixIcon: true, icon: Icons.password,
+                isPrefixIcon: true,
+                icon: Icons.password,
               ),
               addVerticalSpace(100),
 
@@ -163,11 +173,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   // Get.back() ;
                 },
                 icon: const Icon(Icons.save, color: Colors.white),
-                label: const Text("Save Changes",
-                style: TextStyle(
+                label: const Text(
+                  "Save Changes",
+                  style: TextStyle(
                     color: Colors.white,
                     fontFamily: "Satoshi",
-                    fontWeight: FontWeight.bold,),),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.orange,
                   padding:

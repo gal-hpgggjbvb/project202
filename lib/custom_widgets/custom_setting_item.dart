@@ -36,14 +36,24 @@ class CustomSettingItem extends StatelessWidget {
             child: Icon(icon, color: iconColor, size: 20),
           ),
           // title: Text(title , style: const TextStyle(fontSize: 20),),
-          title: Text(title , style: context.theme.textTheme.bodyMedium,),
+          title: Text(
+            title,
+            style: TextStyle(
+              fontFamily: "Satoshi",
+              color: context.theme.colorScheme.onSecondary,
+              fontSize: 18,
+              fontWeight: FontWeight.normal, // typing style
+            ),
+          ),
           trailing: trailing ?? const Icon(Icons.arrow_forward_ios, size: 15),
           onTap: onTap,
         ),
         addVerticalSpace(10),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 15.0),
-          child: Divider(height: 0,),
+          child: Divider(
+            height: 0,
+          ),
         ),
         addVerticalSpace(10),
       ],

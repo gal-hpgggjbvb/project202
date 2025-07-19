@@ -87,8 +87,9 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
       // backgroundColorAppBar: Colors.orange,
       // backgroundColorMenu: Colors.white,
       // backgroundColorAppBar: Theme.of(context).primaryColor,
-      backgroundColorAppBar: context.theme.colorScheme.background,
-      backgroundColorMenu: context.theme.colorScheme.onBackground,
+      backgroundColorAppBar: context.theme.primaryColor,
+      backgroundColorMenu: context.theme.primaryColorLight,
+
         screens: _pages,
         //todo i will try use a condition here (normal/driver)
         initPositionSelected: 1,

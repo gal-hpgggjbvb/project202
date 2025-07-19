@@ -45,7 +45,7 @@ class _ProfilePageState extends State<ProfilePage> {
             child: GetBuilder<EditProfileController>(
           builder: (controller) => Column(
             children: [
-              const SizedBox(height: 30),
+              addVerticalSpace(30),
               // InkWell(
               //   onTap: () => pickImageFromGallery(),
               //   child: ClipRRect(
@@ -59,7 +59,7 @@ class _ProfilePageState extends State<ProfilePage> {
               //     ),
               //   ),
               // ),
-              // const SizedBox(height: 20),
+              addVerticalSpace(30),
               Obx(
                 () => CircleAvatar(
                   radius: 60,
@@ -77,9 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   // ),
                 ),
               ),
-              const SizedBox(
-                height: 30,
-              ),
+              addVerticalSpace(30),
 
               // Profile Info Tiles
               //todo name
@@ -114,26 +112,28 @@ class _ProfilePageState extends State<ProfilePage> {
                     '${CacheHelper().getData(key: 'email') ?? 'email here'}',
               ),
 
-              const SizedBox(height: 100),
+              addVerticalSpace(100),
 
-              // Edit Button
+              /// Edit Button
               Center(
                 child: ElevatedButton.icon(
-                  icon: const Icon(Icons.edit, color: Colors.white),
-                  label: const Text(
+                  icon: Icon(Icons.edit, color: context.theme.colorScheme.secondary),
+                  label: Text(
                     "Edit Profile",
                     style: TextStyle(
-                        color: Colors.white,
                         fontFamily: "Satoshi",
+                        // color: Colors.white,
+                        color: context.theme.colorScheme.secondary,
                         fontWeight: FontWeight.bold),
                   ),
                   style: ElevatedButton.styleFrom(
                     shape: const StadiumBorder(),
-                    backgroundColor: Colors.orange,
+                    backgroundColor: context.theme.primaryColor,
+                    // backgroundColor: context.theme.colorScheme.onBackground,
                     elevation: 10,
-                    shadowColor: Colors.orangeAccent,
+                    shadowColor: context.theme.primaryColor,
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 32, vertical: 12),
+                        horizontal: 30, vertical: 15),
                   ),
                   onPressed: () => Get.to(() => const EditProfilePage()),
                 ),

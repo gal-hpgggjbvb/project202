@@ -69,25 +69,28 @@ class _SignInPageState extends State<SignInPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // const SizedBox(height: 30,) ,
-                      const Text(
+                      Text(
                         "Let's Sign You In",
                         style: TextStyle(
                             fontFamily: "Satoshi",
+                            color: context.theme.primaryColorDark,
                             fontSize: 25,
                             fontWeight: FontWeight.w600),
                       ),
-                      const Text(
+                      Text(
                         "Welcome Back.",
                         style: TextStyle(
                             fontFamily: "Satoshi",
+                            color: context.theme.primaryColorDark,
                             fontSize: 25,
                             fontWeight: FontWeight.w500),
                       ),
                       addVerticalSpace(20),
-                      const Text(
+                      Text(
                         "Email",
                         style: TextStyle(
                             fontFamily: "Satoshi",
+                            color: context.theme.primaryColorDark,
                             fontSize: 15,
                             fontWeight: FontWeight.w600),
                       ),
@@ -99,10 +102,11 @@ class _SignInPageState extends State<SignInPage> {
 
                       addVerticalSpace(30),
 
-                      const Text(
+                      Text(
                         "Password",
                         style: TextStyle(
                             fontFamily: "Satoshi",
+                            color: context.theme.primaryColorDark,
                             fontSize: 15,
                             fontWeight: FontWeight.w600),
                       ),
@@ -120,96 +124,98 @@ class _SignInPageState extends State<SignInPage> {
                       Row(
                         children: [
                           Expanded(
-                              child: GetBuilder<SignStatus>(
-                            init: SignStatus(),
-                            builder: (controller) {
-                              return MaterialButton(
-                                onPressed: () async {
-                                  // controller.signSuccess() ;
-                                  // controller.signLoading() ;
-                                  // controller.signFailure() ;
+                            child: GetBuilder<SignStatus>(
+                              init: SignStatus(),
+                              builder: (controller) {
+                                return MaterialButton(
+                                  onPressed: () async {
+                                    // controller.signSuccess() ;
+                                    // controller.signLoading() ;
+                                    // controller.signFailure() ;
 
-                                  //todo here final code
-                                  if (signInController
-                                      .signInFormKey.currentState!
-                                      .validate()) {
-                                    CacheHelper().saveData(
-                                        key: 'password',
-                                        value: signInController
-                                            .passwordController);
-                                    await signInController.signIn();
-                                    // if(signStatus.done){
-                                    //   CacheHelper().saveData(key: 'signed', value: true) ;
-                                    //   Get.offAll(() => const HiddenDrawer()) ;
-                                    //   signStatus.done = false ;
-                                    //   // setState(() {});
+                                    //todo here final code
+                                    if (signInController
+                                        .signInFormKey.currentState!
+                                        .validate()) {
+                                      CacheHelper().saveData(
+                                          key: 'password',
+                                          value: signInController
+                                              .passwordController);
+                                      await signInController.signIn();
+                                      // if(signStatus.done){
+                                      //   CacheHelper().saveData(key: 'signed', value: true) ;
+                                      //   Get.offAll(() => const HiddenDrawer()) ;
+                                      //   signStatus.done = false ;
+                                      //   // setState(() {});
+                                      // }
+
+                                      // Future.delayed(const Duration(seconds: 3), () {
+                                      //   CacheHelper().saveData(key: 'signed', value: true) ;
+                                      //   CacheHelper().saveData(key: 'done', value: false) ;
+                                      //   Get.offAll(() => const HiddenDrawer()) ;
+                                      // });
+                                      // print('hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
+                                      // print(CacheHelper().getData(key: 'done')) ;
+                                      if (CacheHelper().getData(key: 'done')) {
+                                        Future.delayed(
+                                            const Duration(seconds: 2), () {
+                                          CacheHelper().saveData(
+                                              key: 'signed', value: true);
+                                          CacheHelper().saveData(
+                                              key: 'done', value: false);
+                                          // controller.loading = true ;
+                                          Get.offAll(
+                                              () => const HiddenDrawer());
+                                        });
+                                      }
+                                    }
+                                    // if(signInController.signInFormKey.currentState!.validate()) {
+                                    //   Get.to(() => const HiddenDrawer());
+                                    //   CacheHelper()
+                                    //       .saveData(key: 'signed', value: 'signed');
+                                    //   CacheHelper().saveData(
+                                    //       key: 'email',
+                                    //       value: signInController.emailController
+                                    //           .text);
+                                    //   CacheHelper().saveData(
+                                    //       key: 'password',
+                                    //       value:
+                                    //       signInController.passwordController.text);
                                     // }
 
-                                    // Future.delayed(const Duration(seconds: 3), () {
-                                    //   CacheHelper().saveData(key: 'signed', value: true) ;
-                                    //   CacheHelper().saveData(key: 'done', value: false) ;
-                                    //   Get.offAll(() => const HiddenDrawer()) ;
-                                    // });
-                                    // print('hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
-                                    // print(CacheHelper().getData(key: 'done')) ;
-                                    if (CacheHelper().getData(key: 'done')) {
-                                      Future.delayed(const Duration(seconds: 2),
-                                          () {
-                                        CacheHelper().saveData(
-                                            key: 'signed', value: true);
-                                        CacheHelper().saveData(
-                                            key: 'done', value: false);
-                                        // controller.loading = true ;
-                                        Get.offAll(() => const HiddenDrawer());
-                                      });
-                                    }
-                                  }
-                                  // if(signInController.signInFormKey.currentState!.validate()) {
-                                  //   Get.to(() => const HiddenDrawer());
-                                  //   CacheHelper()
-                                  //       .saveData(key: 'signed', value: 'signed');
-                                  //   CacheHelper().saveData(
-                                  //       key: 'email',
-                                  //       value: signInController.emailController
-                                  //           .text);
-                                  //   CacheHelper().saveData(
-                                  //       key: 'password',
-                                  //       value:
-                                  //       signInController.passwordController.text);
-                                  // }
-
-                                  // if(signInController.signInFormKey.currentState!.validate()){
-                                  //   //to keep in homepage when start again
-                                  //   controller.sharedpref.setString("id", "1") ;
-                                  //   Get.to(() => const HomePage()) ;
-                                  // }
-                                  // else{
-                                  //   print("not valid ***************************") ;
-                                  //   // print("${signInController.emailController}") ;
-                                  // }
-                                },
-                                // color: Colors.orange,
-                                color: context.theme.colorScheme.background,
-                                elevation: 10,
-                                height: 45,
-                                padding: const EdgeInsets.all(5),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: controller.loading == true
-                                    ? const CircularProgressIndicator(
-                                        color: Colors.white,
-                                      )
-                                    : const Text(
-                                        "SignIn",
-                                        style: TextStyle(
-                                            fontFamily: "Satoshi",
-                                            color: Colors.white,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w400),
-                                      ),
-                              );
-                            },
-                          )),
+                                    // if(signInController.signInFormKey.currentState!.validate()){
+                                    //   //to keep in homepage when start again
+                                    //   controller.sharedpref.setString("id", "1") ;
+                                    //   Get.to(() => const HomePage()) ;
+                                    // }
+                                    // else{
+                                    //   print("not valid ***************************") ;
+                                    //   // print("${signInController.emailController}") ;
+                                    // }
+                                  },
+                                  // color: Colors.orange,
+                                  color: context.theme.primaryColor,
+                                  elevation: 10,
+                                  height: 45,
+                                  padding: const EdgeInsets.all(5),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)),
+                                  child: controller.loading == true
+                                      ? const CircularProgressIndicator(
+                                          color: Colors.white,
+                                        )
+                                      : const Text(
+                                          "SignIn",
+                                          style: TextStyle(
+                                              fontFamily: "Satoshi",
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                );
+                              },
+                            ),
+                          ),
                         ],
                       ),
 
@@ -218,11 +224,11 @@ class _SignInPageState extends State<SignInPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
+                          Text(
                             "Don't Have An Account?",
                             style: TextStyle(
                               fontFamily: "Satoshi",
-                              // color: Colors.white,
+                              color: context.theme.colorScheme.onSecondary,
                               fontSize: 15,
                               // fontWeight: FontWeight.w600
                             ),
@@ -235,7 +241,7 @@ class _SignInPageState extends State<SignInPage> {
                               "Register",
                               style: TextStyle(
                                   fontFamily: "Satoshi",
-                                  color: context.theme.colorScheme.background,
+                                  color: context.theme.primaryColor,
                                   fontWeight: FontWeight.bold),
                             ),
                           ),

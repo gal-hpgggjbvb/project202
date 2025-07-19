@@ -19,7 +19,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 SignUpController signUpController =
-    Get.put(SignUpController(api: DioConsumer(dio: Dio())));
+    Get.put(SignUpController(DioConsumer(dio: Dio())));
 
 // SignUpController? signUpController ;
 // SettingsServices serviceController = Get.put(SettingsServices());
@@ -61,17 +61,19 @@ class _SignUpPageState extends State<SignUpPage> {
 
                       addVerticalSpace(20),
 
-                      const Text(
+                      Text(
                         "Hello..",
                         style: TextStyle(
                             fontFamily: "Satoshi",
+                            color: context.theme.primaryColorDark,
                             fontSize: 30,
                             fontWeight: FontWeight.w600),
                       ),
-                      const Text(
+                      Text(
                         "Let's Make a New Account",
                         style: TextStyle(
                             fontFamily: "Satoshi",
+                            color: context.theme.primaryColorDark,
                             fontSize: 25,
                             fontWeight: FontWeight.w400),
                       ),
@@ -84,6 +86,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         textInputType: TextInputType.text,
                         hintText: 'Your Name',
                         maxLength: 20,
+                        isPrefixIcon: true,
+                        icon: Icons.person,
                       ),
 
                       //todo text-field for user number
@@ -92,13 +96,18 @@ class _SignUpPageState extends State<SignUpPage> {
                         textInputType: TextInputType.phone,
                         hintText: 'Your Phone Number',
                         maxLength: 10,
+                        isPrefixIcon: true,
+                        icon: Icons.phone,
                       ),
 
                       //todo text-field for email
                       CustomTextFormField(
                           controller: signUpController.emailController,
                           textInputType: TextInputType.emailAddress,
-                          hintText: 'Your Email'),
+                          hintText: 'Your Email',
+                        isPrefixIcon: true,
+                        icon: Icons.email,
+                      ),
 
                       // TextFormField(
                       //   controller: signUpController.emailController,
@@ -121,6 +130,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         textInputType: TextInputType.text,
                         hintText: 'Your Password',
                         isPassword: true,
+                        isPrefixIcon: true,
+                        icon: Icons.password,
                       ),
                       // TextFormField(
                       //   controller: signUpController.passwordController,
@@ -161,6 +172,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         isPassword: true,
                         compareWithController:
                             signUpController.passwordController,
+                        isPrefixIcon: true,
+                        icon: Icons.password,
                       ),
 
                       addVerticalSpace(45),
@@ -168,78 +181,73 @@ class _SignUpPageState extends State<SignUpPage> {
                       Row(
                         children: [
                           Expanded(
-                              child: GetBuilder<SignStatus>(
-                            init: SignStatus(),
-                            builder: (controller) {
-                              return MaterialButton(
-                                onPressed: () async {
-                                  if (signUpController
-                                      .signUpFormKey.currentState!
-                                      .validate()) {
-                                    await signUpController.signUp();
-                                    if (await CacheHelper()
-                                        .getData(key: 'done')) {
-                                      Future.delayed(const Duration(seconds: 2),
-                                          () {
-                                        CacheHelper().saveData(
-                                            key: 'signed', value: true);
-                                        CacheHelper().saveData(
-                                            key: 'done', value: false);
-                                        //       controller.loading = true ;
-                                        Get.offAll(() => const HiddenDrawer());
-                                      });
+                            child: GetBuilder<SignStatus>(
+                              init: SignStatus(),
+                              builder: (controller) {
+                                return MaterialButton(
+                                  onPressed: () async {
+                                    if (signUpController
+                                        .signUpFormKey.currentState!
+                                        .validate()) {
+                                      await signUpController.signUp();
+                                      if (await CacheHelper()
+                                          .getData(key: 'done')) {
+                                        Future.delayed(
+                                            const Duration(seconds: 2), () {
+                                          CacheHelper().saveData(
+                                              key: 'signed', value: true);
+                                          CacheHelper().saveData(
+                                              key: 'done', value: false);
+                                          //controller.loading = true ;
+                                          Get.offAll(
+                                              () => const HiddenDrawer());
+                                        });
+                                      }
                                     }
-                                  }
-                                  // if(signStatus.done){
-                                  //   CacheHelper().saveData(key: 'signed', value: true) ;
-                                  //   Get.offAll(() => const HiddenDrawer()) ;
-                                  //   // setState(() {});
-                                  // }
-
-                                  // CacheHelper().saveData(key: 'signed', value: true) ;
-                                  // CacheHelper().saveData(key: 'name', value: signUpController.usernameController.text) ;
-                                  // CacheHelper().saveData(key: 'phone', value: signUpController.usernumberController.text) ;
-                                  // CacheHelper().saveData(key: 'email', value: signUpController.emailController.text) ;
-                                  // CacheHelper().saveData(key: 'password', value: signUpController.passwordController.text) ;
-                                  // Get.offAll(() => const HiddenDrawer());
-
-                                  //
-                                  // if(signUpController.signUpFormKey.currentState!.validate()){
-                                  // //   //to keep in homepage when start again
-                                  // //   serviceController.sharedpref.setString("id", "1") ;
-                                  //   CacheHelper().saveData(key: 'name', value: signUpController.usernameController) ;
-                                  //   CacheHelper().saveData(key: 'email', value: signUpController.emailController) ;
-                                  //   CacheHelper().saveData(key: 'password', value: signUpController.passwordController) ;
-                                  //   CacheHelper().saveData(key: 'signed', value: true) ;
-                                  //   Get.to(() => const HomePage()) ;
-                                  // }
-
-                                  // else{
-                                  //   print("not valid ***************************") ;
-                                  //   // print("${signInController.emailController}") ;
-                                  // }
-                                },
-                                color: Colors.orange,
-                                elevation: 10,
-                                height: 45,
-                                padding: const EdgeInsets.all(5),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: controller.loading == true
-                                    ? const CircularProgressIndicator(
-                                        color: Colors.white,
-                                      )
-                                    : const Text(
-                                        "SignUp",
-                                        style: TextStyle(
-                                            fontFamily: "Satoshi",
-                                            color: Colors.white,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w400),
-                                      ),
-                              );
-                            },
-                          )),
+                                    //todo from here
+                                    // CacheHelper().saveData(key: 'signed', value: true) ;
+                                    // CacheHelper().saveData(
+                                    //     key: 'name',
+                                    //     value: signUpController
+                                    //         .usernameController.text);
+                                    // CacheHelper().saveData(
+                                    //     key: 'phone',
+                                    //     value: signUpController
+                                    //         .usernumberController.text);
+                                    // CacheHelper().saveData(
+                                    //     key: 'email',
+                                    //     value: signUpController
+                                    //         .emailController.text);
+                                    // CacheHelper().saveData(
+                                    //     key: 'password',
+                                    //     value: signUpController
+                                    //         .passwordController.text);
+                                    // signUpController.fakeSignUp();
+                                    // Get.offAll(() => const HiddenDrawer());
+                                    //todo to here
+                                  },
+                                  color: context.theme.primaryColor,
+                                  elevation: 10,
+                                  height: 45,
+                                  padding: const EdgeInsets.all(5),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)),
+                                  child: controller.loading == true
+                                      ? const CircularProgressIndicator(
+                                          color: Colors.white,
+                                        )
+                                      : const Text(
+                                          "SignUp",
+                                          style: TextStyle(
+                                              fontFamily: "Satoshi",
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                );
+                              },
+                            ),
+                          ),
                         ],
                       ),
                       Row(
@@ -249,7 +257,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             "Already Have An Account?",
                             style: TextStyle(
                               fontFamily: "Satoshi",
-                              color: context.theme.primaryColor,
+                              color: context.theme.colorScheme.onSecondary,
                               fontSize: 15,
                               // fontWeight: FontWeight.w600
                             ),
@@ -258,11 +266,11 @@ class _SignUpPageState extends State<SignUpPage> {
                             onPressed: () {
                               Get.off(() => const SignInPage());
                             },
-                            child: const Text(
+                            child: Text(
                               "Sign In",
                               style: TextStyle(
                                 fontFamily: "Satoshi",
-                                color: Colors.orange,
+                                color: context.theme.primaryColor,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),

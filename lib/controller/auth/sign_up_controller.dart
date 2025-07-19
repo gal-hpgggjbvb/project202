@@ -9,14 +9,15 @@ import 'package:project2/model/errors/exceptions.dart';
 import 'package:project2/model/errors/sign_up_error_model.dart';
 
 import '../../cache/cache_helper.dart';
-import '../../model/errors/exception_2.dart';
+import '../../view/hidden_drawer.dart';
 
 SignStatus signStatus = Get.put(SignStatus());
 
 class SignUpController extends GetxController {
   final ApiConsumer api;
 
-  SignUpController({required this.api});
+  // SignUpController({required this.api});
+  SignUpController(this.api);
 
   //sign up form key
   GlobalKey<FormState> signUpFormKey = GlobalKey();
@@ -36,9 +37,9 @@ class SignUpController extends GetxController {
   //sign up confirm password
   TextEditingController confirmPasswordController = TextEditingController();
 
-  SignUpErrorModel? signUpErrorModel ;
+  SignUpErrorModel? signUpErrorModel;
 
-  SignUpModel? user ;
+  SignUpModel? user;
 
   signUp() async {
     // print('************************trying**********');
@@ -54,19 +55,19 @@ class SignUpController extends GetxController {
             'email': emailController.text,
             'password': passwordController.text,
             'password_confirmation': confirmPasswordController.text,
-            'role':'normal',
+            'role': 'normal',
           });
-      user = SignUpModel.fromJson(response) ;
-      final decodedToken = JwtDecoder.decode(user!.token) ;
-      CacheHelper().saveData(key: 'token', value: user!.token) ;
-      CacheHelper().saveData(key: 'id', value: decodedToken['prv']) ;
-      CacheHelper().saveData(key: 'name', value: decodedToken['name']) ;
-      CacheHelper().saveData(key: 'phone', value: decodedToken['phone']) ;
-      CacheHelper().saveData(key: 'email', value: decodedToken['email']) ;
-      CacheHelper().saveData(key: 'role', value: decodedToken['role']) ;
+      user = SignUpModel.fromJson(response);
+      final decodedToken = JwtDecoder.decode(user!.token);
+      CacheHelper().saveData(key: 'token', value: user!.token);
+      CacheHelper().saveData(key: 'id', value: decodedToken['prv']);
+      CacheHelper().saveData(key: 'name', value: decodedToken['name']);
+      CacheHelper().saveData(key: 'phone', value: decodedToken['phone']);
+      CacheHelper().saveData(key: 'email', value: decodedToken['email']);
+      CacheHelper().saveData(key: 'role', value: decodedToken['role']);
       // print('**********response******************************');
-      print(response) ;
-      signStatus.signSuccess('sign up successfully', 'Welcome') ;
+      // print(response);
+      signStatus.signSuccess('sign up successfully', 'Welcome');
     } on ServerExceptions catch (e) {
       // print('**********error1******************************');
       // SignFailed(errorMessage: signUpErrorModel?.email ?? 'something');
@@ -75,5 +76,17 @@ class SignUpController extends GetxController {
       // print(e.toString()) ;
       signStatus.signFailure();
     }
+  }
+
+  fakeSignUp() async {
+    signStatus.signLoading();
+    await Future.delayed(const Duration(seconds: 5), () {
+      CacheHelper().saveData(key: 'signed', value: true);
+      CacheHelper().saveData(key: 'done', value: false);
+      //       controller.loading = true ;
+      Get.offAll(() => const HiddenDrawer());
+    });
+    print('fake sign up ********************************************');
+    signStatus.signSuccess('sign up successfully', 'Welcome');
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project2/cache/cache_helper.dart';
 
 class CustomTextFormField extends StatefulWidget {
   final TextEditingController controller;
@@ -44,24 +45,28 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       textInputAction: TextInputAction.next,
       obscureText: widget.isPassword ? _obscureText : false,
       maxLength: widget.maxLength,
-
+      cursorColor: context.theme.primaryColorDark,
+      cursorWidth: 1.5,
+      cursorHeight: 25,
+      cursorRadius: const Radius.circular(25),
       // autofocus: true,
       style: TextStyle(
-        color: context.theme.primaryColor,
+        color: context.theme.colorScheme.onSecondary,
         fontSize: 17,
         fontWeight: FontWeight.normal, // typing style
       ),
       decoration: InputDecoration(
         // prefixIcon: widget.icon! != null ? Icon(widget.icon) : null,
         prefixIcon: widget.isPrefixIcon ? Icon(widget.icon) : null,
+        prefixIconColor: context.theme.primaryColorDark,
         hintText: widget.hintText,
         hintStyle: TextStyle(
-          color: context.theme.colorScheme.secondary,
+          color: context.theme.colorScheme.background,
           fontSize: 15,
           // fontStyle: FontStyle.italic,
         ),
         counterStyle: TextStyle(
-          color: context.theme.primaryColor,
+          color: context.theme.colorScheme.onSecondary,
           fontSize: 13,
           fontWeight: FontWeight.normal,
           letterSpacing: 1.2,
@@ -69,8 +74,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
          // border: UnderlineInputBorder(
          //   borderSide: BorderSide(color: Colors.black),
          // ),
+        filled: CacheHelper().getData(key: 'isDark'),
+        // filled: true,
+        fillColor: context.theme.colorScheme.onPrimary,
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: context.theme.primaryColor),
+          borderSide: BorderSide(color: context.theme.primaryColorDark),
         ),
         focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.blue),
@@ -107,18 +115,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
         return null;
       },
-
-      // validator: (value) {
-      //   if (value == null || value.isEmpty) {
-      //     return "This field can't be empty";
-      //   }
-      //   if(widget.isPassword){
-      //     if(value.length < 8){
-      //       return "password must be at least 8 characters";
-      //     }
-      //   }
-      //   return null;
-      // },
     );
   }
 }

@@ -28,12 +28,11 @@ class CustomListTile extends StatelessWidget {
     return Column(
       children: [
         ListTile(
-          leading: Icon(iconData, color: context.theme.primaryColor),
-          // title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+          leading: Icon(iconData, color: context.theme.primaryColorDark),
           title: Text(
             title,
             style: TextStyle(
-              color: context.theme.primaryColor,
+              color: context.theme.primaryColorDark,
               fontSize: 17,
               fontWeight: FontWeight.bold, // typing style
             ),
@@ -41,7 +40,7 @@ class CustomListTile extends StatelessWidget {
           subtitle: Text(
             subtitle,
             style: TextStyle(
-              color: context.theme.primaryColor,
+              color: context.theme.primaryColorDark,
               fontSize: 17,
               fontWeight: FontWeight.normal, // typing style
             ),
@@ -49,19 +48,23 @@ class CustomListTile extends StatelessWidget {
           // visualDensity: VisualDensity.compact,
           trailing: showCopyIcon
               ? IconButton(
-                  icon: const Icon(Icons.copy, size: 20),
-                  tooltip: 'Copy',
+                  icon: Icon(Icons.copy,
+                    color: context.theme.colorScheme.onSecondary,
+                    size: 20,),
+                  tooltip: 'Copy ID',
                   onPressed: () {
                     Clipboard.setData(ClipboardData(text: subtitle));
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          '$title copied',
-                          style: context.theme.textTheme.bodySmall,
-                        ),
-                        backgroundColor: context.theme.colorScheme.secondary,
-                      ),
-                    );
+                    Get.snackbar("Copied", "Your ID copied");
+                    // ScaffoldMessenger.of(context).showSnackBar(
+                    //   SnackBar(
+                    //     // margin: EdgeInsets.all(1),
+                    //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                    //     content: Text(
+                    //       '$title copied',
+                    //       style: context.theme.textTheme.bodySmall,
+                    //     ),
+                    //     backgroundColor: context.theme.primaryColorLight,
+                    //   ),);
                   },
                 )
               : (onTap != null ? const Icon(Icons.chevron_right) : null),

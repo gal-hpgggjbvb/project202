@@ -21,58 +21,58 @@ class _TermsPageState extends State<TermsPage> {
     super.initState();
     acceptedTerms = CacheHelper().getData(key: 'acceptedTerms') ?? false;
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Terms & Privacy Policy" , style: TextStyle(fontWeight: FontWeight.bold),),
+        title: const Text(
+          "Terms & Privacy Policy",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         backgroundColor: Colors.orange,
       ),
       body: Column(
         children: [
-          const Expanded(
+           Expanded(
             child: Padding(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SectionHeader(title: "1. Terms of Service"),
-                    SectionText(
+                    const SectionHeader(title: "1. Terms of Service"),
+                    const SectionText(
                       text:
                           "By using this app, you agree to comply with our terms and conditions. "
                           "You are responsible for maintaining the confidentiality of your account and password...",
                     ),
-                    SizedBox(height: 20),
-
-                    SectionHeader(title: "2. User Responsibilities"),
-                    SectionText(
+                    addVerticalSpace(20),
+                    const SectionHeader(title: "2. User Responsibilities"),
+                    const SectionText(
                       text:
                           "You agree not to misuse the app in any way, including but not limited to fraudulent activity, abuse, or spreading misinformation.",
                     ),
-                    SizedBox(height: 20),
-
-                    SectionHeader(title: "3. Privacy Policy"),
-                    SectionText(
+                    addVerticalSpace(20),
+                    const SectionHeader(title: "3. Privacy Policy"),
+                    const SectionText(
                       text:
                           "We respect your privacy. Any personal data collected will be stored securely and never sold or shared with third parties without your consent.",
                     ),
-                    SizedBox(height: 20),
-
-                    SectionHeader(title: "4. Data Usage"),
-                    SectionText(
+                    addVerticalSpace(20),
+                    const SectionHeader(title: "4. Data Usage"),
+                    const SectionText(
                       text:
                           "We may collect usage statistics to improve the app. This data is anonymized and used for analysis only.",
                     ),
-                    SizedBox(height: 20),
-
-                    SectionHeader(title: "5. Updates to Terms"),
-                    SectionText(
+                    addVerticalSpace(20),
+                    const SectionHeader(title: "5. Updates to Terms"),
+                    const SectionText(
                       text:
                           "These terms may be updated from time to time. You will be notified of significant changes within the app or via email.",
                     ),
-                    SizedBox(height: 20),
+                    addVerticalSpace(20),
                   ],
                 ),
               ),
@@ -87,23 +87,26 @@ class _TermsPageState extends State<TermsPage> {
                   children: [
                     Checkbox(
                       value: acceptedTerms ? acceptedTerms : accepted,
-                      activeColor: Colors.orange,
+                      activeColor: Colors.green,
+                      checkColor: Colors.blue,
                       onChanged: (val) {
                         setState(() => accepted = val ?? false);
-                         // accepted = val ?? false ;
+                        // accepted = val ?? false ;
                       },
                     ),
-                     Expanded(
+                    Expanded(
                       child: Text(
                         // accepted ? "You already accepted the terms." :
-                        acceptedTerms ?
-                        "You already accepted the terms." :
-                        "I have read and accept the Terms and Privacy Policy.",
+                        acceptedTerms
+                            ? "You already accepted the terms."
+                            : "I have read and accept the Terms and Privacy Policy.",
                         style: TextStyle(
+                          fontFamily: "Satoshi",
                           fontSize: 14,
-                          color:
-                          acceptedTerms || accepted ? Colors.green :
-                          Colors.black87,
+                          color: acceptedTerms || accepted
+                              ? Colors.green
+                              // : Colors.black87,
+                              : context.theme.colorScheme.onSecondary,
                         ),
                       ),
                     ),
@@ -113,18 +116,41 @@ class _TermsPageState extends State<TermsPage> {
                 ElevatedButton(
                   onPressed: accepted
                       ? () {
-                    AwesomeDialog(
-                      context: context,
-                      dialogType: DialogType.success,
-                      animType: AnimType.scale,
-                      dismissOnTouchOutside: false,
-                      title: "Accepted!",
-                      desc: "Thank you for agreeing to the terms.",
-                      btnOkOnPress: () {
-                        Get.back();
-                      },
-                    ).show();
-                    CacheHelper().saveData(key: 'acceptedTerms', value: true) ;
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.success,
+                            animType: AnimType.scale,
+                            dismissOnTouchOutside: false,
+                            title: "Accepted!",
+                            desc: "Thank you for agreeing to the terms.",
+                            titleTextStyle: TextStyle(
+                              fontFamily: "Satoshi",
+                              color: context.theme.colorScheme.onSecondary,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500, // typing style
+                            ),
+                            descTextStyle: TextStyle(
+                              fontFamily: "Satoshi",
+                              color: context.theme.colorScheme.onSecondary,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w500, // typing style
+                            ),
+                            dialogBackgroundColor:
+                                context.theme.primaryColorLight,
+                            dialogBorderRadius: BorderRadius.circular(30),
+                            btnOkText: 'Ok',
+                            buttonsTextStyle: const TextStyle(
+                              fontFamily: "Satoshi",
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500, // typing style
+                            ),
+                            btnOkOnPress: () {
+                              Get.back();
+                            },
+                          ).show();
+                          CacheHelper()
+                              .saveData(key: 'acceptedTerms', value: true);
                         }
                       : null, // Disabled if not accepted
                   style: ElevatedButton.styleFrom(
@@ -151,66 +177,6 @@ class _TermsPageState extends State<TermsPage> {
     );
   }
 }
-
-// class TermsPage extends StatelessWidget {
-//   const TermsPage({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text("Terms & Privacy Policy"),
-//         backgroundColor: Colors.orange,
-//       ),
-//       body: Padding(
-//         padding: const EdgeInsets.all(16),
-//         child: SingleChildScrollView(
-//           physics: const BouncingScrollPhysics(),
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: const [
-//               SectionHeader(title: "1. Terms of Service"),
-//               SectionText(
-//                 text:
-//                 "By using this app, you agree to comply with our terms and conditions. "
-//                     "You are responsible for maintaining the confidentiality of your account and password...",
-//               ),
-//               SizedBox(height: 20),
-//
-//               SectionHeader(title: "2. User Responsibilities"),
-//               SectionText(
-//                 text:
-//                 "You agree not to misuse the app in any way, including but not limited to fraudulent activity, abuse, or spreading misinformation.",
-//               ),
-//               SizedBox(height: 20),
-//
-//               SectionHeader(title: "3. Privacy Policy"),
-//               SectionText(
-//                 text:
-//                 "We respect your privacy. Any personal data collected will be stored securely and never sold or shared with third parties without your consent.",
-//               ),
-//               SizedBox(height: 20),
-//
-//               SectionHeader(title: "4. Data Usage"),
-//               SectionText(
-//                 text:
-//                 "We may collect usage statistics to improve the app. This data is anonymized and used for analysis only.",
-//               ),
-//               SizedBox(height: 20),
-//
-//               SectionHeader(title: "5. Updates to Terms"),
-//               SectionText(
-//                 text:
-//                 "These terms may be updated from time to time. You will be notified of significant changes within the app or via email.",
-//               ),
-//               SizedBox(height: 30),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
 
 class SectionHeader extends StatelessWidget {
   final String title;

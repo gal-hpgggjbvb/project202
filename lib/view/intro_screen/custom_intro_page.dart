@@ -33,23 +33,21 @@ class CustomIntroPage extends StatelessWidget {
             title,
             style: TextStyle(
               fontFamily: "Satoshi",
+              color: context.theme.primaryColorDark,
               fontSize: 25,
               fontWeight: FontWeight.w500,
-              color: context.theme.primaryColor,
             ),
           ),
-
           addVerticalSpace(10),
-
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Text(
               body,
               style: TextStyle(
                 fontFamily: "Satoshi",
+                color: context.theme.primaryColorDark,
                 fontSize: 20,
                 fontWeight: FontWeight.w300,
-                color: context.theme.primaryColor,
               ),
             ),
           ),
