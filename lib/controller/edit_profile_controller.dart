@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -26,6 +27,10 @@ class EditProfileController extends GetxController {
 
   Rx<File?> image = Rx<File?>(null);
 
+  // XFile? profileImage ;
+  // File? imageFile ;
+
+  File? profileImage ;
   // final nameController = TextEditingController();
   // final phoneController = TextEditingController();
   // final emailController = TextEditingController();
@@ -33,7 +38,25 @@ class EditProfileController extends GetxController {
   //
   // final editProfileFormKey = GlobalKey<FormState>();
   //
+  //todo v2
+  setProfileImage(File img){
+    profileImage = img ;
+    CacheHelper().saveData(key: 'profileImage', value: profileImage!.path);
+    update();
+  }
+  Future<void> pickImageFromGallery() async {
+    final picker = ImagePicker();
+    final picked = await picker.pickImage(source: ImageSource.gallery);
 
+    setProfileImage(File(picked!.path));
+    // if (picked != null) {
+    //   profileImage = File(picked.path); // update image
+    // }
+    // CacheHelper().saveData(key: 'profileImage', value: profileImage!.path);
+    update();
+  }
+
+  //todo v1
   Future<void> pickImage() async {
     final picker = ImagePicker();
     final picked = await picker.pickImage(source: ImageSource.gallery);
@@ -49,6 +72,7 @@ class EditProfileController extends GetxController {
   void deleteImage() {
     image.value = null; // reset to null
     CacheHelper().removeData(key: 'image_path');
+    CacheHelper().removeData(key: 'profileImage');
     SignStatus().signSuccess('Profile Image Removed', '');
     update();
   }
@@ -90,4 +114,30 @@ class EditProfileController extends GetxController {
     }
     update();
   }
+
+  // uploadProfileImage(XFile image){
+  //   profileImage = image ;
+  //   update();
+  // }
+
+
+
+  // Future<void> saveImageToPrefs(XFile file) async {
+  //   final bytes = await file.readAsBytes();
+  //   final base64String = base64Encode(bytes);
+  //   await CacheHelper().saveData(key: 'profileImage', value: base64String);
+  //   update();
+  // }
+  // Future<void> pickImageFromGallery() async {
+  //   final picker = ImagePicker();
+  //   final picked = await picker.pickImage(source: ImageSource.gallery);
+  //
+  //   if (picked != null) {
+  //     profileImage = File(picked.path);
+  //   }
+  //   CacheHelper().saveData(key: 'imagePath', value: image.value!.path);
+  //   SignStatus().signSuccess('Profile Image Updated', '');
+  //   update();
+  // }
+  
 }

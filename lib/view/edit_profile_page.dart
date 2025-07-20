@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:project2/api/dio_consumer.dart';
+import 'package:project2/cache/cache_helper.dart';
 import 'package:project2/controller/edit_profile_controller.dart';
 import 'package:project2/functions/add_space.dart';
 
@@ -19,16 +20,15 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-  File? image;
-
-  Future<void> pickImageFromGallery() async {
-    final ImagePicker imagePicker = ImagePicker();
-    final pickedFile = await imagePicker.pickImage(source: ImageSource.gallery);
-
-    setState(() {
-      image = File(pickedFile!.path);
-    });
-  }
+  // File? image;
+  // Future<void> pickImageFromGallery() async {
+  //   final ImagePicker imagePicker = ImagePicker();
+  //   final pickedFile = await imagePicker.pickImage(source: ImageSource.gallery);
+  //
+  //   setState(() {
+  //     image = File(pickedFile!.path);
+  //   });
+  // }
 
   // EditProfileController editProfileController = Get.put(EditProfileController(DioConsumer(dio: Dio())));
   late EditProfileController editProfileController;
@@ -65,32 +65,67 @@ class _EditProfilePageState extends State<EditProfilePage> {
           key: editProfileController.editProfileFormKey,
           child: Column(
             children: [
+              // addVerticalSpace(20),
+              //todo profile image v1
+              // Obx(
+              //   () => GestureDetector(
+              //     onTap: () => editProfileController.pickImage(),
+              //     child: CircleAvatar(
+              //       radius: 70,
+              //       backgroundImage: editProfileController.image.value != null
+              //           ? FileImage(editProfileController.image.value!)
+              //           // : const AssetImage("images/profileimage.jpg") as ImageProvider,
+              //           : const AssetImage("images/profileimage1.jpg")
+              //               as ImageProvider,
+              //       child: const Align(
+              //         alignment: Alignment.bottomRight,
+              //         child: CircleAvatar(
+              //           radius: 20,
+              //           backgroundColor: Colors.white,
+              //           child: Icon(
+              //             Icons.camera_alt,
+              //             size: 25,
+              //             color: Colors.black,
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
               addVerticalSpace(20),
-              Obx(
-                () => GestureDetector(
-                  onTap: () => editProfileController.pickImage(),
-                  child: CircleAvatar(
-                    radius: 70,
-                    backgroundImage: editProfileController.image.value != null
-                        ? FileImage(editProfileController.image.value!)
-                        // : const AssetImage("images/profileimage.jpg") as ImageProvider,
-                        : const AssetImage("images/profileimage1.jpg")
-                            as ImageProvider,
-                    child: const Align(
-                      alignment: Alignment.bottomRight,
-                      child: CircleAvatar(
-                        radius: 15,
-                        backgroundColor: Colors.white,
-                        child: Icon(
-                          Icons.edit,
-                          size: 18,
-                          color: Colors.black,
+              //todo from here profile image v2
+              GetBuilder<EditProfileController>(
+                  // init: EditProfileController(DioConsumer(dio: Dio())),
+                  builder: (controller){
+                    return CircleAvatar(
+                      radius: 70,
+                      // backgroundImage: controller.profileImage == null && CacheHelper().getData(key: 'profileImage') == null ?
+                      backgroundImage: CacheHelper().getData(key: 'profileImage') == null ?
+                          const AssetImage("images/profileimage1.jpg") :
+                           // FileImage(File(controller.profileImage!.path))
+                           FileImage(File(CacheHelper().getData(key: 'profileImage')))
+                      as ImageProvider,
+                      child: Align(
+                        alignment: Alignment.bottomRight,
+                        child: CircleAvatar(
+                          radius: 20,
+                          backgroundColor: Colors.white,
+                          child: IconButton(onPressed: () {
+                            // ImagePicker().pickImage(source: ImageSource.gallery)
+                            //     .then((value) =>
+                                //// controller.uploadProfileImage(value!)) ;
+                            //     controller.setProfileImage(File(value!.path))) ;
+                            // CacheHelper().saveData(key: 'profileImage', value: controller.profileImage!.path);
+                            controller.pickImageFromGallery();
+                          }, icon: const Icon(Icons.camera_alt,
+                          size: 25,color: Colors.black,
+                          ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                ),
-              ),
+                    );
+                  }),
+              //todo to here profile image v2
               TextButton.icon(
                 // onPressed: editProfileController.deleteImage,
                 onPressed: () {
@@ -103,8 +138,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     btnCancelOnPress: () {},
                     btnOkText: "Yes",
                     btnOkOnPress: () {
-                      editProfileController
-                          .deleteImage(); // 👈 your controller logic
+                      editProfileController.deleteImage(); // 👈 your controller logic
                     },
                   ).show();
                   // Get.defaultDialog(

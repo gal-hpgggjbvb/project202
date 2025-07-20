@@ -49,7 +49,7 @@ class _ProfilePageState extends State<ProfilePage> {
             child: GetBuilder<EditProfileController>(
           builder: (controller) => Column(
             children: [
-              addVerticalSpace(30),
+              // addVerticalSpace(30),
               // InkWell(
               //   onTap: () => pickImageFromGallery(),
               //   child: ClipRRect(
@@ -63,24 +63,43 @@ class _ProfilePageState extends State<ProfilePage> {
               //     ),
               //   ),
               // ),
-              addVerticalSpace(30),
-              Obx(
-                () => CircleAvatar(
-                  radius: 60,
-                  backgroundImage: editProfileController.image.value != null
-                      ? FileImage(editProfileController.image.value!)
-                      : const AssetImage("images/profileimage1.jpg")
-                          as ImageProvider,
-                  // child: const Align(
-                  //   alignment: Alignment.bottomRight,
-                  // child: CircleAvatar(
-                  //   radius: 15,
-                  //   backgroundColor: Colors.white,
-                  //   child: Icon(Icons.edit, size: 18,color: Colors.black,),
-                  // ),
-                  // ),
-                ),
+              // addVerticalSpace(30),
+              //todo profile image v1
+              // Obx(
+              //   () => CircleAvatar(
+              //     radius: 70,
+              //     backgroundImage: editProfileController.image.value != null
+              //         ? FileImage(editProfileController.image.value!)
+              //         : const AssetImage("images/profileimage1.jpg")
+              //             as ImageProvider,
+              //     // child: const Align(
+              //     //   alignment: Alignment.bottomRight,
+              //     // child: CircleAvatar(
+              //     //   radius: 15,
+              //     //   backgroundColor: Colors.white,
+              //     //   child: Icon(Icons.edit, size: 18,color: Colors.black,),
+              //     // ),
+              //     // ),
+              //   ),
+              // ),
+              addVerticalSpace(10),
+              //todo from here profile image api
+              GetBuilder<EditProfileController>(
+                  // init: EditProfileController(DioConsumer(dio: Dio())),
+                  builder: (controller) {
+                    // return controller.profileImage == null && CacheHelper().getData(key: 'profileImage') == null ?
+                    return CacheHelper().getData(key: 'profileImage') == null ?
+                     const CircleAvatar(
+                       radius: 70,
+                       backgroundImage: AssetImage("images/profileimage1.jpg"),
+                     ) : CircleAvatar(
+                      radius: 70,
+                      // backgroundImage: FileImage(File(controller.profileImage!.path)),
+                      backgroundImage: FileImage(File(CacheHelper().getData(key: 'profileImage'))),
+                    );
+                  }
               ),
+              //todo to here
               addVerticalSpace(30),
 
               // Profile Info Tiles
@@ -116,7 +135,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     '${CacheHelper().getData(key: 'email') ?? 'email here'}',
               ),
 
-              addVerticalSpace(100),
+              addVerticalSpace(90),
 
               /// Edit Button
               Center(
