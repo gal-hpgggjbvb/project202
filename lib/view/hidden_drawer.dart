@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
+import 'package:project2/cache/cache_helper.dart';
+import 'package:project2/view/delivery_man_view/delivery_man_page.dart';
 import 'package:project2/view/home_page.dart';
 import 'package:project2/view/notifications_page.dart';
-import 'package:project2/view/user_view/profile_page.dart';
 import 'package:project2/view/settings_page.dart';
 import 'package:project2/view/sign_out_page.dart';
+import 'package:project2/view/user_view/profile_page.dart';
 import 'package:project2/view/user_view/user_page.dart';
 
 class HiddenDrawer extends StatefulWidget {
@@ -22,11 +24,13 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
   void initState() {
     super.initState();
     _pages = [
-      //todo profile page
+      ///todo profile page
       ScreenHiddenDrawer(
           ItemHiddenMenu(
             name: 'Profile',
-            baseStyle: const TextStyle(fontSize: 15,),
+            baseStyle: const TextStyle(
+              fontSize: 15,
+            ),
             selectedStyle: const TextStyle(fontSize: 18),
             colorLineSelected: Colors.orange,
             // colorLineSelected: context.theme.primaryColor,
@@ -40,31 +44,55 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
       //       colorLineSelected: Colors.orange,
       //     ),
       //     const HomePage()),
-      //todo main page
+
+      ///condition will be here
+      // CacheHelper().getData(key: 'role') == 'normal' ?
+      // CacheHelper().getData(key: 'role') != 'normal' ?
+
+      ///todo main page user
       ScreenHiddenDrawer(
           ItemHiddenMenu(
             name: 'Main Page',
-            baseStyle: const TextStyle(fontSize: 15,),
+            baseStyle: const TextStyle(
+              fontSize: 15,
+            ),
             selectedStyle: const TextStyle(fontSize: 18),
             colorLineSelected: Colors.orange,
             // colorLineSelected: context.theme.primaryColor,
           ),
-          const UserPage()),
-      //todo notifications page
+          const UserPage()), ///condition here:  :
+      ///todo main page delivery man
+      ScreenHiddenDrawer(
+          ItemHiddenMenu(
+              name: 'Main Page Delivery Man',
+              baseStyle: const TextStyle(
+                fontSize: 15,
+              ),
+              selectedStyle: const TextStyle(fontSize: 18),
+          colorLineSelected: Colors.orange,
+          ),
+          const DeliveryManPage()),
+
+
+      ///todo notifications page
       ScreenHiddenDrawer(
           ItemHiddenMenu(
             name: 'Notifications',
-            baseStyle: const TextStyle(fontSize: 15,),
+            baseStyle: const TextStyle(
+              fontSize: 15,
+            ),
             selectedStyle: const TextStyle(fontSize: 18),
             colorLineSelected: Colors.orange,
             // colorLineSelected: context.theme.primaryColor,
           ),
           const NotificationsPage()),
-      //todo settings page
+      ///todo settings page
       ScreenHiddenDrawer(
           ItemHiddenMenu(
             name: 'Settings',
-            baseStyle: const TextStyle(fontSize: 15,),
+            baseStyle: const TextStyle(
+              fontSize: 15,
+            ),
             selectedStyle: const TextStyle(fontSize: 18),
             colorLineSelected: Colors.orange,
             // colorLineSelected: context.theme.primaryColor,
@@ -90,9 +118,9 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
       backgroundColorAppBar: context.theme.primaryColor,
       backgroundColorMenu: context.theme.primaryColorLight,
 
-        screens: _pages,
-        //todo i will try use a condition here (normal/driver)
-        initPositionSelected: 1,
+      screens: _pages,
+      ///todo i will try use a condition here (normal/driver)
+      initPositionSelected: 1,
       // disableAppBarDefault: false,
       slidePercent: 50,
       contentCornerRadius: 30,
