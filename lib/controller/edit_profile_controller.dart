@@ -101,10 +101,10 @@ class EditProfileController extends GetxController {
         'password': editPasswordController.text,
       });
       // print('here save data **********************************************') ;
-      CacheHelper().saveData(key: 'name', value: editNameController.text);
-      CacheHelper().saveData(key: 'phone', value: editPhoneController.text);
-      CacheHelper().saveData(key: 'email', value: editEmailController.text);
-      CacheHelper().saveData(key: 'password', value: editPasswordController.text);
+      await CacheHelper().saveData(key: 'name', value: editNameController.text);
+      await CacheHelper().saveData(key: 'phone', value: editPhoneController.text);
+      await CacheHelper().saveData(key: 'email', value: editEmailController.text);
+      await CacheHelper().saveData(key: 'password', value: editPasswordController.text);
       // print('here sign status **********************************************') ;
       SignStatus().signSuccess('Profile Updated Successfully', 'Done');
       print(response);
