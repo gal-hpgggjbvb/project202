@@ -4,7 +4,7 @@ import 'package:project2/cache/cache_helper.dart';
 class SignStatus extends GetxController {
   //late final String errorMessage ;
   bool loading = false;
-
+  bool loadingProgress = false ;
   // bool done = false ;
   signSuccess(String title, String message) {
     loading = false;
@@ -47,6 +47,12 @@ class SignStatus extends GetxController {
     //   snackPosition: SnackPosition.BOTTOM,
     // );
   }
+
+  changeLoadingProgress() {
+    loadingProgress = !loadingProgress ;
+    update();
+  }
+
 }
 
 class SignFailed {

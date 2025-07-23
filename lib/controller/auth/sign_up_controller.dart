@@ -63,17 +63,21 @@ class SignUpController extends GetxController {
             'password_confirmation': confirmPasswordController.text,
             'role': 'normal',
           });
-      user = SignUpModel.fromJson(response);
-      final decodedToken = JwtDecoder.decode(user!.token);
-      CacheHelper().saveData(key: 'token', value: user!.token);
-      CacheHelper().saveData(key: 'id', value: decodedToken['prv']);
-      CacheHelper().saveData(key: 'name', value: decodedToken['name']);
-      CacheHelper().saveData(key: 'phone', value: decodedToken['phone']);
-      CacheHelper().saveData(key: 'email', value: decodedToken['email']);
-      CacheHelper().saveData(key: 'role', value: decodedToken['role']);
-      // print('**********response******************************');
-      // print(response);
-      signStatus.signSuccess('sign up successfully', 'Welcome');
+      ///todo status code 201 not 200 -worked-
+      if(CacheHelper().getData(key: 'statusCode') == 201){
+        user = SignUpModel.fromJson(response);
+        final decodedToken = JwtDecoder.decode(user!.token);
+        CacheHelper().saveData(key: 'token', value: user!.token);
+        CacheHelper().saveData(key: 'id', value: decodedToken['prv']);
+        CacheHelper().saveData(key: 'name', value: decodedToken['name']);
+        CacheHelper().saveData(key: 'phone', value: decodedToken['phone']);
+        CacheHelper().saveData(key: 'email', value: decodedToken['email']);
+        CacheHelper().saveData(key: 'role', value: decodedToken['role']);
+        // print('**********response******************************');
+        // print(response);
+        signStatus.signSuccess('sign up successfully', 'Welcome');
+        CacheHelper().removeData(key: 'statusCode');
+      }
     } on ServerExceptions catch (e) {
       // print('**********error1******************************');
       // SignFailed(errorMessage: signUpErrorModel?.email ?? 'something');

@@ -118,10 +118,82 @@ class _SignInPageState extends State<SignInPage> {
                         hintText: 'Your Password',
                         isPassword: true,
                       ),
+                      addVerticalSpace(30),
 
-                      addVerticalSpace(100),
+                      /// Role Dropdown
+                      // DropdownButtonFormField<String>(
+                      //   value: signInController.accountType,
+                      //   items: ['Normal User', 'Delivery Man'].map((role) {
+                      //     return DropdownMenuItem(
+                      //       value: role,
+                      //       child: Text(role),
+                      //     );
+                      //   }).toList(),
+                      //   onChanged: (value) {
+                      //     setState(() {
+                      //       signInController.accountType = value;
+                      //     });
+                      //   },
+                      //   // decoration: InputDecoration(
+                      //   //   labelText: "Select Role",
+                      //   //   border: UnderlineInputBorder(),
+                      //   // ),
+                      // ),
+                      ///Radio to choose account type
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Signin as :',
+                            style: TextStyle(
+                              fontFamily: "Satoshi",
+                              color: context.theme.colorScheme.onSecondary,
+                              fontSize: 17,
+                            ),
+                          ),
+                          Radio<String>(
+                            value: 'user',
+                            groupValue: signInController.accountType,
+                            activeColor: context.theme.primaryColor,
+                            autofocus: true,
+                            // fillColor: MaterialStateProperty.resolveWith((states) {
+                            //   if (states.contains(MaterialState.selected)) {
+                            //     return Colors.green;
+                            //   }
+                            //   return Colors.grey;
+                            // }),
+                            onChanged: (value) => setState(
+                                () => signInController.accountType = value!),
+                          ),
+                          Text(
+                            'Normal User',
+                            style: TextStyle(
+                              fontFamily: "Satoshi",
+                              color: context.theme.colorScheme.onSecondary,
+                              fontSize: 15,
+                            ),
+                          ),
+                          Radio<String>(
+                            value: 'driver',
+                            groupValue: signInController.accountType,
+                            activeColor: context.theme.primaryColor,
+                            onChanged: (value) => setState(
+                                () => signInController.accountType = value!),
+                          ),
+                          Text(
+                            'Delivery Man',
+                            style: TextStyle(
+                              fontFamily: "Satoshi",
+                              color: context.theme.colorScheme.onSecondary,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ],
+                      ),
 
-                      //todo sign in button
+                      addVerticalSpace(40),
+
+                      ///todo sign in button
                       Row(
                         children: [
                           Expanded(
@@ -139,9 +211,13 @@ class _SignInPageState extends State<SignInPage> {
                                         .signInFormKey.currentState!
                                         .validate()) {
                                       CacheHelper().saveData(
+                                          key: 'email',
+                                          value:
+                                              signInController.emailController.text);
+                                      CacheHelper().saveData(
                                           key: 'password',
                                           value: signInController
-                                              .passwordController);
+                                              .passwordController.text);
                                       await signInController.signIn();
                                       if (CacheHelper()
                                           .getData(key: 'signDone')) {
@@ -187,7 +263,7 @@ class _SignInPageState extends State<SignInPage> {
                       ),
 
                       // addVerticalSpace(5),
-
+                      ///todo
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

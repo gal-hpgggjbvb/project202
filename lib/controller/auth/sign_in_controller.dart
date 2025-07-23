@@ -32,6 +32,10 @@ class SignInController extends GetxController {
   //sign in password
   TextEditingController passwordController = TextEditingController();
 
+  //account type
+  // String? accountType ;
+  String accountType = 'user';
+
   SignInModel? user;
   ErrorModel? errorModel;
 
@@ -46,47 +50,33 @@ class SignInController extends GetxController {
           data: {
             "email": emailController.text,
             "password": passwordController.text,
+            "account_type": accountType,
+            // "account_type": 'user',
           });
+      if(await CacheHelper().getData(key: 'statusCode') == 200){
+        user = SignInModel.fromJson(response);
+        final decodedToken = JwtDecoder.decode(user!.token);
+        CacheHelper().saveData(key: 'token', value: user!.token);
+        CacheHelper().saveData(key: 'id', value: decodedToken['prv']);
+        CacheHelper().saveData(key: 'name', value: decodedToken['name']);
+        CacheHelper().saveData(key: 'phone', value: decodedToken['phone']);
+        CacheHelper().saveData(key: 'email', value: decodedToken['email']);
+        CacheHelper().saveData(key: 'role', value: decodedToken['role']);
 
-      user = SignInModel.fromJson(response);
-      final decodedToken = JwtDecoder.decode(user!.token);
-      CacheHelper().saveData(key: 'token', value: user!.token);
-      CacheHelper().saveData(key: 'id', value: decodedToken['prv']);
-      CacheHelper().saveData(key: 'name', value: decodedToken['name']);
-      CacheHelper().saveData(key: 'phone', value: decodedToken['phone']);
-      CacheHelper().saveData(key: 'email', value: decodedToken['email']);
-      CacheHelper().saveData(key: 'role', value: decodedToken['role']);
-
-      // final String v = CacheHelper().getData(key: 'id') ;
-      // final String y = CacheHelper().getData(key: 'token') ;
-      // print('ID is : $v') ;
-      // print('token is : $y') ;
-      // print(decodedToken['role']) ;
-      // print(decodedToken['phone']) ;
-      // print(decodedToken['email']) ;
-
-      // print(response) ;
-      // print('2*****************************************************') ;
-      // print(CacheHelper().getData(key: 'token')) ;
-      signStatus.signSuccess('signin successful', 'welcome');
-      // CacheHelper().saveData(key: 'done', value: true) ;
-      // print('lookhereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee') ;
-      // print(CacheHelper().getData(key: 'done')) ;
-      // Get.off(() => const Drawer()) ;
+        // print("✅ Role : $accountType+++++++++++++++++++++++++++");
+        // print("✅ POST status: ${await CacheHelper().getData(key: 'statusCode')}+++++++++++++++++++++++++++");
+        signStatus.signSuccess('signin successful', 'welcome');
+        CacheHelper().removeData(key: 'statusCode');
+      }
     } on ServerExceptions catch (e) {
-      // print('error******************************************') ;
-      // print(e.toString()) ;
-      // signStatus.loading = false ;
-      // SignFailed(errorMessage: e.errorModel.errorMessage);
-      // SignFailed(status: e.errorModel.status,errorMessage: e.errorModel.message);
       SignFailed(errorMessage: e.errorModel.message);
-      // print(CacheHelper().getData(key: 'status'));
-      // print(CacheHelper().getData(key: 'message'));
+
       signStatus.signFailure();
       // update() ;
     }
   }
 }
+
 // signIn() async {
 //   try {
 //     // signStatus.signLoading();
