@@ -31,13 +31,7 @@ class ProfileInfoController extends GetxController {
     try {
       signStatus.changeLoadingProgress() ;
       await CacheHelper().saveData(key: 'sendToken', value: true);
-      final response = await api.get("http://10.0.2.2:8000/api/user/profile",
-          // isFormData: true,
-          // data: {
-          //   'email': CacheHelper().getData(key: 'email'),
-          //   'password': CacheHelper().getData(key: 'password'),
-          //   'password': '00001111',}
-            );
+      final response = await api.get("http://10.0.2.2:8000/api/user/profile",);
       if (await CacheHelper().getData(key: 'statusCode') == 200) {
         profileInfoModel = ProfileInfoModel.fromJson(response);
         name = profileInfoModel!.user.name;
@@ -51,6 +45,7 @@ class ProfileInfoController extends GetxController {
         signStatus.changeLoadingProgress();
         // print('/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/');
         // print(signStatus.loadingProgress);
+        CacheHelper().removeData(key: 'statusCode');
       } else {
         signStatus.changeLoadingProgress();
         return null;

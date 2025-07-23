@@ -9,7 +9,7 @@ import 'package:project2/api/dio_consumer.dart';
 import 'package:project2/controller/profile_controller/profile_info_controller.dart';
 import 'package:project2/custom_widgets/custom_listtile.dart';
 import 'package:project2/functions/add_space.dart';
-import 'package:project2/view/edit_profile_page.dart';
+import 'package:project2/view/profile_view/edit_profile_page.dart';
 
 import '../../cache/cache_helper.dart';
 import '../../controller/auth/sign_status.dart';

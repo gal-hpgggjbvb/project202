@@ -7,11 +7,13 @@ import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:project2/api/dio_consumer.dart';
 import 'package:project2/cache/cache_helper.dart';
+import 'package:project2/custom_widgets/custom_order_field.dart';
 import 'package:project2/functions/add_space.dart';
+import 'package:project2/view/profile_view/edit_password_page.dart';
 
-import '../controller/auth/sign_status.dart';
-import '../controller/profile_controller/update_profile_controller.dart';
-import '../custom_widgets/custom_textformfield.dart';
+import '../../controller/auth/sign_status.dart';
+import '../../controller/profile_controller/update_profile_controller.dart';
+import '../../custom_widgets/custom_textformfield.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({super.key});
@@ -208,29 +210,108 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     icon: Icons.email,
                   ),
                   addVerticalSpace(35),
+                  ///todo change password
+                  Center(
+                    child: ElevatedButton.icon(
+                      icon: Icon(Icons.lock,
+                          color: context.theme.colorScheme.secondary),
+                      label: Text(
+                        "Change Password",
+                        style: TextStyle(
+                            fontFamily: "Satoshi",
+                            // color: Colors.white,
+                            color: context.theme.colorScheme.secondary,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        shape: const StadiumBorder(),
+                        backgroundColor: context.theme.primaryColor,
+                        // backgroundColor: context.theme.colorScheme.onBackground,
+                        elevation: 10,
+                        shadowColor: context.theme.primaryColor,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 30, vertical: 15),
+                      ),
+                      onPressed: () => Get.to(() => const EditPasswordPage()),
+                    ),
+                  ),
 
                   ///todo password field
-                  CustomTextFormField(
-                    controller: updateProfileController.editPasswordController,
-                    textInputType: TextInputType.text,
-                    hintText: 'Password',
-                    isPassword: true,
-                    isPrefixIcon: true,
-                    icon: Icons.password,
-                  ),
+                  // CustomTextFormField(
+                  //   controller: updateProfileController.editPasswordController,
+                  //   textInputType: TextInputType.text,
+                  //   hintText: 'Password',
+                  //   isPassword: true,
+                  //   isPrefixIcon: true,
+                  //   icon: Icons.password,
+                  // ),
+                  ///todo confirm password
+                  // CustomTextFormField(
+                  //   controller: updateProfileController.editPasswordController,
+                  //   textInputType: TextInputType.text,
+                  //   hintText: 'Password',
+                  //   isPassword: true,
+                  //   isPrefixIcon: true,
+                  //   icon: Icons.password,
+                  // ),
                   addVerticalSpace(100),
 
+                  ///todo save changes button
                   ElevatedButton.icon(
-                    // onPressed: controller.saveProfile,
                     onPressed: () async {
-                      await updateProfileController.editProfile();
-                      // Get.back() ;
+                      AwesomeDialog(
+                        context: context,
+                        width: double.infinity,
+                        dialogType: DialogType.noHeader,
+                        customHeader: const Icon(
+                          Icons.lock,
+                          color: Colors.redAccent,
+                          size: 70,
+                        ),
+                        animType: AnimType.topSlide,
+                        dialogBorderRadius: BorderRadius.circular(20),
+                        body: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                          child: Column(
+                            children: [
+                              Text('Enter password to save changes',
+                              style: TextStyle(
+                                fontFamily: "Satoshi",
+                                color: context.theme.colorScheme.onSecondary,
+                                fontSize: 17,
+                                fontWeight: FontWeight.normal, // typing style
+                              ),),
+                              addVerticalSpace(20),
+                              CustomTextFormField(
+                                controller: updateProfileController.editPasswordController,
+                                hintText: 'enter password',
+                                textInputType: TextInputType.visiblePassword,
+                                isPassword: true,
+                              ),
+                              addVerticalSpace(20),
+                            ],
+                          ),
+                        ),
+                        btnOkText: "Save Changes",
+                        btnCancelText: "Cansel",
+                        buttonsTextStyle: const TextStyle(
+                          fontFamily: "Satoshi",
+                          color: Colors.white,
+                          fontSize: 17,
+                          fontWeight: FontWeight.normal, // typing style
+                        ),
+                        btnCancelOnPress: () {},
+                        btnOkOnPress: () async {
+                          await updateProfileController.editProfile();
+                        },
+                      ).show();
+
                     },
-                    icon: const Icon(Icons.save, color: Colors.white),
-                    label: const Text(
+                    icon: Icon(Icons.save, color: context.theme.colorScheme.secondary,),
+                    label: Text(
                       "Save Changes",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: context.theme.colorScheme.secondary,
                         fontFamily: "Satoshi",
                         fontWeight: FontWeight.bold,
                       ),

@@ -30,6 +30,8 @@ class UpdateProfileController extends GetxController {
 
   TextEditingController editPasswordController = TextEditingController();
 
+  TextEditingController confirmPasswordController = TextEditingController();
+
   GlobalKey<FormState> editProfileFormKey = GlobalKey();
 
   Rx<File?> image = Rx<File?>(null);
@@ -91,7 +93,7 @@ class UpdateProfileController extends GetxController {
     editNameController.text = CacheHelper().getData(key: 'name') ?? '';
     editPhoneController.text = CacheHelper().getData(key: 'phone') ?? '';
     editEmailController.text = CacheHelper().getData(key: 'email') ?? '';
-    editPasswordController.text = CacheHelper().getData(key: 'password') ?? '';
+    // editPasswordController.text = CacheHelper().getData(key: 'password') ?? '';
     profileInfoController =
         Get.put(ProfileInfoController(DioConsumer(dio: Dio())));
     signStatus = Get.put(SignStatus());
@@ -117,6 +119,7 @@ class UpdateProfileController extends GetxController {
         'phone': editPhoneController.text,
         'email': editEmailController.text,
         'password': editPasswordController.text,
+        'password_confirmation': editPasswordController.text,
       });
       if(CacheHelper().getData(key: 'statusCode') == 200){
         print('++++++++++++++++++++++++++++++++++++++++++++++');
@@ -133,6 +136,7 @@ class UpdateProfileController extends GetxController {
         signStatus.changeLoadingProgress();
         SignStatus().signSuccess('Profile Updated Successfully', 'Done');
         profileInfoController.fetchProfileInfo();
+        CacheHelper().removeData(key: 'statusCode');
       }else{
         signStatus.changeLoadingProgress();
         return null ;
