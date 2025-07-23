@@ -49,18 +49,22 @@ class OrderController extends GetxController {
             'destination': destinationController.text,
           }
         );
-        // print('*******************2 here*****************') ;
-        print(await CacheHelper().getData(key:'StatusCode')) ;
-        addOrder = AddOrder.fromJson(response) ;
-        print('status ${addOrder!.status}');
-        print(addOrder!.message);
-        // print('*******************3 here*****************') ;
+        if(CacheHelper().getData(key: 'statusCode') == 200){
+          // print('*******************2 here*****************') ;
+          print(await CacheHelper().getData(key:'StatusCode')) ;
+          addOrder = AddOrder.fromJson(response) ;
+          print('status ${addOrder!.status}');
+          print(addOrder!.message);
+          // print('*******************3 here*****************') ;
 
-        // print(response) ;
+          // print(response) ;
 
-        // CacheHelper().saveData(key: 'orderMessage', value: orderModel?.message);
-        // print(CacheHelper().getData(key: 'orderMessage')) ;
-        SignStatus().signSuccess('order added successfully', '') ;
+          // CacheHelper().saveData(key: 'orderMessage', value: orderModel?.message);
+          // print(CacheHelper().getData(key: 'orderMessage')) ;
+          SignStatus().signSuccess('order added successfully', '') ;
+          CacheHelper().removeData(key: 'statusCode');
+        }
+
       } on ServerExceptions catch (e) {
           // print('Error status code: ${e.response?.statusCode}');
           // print('Error data: ${e.response?.data}');
@@ -69,6 +73,7 @@ class OrderController extends GetxController {
         // print('*******************something3 here*****************') ;
         print(e.toString()) ;
       }
+      update();
     }
 }
 

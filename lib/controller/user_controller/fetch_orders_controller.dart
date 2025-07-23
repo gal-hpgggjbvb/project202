@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project2/api/api_consumer.dart';
 import 'package:project2/controller/auth/sign_status.dart';
-import 'package:project2/functions/show_success_dialog.dart';
 import 'package:project2/model/errors/exceptions.dart';
 import 'package:project2/model/user/order/fetch_orders_model.dart';
 
@@ -27,6 +26,10 @@ class FetchOrdersController extends GetxController {
   //order edit destination
   TextEditingController editDestinationController = TextEditingController();
 
+  //for refresh indicator
+  GlobalKey<RefreshIndicatorState> refreshKey = GlobalKey();
+  // GlobalKey<RefreshIndicatorState> refreshKey = GlobalKey<RefreshIndicatorState>();
+
   // var ordersList = <Orders>[];
   List<dynamic> orderList = [];
 
@@ -39,17 +42,23 @@ class FetchOrdersController extends GetxController {
 
   fetchOrders() async {
     try {
+      //todo to trigger refresh
+      refreshKey.currentState?.show();
       await CacheHelper().saveData(key: 'sendToken', value: true);
       final response = await api.get(
         'http://10.0.2.2:8000/api/orders/my_orders',
       );
-      fetchOrdersModel = FetchOrdersModel.fromJson(response);
-
-      orderList = fetchOrdersModel!.orders;
-      print(response);
+      if (CacheHelper().getData(key: 'statusCode') == 200) {
+        fetchOrdersModel = FetchOrdersModel.fromJson(response);
+        orderList = fetchOrdersModel!.orders;
+        // print(response);
+        CacheHelper().removeData(key: 'statusCode');
+      }
     } on ServerExceptions catch (e) {
       SignFailed(errorMessage: e.errorModel.message);
     }
+    //todo to trigger refresh
+    // refreshKey.currentState?.show();
     //todo to update tab2 -refresh-
     update();
   }
@@ -58,11 +67,14 @@ class FetchOrdersController extends GetxController {
     try {
       await CacheHelper().saveData(key: 'sendToken', value: true);
       final orderId = await CacheHelper().getData(key: 'orderId');
-      final response =
-          await api.delete('http://10.0.2.2:8000/api/orders/$orderId');
+      await api.delete('http://10.0.2.2:8000/api/orders/$orderId');
       // print('delete response here ***********************************');
-      print(response);
-      SignStatus().signSuccess('order deleted successfully', '');
+      if (CacheHelper().getData(key: 'statusCode') == 200) {
+        SignStatus().signSuccess('order deleted successfully', '');
+        CacheHelper().removeData(key: 'orderID');
+        CacheHelper().removeData(key: 'statusCode');
+      }
+      // print(response);
     } on ServerExceptions catch (e) {
       SignFailed(errorMessage: e.errorModel.message);
     }
@@ -84,10 +96,12 @@ class FetchOrdersController extends GetxController {
         "source": editSourceController.text,
         "destination": editDestinationController.text,
       });
-
-      print(response);
-      SignStatus().signSuccess('order edited successfully', '');
-      // showSuccessDialog( Get.context ,title: 'Your Order Updated Successfully', desc: 'Done',onOk: (){}) ;
+      if (CacheHelper().getData(key: 'statusCode') == 200) {
+        print(response);
+        SignStatus().signSuccess('order edited successfully', '');
+        // showSuccessDialog( Get.context ,title: 'Your Order Updated Successfully', desc: 'Done',onOk: (){}) ;
+        CacheHelper().removeData(key: 'statusCode');
+      }
     } on ServerExceptions catch (e) {
       SignFailed(errorMessage: e.errorModel.message);
     }
