@@ -45,6 +45,7 @@ class DioConsumer extends ApiConsumer {
         data: data,
         queryParameters: queryParameters,
       );
+      CacheHelper().saveData(key: 'statusCode', value: response.statusCode);
       return response.data;
     } on DioException catch (e) {
       handleDioExceptions(e);
