@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:project2/api/api_consumer.dart';
 import 'package:project2/api/api_interceptors.dart';
-import 'package:project2/api/end_points.dart';
 import 'package:project2/cache/cache_helper.dart';
 import 'package:project2/model/errors/exceptions.dart';
 
@@ -9,21 +8,21 @@ class DioConsumer extends ApiConsumer {
   final Dio dio;
 
   DioConsumer({required this.dio}) {
-    //to make one time used base url (Version1)
+    ///to make one time used base url (v1)
     // dio.options.baseUrl = "https://food-api-omega.vercel.app/api/v1/" ;
 
-    //to make one time used base url (V2)
+    ///to make one time used base url (v2)
     // dio.options.baseUrl = EndPoint.baseUrl ;
     // dio.options.baseUrl = "http://10.0.2.2:8000/api/" ;
 
     //to add my interceptor
-    dio.interceptors.add(ApiInterceptor()) ;
+    dio.interceptors.add(ApiInterceptor());
 
     // here send token
     // String tok = CacheHelper().getData(key: 'token') ;
     // dio.options.headers['Authorization'] = "Bearer $tok" ;
 
-    //to print my request info
+    ///to print my request info (optional)
     dio.interceptors.add(LogInterceptor(
       request: true,
       requestHeader: true,
@@ -66,7 +65,8 @@ class DioConsumer extends ApiConsumer {
         data: isFormData ? FormData.fromMap(data) : data,
         queryParameters: queryParameters,
       );
-      CacheHelper().saveData(key: 'StatusCode', value: response.statusCode) ;
+      CacheHelper().saveData(key: 'statusCode', value: response.statusCode);
+      // print("✅ POST status: ${response.statusCode}+++++++++++++++++++++++++++");
       return response.data;
     } on DioException catch (e) {
       handleDioExceptions(e);
@@ -86,6 +86,7 @@ class DioConsumer extends ApiConsumer {
         data: isFormData ? FormData.fromMap(data) : data,
         queryParameters: queryParameters,
       );
+      CacheHelper().saveData(key: 'statusCode', value: response.statusCode);
       return response.data;
     } on DioException catch (e) {
       handleDioExceptions(e);
@@ -105,24 +106,27 @@ class DioConsumer extends ApiConsumer {
         data: isFormData ? FormData.fromMap(data) : data,
         queryParameters: queryParameters,
       );
+      CacheHelper().saveData(key: 'statusCode', value: response.statusCode);
       return response.data;
     } on DioException catch (e) {
       handleDioExceptions(e);
     }
   }
+
   @override
   Future put(
-      String path, {
-        data,
-        Map<String, dynamic>? queryParameters,
-        bool isFormData = false,
-      }) async {
+    String path, {
+    data,
+    Map<String, dynamic>? queryParameters,
+    bool isFormData = false,
+  }) async {
     try {
       final response = await dio.put(
         path,
         data: isFormData ? FormData.fromMap(data) : data,
         queryParameters: queryParameters,
       );
+      CacheHelper().saveData(key: 'statusCode', value: response.statusCode);
       return response.data;
     } on DioException catch (e) {
       handleDioExceptions(e);
@@ -184,7 +188,7 @@ class DioConsumer extends ApiConsumer {
 //       handleDioExceptions(e);
 //     }
 //   }
-//
+
 //   @override
 //   Future post(
 //     String path, {
