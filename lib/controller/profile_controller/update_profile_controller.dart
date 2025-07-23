@@ -118,8 +118,8 @@ class UpdateProfileController extends GetxController {
         'name': editNameController.text,
         'phone': editPhoneController.text,
         'email': editEmailController.text,
-        'password': editPasswordController.text,
-        'password_confirmation': editPasswordController.text,
+        // 'password': editPasswordController.text,
+        // 'password_confirmation': editPasswordController.text,
       });
       if(CacheHelper().getData(key: 'statusCode') == 200){
         print('++++++++++++++++++++++++++++++++++++++++++++++');

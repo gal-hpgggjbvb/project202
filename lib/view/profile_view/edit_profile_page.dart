@@ -259,53 +259,53 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   ///todo save changes button
                   ElevatedButton.icon(
                     onPressed: () async {
-                      AwesomeDialog(
-                        context: context,
-                        width: double.infinity,
-                        dialogType: DialogType.noHeader,
-                        customHeader: const Icon(
-                          Icons.lock,
-                          color: Colors.redAccent,
-                          size: 70,
-                        ),
-                        animType: AnimType.topSlide,
-                        dialogBorderRadius: BorderRadius.circular(20),
-                        body: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                          child: Column(
-                            children: [
-                              Text('Enter password to save changes',
-                              style: TextStyle(
-                                fontFamily: "Satoshi",
-                                color: context.theme.colorScheme.onSecondary,
-                                fontSize: 17,
-                                fontWeight: FontWeight.normal, // typing style
-                              ),),
-                              addVerticalSpace(20),
-                              CustomTextFormField(
-                                controller: updateProfileController.editPasswordController,
-                                hintText: 'enter password',
-                                textInputType: TextInputType.visiblePassword,
-                                isPassword: true,
-                              ),
-                              addVerticalSpace(20),
-                            ],
-                          ),
-                        ),
-                        btnOkText: "Save Changes",
-                        btnCancelText: "Cansel",
-                        buttonsTextStyle: const TextStyle(
-                          fontFamily: "Satoshi",
-                          color: Colors.white,
-                          fontSize: 17,
-                          fontWeight: FontWeight.normal, // typing style
-                        ),
-                        btnCancelOnPress: () {},
-                        btnOkOnPress: () async {
-                          await updateProfileController.editProfile();
-                        },
-                      ).show();
-
+                      await updateProfileController.editProfile();
+                      // AwesomeDialog(
+                      //   context: context,
+                      //   width: double.infinity,
+                      //   dialogType: DialogType.noHeader,
+                      //   customHeader: const Icon(
+                      //     Icons.lock,
+                      //     color: Colors.redAccent,
+                      //     size: 70,
+                      //   ),
+                      //   animType: AnimType.topSlide,
+                      //   dialogBorderRadius: BorderRadius.circular(20),
+                      //   body: Padding(
+                      //     padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                      //     child: Column(
+                      //       children: [
+                      //         Text('Enter password to save changes',
+                      //         style: TextStyle(
+                      //           fontFamily: "Satoshi",
+                      //           color: context.theme.colorScheme.onSecondary,
+                      //           fontSize: 17,
+                      //           fontWeight: FontWeight.normal, // typing style
+                      //         ),),
+                      //         addVerticalSpace(20),
+                      //         CustomTextFormField(
+                      //           controller: updateProfileController.editPasswordController,
+                      //           hintText: 'enter password',
+                      //           textInputType: TextInputType.visiblePassword,
+                      //           isPassword: true,
+                      //         ),
+                      //         addVerticalSpace(20),
+                      //       ],
+                      //     ),
+                      //   ),
+                      //   btnOkText: "Save Changes",
+                      //   btnCancelText: "Cansel",
+                      //   buttonsTextStyle: const TextStyle(
+                      //     fontFamily: "Satoshi",
+                      //     color: Colors.white,
+                      //     fontSize: 17,
+                      //     fontWeight: FontWeight.normal, // typing style
+                      //   ),
+                      //   btnCancelOnPress: () {},
+                      //   btnOkOnPress: () async {
+                      //     await updateProfileController.editProfile();
+                      //   },
+                      // ).show();
                     },
                     icon: Icon(Icons.save, color: context.theme.colorScheme.secondary,),
                     label: Text(

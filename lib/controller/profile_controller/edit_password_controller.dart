@@ -35,9 +35,9 @@ class EditPasswordController extends GetxController {
     try {
       await CacheHelper().saveData(key: 'sendToken', value: true);
       signStatus.changeLoadingProgress();
-      final response = await api.put('http://10.0.2.2:8000/api/user/profile',
+      await api.put('http://10.0.2.2:8000/api/user/profile',
           data: {
-            // 'oldPassword': oldPasswordController.text,
+            'current_password': oldPasswordController.text,
             'password': newPasswordController.text,
             'password_confirmation': confirmNewPasswordController.text,
           });
@@ -45,6 +45,7 @@ class EditPasswordController extends GetxController {
         signStatus.changeLoadingProgress();
         signStatus.signSuccess('updated password successfully', '');
         // await profileInfoController.fetchProfileInfo();
+        CacheHelper().removeData(key: 'statusCode');
       }
       else{
         signStatus.changeLoadingProgress();
