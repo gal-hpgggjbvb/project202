@@ -497,6 +497,7 @@ class _UserPageState extends State<UserPage>
                     onPressed: () async {
                       print('_____________________________________________');
                       print(CacheHelper().getData(key: 'token'));
+                      print(CacheHelper().getData(key: 'statusCode'));
                       print('_____________________________________________');
                     },
                     color: Colors.green,
@@ -524,11 +525,12 @@ class _UserPageState extends State<UserPage>
             ),
             //todo my orders page -second tab-
             GetBuilder<FetchOrdersController>(
-              init: fetchOrdersController,
+              // init: fetchOrdersController,
               builder: (controller) {
                 if (controller.orderList.isEmpty) {
                   //todo center text if there are no orders
                   return RefreshIndicator(
+                    key: fetchOrdersController.refreshKey,
                     onRefresh: controller.refreshTab2,
                     // color: Colors.orangeAccent,
                     color: context.theme.primaryColor,
@@ -554,6 +556,7 @@ class _UserPageState extends State<UserPage>
                   );
                 } else {
                   return RefreshIndicator(
+                    key: fetchOrdersController.refreshKey,
                     onRefresh: () async {
                       await controller.refreshTab2();
                     },
