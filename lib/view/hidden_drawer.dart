@@ -7,7 +7,7 @@ import 'package:project2/view/home_page.dart';
 import 'package:project2/view/notifications_page.dart';
 import 'package:project2/view/settings_page.dart';
 import 'package:project2/view/sign_out_page.dart';
-import 'package:project2/view/user_view/profile_page.dart';
+import 'package:project2/view/profile_view/profile_page.dart';
 import 'package:project2/view/user_view/user_page.dart';
 
 class HiddenDrawer extends StatefulWidget {
