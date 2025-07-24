@@ -28,6 +28,9 @@ class FetchOrdersController extends GetxController {
 
   //for refresh indicator
   GlobalKey<RefreshIndicatorState> refreshKey = GlobalKey();
+  GlobalKey<RefreshIndicatorState> refreshKey1 = GlobalKey();
+  GlobalKey<RefreshIndicatorState> refreshKey2 = GlobalKey();
+  GlobalKey<RefreshIndicatorState> refreshKey3 = GlobalKey();
   // GlobalKey<RefreshIndicatorState> refreshKey = GlobalKey<RefreshIndicatorState>();
 
   // var ordersList = <Orders>[];
@@ -44,7 +47,9 @@ class FetchOrdersController extends GetxController {
   // }
 
   Future<void> refreshTab1() async {
+    refreshKey1.currentState?.show();
     await fetchPendingOrders();
+    print('refresh tab pending orders ++++++++++++++++++++++++++++++++++');
     update();
   }
   Future<void> refreshTab2() async {
@@ -84,8 +89,8 @@ class FetchOrdersController extends GetxController {
   fetchPendingOrders() async {
     try {
       //todo to trigger refresh
-      refreshKey.currentState?.show();
-      // print('pending orders ++++++++++++++++++++++++++++++++++');
+      // refreshKey1.currentState?.show();
+      print('fetch pending orders ++++++++++++++++++++++++++++++++++');
       pendingOrdersList.clear();
       await CacheHelper().saveData(key: 'sendToken', value: true);
       final response = await api.get(
@@ -108,14 +113,14 @@ class FetchOrdersController extends GetxController {
     //todo to trigger refresh
     // refreshKey.currentState?.show();
     //todo to update tab2 -refresh-
-    update();
+    // update();
   }
 
   ///todo in progress orders
   fetchInProgressOrders() async {
     try {
       //todo to trigger refresh
-      refreshKey.currentState?.show();
+      refreshKey2.currentState?.show();
       inProgressOrdersList.clear();
       await CacheHelper().saveData(key: 'sendToken', value: true);
       final response = await api.get(
@@ -144,7 +149,7 @@ class FetchOrdersController extends GetxController {
   fetchCompletedOrders() async {
     try {
       //todo to trigger refresh
-      refreshKey.currentState?.show();
+      refreshKey3.currentState?.show();
       completedOrdersList.clear();
       await CacheHelper().saveData(key: 'sendToken', value: true);
       final response = await api.get(

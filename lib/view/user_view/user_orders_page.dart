@@ -27,22 +27,37 @@ class _UserOrdersPageState extends State<UserOrdersPage>
         Get.put(FetchOrdersController(DioConsumer(dio: Dio())));
 
     tabController = TabController(length: 3, vsync: this);
-    //to listen to change in tabs
-    tabController!.addListener(() {
-      if (tabController!.indexIsChanging) {
-        return;
+    tabController!.addListener(() async {
+      if (!tabController!.indexIsChanging && tabController!.index == 0) {
+        // await Future.delayed(Duration(milliseconds: 100)); // wait for tab to fully build
+        // await fetchOrdersController.refreshTab1();
+        ///call only once
+        fetchOrdersController.refreshKey1.currentState?.show();
+        print('listener refresh tab pending orders ++++++++++++++++++++++++++++++++++');
+      } else if (!tabController!.indexIsChanging && tabController!.index == 1) {
+        fetchOrdersController.refreshKey2.currentState?.show();
+      } else if (!tabController!.indexIsChanging && tabController!.index == 2) {
+        fetchOrdersController.refreshKey3.currentState?.show();
       }
-      if (tabController!.index == 0) {
-        fetchOrdersController.refreshTab1();
-      }
-      if (tabController!.index == 1) {
-        fetchOrdersController.refreshTab2();
-      }
-      if (tabController!.index == 3) {
-        fetchOrdersController.refreshTab3();
-      }
-
     });
+
+    ///to listen to change in tabs
+    // tabController!.addListener(() {
+    //   if (tabController!.indexIsChanging) {
+    //     return;
+    //   }
+    //   if (tabController!.index == 0) {
+    //     fetchOrdersController.refreshKey1.currentState?.show();
+    //     fetchOrdersController.refreshTab1();
+    //   }
+    //   if (tabController!.index == 1) {
+    //     fetchOrdersController.refreshTab2();
+    //   }
+    //   if (tabController!.index == 3) {
+    //     fetchOrdersController.refreshTab3();
+    //   }
+    //
+    // });
     super.initState();
   }
 
@@ -148,7 +163,7 @@ class _UserOrdersPageState extends State<UserOrdersPage>
               if (controller.pendingOrdersList.isEmpty) {
                 //todo center text if there are no orders
                 return RefreshIndicator(
-                  // key: fetchOrdersController.refreshKey,
+                  key: fetchOrdersController.refreshKey1,
                   onRefresh: controller.refreshTab1,
                   // color: Colors.orangeAccent,
                   color: context.theme.primaryColor,
@@ -174,10 +189,11 @@ class _UserOrdersPageState extends State<UserOrdersPage>
                 );
               } else {
                 return RefreshIndicator(
-                  // key: fetchOrdersController.refreshKey,
-                  onRefresh: () async {
-                    await controller.fetchPendingOrders();
-                  },
+                  key: fetchOrdersController.refreshKey1,
+                  onRefresh: controller.refreshTab1,
+                  // onRefresh: () async {
+                  //   await controller.fetchPendingOrders();
+                  // },
                   color: context.theme.primaryColor,
                   backgroundColor: context.theme.primaryColorLight,
                   child: ListView.builder(
@@ -211,7 +227,7 @@ class _UserOrdersPageState extends State<UserOrdersPage>
               if (controller.inProgressOrdersList.isEmpty) {
                 //todo center text if there are no orders
                 return RefreshIndicator(
-                  // key: fetchOrdersController.refreshKey,
+                  key: fetchOrdersController.refreshKey2,
                   onRefresh: controller.refreshTab2,
                   // color: Colors.orangeAccent,
                   color: context.theme.primaryColor,
@@ -237,7 +253,7 @@ class _UserOrdersPageState extends State<UserOrdersPage>
                 );
               } else {
                 return RefreshIndicator(
-                  // key: fetchOrdersController.refreshKey,
+                  key: fetchOrdersController.refreshKey2,
                   onRefresh: () async {
                     await controller.fetchInProgressOrders();
                   },
@@ -274,7 +290,7 @@ class _UserOrdersPageState extends State<UserOrdersPage>
               if (controller.completedOrdersList.isEmpty) {
                 //todo center text if there are no orders
                 return RefreshIndicator(
-                  // key: fetchOrdersController.refreshKey,
+                  key: fetchOrdersController.refreshKey3,
                   onRefresh: controller.refreshTab3,
                   // color: Colors.orangeAccent,
                   color: context.theme.primaryColor,
@@ -301,7 +317,7 @@ class _UserOrdersPageState extends State<UserOrdersPage>
                 );
               } else {
                 return RefreshIndicator(
-                  key: fetchOrdersController.refreshKey,
+                  key: fetchOrdersController.refreshKey3,
                   onRefresh: () async {
                     await controller.fetchCompletedOrders();
                   },
