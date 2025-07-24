@@ -33,6 +33,8 @@ class CustomExpansionTile extends StatelessWidget {
 
   final DateTime created;
 
+  final bool? buttons;
+
   const CustomExpansionTile(
       {super.key,
       required this.leading,
@@ -43,7 +45,8 @@ class CustomExpansionTile extends StatelessWidget {
       required this.source,
       required this.destination,
       required this.status,
-      required this.created});
+      required this.created,
+      this.buttons=false,});
 
   @override
   Widget build(BuildContext context) {
@@ -68,8 +71,8 @@ class CustomExpansionTile extends StatelessWidget {
           ),
         ),
         title: Text(
-          title.length > 8
-              ? '   Order Name: \n   ${title.substring(0, 8)}...'
+          title.length > 7
+              ? '   Order Name: \n   ${title.substring(0, 7)}..'
               : '   Order Name: \n   $title',
           style: TextStyle(
             fontFamily: "Satoshi",
@@ -263,7 +266,7 @@ class CustomExpansionTile extends StatelessWidget {
                 child: Divider(),
               ),
               //todo buttons
-              Row(
+              buttons! ? Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   //todo edit button
@@ -447,7 +450,7 @@ class CustomExpansionTile extends StatelessWidget {
                     ),
                   ),
                 ],
-              ),
+              ) : const SizedBox(height: 10,),
               addVerticalSpace(5),
               // Text('data'),
               // Text('data'),

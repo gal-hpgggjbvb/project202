@@ -43,3 +43,10 @@ Future<void> uploadFileImage(File imageFile) async {
   //   print("❌ Upload error: $e");
   // }
 }
+
+// final picker = ImagePicker();
+// final picked = await picker.pickImage(source: ImageSource.gallery);
+// if (picked != null) {
+// File file = File(picked.path);
+// await uploadFileImage(file);
+// }

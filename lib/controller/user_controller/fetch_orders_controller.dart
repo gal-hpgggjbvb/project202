@@ -32,18 +32,35 @@ class FetchOrdersController extends GetxController {
 
   // var ordersList = <Orders>[];
   List<dynamic> orderList = [];
+  List<dynamic> pendingOrdersList = [];
+  List<dynamic> inProgressOrdersList = [];
+  List<dynamic> completedOrdersList = [];
 
+  // Future<void> refreshTab2() async {
+  //   // await Future.delayed(const Duration(seconds: 1)) ;
+  //   // await CacheHelper().saveData(key: 'sendToken', value: true);
+  //   await fetchOrders();
+  //   update();
+  // }
+
+  Future<void> refreshTab1() async {
+    await fetchPendingOrders();
+    update();
+  }
   Future<void> refreshTab2() async {
-    // await Future.delayed(const Duration(seconds: 1)) ;
-    await CacheHelper().saveData(key: 'sendToken', value: true);
-    await fetchOrders();
+    await fetchInProgressOrders();
+    update();
+  }
+  Future<void> refreshTab3() async {
+    await fetchCompletedOrders();
     update();
   }
 
   fetchOrders() async {
     try {
       //todo to trigger refresh
-      refreshKey.currentState?.show();
+      // refreshKey.currentState?.show();
+      // print('fetch orders ++++++++++++++++++++++++++++++++++');
       await CacheHelper().saveData(key: 'sendToken', value: true);
       final response = await api.get(
         'http://10.0.2.2:8000/api/orders/my_orders',
@@ -63,6 +80,96 @@ class FetchOrdersController extends GetxController {
     update();
   }
 
+  ///todo pending orders
+  fetchPendingOrders() async {
+    try {
+      //todo to trigger refresh
+      refreshKey.currentState?.show();
+      // print('pending orders ++++++++++++++++++++++++++++++++++');
+      pendingOrdersList.clear();
+      await CacheHelper().saveData(key: 'sendToken', value: true);
+      final response = await api.get(
+        'http://10.0.2.2:8000/api/orders/my_orders',
+      );
+      if (CacheHelper().getData(key: 'statusCode') == 200) {
+        fetchOrdersModel = FetchOrdersModel.fromJson(response);
+        for(int i=0 ; i<fetchOrdersModel!.orders.length ; i++){
+          if(fetchOrdersModel!.orders[i].status == 'pending'){
+            pendingOrdersList.add(fetchOrdersModel!.orders[i]);
+          }
+        }
+        print(response);
+        print(pendingOrdersList[0].id);
+        CacheHelper().removeData(key: 'statusCode');
+      }
+    } on ServerExceptions catch (e) {
+      SignFailed(errorMessage: e.errorModel.message);
+    }
+    //todo to trigger refresh
+    // refreshKey.currentState?.show();
+    //todo to update tab2 -refresh-
+    update();
+  }
+
+  ///todo in progress orders
+  fetchInProgressOrders() async {
+    try {
+      //todo to trigger refresh
+      refreshKey.currentState?.show();
+      inProgressOrdersList.clear();
+      await CacheHelper().saveData(key: 'sendToken', value: true);
+      final response = await api.get(
+        'http://10.0.2.2:8000/api/orders/my_orders',
+      );
+      if (CacheHelper().getData(key: 'statusCode') == 200) {
+        fetchOrdersModel = FetchOrdersModel.fromJson(response);
+        for(int i=0 ; i<fetchOrdersModel!.orders.length ; i++){
+          if(fetchOrdersModel!.orders[i].status == 'in_progress'){
+            inProgressOrdersList.add(fetchOrdersModel!.orders[i]);
+          }
+        }
+        // print(response);
+        CacheHelper().removeData(key: 'statusCode');
+      }
+    } on ServerExceptions catch (e) {
+      SignFailed(errorMessage: e.errorModel.message);
+    }
+    //todo to trigger refresh
+    // refreshKey.currentState?.show();
+    //todo to update tab2 -refresh-
+    update();
+  }
+
+  ///todo completed orders
+  fetchCompletedOrders() async {
+    try {
+      //todo to trigger refresh
+      refreshKey.currentState?.show();
+      completedOrdersList.clear();
+      await CacheHelper().saveData(key: 'sendToken', value: true);
+      final response = await api.get(
+        'http://10.0.2.2:8000/api/orders/my_orders',
+      );
+      if (CacheHelper().getData(key: 'statusCode') == 200) {
+        fetchOrdersModel = FetchOrdersModel.fromJson(response);
+        for(int i=0 ; i<fetchOrdersModel!.orders.length ; i++){
+          if(fetchOrdersModel!.orders[i].status == 'completed'){
+            completedOrdersList.add(fetchOrdersModel!.orders[i]);
+          }
+        }
+        // print(response);
+        CacheHelper().removeData(key: 'statusCode');
+      }
+    } on ServerExceptions catch (e) {
+      SignFailed(errorMessage: e.errorModel.message);
+    }
+    //todo to trigger refresh
+    // refreshKey.currentState?.show();
+    //todo to update tab2 -refresh-
+    update();
+  }
+
+  ///todo delete order
   deleteOrder() async {
     try {
       await CacheHelper().saveData(key: 'sendToken', value: true);
@@ -84,6 +191,7 @@ class FetchOrdersController extends GetxController {
     update();
   }
 
+  ///todo edit order
   editOrder() async {
     try {
       await CacheHelper().saveData(key: 'sendToken', value: true);

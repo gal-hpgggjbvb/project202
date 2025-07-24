@@ -17,27 +17,27 @@ ThemeData lightTheme = ThemeData(
   ),
 
   //todo tabBar
-  tabBarTheme: TabBarTheme(
-    labelColor: Colors.black,
-    labelStyle: const TextStyle(
-      fontFamily: "Satoshi",
-      fontSize: 15,
-      fontWeight: FontWeight.w700, // typing style
-    ),
-    unselectedLabelColor: Colors.grey.shade700,
-    indicatorSize: TabBarIndicatorSize.tab,
-    indicatorColor: Colors.deepOrange,
-    // indicator: UnderlineTabIndicator(
-    //   borderSide: BorderSide(width: 3.0, color: Colors.orange),
-    // ),
-    //todo another indicator theme
-    // indicator: BoxDecoration(
-    //   borderRadius: BorderRadius.circular(50),
-    //   color: Colors.orange.withOpacity(0.2),
-    // ),
-
-    // labelPadding: EdgeInsets.symmetric(horizontal: 5),
-  ),
+  // tabBarTheme: TabBarTheme(
+  //   labelColor: Colors.black,
+  //   labelStyle: const TextStyle(
+  //     fontFamily: "Satoshi",
+  //     fontSize: 15,
+  //     fontWeight: FontWeight.w700, // typing style
+  //   ),
+  //   unselectedLabelColor: Colors.grey.shade700,
+  //   indicatorSize: TabBarIndicatorSize.tab,
+  //   indicatorColor: Colors.deepOrange,
+  //   // indicator: UnderlineTabIndicator(
+  //   //   borderSide: BorderSide(width: 3.0, color: Colors.orange),
+  //   // ),
+  //   //todo another indicator theme
+  //   // indicator: BoxDecoration(
+  //   //   borderRadius: BorderRadius.circular(50),
+  //   //   color: Colors.orange.withOpacity(0.2),
+  //   // ),
+  //
+  //   // labelPadding: EdgeInsets.symmetric(horizontal: 5),
+  // ),
 
   //todo colorScheme
   colorScheme: ColorScheme.light(
