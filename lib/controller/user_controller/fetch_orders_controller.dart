@@ -89,7 +89,7 @@ class FetchOrdersController extends GetxController {
   fetchPendingOrders() async {
     try {
       //todo to trigger refresh
-      // refreshKey1.currentState?.show();
+      refreshKey1.currentState?.show();
       print('fetch pending orders ++++++++++++++++++++++++++++++++++');
       pendingOrdersList.clear();
       await CacheHelper().saveData(key: 'sendToken', value: true);
@@ -103,9 +103,10 @@ class FetchOrdersController extends GetxController {
             pendingOrdersList.add(fetchOrdersModel!.orders[i]);
           }
         }
-        print(response);
-        print(pendingOrdersList[0].id);
+        // print(response);
+        // print(pendingOrdersList[0].id);
         CacheHelper().removeData(key: 'statusCode');
+        // await refreshTab1();
       }
     } on ServerExceptions catch (e) {
       SignFailed(errorMessage: e.errorModel.message);
@@ -182,7 +183,7 @@ class FetchOrdersController extends GetxController {
       await api.delete('http://10.0.2.2:8000/api/orders/$orderId');
       // print('delete response here ***********************************');
       if (CacheHelper().getData(key: 'statusCode') == 200) {
-        SignStatus().signSuccess('order deleted successfully', '');
+        SignStatus().signSuccess('order $orderId deleted successfully', '');
         CacheHelper().removeData(key: 'orderID');
         CacheHelper().removeData(key: 'statusCode');
       }
@@ -192,7 +193,8 @@ class FetchOrdersController extends GetxController {
     }
     // print('try fetching after delete here ************************************');
     // refreshTab2() ;
-    fetchOrders();
+    fetchPendingOrders();
+    // fetchOrders();
     update();
   }
 
@@ -211,14 +213,16 @@ class FetchOrdersController extends GetxController {
       });
       if (CacheHelper().getData(key: 'statusCode') == 200) {
         print(response);
-        SignStatus().signSuccess('order edited successfully', '');
+        SignStatus().signSuccess('order $orderId edited successfully', '');
         // showSuccessDialog( Get.context ,title: 'Your Order Updated Successfully', desc: 'Done',onOk: (){}) ;
         CacheHelper().removeData(key: 'statusCode');
       }
     } on ServerExceptions catch (e) {
       SignFailed(errorMessage: e.errorModel.message);
     }
-    fetchOrders();
+    fetchPendingOrders();
+    // refreshKey1.currentState?.show();
+    // fetchOrders();
     update();
   }
 }

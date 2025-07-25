@@ -226,28 +226,31 @@ class _UserPageState extends State<UserPage>
                   ),
                 ),
               ),
-              addVerticalSpace(20),
+              addVerticalSpace(30),
               ///todo my orders button
-              //todo add order button
-              MaterialButton(
-                onPressed: (){
-                  Get.to(() => const UserOrdersPage());
-                },
-                color: context.theme.primaryColor,
-                elevation: 15,
-                splashColor:
-                context.theme.buttonTheme.colorScheme!.onBackground,
-                child: Text(
-                  "show my orders",
-                  style: TextStyle(
-                    fontFamily: "Satoshi",
-                    color: context.theme.colorScheme.secondary,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                child: MaterialButton(
+                  onPressed: (){
+                    Get.to(() => const UserOrdersPage());
+                  },
+                  color: context.theme.primaryColor,
+                  elevation: 15,
+                  splashColor:
+                  context.theme.buttonTheme.colorScheme!.onBackground,
+                  height: 75,
+                  child: Text(
+                    "show my orders",
+                    style: TextStyle(
+                      fontFamily: "Satoshi",
+                      color: context.theme.colorScheme.secondary,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
-              addVerticalSpace(20),
+              addVerticalSpace(70),
               MaterialButton(
                 onPressed: () async {
                   print('_____________________________________________');
@@ -261,7 +264,6 @@ class _UserPageState extends State<UserPage>
                   style: TextStyle(color: Colors.white),
                 ),
               ),
-              addVerticalSpace(10),
 
               ///todo pop v1
               // GestureDetector(
@@ -274,11 +276,13 @@ class _UserPageState extends State<UserPage>
               //   child: Icon(Icons.filter_alt,
               //   )
               // ),
-              addVerticalSpace(90),
+              addVerticalSpace(30),
               CustomOrderField(
                   controller: orderController.objectNameController,
                   hintText: 'another way for order ui',
                   labelText: 'another way'),
+
+
             ],
           ),
         ),

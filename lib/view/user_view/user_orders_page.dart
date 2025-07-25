@@ -22,11 +22,14 @@ class _UserOrdersPageState extends State<UserOrdersPage>
 
   @override
   void initState() {
-    // orderController = Get.put(OrderController(DioConsumer(dio: Dio())));
     fetchOrdersController =
         Get.put(FetchOrdersController(DioConsumer(dio: Dio())));
+    ///to refresh on start
+    // fetchOrdersController.refreshKey1.currentState?.show();
+    fetchOrdersController.refreshTab1();
 
     tabController = TabController(length: 3, vsync: this);
+    ///to listen to change in tabs
     tabController!.addListener(() async {
       if (!tabController!.indexIsChanging && tabController!.index == 0) {
         // await Future.delayed(Duration(milliseconds: 100)); // wait for tab to fully build
@@ -41,29 +44,13 @@ class _UserOrdersPageState extends State<UserOrdersPage>
       }
     });
 
-    ///to listen to change in tabs
-    // tabController!.addListener(() {
-    //   if (tabController!.indexIsChanging) {
-    //     return;
-    //   }
-    //   if (tabController!.index == 0) {
-    //     fetchOrdersController.refreshKey1.currentState?.show();
-    //     fetchOrdersController.refreshTab1();
-    //   }
-    //   if (tabController!.index == 1) {
-    //     fetchOrdersController.refreshTab2();
-    //   }
-    //   if (tabController!.index == 3) {
-    //     fetchOrdersController.refreshTab3();
-    //   }
-    //
-    // });
     super.initState();
   }
 
   @override
   void dispose() {
     tabController?.dispose();
+    fetchOrdersController.dispose();
     super.dispose();
   }
 
@@ -304,7 +291,7 @@ class _UserOrdersPageState extends State<UserOrdersPage>
                       // 👈 fake height to enable scroll
                       Center(
                           child: Text(
-                            '    No orders yet...\nScroll down to refresh',
+                            'No completed orders yet...\n    Scroll down to refresh',
                         style: TextStyle(
                           color: context.theme.primaryColorDark,
                           fontSize: 17,
