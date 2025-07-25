@@ -24,11 +24,13 @@ class _UserOrdersPageState extends State<UserOrdersPage>
   void initState() {
     fetchOrdersController =
         Get.put(FetchOrdersController(DioConsumer(dio: Dio())));
+
     ///to refresh on start
     // fetchOrdersController.refreshKey1.currentState?.show();
     fetchOrdersController.refreshTab1();
 
     tabController = TabController(length: 3, vsync: this);
+
     ///to listen to change in tabs
     tabController!.addListener(() async {
       if (!tabController!.indexIsChanging && tabController!.index == 0) {
@@ -36,7 +38,8 @@ class _UserOrdersPageState extends State<UserOrdersPage>
         // await fetchOrdersController.refreshTab1();
         ///call only once
         fetchOrdersController.refreshKey1.currentState?.show();
-        print('listener refresh tab pending orders ++++++++++++++++++++++++++++++++++');
+        print(
+            'listener refresh tab pending orders ++++++++++++++++++++++++++++++++++');
       } else if (!tabController!.indexIsChanging && tabController!.index == 1) {
         fetchOrdersController.refreshKey2.currentState?.show();
       } else if (!tabController!.indexIsChanging && tabController!.index == 2) {
@@ -82,8 +85,12 @@ class _UserOrdersPageState extends State<UserOrdersPage>
           ),
           tabs: const [
             Tab(text: 'pending'),
-            Tab(text: 'in progress',),
-            Tab(text: 'completed',),
+            Tab(
+              text: 'in progress',
+            ),
+            Tab(
+              text: 'completed',
+            ),
           ],
         ),
 
@@ -195,7 +202,8 @@ class _UserOrdersPageState extends State<UserOrdersPage>
                         id: controller.pendingOrdersList[i].id,
                         name: controller.pendingOrdersList[i].orderName,
                         source: controller.pendingOrdersList[i].source,
-                        destination: controller.pendingOrdersList[i].destination,
+                        destination:
+                            controller.pendingOrdersList[i].destination,
                         status: controller.pendingOrdersList[i].status,
                         created: controller.pendingOrdersList[i].createdAt,
                         buttons: true,
@@ -252,17 +260,24 @@ class _UserOrdersPageState extends State<UserOrdersPage>
                     itemCount: controller.inProgressOrdersList.length,
                     itemBuilder: (context, i) {
                       return CustomExpansionTile(
-                        leading: controller.inProgressOrdersList[i].id,
-                        title: controller.inProgressOrdersList[i].orderName,
-                        trailing: controller.inProgressOrdersList[i].status,
-                        id: controller.inProgressOrdersList[i].id,
-                        name: controller.inProgressOrdersList[i].orderName,
-                        source: controller.inProgressOrdersList[i].source,
-                        destination: controller.inProgressOrdersList[i].destination,
-                        status: controller.inProgressOrdersList[i].status,
-                        created: controller.inProgressOrdersList[i].createdAt,
-                          buttons: false
-                      );
+                          leading: controller.inProgressOrdersList[i].id,
+                          title: controller.inProgressOrdersList[i].orderName,
+                          trailing: controller.inProgressOrdersList[i].status,
+                          id: controller.inProgressOrdersList[i].id,
+                          name: controller.inProgressOrdersList[i].orderName,
+                          source: controller.inProgressOrdersList[i].source,
+                          destination:
+                              controller.inProgressOrdersList[i].destination,
+                          status: controller.inProgressOrdersList[i].status,
+                          created: controller.inProgressOrdersList[i].createdAt,
+                          updated: controller.inProgressOrdersList[i].updatedAt,
+                          deliveryManId:
+                              controller.inProgressOrdersList[i].driver.id,
+                          deliveryManName:
+                              controller.inProgressOrdersList[i].driver.name,
+                          deliveryManPhone:
+                              controller.inProgressOrdersList[i].driver.phone,
+                          buttons: false);
                     },
                   ),
                 );
@@ -290,14 +305,15 @@ class _UserOrdersPageState extends State<UserOrdersPage>
                       addVerticalSpace(300),
                       // 👈 fake height to enable scroll
                       Center(
-                          child: Text(
-                            'No completed orders yet...\n    Scroll down to refresh',
-                        style: TextStyle(
-                          color: context.theme.primaryColorDark,
-                          fontSize: 17,
-                          fontWeight: FontWeight.normal, // typing style
+                        child: Text(
+                          'No completed orders yet...\n    Scroll down to refresh',
+                          style: TextStyle(
+                            color: context.theme.primaryColorDark,
+                            fontSize: 17,
+                            fontWeight: FontWeight.normal, // typing style
+                          ),
                         ),
-                      ),),
+                      ),
                       addVerticalSpace(100),
                     ],
                   ),
@@ -316,17 +332,24 @@ class _UserOrdersPageState extends State<UserOrdersPage>
                     itemCount: controller.completedOrdersList.length,
                     itemBuilder: (context, i) {
                       return CustomExpansionTile(
-                        leading: controller.completedOrdersList[i].id,
-                        title: controller.completedOrdersList[i].orderName,
-                        trailing: controller.completedOrdersList[i].status,
-                        id: controller.completedOrdersList[i].id,
-                        name: controller.completedOrdersList[i].orderName,
-                        source: controller.completedOrdersList[i].source,
-                        destination: controller.completedOrdersList[i].destination,
-                        status: controller.completedOrdersList[i].status,
-                        created: controller.completedOrdersList[i].createdAt,
-                          buttons: false
-                      );
+                          leading: controller.completedOrdersList[i].id,
+                          title: controller.completedOrdersList[i].orderName,
+                          trailing: controller.completedOrdersList[i].status,
+                          id: controller.completedOrdersList[i].id,
+                          name: controller.completedOrdersList[i].orderName,
+                          source: controller.completedOrdersList[i].source,
+                          destination:
+                              controller.completedOrdersList[i].destination,
+                          status: controller.completedOrdersList[i].status,
+                          created: controller.completedOrdersList[i].createdAt,
+                          updated: controller.completedOrdersList[i].updatedAt,
+                          deliveryManId:
+                          controller.completedOrdersList[i].driver.id,
+                          deliveryManName:
+                          controller.completedOrdersList[i].driver.name,
+                          deliveryManPhone:
+                          controller.completedOrdersList[i].driver.phone,
+                          buttons: false);
                     },
                   ),
                 );
