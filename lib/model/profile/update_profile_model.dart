@@ -31,9 +31,9 @@ class Data {
   final String name;
   final String phone;
   final String email;
-  final String role;
-  final String? emailVerifiedAt;
-  final String? rememberToken;
+  // final String role;
+  // final String? emailVerifiedAt;
+  // final String? rememberToken;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -42,9 +42,9 @@ class Data {
     required this.name,
     required this.phone,
     required this.email,
-    required this.role,
-    this.emailVerifiedAt,
-    this.rememberToken,
+    // required this.role,
+    // this.emailVerifiedAt,
+    // this.rememberToken,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -55,9 +55,9 @@ class Data {
       name: jsonData['name'],
       phone: jsonData['phone'],
       email: jsonData['email'],
-      role: jsonData['role'],
-      emailVerifiedAt: jsonData['email_verified_at'],
-      rememberToken: jsonData['remember_token'],
+      // role: jsonData['role'],
+      // emailVerifiedAt: jsonData['email_verified_at'],
+      // rememberToken: jsonData['remember_token'],
       createdAt: DateTime.parse(jsonData['created_at']),
       updatedAt: DateTime.parse(jsonData['updated_at']),
     );
@@ -69,9 +69,9 @@ class Data {
       'name': name,
       'phone': phone,
       'email': email,
-      'role': role,
-      'email_verified_at': emailVerifiedAt,
-      'remember_token': rememberToken,
+      // 'role': role,
+      // 'email_verified_at': emailVerifiedAt,
+      // 'remember_token': rememberToken,
       'created_at': createdAt,
       'updated_at': updatedAt,
     };
