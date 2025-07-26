@@ -37,7 +37,11 @@ class _DeliveryManPageState extends State<DeliveryManPage>
 
     ///to refresh on start
     // availableOrdersController.refreshTabKey1.currentState?.show();
-    availableOrdersController.refreshAvailableOrders();
+    // availableOrdersController.refreshAvailableOrders();
+    /// Show the RefreshIndicator after the first frame is rendered
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      availableOrdersController.refreshTabKey1.currentState?.show();
+    });
     ///to listen to change in tabs
     tabController!.addListener(() async {
       if (!tabController!.indexIsChanging && tabController!.index == 0) {
@@ -203,7 +207,7 @@ class _DeliveryManPageState extends State<DeliveryManPage>
                   );
                 } else {
                   return RefreshIndicator(
-                    key: availableOrdersController.refreshTabKey1,
+                    key: availableOrdersController.refreshTabKey2,
                     onRefresh: () async {
                       await controller.fetchPickedOrders();
                     },

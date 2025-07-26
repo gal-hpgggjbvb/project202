@@ -21,9 +21,9 @@ class AvailableOrdersController extends GetxController {
     signStatus = Get.put(SignStatus());
   }
 
-  GlobalKey<RefreshIndicatorState> refreshTabKey1 = GlobalKey();
-  GlobalKey<RefreshIndicatorState> refreshTabKey2 = GlobalKey();
-  GlobalKey<RefreshIndicatorState> refreshTabKey3 = GlobalKey();
+  GlobalKey<RefreshIndicatorState> refreshTabKey1 = GlobalKey<RefreshIndicatorState>();
+  GlobalKey<RefreshIndicatorState> refreshTabKey2 = GlobalKey<RefreshIndicatorState>();
+  GlobalKey<RefreshIndicatorState> refreshTabKey3 = GlobalKey<RefreshIndicatorState>();
 
   List<dynamic> pendingOrdersList = [];
 
@@ -116,6 +116,7 @@ class AvailableOrdersController extends GetxController {
         // print(fetchPendingOrdersModel!.data[0].user.phone);
         CacheHelper().removeData(key: 'statusCode');
       }
+      update();
     } on ServerExceptions catch (e) {
       SignFailed(errorMessage: e.errorModel.message);
     }
@@ -141,6 +142,26 @@ class AvailableOrdersController extends GetxController {
     update();
   }
 
+  ///todo cancel order
+  cancelDelivery(int id) async {
+    try {
+      // refreshTabKey2.currentState?.show();
+      await CacheHelper().saveData(key: 'sendToken', value: true);
+      // int id = await CacheHelper().getData(key: 'orderId');
+      await api.post('http://10.0.2.2:8000/api/orders/cancel/$id');
+      if (CacheHelper().getData(key: 'statusCode') == 200) {
+        signStatus.signSuccess('canceled delivery id $id', 'done');
+        CacheHelper().removeData(key: 'statusCode');
+        // print('++++++++++++++++++++++++++${CacheHelper().getData(key: 'orderID')}');
+        // CacheHelper().removeData(key: 'orderId');
+        await refreshPickedOrders();
+      }
+    } on ServerExceptions catch (e) {
+      SignFailed(errorMessage: e.errorModel.message);
+    }
+    update();
+  }
+
   ///todo fetch completed Orders
   fetchCompletedOrders() async {
     try {
@@ -151,7 +172,8 @@ class AvailableOrdersController extends GetxController {
         'http://10.0.2.2:8000/api/orders/complete',
       );
       if (CacheHelper().getData(key: 'statusCode') == 200) {
-        fetchCompletedOrdersModel = FetchCompletedOrdersModel.fromJson(response);
+        fetchCompletedOrdersModel =
+            FetchCompletedOrdersModel.fromJson(response);
         completedOrdersList = fetchCompletedOrdersModel!.data;
         // print('++++++++++++++++++++++++++++++++++++++++++++++++++++++');
         // print(fetchPendingOrdersModel!.data[0].id);

@@ -420,7 +420,7 @@ class DeliveryExpTile extends StatelessWidget {
                               context.theme.primaryColorLight,
                           dialogBorderRadius: BorderRadius.circular(30),
                           btnOkText: 'Ok',
-                          btnCancelText: 'Cansel',
+                          btnCancelText: 'Cancel',
                           buttonsTextStyle: const TextStyle(
                             fontFamily: "Satoshi",
                             color: Colors.white,
@@ -429,8 +429,7 @@ class DeliveryExpTile extends StatelessWidget {
                           ),
                           btnCancelOnPress: () {},
                           btnOkOnPress: () async {
-                            await CacheHelper()
-                                .saveData(key: 'orderId', value: id);
+                            // await CacheHelper().saveData(key: 'orderId', value: id);
                             await availableOrdersController.pickDelivery(id);
                           },
                         ).show();
@@ -460,10 +459,16 @@ class DeliveryExpTile extends StatelessWidget {
                 ),
               addVerticalSpace(5),
 
-              ///todo complete order button
+              ///todo progress order buttons
               if (progressButton!)
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15.0),
+                  child: Divider(),
+                ),
+              if (progressButton!)
+                Column(
+                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     //todo complete button
                     MaterialButton(
@@ -484,7 +489,7 @@ class DeliveryExpTile extends StatelessWidget {
                               context.theme.primaryColorLight,
                           dialogBorderRadius: BorderRadius.circular(30),
                           btnOkText: 'Ok',
-                          btnCancelText: 'Cansel',
+                          btnCancelText: 'Cancel',
                           buttonsTextStyle: const TextStyle(
                             fontFamily: "Satoshi",
                             color: Colors.white,
@@ -511,6 +516,56 @@ class DeliveryExpTile extends StatelessWidget {
                         style: TextStyle(
                           fontFamily: "Satoshi",
                           color: Colors.green,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500, // typing style
+                        ),
+                      ),
+                    ),
+                    //todo cancel button
+                    MaterialButton(
+                      onPressed: () async {
+                        AwesomeDialog(
+                          context: context,
+                          dialogType: DialogType.warning,
+                          animType: AnimType.rightSlide,
+                          dismissOnTouchOutside: true,
+                          title: 'Cancel Order $id ?',
+                          titleTextStyle: TextStyle(
+                            fontFamily: "Satoshi",
+                            color: context.theme.colorScheme.onSecondary,
+                            fontSize: 17,
+                            fontWeight: FontWeight.normal, // typing style
+                          ),
+                          dialogBackgroundColor:
+                          context.theme.primaryColorLight,
+                          dialogBorderRadius: BorderRadius.circular(30),
+                          btnOkText: 'Yes',
+                          btnCancelText: 'No',
+                          buttonsTextStyle: const TextStyle(
+                            fontFamily: "Satoshi",
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500, // typing style
+                          ),
+                          btnCancelOnPress: () {},
+                          btnOkOnPress: () async {
+                            // await CacheHelper().saveData(key: 'orderId', value: id);
+                            await availableOrdersController.cancelDelivery(id);
+                          },
+                        ).show();
+                        // await CacheHelper().saveData(key: 'orderId', value: id);
+                        // await availableOrdersController.pickDelivery(id);
+                      },
+                      // color: Colors.blue,
+                      padding: const EdgeInsets.all(5),
+                      // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                      minWidth: 5,
+                      height: 10,
+                      child: const Text(
+                        "Cancel Delivery",
+                        style: TextStyle(
+                          fontFamily: "Satoshi",
+                          color: Colors.redAccent,
                           fontSize: 15,
                           fontWeight: FontWeight.w500, // typing style
                         ),
