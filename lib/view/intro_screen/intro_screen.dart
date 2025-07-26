@@ -23,12 +23,12 @@ final List<CustomIntroPage> introPages = [
   const CustomIntroPage(
     title: 'Your Order is Safe',
     body: 'Every Order Handled with Care and \n                      Precision.',
-    img: 'Animation - 1729504169221.json',
+    img: 'Delivery boy animation.json',
   ),
   const CustomIntroPage(
     title: 'Our Community',
     body: 'Join Thousands Who Trust Us to Deliver \n                  What Matters.',
-    img: 'Animation - 1729504047372.json',
+    img: 'groupofpeople.json',
   ),
 ];
 

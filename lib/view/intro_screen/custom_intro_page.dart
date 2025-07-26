@@ -28,7 +28,7 @@ class CustomIntroPage extends StatelessWidget {
                 child: Lottie.asset("images/$img")),
             // child: Image.asset("images/$img")),
           ),
-          addVerticalSpace(100),
+          addVerticalSpace(75),
           Text(
             title,
             style: TextStyle(

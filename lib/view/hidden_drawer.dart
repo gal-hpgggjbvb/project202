@@ -48,6 +48,7 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
       ///condition will be here
       // CacheHelper().getData(key: 'role') == 'normal' ?
       // CacheHelper().getData(key: 'role') != 'normal' ?
+      CacheHelper().getData(key: 'accountType') == 'user' ?
 
       ///todo main page user
       ScreenHiddenDrawer(
@@ -60,7 +61,8 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
             colorLineSelected: Colors.orange,
             // colorLineSelected: context.theme.primaryColor,
           ),
-          const UserPage()), ///condition here:  :
+          const UserPage())  ///condition here:
+       :
       ///todo main page delivery man
       ScreenHiddenDrawer(
           ItemHiddenMenu(
@@ -117,7 +119,6 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
       // backgroundColorAppBar: Theme.of(context).primaryColor,
       backgroundColorAppBar: context.theme.primaryColor,
       backgroundColorMenu: context.theme.primaryColorLight,
-
       screens: _pages,
       ///todo i will try use a condition here (normal/driver)
       initPositionSelected: 1,

@@ -62,7 +62,7 @@ class SignInController extends GetxController {
         CacheHelper().saveData(key: 'phone', value: decodedToken['phone']);
         CacheHelper().saveData(key: 'email', value: decodedToken['email']);
         CacheHelper().saveData(key: 'role', value: decodedToken['role']);
-
+        CacheHelper().saveData(key: 'accountType', value: accountType);
         // print("✅ Role : $accountType+++++++++++++++++++++++++++");
         // print("✅ POST status: ${await CacheHelper().getData(key: 'statusCode')}+++++++++++++++++++++++++++");
         signStatus.signSuccess('signin successful', 'welcome');

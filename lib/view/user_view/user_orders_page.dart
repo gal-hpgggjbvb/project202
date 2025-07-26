@@ -27,7 +27,11 @@ class _UserOrdersPageState extends State<UserOrdersPage>
 
     ///to refresh on start
     // fetchOrdersController.refreshKey1.currentState?.show();
-    fetchOrdersController.refreshTab1();
+    // fetchOrdersController.refreshTab1();
+    /// Show the RefreshIndicator after the first frame is rendered
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      fetchOrdersController.refreshKey1.currentState?.show();
+    });
 
     tabController = TabController(length: 3, vsync: this);
 
@@ -38,8 +42,6 @@ class _UserOrdersPageState extends State<UserOrdersPage>
         // await fetchOrdersController.refreshTab1();
         ///call only once
         fetchOrdersController.refreshKey1.currentState?.show();
-        print(
-            'listener refresh tab pending orders ++++++++++++++++++++++++++++++++++');
       } else if (!tabController!.indexIsChanging && tabController!.index == 1) {
         fetchOrdersController.refreshKey2.currentState?.show();
       } else if (!tabController!.indexIsChanging && tabController!.index == 2) {

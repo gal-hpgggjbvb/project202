@@ -50,7 +50,7 @@ class FetchOrdersController extends GetxController {
   Future<void> refreshTab1() async {
     refreshKey1.currentState?.show();
     await fetchPendingOrders();
-    print('refresh tab pending orders ++++++++++++++++++++++++++++++++++');
+    // print('refresh tab pending orders ++++++++++++++++++++++++++++++++++');
     update();
   }
 
@@ -70,7 +70,7 @@ class FetchOrdersController extends GetxController {
       //todo to trigger refresh
       refreshKey1.currentState?.show();
       // print('fetch pending orders ++++++++++++++++++++++++++++++++++');
-      pendingOrdersList.clear();
+      // pendingOrdersList.clear();
       await CacheHelper().saveData(key: 'sendToken', value: true);
       final response = await api.get(
         'http://10.0.2.2:8000/api/orders/my_pending_orders',
@@ -95,7 +95,7 @@ class FetchOrdersController extends GetxController {
     try {
       //todo to trigger refresh
       refreshKey2.currentState?.show();
-      inProgressOrdersList.clear();
+      // inProgressOrdersList.clear();
       await CacheHelper().saveData(key: 'sendToken', value: true);
       final response = await api.get(
         'http://10.0.2.2:8000/api/orders/my_progress_orders',
@@ -121,7 +121,7 @@ class FetchOrdersController extends GetxController {
     try {
       //todo to trigger refresh
       refreshKey3.currentState?.show();
-      completedOrdersList.clear();
+      // completedOrdersList.clear();
       await CacheHelper().saveData(key: 'sendToken', value: true);
       final response = await api.get(
         'http://10.0.2.2:8000/api/orders/my_completed_orders',

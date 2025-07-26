@@ -197,6 +197,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                     if (signUpController
                                         .signUpFormKey.currentState!
                                         .validate()) {
+                                      CacheHelper().saveData(key: 'accountType', value: 'user');
                                       await signUpController.signUp();
                                       if (CacheHelper()
                                           .getData(key: 'signDone')) {
