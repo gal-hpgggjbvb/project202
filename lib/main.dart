@@ -30,6 +30,7 @@ void main() async {
   await CacheHelper().init() ;
   //to take one object of the class
   // await getIt<CacheHelper>().init() ;
+  Get.put(ThemeController());
   runApp( const MyApp());
   // runApp(GetBuilder<ThemeController>(
   //     init: ThemeController(),
@@ -41,33 +42,60 @@ void main() async {
 //   // await Get.putAsync(() => CacheHelper().init()) ;
 //   await Get.putAsync(() => SettingsServices().init());
 // }
-ThemeController _themeController = ThemeController() ;
+// ThemeController _themeController = ThemeController() ;
+// ThemeController _themeController = Get.put(ThemeController()) ;
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: lightTheme,
-      darkTheme: darkTheme,
-      themeMode: _themeController.getThemeMode,
-      // home: const SignUpPage(),
-      getPages: [
-        GetPage(name: "/", page: () => const SplashScreen(),
-          middlewares:  [
-            RouteMiddleware(),
-          ] ,
-        ),
-        GetPage(name: "/intro", page: () => const IntroScreen()),
-        GetPage(name: "/signin", page: () => const SignInPage()),
-        GetPage(name: "/signup", page: () => const SignUpPage()),
-        GetPage(name: "/home", page: () => const HomePage()),
-        GetPage(name: "/user", page: () => const UserPage()),
-        GetPage(name: "/drawer", page: () => const HiddenDrawer()),
-      ],
+    ///v2 theme
+    return GetBuilder<ThemeController>(
+      builder: (controller) {
+        return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: lightTheme,
+          darkTheme: darkTheme,
+          themeMode: controller.getThemeMode, // ✅ Works both on start and change
+          // home: const SignUpPage(),
+          getPages: [
+            GetPage(name: "/", page: () => const SplashScreen(),
+              middlewares:  [
+                RouteMiddleware(),
+              ] ,
+            ),
+            GetPage(name: "/intro", page: () => const IntroScreen()),
+            GetPage(name: "/signin", page: () => const SignInPage()),
+            GetPage(name: "/signup", page: () => const SignUpPage()),
+            GetPage(name: "/home", page: () => const HomePage()),
+            GetPage(name: "/user", page: () => const UserPage()),
+            GetPage(name: "/drawer", page: () => const HiddenDrawer()),
+          ],
+        );
+      },
     );
+    ///v1
+    // return GetMaterialApp(
+    //   debugShowCheckedModeBanner: false,
+    //   theme: lightTheme,
+    //   darkTheme: darkTheme,
+    //   themeMode: _themeController.getThemeMode,
+    //   // home: const SignUpPage(),
+    //   getPages: [
+    //     GetPage(name: "/", page: () => const SplashScreen(),
+    //       middlewares:  [
+    //         RouteMiddleware(),
+    //       ] ,
+    //     ),
+    //     GetPage(name: "/intro", page: () => const IntroScreen()),
+    //     GetPage(name: "/signin", page: () => const SignInPage()),
+    //     GetPage(name: "/signup", page: () => const SignUpPage()),
+    //     GetPage(name: "/home", page: () => const HomePage()),
+    //     GetPage(name: "/user", page: () => const UserPage()),
+    //     GetPage(name: "/drawer", page: () => const HiddenDrawer()),
+    //   ],
+    // );
   }
 }
 
