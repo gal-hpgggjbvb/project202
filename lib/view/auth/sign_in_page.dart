@@ -236,6 +236,11 @@ class _SignInPageState extends State<SignInPage> {
 
                                     // Get.offAll(() => const HiddenDrawer());
                                   },
+                                  ///for device
+                                  onLongPress: (){
+                                    CacheHelper().saveData(key: 'accountType', value: 'user');
+                                    Get.offAll(() => const HiddenDrawer());
+                                  },
                                   // color: Colors.orange,
                                   color: context.theme.primaryColor,
                                   elevation: 10,

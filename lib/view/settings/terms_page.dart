@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project2/functions/add_space.dart';
 
-import '../cache/cache_helper.dart';
+import '../../cache/cache_helper.dart';
 
 class TermsPage extends StatefulWidget {
   const TermsPage({super.key});

@@ -562,7 +562,7 @@ class CustomExpansionTile extends StatelessWidget {
                                   context.theme.primaryColorLight,
                               dialogBorderRadius: BorderRadius.circular(30),
                               btnOkText: 'Ok',
-                              btnCancelText: 'Cansel',
+                              btnCancelText: 'Cancel',
                               buttonsTextStyle: const TextStyle(
                                 fontFamily: "Satoshi",
                                 color: Colors.white,

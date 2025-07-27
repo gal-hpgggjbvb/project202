@@ -5,10 +5,11 @@ import 'package:get/get.dart';
 import 'package:project2/custom_widgets/custom_setting_item.dart';
 import 'package:project2/functions/add_space.dart';
 import 'package:project2/view/auth/sign_in_page.dart';
-import 'package:project2/view/terms_page.dart';
+import 'package:project2/view/settings/terms_page.dart';
+import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 
-import '../cache/cache_helper.dart';
-import '../controller/theme_controller.dart';
+import '../../cache/cache_helper.dart';
+import '../../controller/theme_controller.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});

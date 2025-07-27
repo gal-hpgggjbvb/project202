@@ -4,9 +4,9 @@ import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'package:project2/cache/cache_helper.dart';
 import 'package:project2/view/delivery_man_view/delivery_man_page.dart';
 import 'package:project2/view/home_page.dart';
-import 'package:project2/view/notifications_page.dart';
-import 'package:project2/view/settings_page.dart';
-import 'package:project2/view/sign_out_page.dart';
+import 'package:project2/view/settings/notifications_page.dart';
+import 'package:project2/view/settings/settings_page.dart';
+import 'package:project2/view/auth/sign_out_page.dart';
 import 'package:project2/view/profile_view/profile_page.dart';
 import 'package:project2/view/user_view/user_page.dart';
 
