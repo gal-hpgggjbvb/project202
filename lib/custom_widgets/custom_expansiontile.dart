@@ -74,7 +74,7 @@ class CustomExpansionTile extends StatelessWidget {
         // backgroundColor: Colors.deepOrange[50],
         leading: Text(
           // 'Order ID: $leading',
-          '${'order_id1'.tr}$leading',
+          '${'order_id1'.tr}    $leading',
           //style: context.theme.textTheme.bodySmall,
           style: TextStyle(
             fontFamily: "Satoshi",
@@ -87,8 +87,8 @@ class CustomExpansionTile extends StatelessWidget {
           title.length > 7
               // ? '   Order Name: \n   ${title.substring(0, 7)}..'
               // : '   Order Name: \n   $title',
-              ? '${'order_name1'.tr}\n   ${title.substring(0, 7)}..'
-              : '${'order_name1'.tr}\n   $title',
+              ? '${'order_name1'.tr}\n       ${title.substring(0, 7)}..'
+              : '${'order_name1'.tr}\n       $title',
           style: TextStyle(
             fontFamily: "Satoshi",
             color: context.theme.colorScheme.primary,
@@ -115,7 +115,9 @@ class CustomExpansionTile extends StatelessWidget {
                 // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 50.0),
+                    padding: CacheHelper().getData(key: 'language') == 'ar' ?
+                    const EdgeInsets.only(right: 50.0) :
+                    const EdgeInsets.only(left: 50.0),
                     child: Text(
                       'order_id2'.tr,
                       // style: context.textTheme.displaySmall,
@@ -146,7 +148,9 @@ class CustomExpansionTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 50.0),
+                    padding: CacheHelper().getData(key: 'language') == 'ar' ?
+                    const EdgeInsets.only(right: 50.0) :
+                    const EdgeInsets.only(left: 50.0),
                     child: Text(
                       'order_name2'.tr,
                       // style: context.textTheme.displaySmall,
@@ -175,7 +179,9 @@ class CustomExpansionTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 50.0),
+                    padding: CacheHelper().getData(key: 'language') == 'ar' ?
+                    const EdgeInsets.only(right: 50.0) :
+                    const EdgeInsets.only(left: 50.0),
                     child: Text(
                       'source'.tr,
                       // style: context.textTheme.displaySmall,
@@ -207,7 +213,9 @@ class CustomExpansionTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 50.0),
+                    padding: CacheHelper().getData(key: 'language') == 'ar' ?
+                    const EdgeInsets.only(right: 50.0) :
+                    const EdgeInsets.only(left: 50.0),
                     child: Text(
                       'destination'.tr,
                       // style: context.textTheme.displaySmall,
@@ -233,7 +241,9 @@ class CustomExpansionTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 50.0),
+                    padding: CacheHelper().getData(key: 'language') == 'ar' ?
+                    const EdgeInsets.only(right: 50.0) :
+                    const EdgeInsets.only(left: 50.0),
                     child: Text(
                       'status2'.tr,
                       // style: context.textTheme.displaySmall,
@@ -258,7 +268,9 @@ class CustomExpansionTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 50.0),
+                    padding: CacheHelper().getData(key: 'language') == 'ar' ?
+                    const EdgeInsets.only(right: 50.0) :
+                    const EdgeInsets.only(left: 50.0),
                     child: Text(
                       'created'.tr,
                       // style: context.textTheme.displaySmall,
@@ -285,7 +297,9 @@ class CustomExpansionTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 50.0),
+                      padding: CacheHelper().getData(key: 'language') == 'ar' ?
+                    const EdgeInsets.only(right: 50.0) :
+                    const EdgeInsets.only(left: 50.0),
                       child: Text(
                         'updated'.tr,
                         // style: context.textTheme.displaySmall,
@@ -317,7 +331,9 @@ class CustomExpansionTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 50.0),
+                      padding: CacheHelper().getData(key: 'language') == 'ar' ?
+                      const EdgeInsets.only(right: 50.0) :
+                      const EdgeInsets.only(left: 50.0),
                       child: Text(
                         // 'DeliveryMan ID :                   ',
                         'delivery_man_id'.tr,
@@ -343,7 +359,9 @@ class CustomExpansionTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 50.0),
+                      padding: CacheHelper().getData(key: 'language') == 'ar' ?
+                      const EdgeInsets.only(right: 50.0) :
+                      const EdgeInsets.only(left: 50.0),
                       child: Text(
                         // 'DeliveryMan Name :              ',
                         'delivery_man_name'.tr,
@@ -369,7 +387,9 @@ class CustomExpansionTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 50.0),
+                      padding: CacheHelper().getData(key: 'language') == 'ar' ?
+                      const EdgeInsets.only(right: 50.0) :
+                      const EdgeInsets.only(left: 50.0),
                       child: Text(
                         // 'DeliveryMan Phone :             ',
                         'delivery_man_phone'.tr,
@@ -387,7 +407,9 @@ class CustomExpansionTile extends StatelessWidget {
                       style: context.textTheme.displaySmall,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 30.0,right: 30),
+                      padding: CacheHelper().getData(key: 'language') == 'ar' ?
+                      const EdgeInsets.only(right: 30.0) :
+                      const EdgeInsets.only(left: 30.0),
                       child: GestureDetector(
                         onTap: () {
                           Clipboard.setData(

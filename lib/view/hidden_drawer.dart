@@ -178,7 +178,8 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
                   ///todo main page delivery man
                   ScreenHiddenDrawer(
                       ItemHiddenMenu(
-                        name: 'Main Page Delivery Man',
+                        // name: 'Main Page Delivery Man',
+                        name: 'main'.tr,
                         baseStyle: const TextStyle(
                           fontSize: 15,
                         ),

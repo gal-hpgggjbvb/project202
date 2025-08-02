@@ -81,22 +81,22 @@ class _DeliveryManPageState extends State<DeliveryManPage>
             indicatorWeight: 3,
             indicatorSize: TabBarIndicatorSize.tab,
             indicatorPadding: const EdgeInsets.symmetric(horizontal: 10),
-            labelStyle: const TextStyle(
+            labelStyle: TextStyle(
               fontFamily: "Satoshi",
-              color: Colors.black,
+              color: context.theme.colorScheme.onSecondary,
               fontSize: 15,
               fontWeight: FontWeight.w500,
             ),
             unselectedLabelStyle: TextStyle(
               fontFamily: "Satoshi",
-              color: Colors.grey.shade700,
+              color: context.theme.colorScheme.background,
               fontSize: 15,
               fontWeight: FontWeight.w500,
             ),
-            tabs: const [
-              Tab(text: "available\n  orders"),
-              Tab(text: "in progress\n    orders"),
-              Tab(text: "completed\n    orders"),
+            tabs: [
+              Tab(text: "available_orders".tr),
+              Tab(text: "in_progress_orders".tr),
+              Tab(text: "completed_orders".tr),
             ],
           ),
           //for appbar height
@@ -127,7 +127,7 @@ class _DeliveryManPageState extends State<DeliveryManPage>
                         // 👈 fake height to enable scroll
                         Center(
                             child: Text(
-                          'No available orders yet...',
+                          'no_av_orders'.tr,
                           style: TextStyle(
                             color: context.theme.primaryColorDark,
                             fontSize: 17,
@@ -195,7 +195,7 @@ class _DeliveryManPageState extends State<DeliveryManPage>
                         // 👈 fake height to enable scroll
                         Center(
                             child: Text(
-                              'No picked orders yet...',
+                              'no_pr_orders'.tr,
                               style: TextStyle(
                                 color: context.theme.primaryColorDark,
                                 fontSize: 17,
@@ -265,7 +265,7 @@ class _DeliveryManPageState extends State<DeliveryManPage>
                         // 👈 fake height to enable scroll
                         Center(
                             child: Text(
-                              'No available orders yet...',
+                              'no_co_orders'.tr,
                               style: TextStyle(
                                 color: context.theme.primaryColorDark,
                                 fontSize: 17,

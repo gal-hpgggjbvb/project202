@@ -77,8 +77,10 @@ class DeliveryExpTile extends StatelessWidget {
       child: ExpansionTile(
         leading: Text(
           orderName.length > 7
-              ? '   Order Name: \n   ${orderName.substring(0, 7)}..'
-              : '   Order Name: \n   $orderName',
+              // ? '   Order Name: \n   ${orderName.substring(0, 7)}..'
+              // : '   Order Name: \n   $orderName',
+              ? '${'order_name1'.tr}\n   ${title.substring(0, 7)}..'
+              : '${'order_name1'.tr}\n   $title',
           style: TextStyle(
             fontFamily: "Satoshi",
             color: context.theme.colorScheme.primary,
@@ -88,8 +90,10 @@ class DeliveryExpTile extends StatelessWidget {
         ),
         title: Text(
           source.length > 7
-              ? '   Source: \n   ${source.substring(0, 7)}..'
-              : '   Source: \n   $source',
+              // ? '   Source: \n   ${source.substring(0, 7)}..'
+              // : '   Source: \n   $source',
+              ? '${'source1'.tr}\n   ${title.substring(0, 7)}..'
+              : '${'source1'.tr}\n   $title',
           style: TextStyle(
             fontFamily: "Satoshi",
             color: context.theme.colorScheme.primary,
@@ -99,8 +103,10 @@ class DeliveryExpTile extends StatelessWidget {
         ),
         trailing: Text(
           destination.length > 7
-              ? '   Destination: \n   ${destination.substring(0, 7)}..'
-              : '   Destination: \n   $destination',
+              // ? '   Destination: \n   ${destination.substring(0, 7)}..'
+              // : '   Destination: \n   $destination',
+              ? '${'destination1'.tr}\n   ${title.substring(0, 7)}..'
+              : '${'destination1'.tr}\n   $title',
           style: TextStyle(
             fontFamily: "Satoshi",
             color: context.theme.colorScheme.primary,
@@ -117,9 +123,12 @@ class DeliveryExpTile extends StatelessWidget {
                 // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 50.0),
+                    padding: CacheHelper().getData(key: 'language') == 'ar' ?
+                    const EdgeInsets.only(right: 50.0) :
+                    const EdgeInsets.only(left: 50.0),
                     child: Text(
-                      'OrderId :           ',
+                      // 'OrderId :           ',
+                      'order_id2'.tr,
                       // style: context.textTheme.displaySmall,
                       style: TextStyle(
                         fontFamily: "Satoshi",
@@ -149,9 +158,12 @@ class DeliveryExpTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 50.0),
+                    padding: CacheHelper().getData(key: 'language') == 'ar' ?
+                    const EdgeInsets.only(right: 50.0) :
+                    const EdgeInsets.only(left: 50.0),
                     child: Text(
-                      'OrderName :     ',
+                      // 'OrderName :     ',
+                      'order_name2'.tr,
                       // style: context.textTheme.displaySmall,
                       style: TextStyle(
                         fontFamily: "Satoshi",
@@ -179,9 +191,12 @@ class DeliveryExpTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 50.0),
+                    padding: CacheHelper().getData(key: 'language') == 'ar' ?
+                    const EdgeInsets.only(right: 50.0) :
+                    const EdgeInsets.only(left: 50.0),
                     child: Text(
-                      'Source :            ',
+                      // 'Source :            ',
+                      'source'.tr,
                       // style: context.textTheme.displaySmall,
                       style: TextStyle(
                         fontFamily: "Satoshi",
@@ -212,9 +227,12 @@ class DeliveryExpTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 50.0),
+                    padding: CacheHelper().getData(key: 'language') == 'ar' ?
+                    const EdgeInsets.only(right: 50.0) :
+                    const EdgeInsets.only(left: 50.0),
                     child: Text(
-                      'Destination :      ',
+                      // 'Destination :      ',
+                      'destination'.tr,
                       // style: context.textTheme.displaySmall,
                       style: TextStyle(
                         fontFamily: "Satoshi",
@@ -239,9 +257,12 @@ class DeliveryExpTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 50.0),
+                    padding: CacheHelper().getData(key: 'language') == 'ar' ?
+                    const EdgeInsets.only(right: 50.0) :
+                    const EdgeInsets.only(left: 50.0),
                     child: Text(
-                      'Createdat :        ',
+                      // 'Createdat :        ',
+                      'created'.tr,
                       // style: context.textTheme.displaySmall,
                       style: TextStyle(
                         fontFamily: "Satoshi",
@@ -267,9 +288,12 @@ class DeliveryExpTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 50.0),
+                    padding: CacheHelper().getData(key: 'language') == 'ar' ?
+                    const EdgeInsets.only(right: 50.0) :
+                    const EdgeInsets.only(left: 50.0),
                     child: Text(
-                      'Updatedat :       ',
+                      // 'Updatedat :       ',
+                      'updated'.tr,
                       // style: context.textTheme.displaySmall,
                       style: TextStyle(
                         fontFamily: "Satoshi",
@@ -294,33 +318,6 @@ class DeliveryExpTile extends StatelessWidget {
                   child: Divider(),
                 ),
 
-              ///todo user name optional
-              if (userId != null)
-                Row(
-                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 50.0),
-                      child: Text(
-                        'Customer Name :        ',
-                        // style: context.textTheme.displaySmall,
-                        style: TextStyle(
-                          fontFamily: "Satoshi",
-                          color: context.theme.colorScheme.primary,
-                          fontSize: 15,
-                          fontWeight: FontWeight.normal, // typing style
-                        ),
-                      ),
-                    ),
-                    Text(
-                      userName!,
-                      style: context.textTheme.displaySmall,
-                    ),
-                  ],
-                ),
-              if (userId != null) addVerticalSpace(7),
-
               ///todo user id optional
               if (userId != null)
                 Row(
@@ -328,9 +325,12 @@ class DeliveryExpTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 50.0),
+                      padding: CacheHelper().getData(key: 'language') == 'ar' ?
+                      const EdgeInsets.only(right: 50.0) :
+                      const EdgeInsets.only(left: 50.0),
                       child: Text(
-                        'Customer ID :              ',
+                        // 'Customer ID :              ',
+                        'customer_id'.tr,
                         // style: context.textTheme.displaySmall,
                         style: TextStyle(
                           fontFamily: "Satoshi",
@@ -348,6 +348,36 @@ class DeliveryExpTile extends StatelessWidget {
                 ),
               if (userId != null) addVerticalSpace(7),
 
+              ///todo user name optional
+              if (userId != null)
+                Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: CacheHelper().getData(key: 'language') == 'ar' ?
+                      const EdgeInsets.only(right: 50.0) :
+                      const EdgeInsets.only(left: 50.0),
+                      child: Text(
+                        // 'Customer Name :        ',
+                        'customer_name'.tr,
+                        // style: context.textTheme.displaySmall,
+                        style: TextStyle(
+                          fontFamily: "Satoshi",
+                          color: context.theme.colorScheme.primary,
+                          fontSize: 15,
+                          fontWeight: FontWeight.normal, // typing style
+                        ),
+                      ),
+                    ),
+                    Text(
+                      userName!,
+                      style: context.textTheme.displaySmall,
+                    ),
+                  ],
+                ),
+              if (userId != null) addVerticalSpace(7),
+
               ///todo user phone optional
               if (userId != null)
                 Row(
@@ -355,9 +385,12 @@ class DeliveryExpTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 50.0),
+                      padding: CacheHelper().getData(key: 'language') == 'ar' ?
+                      const EdgeInsets.only(right: 50.0) :
+                      const EdgeInsets.only(left: 50.0),
                       child: Text(
-                        'Customer Phone :        ',
+                        // 'Customer Phone :       ',
+                        'customer_phone'.tr,
                         // style: context.textTheme.displaySmall,
                         style: TextStyle(
                           fontFamily: "Satoshi",
@@ -372,7 +405,9 @@ class DeliveryExpTile extends StatelessWidget {
                       style: context.textTheme.displaySmall,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 50.0),
+                      padding: CacheHelper().getData(key: 'language') == 'ar' ?
+                      const EdgeInsets.only(right: 50.0) :
+                      const EdgeInsets.only(left: 50.0),
                       child: GestureDetector(
                         onTap: () {
                           Clipboard.setData(ClipboardData(text: userPhone!));
@@ -409,7 +444,8 @@ class DeliveryExpTile extends StatelessWidget {
                           dialogType: DialogType.warning,
                           animType: AnimType.rightSlide,
                           dismissOnTouchOutside: true,
-                          title: 'Pick Order $id ?',
+                          // title: 'Pick Order $id ?',
+                          title: '${'pick_order'.tr}$id${'question_mark'.tr} ',
                           titleTextStyle: TextStyle(
                             fontFamily: "Satoshi",
                             color: context.theme.colorScheme.onSecondary,
@@ -419,8 +455,8 @@ class DeliveryExpTile extends StatelessWidget {
                           dialogBackgroundColor:
                               context.theme.primaryColorLight,
                           dialogBorderRadius: BorderRadius.circular(30),
-                          btnOkText: 'Ok',
-                          btnCancelText: 'Cancel',
+                          btnOkText: 'ok'.tr,
+                          btnCancelText: 'cancel'.tr,
                           buttonsTextStyle: const TextStyle(
                             fontFamily: "Satoshi",
                             color: Colors.white,
@@ -441,9 +477,10 @@ class DeliveryExpTile extends StatelessWidget {
                       // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                       minWidth: 5,
                       height: 10,
-                      child: const Text(
-                        "Pick Delivery",
-                        style: TextStyle(
+                      child: Text(
+                        // "Pick Delivery",
+                        "pick_order".tr,
+                        style: const TextStyle(
                           fontFamily: "Satoshi",
                           color: Colors.blue,
                           fontSize: 15,
@@ -478,7 +515,8 @@ class DeliveryExpTile extends StatelessWidget {
                           dialogType: DialogType.warning,
                           animType: AnimType.rightSlide,
                           dismissOnTouchOutside: true,
-                          title: 'Complete Order $id ?',
+                          // title: 'Complete Order $id ?',
+                          title: '${'complete_order'.tr}$id${'question_mark'.tr} ',
                           titleTextStyle: TextStyle(
                             fontFamily: "Satoshi",
                             color: context.theme.colorScheme.onSecondary,
@@ -488,8 +526,8 @@ class DeliveryExpTile extends StatelessWidget {
                           dialogBackgroundColor:
                               context.theme.primaryColorLight,
                           dialogBorderRadius: BorderRadius.circular(30),
-                          btnOkText: 'Ok',
-                          btnCancelText: 'Cancel',
+                          btnOkText: 'ok'.tr,
+                          btnCancelText: 'cancel'.tr,
                           buttonsTextStyle: const TextStyle(
                             fontFamily: "Satoshi",
                             color: Colors.white,
@@ -511,9 +549,9 @@ class DeliveryExpTile extends StatelessWidget {
                       // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                       minWidth: 5,
                       height: 10,
-                      child: const Text(
-                        "Complete Delivery",
-                        style: TextStyle(
+                      child: Text(
+                        "complete_order".tr,
+                        style: const TextStyle(
                           fontFamily: "Satoshi",
                           color: Colors.green,
                           fontSize: 15,
@@ -529,7 +567,8 @@ class DeliveryExpTile extends StatelessWidget {
                           dialogType: DialogType.warning,
                           animType: AnimType.rightSlide,
                           dismissOnTouchOutside: true,
-                          title: 'Cancel Order $id ?',
+                          // title: 'Cancel Order $id ?',
+                          title: '${'cancel_order'.tr}$id${'question_mark'.tr} ',
                           titleTextStyle: TextStyle(
                             fontFamily: "Satoshi",
                             color: context.theme.colorScheme.onSecondary,
@@ -539,8 +578,8 @@ class DeliveryExpTile extends StatelessWidget {
                           dialogBackgroundColor:
                           context.theme.primaryColorLight,
                           dialogBorderRadius: BorderRadius.circular(30),
-                          btnOkText: 'Yes',
-                          btnCancelText: 'No',
+                          btnOkText: 'ok'.tr,
+                          btnCancelText: 'cancel'.tr,
                           buttonsTextStyle: const TextStyle(
                             fontFamily: "Satoshi",
                             color: Colors.white,
@@ -561,9 +600,9 @@ class DeliveryExpTile extends StatelessWidget {
                       // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                       minWidth: 5,
                       height: 10,
-                      child: const Text(
-                        "Cancel Delivery",
-                        style: TextStyle(
+                      child: Text(
+                        "cancel_order".tr,
+                        style: const TextStyle(
                           fontFamily: "Satoshi",
                           color: Colors.redAccent,
                           fontSize: 15,
