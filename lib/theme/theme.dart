@@ -45,7 +45,7 @@ ThemeData lightTheme = ThemeData(
     onBackground: Colors.orangeAccent,
     primary: Colors.black,
     // onPrimary: const Color(0xFFFDF8F3),
-    onPrimary: Colors.green,
+    onPrimary: const Color(0xFFFDF8F3),
     secondary: Colors.white,
     onSecondary: Colors.black,
     surface: const Color(0xFFFDF8F3),
