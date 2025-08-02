@@ -20,7 +20,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 bool activeDarkMode = false;
-bool activeNotification = false;
+bool activeNotification = true;
 // ThemeController themeController = Get.put(ThemeController());
 late ThemeController themeController;
 
@@ -61,37 +61,63 @@ class _SettingsPageState extends State<SettingsPage> {
                 iconColor: Colors.white,
                 // title: 'Dark Mode',
                 title: 'dark'.tr,
-                trailing: Switch(
-                  activeColor: Colors.deepOrange,
-                  inactiveThumbColor: Colors.orange,
-                  inactiveTrackColor: Colors.white,
-                  activeTrackColor: Colors.orange,
-                  trackOutlineColor:
-                      MaterialStateProperty.resolveWith<Color>((states) {
-                    if (states.contains(MaterialState.selected)) {
-                      return Colors.orange; // when switch is ON
-                    }
-                    return Colors.black26; // when switch is OFF
-                  }),
-                  value: themeController.isDark,
-                  onChanged: (val) {
-                    themeController.isDark = val;
-                    CacheHelper().saveData(key: 'isDark', value: val);
-                    themeController.toggleTheme(val);
-                    // print(val);
-                    // print(CacheHelper().getData(key: 'isDark')) ;
-                    // print('isDark settings  ${themeController.isDark}*********************************');
-                    // print('isDark cache  ${CacheHelper().getData(key: 'isDark')}*********************************');
-                    setState(() {});
-                  },
-                  // value: activeDarkMode,
-                  // onChanged: (val) {
-                  //   setState(() {
-                  //     activeDarkMode = !activeDarkMode;
-                  //     v ? v=false : v=true;
-                  // });
-                  // },
-                ),
+                trailing: AnimatedToggleSwitch<bool>.dual(
+                  current: themeController.isDark,
+                  first: false,
+                  second: true,
+                  height: 35, // height of switch
+                  borderWidth: 2,
+                  spacing: -5.0,
+                  indicatorSize: const Size(30, 30),
+                  // borderRadius: BorderRadius.circular(20.0),
+                  // iconSize: 20.0, // size of the icon inside
+                  style: ToggleStyle(
+                    indicatorColor: themeController.isDark ?
+                    Colors.black54 : Colors.blue.shade100,
+                    // backgroundColor: context.theme.colorScheme.onPrimary,
+                    backgroundColor: Colors.grey.shade400,
+                    borderColor: Colors.transparent,
+                    // borderColor: context.theme.colorScheme.background,
+                    borderRadius: const BorderRadius.all(Radius.circular(40)),
+                  ),
+                  iconBuilder: (value) => Icon(
+                    value ? Icons.dark_mode : Icons.light_mode,
+                    color: value ? Colors.white : Colors.yellow.shade700,
+                  ),
+                  onChanged: (val) => themeController.toggleTheme(val),
+                )
+                  ///v1 switch
+                // Switch(
+                //   activeColor: Colors.deepOrange,
+                //   inactiveThumbColor: Colors.orange,
+                //   inactiveTrackColor: Colors.white,
+                //   activeTrackColor: Colors.orange,
+                //   trackOutlineColor:
+                //       MaterialStateProperty.resolveWith<Color>((states) {
+                //     if (states.contains(MaterialState.selected)) {
+                //       return Colors.orange; // when switch is ON
+                //     }
+                //     return Colors.black26; // when switch is OFF
+                //   }),
+                //   value: themeController.isDark,
+                //   onChanged: (val) {
+                //     themeController.isDark = val;
+                //     CacheHelper().saveData(key: 'isDark', value: val);
+                //     themeController.toggleTheme(val);
+                //     // print(val);
+                //     // print(CacheHelper().getData(key: 'isDark')) ;
+                //     // print('isDark settings  ${themeController.isDark}*********************************');
+                //     // print('isDark cache  ${CacheHelper().getData(key: 'isDark')}*********************************');
+                //     setState(() {});
+                //   },
+                //   // value: activeDarkMode,
+                //   // onChanged: (val) {
+                //   //   setState(() {
+                //   //     activeDarkMode = !activeDarkMode;
+                //   //     v ? v=false : v=true;
+                //   // });
+                //   // },
+                // ),
               ),
               //todo change language
               CustomSettingItem(
@@ -109,26 +135,57 @@ class _SettingsPageState extends State<SettingsPage> {
                 iconColor: Colors.white,
                 // title: 'Notification',
                 title: 'notifications'.tr,
-                trailing: Switch(
-                  activeColor: Colors.deepOrange,
-                  inactiveThumbColor: Colors.orange,
-                  inactiveTrackColor: Colors.white,
-                  activeTrackColor: Colors.orange,
-                  trackOutlineColor:
-                      MaterialStateProperty.resolveWith<Color>((states) {
-                    if (states.contains(MaterialState.selected)) {
-                      return Colors.orange; // when switch is ON
-                    }
-                    return Colors.black26; // when switch is OFF
+                trailing: AnimatedToggleSwitch<bool>.dual(
+                  current: activeNotification,
+                  first: false,
+                  second: true,
+                  height: 35, // height of switch
+                  borderWidth: 2,
+                  spacing: -5.0,
+                  indicatorSize: const Size(30, 30),
+                  // borderRadius: BorderRadius.circular(20.0),
+                  // iconSize: 20.0,
+                  style: ToggleStyle(
+                    indicatorColor: Colors.white,
+                    backgroundColor: Colors.grey.shade400,
+                    borderColor: Colors.transparent,
+                  ),
+                  iconBuilder: (value) => Icon(
+                    value ? Icons.notifications_active : Icons.notifications_off,
+                    color: value ? Colors.green : Colors.red,
+                  ),
+                  // textBuilder: (value) => Text(
+                  //   value ? 'Muted' : 'Received',
+                  //   style: TextStyle(
+                  //     color: Colors.white,
+                  //     fontWeight: FontWeight.bold,
+                  //   ),
+                  // ),
+                  onChanged: (val) => setState(() {
+                    activeNotification = !activeNotification;
                   }),
-                  value: activeNotification,
-                  onChanged: (val) {
-                    setState(() {
-                      activeNotification = !activeNotification;
-                      //v ? v=false : v=true;
-                    });
-                  },
                 ),
+                    ///v1 switch
+                // Switch(
+                //   activeColor: Colors.deepOrange,
+                //   inactiveThumbColor: Colors.orange,
+                //   inactiveTrackColor: Colors.white,
+                //   activeTrackColor: Colors.orange,
+                //   trackOutlineColor:
+                //       MaterialStateProperty.resolveWith<Color>((states) {
+                //     if (states.contains(MaterialState.selected)) {
+                //       return Colors.orange; // when switch is ON
+                //     }
+                //     return Colors.black26; // when switch is OFF
+                //   }),
+                //   value: activeNotification,
+                //   onChanged: (val) {
+                //     setState(() {
+                //       activeNotification = !activeNotification;
+                //       //v ? v=false : v=true;
+                //     });
+                //   },
+                // ),
               ),
               //todo terms
               CustomSettingItem(
