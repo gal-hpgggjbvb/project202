@@ -78,10 +78,11 @@ class _UserPageState extends State<UserPage>
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              addVerticalSpace(100),
+              addVerticalSpace(150),
               //todo
               Text(
-                'Want Something Fast ? ',
+                // 'Want Something Fast ? ',
+                'want something'.tr,
                 // style: context.theme.textTheme.bodyLarge,
                 style: TextStyle(
                     fontFamily: "Satoshi",
@@ -91,7 +92,8 @@ class _UserPageState extends State<UserPage>
               ),
               addVerticalSpace(5),
               Text(
-                'Just add an Order and Leave it to Us.',
+                // 'Just add an Order and Leave it to Us.',
+                'just'.tr,
                 // style: context.theme.textTheme.bodyLarge,
                 style: TextStyle(
                     fontFamily: "Satoshi",
@@ -100,6 +102,7 @@ class _UserPageState extends State<UserPage>
                     fontWeight: FontWeight.bold),
               ),
               addVerticalSpace(80),
+
               ///todo add order button
               MaterialButton(
                 onPressed: () {
@@ -126,7 +129,8 @@ class _UserPageState extends State<UserPage>
                                   children: [
                                     Center(
                                         child: Text(
-                                      'Make an Order',
+                                      // 'Make an Order',
+                                      'make'.tr,
                                       style: TextStyle(
                                         fontFamily: "Satoshi",
                                         color: context.theme.primaryColorDark,
@@ -137,20 +141,26 @@ class _UserPageState extends State<UserPage>
                                     CustomOrderField(
                                       controller:
                                           orderController.objectNameController,
-                                      hintText: 'type here',
-                                      labelText: 'what do you want to deliver',
+                                      // hintText: 'type here',
+                                      hintText: 'type'.tr,
+                                      // labelText: 'what do you want to deliver',
+                                      labelText: 'what'.tr,
                                     ),
                                     CustomOrderField(
                                       controller:
                                           orderController.sourceController,
-                                      hintText: 'type here',
-                                      labelText: 'pickup location',
+                                      // hintText: 'type here',
+                                      hintText: 'type'.tr,
+                                      // labelText: 'pickup location',
+                                      labelText: 'pickup'.tr,
                                     ),
                                     CustomOrderField(
                                       controller:
                                           orderController.destinationController,
-                                      hintText: 'type here',
-                                      labelText: 'drop location',
+                                      // hintText: 'type here',
+                                      hintText: 'type'.tr,
+                                      // labelText: 'drop location',
+                                      labelText: 'drop'.tr,
                                     ),
                                     addVerticalSpace(15),
                                     //todo bottomsheet button
@@ -175,7 +185,8 @@ class _UserPageState extends State<UserPage>
                                         color: context
                                             .theme.colorScheme.onBackground,
                                         child: Text(
-                                          "Make an Order",
+                                          // "Make an Order",
+                                          "make".tr,
                                           style: TextStyle(
                                             fontFamily: "Satoshi",
                                             color: context
@@ -218,7 +229,8 @@ class _UserPageState extends State<UserPage>
                     context.theme.buttonTheme.colorScheme!.onBackground,
                 child: Text(
                   // "add order via bottomsheet ",
-                  "add order",
+                  // "add order",
+                  'add'.tr,
                   style: TextStyle(
                     fontFamily: "Satoshi",
                     color: context.theme.colorScheme.secondary,
@@ -228,20 +240,22 @@ class _UserPageState extends State<UserPage>
                 ),
               ),
               addVerticalSpace(30),
+
               ///todo my orders button
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30.0),
                 child: MaterialButton(
-                  onPressed: (){
+                  onPressed: () {
                     Get.to(() => const UserOrdersPage());
                   },
                   color: context.theme.primaryColor,
                   elevation: 15,
                   splashColor:
-                  context.theme.buttonTheme.colorScheme!.onBackground,
+                      context.theme.buttonTheme.colorScheme!.onBackground,
                   height: 75,
                   child: Text(
-                    "show my orders",
+                    // "show my orders",
+                    'show'.tr,
                     style: TextStyle(
                       fontFamily: "Satoshi",
                       color: context.theme.colorScheme.secondary,

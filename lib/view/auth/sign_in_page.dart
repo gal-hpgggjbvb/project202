@@ -71,7 +71,8 @@ class _SignInPageState extends State<SignInPage> {
                     children: [
                       // const SizedBox(height: 30,) ,
                       Text(
-                        "Let's Sign You In",
+                        // "Let's Sign You In",
+                        "lets".tr,
                         style: TextStyle(
                             fontFamily: "Satoshi",
                             color: context.theme.primaryColorDark,
@@ -79,7 +80,8 @@ class _SignInPageState extends State<SignInPage> {
                             fontWeight: FontWeight.w600),
                       ),
                       Text(
-                        "Welcome Back.",
+                        // "Welcome Back.",
+                        'welcome'.tr,
                         style: TextStyle(
                             fontFamily: "Satoshi",
                             color: context.theme.primaryColorDark,
@@ -88,7 +90,7 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                       addVerticalSpace(20),
                       Text(
-                        "Email",
+                        "email".tr,
                         style: TextStyle(
                             fontFamily: "Satoshi",
                             color: context.theme.primaryColorDark,
@@ -99,12 +101,12 @@ class _SignInPageState extends State<SignInPage> {
                       CustomTextFormField(
                           controller: signInController.emailController,
                           textInputType: TextInputType.emailAddress,
-                          hintText: 'Your Email'),
+                          hintText: 'sign_email'.tr),
 
                       addVerticalSpace(30),
 
                       Text(
-                        "Password",
+                        "password".tr,
                         style: TextStyle(
                             fontFamily: "Satoshi",
                             color: context.theme.primaryColorDark,
@@ -115,7 +117,7 @@ class _SignInPageState extends State<SignInPage> {
                       CustomTextFormField(
                         controller: signInController.passwordController,
                         textInputType: TextInputType.visiblePassword,
-                        hintText: 'Your Password',
+                        hintText: 'sign_password'.tr,
                         isPassword: true,
                       ),
                       addVerticalSpace(30),
@@ -144,7 +146,8 @@ class _SignInPageState extends State<SignInPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Signin as :',
+                            // 'Signin as :',
+                            'sign_as'.tr,
                             style: TextStyle(
                               fontFamily: "Satoshi",
                               color: context.theme.colorScheme.onSecondary,
@@ -166,7 +169,8 @@ class _SignInPageState extends State<SignInPage> {
                                 () => signInController.accountType = value!),
                           ),
                           Text(
-                            'Normal User',
+                            // 'Normal User',
+                            'normal'.tr,
                             style: TextStyle(
                               fontFamily: "Satoshi",
                               color: context.theme.colorScheme.onSecondary,
@@ -181,7 +185,8 @@ class _SignInPageState extends State<SignInPage> {
                                 () => signInController.accountType = value!),
                           ),
                           Text(
-                            'Delivery Man',
+                            // 'Delivery Man',
+                            'delivery_man'.tr,
                             style: TextStyle(
                               fontFamily: "Satoshi",
                               color: context.theme.colorScheme.onSecondary,
@@ -252,9 +257,9 @@ class _SignInPageState extends State<SignInPage> {
                                       ? const CircularProgressIndicator(
                                           color: Colors.white,
                                         )
-                                      : const Text(
-                                          "SignIn",
-                                          style: TextStyle(
+                                      : Text(
+                                          "sign_in".tr,
+                                          style: const TextStyle(
                                               fontFamily: "Satoshi",
                                               color: Colors.white,
                                               fontSize: 20,
@@ -273,7 +278,8 @@ class _SignInPageState extends State<SignInPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Don't Have An Account?",
+                            // "Don't Have An Account?",
+                            'have_account'.tr,
                             style: TextStyle(
                               fontFamily: "Satoshi",
                               color: context.theme.colorScheme.onSecondary,
@@ -286,7 +292,7 @@ class _SignInPageState extends State<SignInPage> {
                               Get.to(() => const SignUpPage());
                             },
                             child: Text(
-                              "Register",
+                              "register".tr,
                               style: TextStyle(
                                   fontFamily: "Satoshi",
                                   color: context.theme.primaryColor,

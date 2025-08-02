@@ -50,7 +50,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          "Edit Profile",
+          // "Edit Profile",
+          "edit_profile".tr,
           style: TextStyle(
             fontFamily: "Satoshi",
             color: context.theme.colorScheme.primary,
@@ -146,33 +147,25 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         context: context,
                         dialogType: DialogType.warning,
                         animType: AnimType.scale,
-                        title: 'Delete Photo?',
-                        desc: 'Are you sure you want to remove your profile image?',
+                        title: 'delete_photo'.tr,
+                        titleTextStyle: TextStyle(
+                          fontFamily: "Satoshi",
+                          color: context.theme.colorScheme.onSecondary,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        desc: 'sure_delete_photo'.tr,
+                        btnCancelText: 'cancel'.tr,
                         btnCancelOnPress: () {},
-                        btnOkText: "Yes",
+                        btnOkText: "yes".tr,
                         btnOkOnPress: () {
                           updateProfileController
                               .deleteImage(); // 👈 your controller logic
                         },
                       ).show();
-                      // Get.defaultDialog(
-                      //   title: "Delete Photo",
-                      //   middleText: "Are you sure you want to remove your profile photo?",
-                      //   confirm: ElevatedButton(
-                      //     onPressed: () {
-                      //       editProfileController.deleteImage();
-                      //       Get.back();
-                      //     },
-                      //     child: Text("Yes"),
-                      //   ),
-                      //   cancel: TextButton(
-                      //     onPressed: () => Get.back(),
-                      //     child: Text("Cancel"),
-                      //   ),
-                      // );
                     },
                     icon: const Icon(Icons.delete, color: Colors.red),
-                    label: Text("Remove Photo",
+                    label: Text("remove_photo".tr,
                         style: context.theme.textTheme.bodySmall!
                             .copyWith(color: Colors.red)),
                   ),
@@ -183,7 +176,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   CustomTextFormField(
                     controller: updateProfileController.editNameController,
                     textInputType: TextInputType.text,
-                    hintText: 'Name',
+                    // hintText: 'Name',
+                    hintText: 'name'.tr,
                     maxLength: 20,
                     isPrefixIcon: true,
                     icon: Icons.person,
@@ -194,7 +188,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   CustomTextFormField(
                     controller: updateProfileController.editPhoneController,
                     textInputType: TextInputType.phone,
-                    hintText: 'Phone',
+                    hintText: 'phone'.tr,
                     maxLength: 10,
                     isPrefixIcon: true,
                     icon: Icons.phone,
@@ -205,7 +199,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   CustomTextFormField(
                     controller: updateProfileController.editEmailController,
                     textInputType: TextInputType.emailAddress,
-                    hintText: 'Email',
+                    hintText: 'email'.tr,
                     isPrefixIcon: true,
                     icon: Icons.email,
                   ),
@@ -216,7 +210,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       icon: Icon(Icons.lock,
                           color: context.theme.colorScheme.secondary),
                       label: Text(
-                        "Change Password",
+                        "change_password".tr,
                         style: TextStyle(
                             fontFamily: "Satoshi",
                             // color: Colors.white,
@@ -309,7 +303,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     },
                     icon: Icon(Icons.save, color: context.theme.colorScheme.secondary,),
                     label: Text(
-                      "Save Changes",
+                      "save_changes".tr,
                       style: TextStyle(
                         color: context.theme.colorScheme.secondary,
                         fontFamily: "Satoshi",

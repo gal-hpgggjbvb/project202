@@ -56,10 +56,10 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
                 children: [
                   addVerticalSpace(20),
                   Text(
-                    "Edit Password",
+                    "change_password".tr,
                     style: TextStyle(
                       fontFamily: "Satoshi",
-                      color: context.theme.colorScheme.primary,
+                      color: context.theme.colorScheme.onSecondary,
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
                     ),
@@ -70,7 +70,7 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
                   CustomTextFormField(
                     controller: editPasswordController.oldPasswordController,
                     textInputType: TextInputType.text,
-                    hintText: 'Old Password',
+                    hintText: 'old_password'.tr,
                     isPassword: true,
                     isPrefixIcon: true,
                     icon: Icons.lock_open_outlined,
@@ -81,7 +81,7 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
                   CustomTextFormField(
                     controller: editPasswordController.newPasswordController,
                     textInputType: TextInputType.text,
-                    hintText: 'New Password',
+                    hintText: 'new_password'.tr,
                     isPassword: true,
                     isPrefixIcon: true,
                     icon: Icons.lock_outline,
@@ -93,7 +93,7 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
                     controller:
                         editPasswordController.confirmNewPasswordController,
                     textInputType: TextInputType.text,
-                    hintText: 'Confirm New Password',
+                    hintText: 'confirm_new_password'.tr,
                     isPassword: true,
                     isPrefixIcon: true,
                     icon: Icons.lock_outline,
@@ -112,9 +112,9 @@ class _EditPasswordPageState extends State<EditPasswordPage> {
                       }
                     },
                     icon: const Icon(Icons.save, color: Colors.white),
-                    label: const Text(
-                      "Save Changes",
-                      style: TextStyle(
+                    label: Text(
+                      "save_changes".tr,
+                      style: const TextStyle(
                         color: Colors.white,
                         fontFamily: "Satoshi",
                         fontWeight: FontWeight.bold,

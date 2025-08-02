@@ -74,6 +74,7 @@ class _UserOrdersPageState extends State<UserOrdersPage>
           indicatorColor: Colors.deepOrangeAccent,
           // labelColor: context.theme.colorScheme.secondary,
           labelColor: Colors.black,
+          unselectedLabelColor: context.theme.colorScheme.background,
           labelStyle: const TextStyle(
             fontFamily: "Satoshi",
             fontSize: 16,
@@ -81,17 +82,17 @@ class _UserOrdersPageState extends State<UserOrdersPage>
           ),
           unselectedLabelStyle: TextStyle(
             fontFamily: "Satoshi",
-            color: Colors.grey.shade700,
+            // color: Colors.grey.shade700,
             fontSize: 16,
             fontWeight: FontWeight.w500,
           ),
-          tabs: const [
-            Tab(text: 'pending'),
+          tabs: [
+            Tab(text: 'pending'.tr),
             Tab(
-              text: 'in progress',
+              text: 'in_progress'.tr,
             ),
             Tab(
-              text: 'completed',
+              text: 'completed'.tr,
             ),
           ],
         ),
@@ -173,7 +174,8 @@ class _UserOrdersPageState extends State<UserOrdersPage>
                       // 👈 fake height to enable scroll
                       Center(
                           child: Text(
-                        'No orders yet...',
+                        // 'No orders yet...',
+                        'no_orders'.tr,
                         style: TextStyle(
                           color: context.theme.primaryColorDark,
                           fontSize: 17,
@@ -238,7 +240,8 @@ class _UserOrdersPageState extends State<UserOrdersPage>
                       // 👈 fake height to enable scroll
                       Center(
                           child: Text(
-                        'No orders yet...',
+                        // 'No orders yet...',
+                        'no_orders'.tr,
                         style: TextStyle(
                           color: context.theme.primaryColorDark,
                           fontSize: 17,
@@ -308,7 +311,8 @@ class _UserOrdersPageState extends State<UserOrdersPage>
                       // 👈 fake height to enable scroll
                       Center(
                         child: Text(
-                          'No completed orders yet...\n    Scroll down to refresh',
+                          // 'No completed orders yet...\n    Scroll down to refresh',
+                          'no_orders'.tr,
                           style: TextStyle(
                             color: context.theme.primaryColorDark,
                             fontSize: 17,
@@ -346,11 +350,11 @@ class _UserOrdersPageState extends State<UserOrdersPage>
                           created: controller.completedOrdersList[i].createdAt,
                           updated: controller.completedOrdersList[i].updatedAt,
                           deliveryManId:
-                          controller.completedOrdersList[i].driver.id,
+                              controller.completedOrdersList[i].driver.id,
                           deliveryManName:
-                          controller.completedOrdersList[i].driver.name,
+                              controller.completedOrdersList[i].driver.name,
                           deliveryManPhone:
-                          controller.completedOrdersList[i].driver.phone,
+                              controller.completedOrdersList[i].driver.phone,
                           buttons: false);
                     },
                   ),

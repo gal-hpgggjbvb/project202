@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:project2/bindings/main_binding.dart';
 import 'package:project2/cache/cache_helper.dart';
+import 'package:project2/controller/lang/lang.dart';
+import 'package:project2/controller/lang/lang_controller.dart';
 import 'package:project2/controller/settings_controller.dart';
 import 'package:project2/middleware/route_middleware.dart';
 import 'package:project2/services/settings_services.dart';
@@ -30,7 +33,10 @@ void main() async {
   await CacheHelper().init() ;
   //to take one object of the class
   // await getIt<CacheHelper>().init() ;
+
   Get.put(ThemeController());
+  Get.put(LangController());
+
   runApp( const MyApp());
   // runApp(GetBuilder<ThemeController>(
   //     init: ThemeController(),
@@ -43,8 +49,10 @@ void main() async {
 //   await Get.putAsync(() => SettingsServices().init());
 // }
 // ThemeController _themeController = ThemeController() ;
-ThemeController themeController = Get.put(ThemeController()) ;
-  // late ThemeController themeController;
+
+// ThemeController themeController = Get.put(ThemeController()) ;
+final ThemeController themeController = Get.find();
+final LangController langController = Get.find();
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -55,20 +63,23 @@ class MyApp extends StatelessWidget {
     ///v3 theme working
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      initialBinding: MainBinding(),
       ///theme
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: themeController.getThemeMode, // ✅ Works both on start and change
 
       ///localization
-      locale: Get.deviceLocale,
+      // locale: Get.deviceLocale,
+      locale: langController.iniLanguage,
+      translations: Languages(),
 
       // home: const SignUpPage(),
       getPages: [
         GetPage(name: "/", page: () => const SplashScreen(),
           middlewares:  [
             RouteMiddleware(),
-          ] ,
+          ] ,binding: MainBinding(),
         ),
         GetPage(name: "/intro", page: () => const IntroScreen()),
         GetPage(name: "/signin", page: () => const SignInPage()),
@@ -78,6 +89,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: "/drawer", page: () => const HiddenDrawer()),
       ],
     );
+
     ///v1
     // return GetMaterialApp(
     //   debugShowCheckedModeBanner: false,

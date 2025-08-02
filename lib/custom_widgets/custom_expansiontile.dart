@@ -73,7 +73,8 @@ class CustomExpansionTile extends StatelessWidget {
         // collapsedBackgroundColor: Themes.customLightTheme.colorScheme.primary,
         // backgroundColor: Colors.deepOrange[50],
         leading: Text(
-          'Order ID: $leading',
+          // 'Order ID: $leading',
+          '${'order_id1'.tr}$leading',
           //style: context.theme.textTheme.bodySmall,
           style: TextStyle(
             fontFamily: "Satoshi",
@@ -84,8 +85,10 @@ class CustomExpansionTile extends StatelessWidget {
         ),
         title: Text(
           title.length > 7
-              ? '   Order Name: \n   ${title.substring(0, 7)}..'
-              : '   Order Name: \n   $title',
+              // ? '   Order Name: \n   ${title.substring(0, 7)}..'
+              // : '   Order Name: \n   $title',
+              ? '${'order_name1'.tr}\n   ${title.substring(0, 7)}..'
+              : '${'order_name1'.tr}\n   $title',
           style: TextStyle(
             fontFamily: "Satoshi",
             color: context.theme.colorScheme.primary,
@@ -94,7 +97,8 @@ class CustomExpansionTile extends StatelessWidget {
           ),
         ),
         trailing: Text(
-          'Status : $trailing',
+          // 'Status : $trailing',
+          '${'status1'.tr}$trailing',
           style: TextStyle(
             fontFamily: "Satoshi",
             color: context.theme.colorScheme.primary,
@@ -113,7 +117,7 @@ class CustomExpansionTile extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 50.0),
                     child: Text(
-                      'OrderId :           ',
+                      'order_id2'.tr,
                       // style: context.textTheme.displaySmall,
                       style: TextStyle(
                         fontFamily: "Satoshi",
@@ -144,7 +148,7 @@ class CustomExpansionTile extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 50.0),
                     child: Text(
-                      'OrderName :     ',
+                      'order_name2'.tr,
                       // style: context.textTheme.displaySmall,
                       style: TextStyle(
                         fontFamily: "Satoshi",
@@ -173,7 +177,7 @@ class CustomExpansionTile extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 50.0),
                     child: Text(
-                      'Source :             ',
+                      'source'.tr,
                       // style: context.textTheme.displaySmall,
                       style: TextStyle(
                         fontFamily: "Satoshi",
@@ -205,7 +209,7 @@ class CustomExpansionTile extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 50.0),
                     child: Text(
-                      'Destination :      ',
+                      'destination'.tr,
                       // style: context.textTheme.displaySmall,
                       style: TextStyle(
                         fontFamily: "Satoshi",
@@ -231,7 +235,7 @@ class CustomExpansionTile extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 50.0),
                     child: Text(
-                      'Status :              ',
+                      'status2'.tr,
                       // style: context.textTheme.displaySmall,
                       style: TextStyle(
                         fontFamily: "Satoshi",
@@ -256,7 +260,7 @@ class CustomExpansionTile extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 50.0),
                     child: Text(
-                      'Createdat :        ',
+                      'created'.tr,
                       // style: context.textTheme.displaySmall,
                       style: TextStyle(
                         fontFamily: "Satoshi",
@@ -272,133 +276,134 @@ class CustomExpansionTile extends StatelessWidget {
                   ),
                 ],
               ),
-              if(updated != null)
-              addVerticalSpace(7),
+              if (updated != null) addVerticalSpace(7),
+
               ///todo updatedat
-              if(updated != null)
-              Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 50.0),
-                    child: Text(
-                      'Updatedat :        ',
-                      // style: context.textTheme.displaySmall,
-                      style: TextStyle(
-                        fontFamily: "Satoshi",
-                        color: context.theme.colorScheme.primary,
-                        fontSize: 15,
-                        fontWeight: FontWeight.normal, // typing style
+              if (updated != null)
+                Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 50.0),
+                      child: Text(
+                        'updated'.tr,
+                        // style: context.textTheme.displaySmall,
+                        style: TextStyle(
+                          fontFamily: "Satoshi",
+                          color: context.theme.colorScheme.primary,
+                          fontSize: 15,
+                          fontWeight: FontWeight.normal, // typing style
+                        ),
                       ),
                     ),
-                  ),
-                  Text(
-                    '$updated',
-                    style: context.textTheme.displaySmall,
-                  ),
-                ],
-              ),
+                    Text(
+                      '$updated',
+                      style: context.textTheme.displaySmall,
+                    ),
+                  ],
+                ),
               addVerticalSpace(10),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15.0),
                 child: Divider(),
               ),
-              if(deliveryManId != null)
-              addVerticalSpace(10),
-              ///delivery man info
-              if(deliveryManId != null)
-              Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 50.0),
-                    child: Text(
-                      'DeliveryMan ID :                   ',
-                      // style: context.textTheme.displaySmall,
-                      style: TextStyle(
-                        fontFamily: "Satoshi",
-                        color: context.theme.colorScheme.primary,
-                        fontSize: 15,
-                        fontWeight: FontWeight.normal, // typing style
+              if (deliveryManId != null) addVerticalSpace(10),
+
+              ///todo delivery man info
+              if (deliveryManId != null)
+                Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 50.0),
+                      child: Text(
+                        // 'DeliveryMan ID :                   ',
+                        'delivery_man_id'.tr,
+                        // style: context.textTheme.displaySmall,
+                        style: TextStyle(
+                          fontFamily: "Satoshi",
+                          color: context.theme.colorScheme.primary,
+                          fontSize: 15,
+                          fontWeight: FontWeight.normal, // typing style
+                        ),
                       ),
                     ),
-                  ),
-                  Text(
-                    '$deliveryManId',
-                    style: context.textTheme.displaySmall,
-                  ),
-                ],
-              ),
-              if(deliveryManId != null)
-              addVerticalSpace(7),
-              if(deliveryManId != null)
-              Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 50.0),
-                    child: Text(
-                      'DeliveryMan Name :              ',
-                      // style: context.textTheme.displaySmall,
-                      style: TextStyle(
-                        fontFamily: "Satoshi",
-                        color: context.theme.colorScheme.primary,
-                        fontSize: 15,
-                        fontWeight: FontWeight.normal, // typing style
+                    Text(
+                      '$deliveryManId',
+                      style: context.textTheme.displaySmall,
+                    ),
+                  ],
+                ),
+              if (deliveryManId != null) addVerticalSpace(7),
+              if (deliveryManId != null)
+                Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 50.0),
+                      child: Text(
+                        // 'DeliveryMan Name :              ',
+                        'delivery_man_name'.tr,
+                        // style: context.textTheme.displaySmall,
+                        style: TextStyle(
+                          fontFamily: "Satoshi",
+                          color: context.theme.colorScheme.primary,
+                          fontSize: 15,
+                          fontWeight: FontWeight.normal, // typing style
+                        ),
                       ),
                     ),
-                  ),
-                  Text(
-                    deliveryManName ?? 'not set',
-                    style: context.textTheme.displaySmall,
-                  ),
-                ],
-              ),
-              if(deliveryManId != null)
-              addVerticalSpace(7),
-              if(deliveryManId != null)
-              Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 50.0),
-                    child: Text(
-                      'DeliveryMan Phone :             ',
-                      // style: context.textTheme.displaySmall,
-                      style: TextStyle(
-                        fontFamily: "Satoshi",
-                        color: context.theme.colorScheme.primary,
-                        fontSize: 15,
-                        fontWeight: FontWeight.normal, // typing style
+                    Text(
+                      deliveryManName ?? 'not set',
+                      style: context.textTheme.displaySmall,
+                    ),
+                  ],
+                ),
+              if (deliveryManId != null) addVerticalSpace(7),
+              if (deliveryManId != null)
+                Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 50.0),
+                      child: Text(
+                        // 'DeliveryMan Phone :             ',
+                        'delivery_man_phone'.tr,
+                        // style: context.textTheme.displaySmall,
+                        style: TextStyle(
+                          fontFamily: "Satoshi",
+                          color: context.theme.colorScheme.primary,
+                          fontSize: 15,
+                          fontWeight: FontWeight.normal, // typing style
+                        ),
                       ),
                     ),
-                  ),
-                  Text(
-                    deliveryManPhone ?? 'not set',
-                    style: context.textTheme.displaySmall,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 30.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        Clipboard.setData(ClipboardData(text: deliveryManPhone!));
-                        Get.snackbar("Copied", "phone number copied");
-                      },
-                      child: Icon(
-                        Icons.copy,
-                        color: Colors.grey.shade500,
-                        size: 17,
+                    Text(
+                      deliveryManPhone ?? 'not set',
+                      style: context.textTheme.displaySmall,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30.0,right: 30),
+                      child: GestureDetector(
+                        onTap: () {
+                          Clipboard.setData(
+                              ClipboardData(text: deliveryManPhone!));
+                          Get.snackbar("Copied", "phone number copied");
+                        },
+                        child: Icon(
+                          Icons.copy,
+                          color: Colors.grey.shade500,
+                          size: 17,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              if(deliveryManId != null)
-              addVerticalSpace(7),
+                  ],
+                ),
+              if (deliveryManId != null) addVerticalSpace(7),
               //todo buttons
               buttons!
                   ? Row(
@@ -432,7 +437,8 @@ class CustomExpansionTile extends StatelessWidget {
                                             children: [
                                               Center(
                                                   child: Text(
-                                                'Edit Order $id',
+                                                // 'Edit Order $id',
+                                                '${'edit_order'.tr}$id',
                                                 style: TextStyle(
                                                   fontFamily: "Satoshi",
                                                   color: context
@@ -450,22 +456,22 @@ class CustomExpansionTile extends StatelessWidget {
                                                     fetchOrdersController
                                                         .editNameController,
                                                 // controller: orderController.objectNameController,
-                                                hintText: 'type here',
+                                                hintText: 'type'.tr,
                                                 labelText:
-                                                    'what do you want to deliver',
+                                                    'what'.tr,
                                               ),
                                               CustomOrderField(
                                                 controller:
                                                     fetchOrdersController
                                                         .editSourceController,
-                                                hintText: 'type here',
-                                                labelText: 'pickup location',
+                                                hintText: 'type'.tr,
+                                                labelText: 'pickup'.tr,
                                               ),
                                               CustomOrderField(
                                                 controller: fetchOrdersController
                                                     .editDestinationController,
-                                                hintText: 'type here',
-                                                labelText: 'drop location',
+                                                hintText: 'type'.tr,
+                                                labelText: 'drop'.tr,
                                               ),
                                               addVerticalSpace(15),
                                               //todo bottom sheet button
@@ -490,7 +496,8 @@ class CustomExpansionTile extends StatelessWidget {
                                                   color: context.theme
                                                       .colorScheme.onBackground,
                                                   child: Text(
-                                                    "Edit my Order",
+                                                    // "Edit my Order",
+                                                    "edit_order".tr,
                                                     style: TextStyle(
                                                       fontFamily: "Satoshi",
                                                       color: context
@@ -526,9 +533,9 @@ class CustomExpansionTile extends StatelessWidget {
                           // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                           minWidth: 5,
                           height: 10,
-                          child: const Text(
-                            "Edit",
-                            style: TextStyle(
+                          child: Text(
+                            "edit".tr,
+                            style: const TextStyle(
                               fontFamily: "Satoshi",
                               color: Colors.blue,
                               fontSize: 15,
@@ -549,7 +556,8 @@ class CustomExpansionTile extends StatelessWidget {
                               dialogType: DialogType.warning,
                               animType: AnimType.rightSlide,
                               dismissOnTouchOutside: false,
-                              title: 'Delete Order with ID $id ?',
+                              // title: 'del$id ?',
+                              title: '${'delete_order'.tr}$id${'question_mark'.tr}',
                               titleTextStyle: TextStyle(
                                 fontFamily: "Satoshi",
                                 color: context.theme.colorScheme.onSecondary,
@@ -561,8 +569,8 @@ class CustomExpansionTile extends StatelessWidget {
                               dialogBackgroundColor:
                                   context.theme.primaryColorLight,
                               dialogBorderRadius: BorderRadius.circular(30),
-                              btnOkText: 'Ok',
-                              btnCancelText: 'Cancel',
+                              btnOkText: 'yes'.tr,
+                              btnCancelText: 'cancel'.tr,
                               buttonsTextStyle: const TextStyle(
                                 fontFamily: "Satoshi",
                                 color: Colors.white,
@@ -581,9 +589,9 @@ class CustomExpansionTile extends StatelessWidget {
                           // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                           minWidth: 5,
                           height: 10,
-                          child: const Text(
-                            "Delete",
-                            style: TextStyle(
+                          child: Text(
+                            "delete".tr,
+                            style: const TextStyle(
                               fontFamily: "Satoshi",
                               color: Colors.red,
                               fontSize: 15,

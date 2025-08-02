@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:project2/custom_widgets/custom_setting_item.dart';
 import 'package:project2/functions/add_space.dart';
 import 'package:project2/view/auth/sign_in_page.dart';
+import 'package:project2/view/settings/languages_page.dart';
 import 'package:project2/view/settings/terms_page.dart';
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 
@@ -43,7 +44,8 @@ class _SettingsPageState extends State<SettingsPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'Settings',
+                // 'Settings',
+                'settings'.tr,
                 style: TextStyle(
                   fontFamily: "Satoshi",
                   color: context.theme.colorScheme.onSecondary,
@@ -57,7 +59,8 @@ class _SettingsPageState extends State<SettingsPage> {
                 icon: Icons.nightlight_round,
                 iconBackgroundColor: Colors.grey.shade800,
                 iconColor: Colors.white,
-                title: 'Dark Mode',
+                // title: 'Dark Mode',
+                title: 'dark'.tr,
                 trailing: Switch(
                   activeColor: Colors.deepOrange,
                   inactiveThumbColor: Colors.orange,
@@ -90,19 +93,22 @@ class _SettingsPageState extends State<SettingsPage> {
                   // },
                 ),
               ),
-              //todo change language pop menu
+              //todo change language
               CustomSettingItem(
-                title: 'Change Language',
+                // title: 'Change Language',
+                title: 'change_language'.tr,
                 icon: Icons.language,
                 iconColor: Colors.white,
                 iconBackgroundColor: Colors.teal.shade400,
+                onTap: () => Get.to(() => LanguagesPage()),
               ),
               //todo notification
               CustomSettingItem(
                 icon: Icons.notifications,
                 iconBackgroundColor: Colors.deepPurple.shade300,
                 iconColor: Colors.white,
-                title: 'Notification',
+                // title: 'Notification',
+                title: 'notifications'.tr,
                 trailing: Switch(
                   activeColor: Colors.deepOrange,
                   inactiveThumbColor: Colors.orange,
@@ -126,7 +132,8 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               //todo terms
               CustomSettingItem(
-                title: 'Terms & Policy',
+                // title: 'Terms & Policy',
+                title: 'terms'.tr,
                 icon: Icons.description,
                 iconColor: Colors.white,
                 // iconBackgroundColor: Colors.brown.shade400,
@@ -135,7 +142,8 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               //todo contact
               CustomSettingItem(
-                title: 'Contact Us',
+                // title: 'Contact Us',
+                title: 'contact'.tr,
                 icon: Icons.mail,
                 iconColor: Colors.white,
                 iconBackgroundColor: Colors.blue,
@@ -150,7 +158,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                     animType: AnimType.topSlide,
                     dialogBorderRadius: BorderRadius.circular(20),
-                    title: "Contact Us at :",
+                    // title: "Contact Us at :",
+                    title: "contact_us".tr,
                     titleTextStyle: TextStyle(
                       fontFamily: "Satoshi",
                       color: context.theme.colorScheme.onSecondary,
@@ -164,8 +173,10 @@ class _SettingsPageState extends State<SettingsPage> {
                       fontSize: 17,
                       fontWeight: FontWeight.normal, // typing style
                     ),
-                    btnOkText: "Copy Email",
-                    btnCancelText: "Close",
+                    // btnOkText: "Copy Email",
+                    btnOkText: "copy".tr,
+                    // btnCancelText: "Close",
+                    btnCancelText: "close".tr,
                     buttonsTextStyle: const TextStyle(
                       fontFamily: "Satoshi",
                       color: Colors.white,
@@ -183,7 +194,8 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               //todo sign out button
               CustomSettingItem(
-                  title: 'Sign Out',
+                  // title: 'Sign Out',
+                  title: 'sign_out'.tr,
                   icon: Icons.logout,
                   iconColor: Colors.white,
                   iconBackgroundColor: Colors.red.shade500,
@@ -194,16 +206,20 @@ class _SettingsPageState extends State<SettingsPage> {
                             customHeader: const Icon(Icons.logout,
                                 color: Colors.red, size: 50),
                             animType: AnimType.bottomSlide,
-                            title: 'Sign Out',
+                            // title: 'Sign Out',
+                            title: 'sign_out'.tr,
                             titleTextStyle: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
                             ),
                             desc:
-                                'Are you sure you want to sign out?\nYou will need to sign in again.',
-                            btnCancelText: "Cancel",
+                                // 'Are you sure you want to sign out?\nYou will need to sign in again.',
+                                'sign_sure'.tr,
+                            // btnCancelText: "Cancel",
+                            btnCancelText: "cancel".tr,
                             btnCancelOnPress: () {},
-                            btnOkText: "Sign Out",
+                            // btnOkText: "Sign Out",
+                            btnOkText: "sign_out".tr,
                             btnOkOnPress: () async {
                               await CacheHelper().clearData();
                               // await CacheHelper().removeData(key: 'signed'); // or just remove "signed", "token", etc.
@@ -217,7 +233,8 @@ class _SettingsPageState extends State<SettingsPage> {
                   }),
               //todo delete account
               CustomSettingItem(
-                  title: 'Delete Account',
+                  // title: 'Delete Account',
+                  title: 'delete_account'.tr,
                   icon: Icons.delete_forever,
                   iconColor: Colors.white,
                   iconBackgroundColor: Colors.red.shade900,
@@ -228,16 +245,19 @@ class _SettingsPageState extends State<SettingsPage> {
                             customHeader: const Icon(Icons.delete_forever,
                                 color: Colors.red, size: 55),
                             animType: AnimType.bottomSlide,
-                            title: 'Delete Account!',
+                            // title: 'Delete Account!',
+                            title: 'delete_mark'.tr,
                             titleTextStyle: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
                                 color: Colors.red),
                             desc:
-                                'Are you sure you want to delete your account?\nAll your data will be deleted!.',
-                            btnCancelText: "Cancel",
+                                // 'Are you sure you want to delete your account?\nAll your data will be deleted!.',
+                                'delete_sure'.tr,
+                            // btnCancelText: "Cancel",
+                            btnCancelText: "cancel".tr,
                             btnCancelOnPress: () {},
-                            btnOkText: "Delete Account",
+                            btnOkText: "delete_account".tr,
                             btnOkOnPress: () async {
                               // Clear user session
                               //must be delete account from data base
@@ -254,7 +274,8 @@ class _SettingsPageState extends State<SettingsPage> {
               //todo app version
               ListTile(
                 title: Text(
-                  'Version  1.0.0',
+                  // 'Version  1.0.0',
+                  'version'.tr,
                   style: context.theme.textTheme.bodyMedium,
                 ),
               ),
@@ -264,9 +285,9 @@ class _SettingsPageState extends State<SettingsPage> {
                   height: 0,
                 ),
               ),
-              const Text(
-                'Version  1.0.0',
-                style: TextStyle(fontSize: 15),
+              Text(
+                'version'.tr,
+                style: const TextStyle(fontSize: 15),
               ),
             ],
           ),

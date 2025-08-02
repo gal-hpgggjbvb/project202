@@ -28,7 +28,8 @@ class _TermsPageState extends State<TermsPage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          "Terms & Privacy Policy",
+          // "Terms & Privacy Policy",
+          "terms".tr,
           style: TextStyle(
               fontFamily: "Satoshi",
               color: context.theme.colorScheme.onSecondary,
@@ -47,36 +48,26 @@ class _TermsPageState extends State<TermsPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SectionHeader(title: "1. Terms of Service"),
-                    const SectionText(
-                      text:
-                          "By using this app, you agree to comply with our terms and conditions. "
-                          "You are responsible for maintaining the confidentiality of your account and password...",
+                    SectionHeader(title: "terms_of_service".tr),
+                    SectionText(
+                      text: 'terms1'.tr ),
+                    addVerticalSpace(20),
+                    SectionHeader(title: "user_responsibilities".tr),
+                    SectionText(
+                      text: 'user1'.tr,
                     ),
                     addVerticalSpace(20),
-                    const SectionHeader(title: "2. User Responsibilities"),
-                    const SectionText(
-                      text:
-                          "You agree not to misuse the app in any way, including but not limited to fraudulent activity, abuse, or spreading misinformation.",
-                    ),
+                    SectionHeader(title: "privacy_policy".tr),
+                    SectionText(
+                      text: 'policy1'.tr),
                     addVerticalSpace(20),
-                    const SectionHeader(title: "3. Privacy Policy"),
-                    const SectionText(
-                      text:
-                          "We respect your privacy. Any personal data collected will be stored securely and never sold or shared with third parties without your consent.",
-                    ),
+                    SectionHeader(title: "data_usage".tr),
+                    SectionText(
+                      text: 'data1'.tr),
                     addVerticalSpace(20),
-                    const SectionHeader(title: "4. Data Usage"),
-                    const SectionText(
-                      text:
-                          "We may collect usage statistics to improve the app. This data is anonymized and used for analysis only.",
-                    ),
-                    addVerticalSpace(20),
-                    const SectionHeader(title: "5. Updates to Terms"),
-                    const SectionText(
-                      text:
-                          "These terms may be updated from time to time. You will be notified of significant changes within the app or via email.",
-                    ),
+                    SectionHeader(title: "update_terms".tr),
+                    SectionText(
+                      text: 'update1'.tr),
                     addVerticalSpace(20),
                   ],
                 ),
@@ -103,8 +94,9 @@ class _TermsPageState extends State<TermsPage> {
                       child: Text(
                         // accepted ? "You already accepted the terms." :
                         acceptedTerms
-                            ? "You already accepted the terms."
-                            : "I have read and accept the Terms and Privacy Policy.",
+                            // ? "You already accepted the terms."
+                            // : "I have read and accept the Terms and Privacy Policy.",
+                            ? 'read_check2'.tr : 'read_check1'.tr ,
                         style: TextStyle(
                           fontFamily: "Satoshi",
                           fontSize: 14,
@@ -126,8 +118,8 @@ class _TermsPageState extends State<TermsPage> {
                             dialogType: DialogType.success,
                             animType: AnimType.scale,
                             dismissOnTouchOutside: false,
-                            title: "Accepted!",
-                            desc: "Thank you for agreeing to the terms.",
+                            title: "accepted".tr,
+                            desc: "thanks".tr,
                             titleTextStyle: TextStyle(
                               fontFamily: "Satoshi",
                               color: context.theme.colorScheme.onSecondary,
@@ -143,7 +135,7 @@ class _TermsPageState extends State<TermsPage> {
                             dialogBackgroundColor:
                                 context.theme.primaryColorLight,
                             dialogBorderRadius: BorderRadius.circular(30),
-                            btnOkText: 'Ok',
+                            btnOkText: 'ok'.tr,
                             buttonsTextStyle: const TextStyle(
                               fontFamily: "Satoshi",
                               color: Colors.white,
@@ -167,9 +159,10 @@ class _TermsPageState extends State<TermsPage> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 32, vertical: 14),
                   ),
-                  child: const Text(
-                    "Accept and Continue",
-                    style: TextStyle(
+                  child: Text(
+                    // "Accept and Continue",
+                    "accept".tr,
+                    style: const TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                 ),

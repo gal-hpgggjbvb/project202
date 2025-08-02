@@ -41,13 +41,15 @@ ThemeData lightTheme = ThemeData(
 
   //todo colorScheme
   colorScheme: ColorScheme.light(
-    background: Colors.grey.shade500,
+    background: Colors.grey.shade700,
     onBackground: Colors.orangeAccent,
     primary: Colors.black,
     // onPrimary: const Color(0xFFFDF8F3),
     onPrimary: Colors.green,
     secondary: Colors.white,
     onSecondary: Colors.black,
+    surface: const Color(0xFFFDF8F3),
+    onSurface: Colors.black,
   ),
 
   //todo floating
@@ -263,27 +265,27 @@ ThemeData darkTheme = ThemeData(
   ),
 
   //todo tabBar
-  tabBarTheme: TabBarTheme(
-    labelColor: Colors.orange,
-    labelStyle: const TextStyle(
-      fontFamily: "Satoshi",
-      fontSize: 15,
-      fontWeight: FontWeight.w700, // typing style
-    ),
-    unselectedLabelColor: Colors.orange.shade300,
-    indicatorSize: TabBarIndicatorSize.tab,
-    indicator: const UnderlineTabIndicator(
-      borderSide: BorderSide(width: 3.0, color: Colors.orange),
-    ),
-    //todo another indicator theme
-    // indicator: BoxDecoration(
-    //   borderRadius: BorderRadius.circular(50),
-    //   color: Colors.orange.withOpacity(0.2),
-    // ),
-
-    // labelPadding: EdgeInsets.symmetric(horizontal: 5),
-    indicatorColor: Colors.deepOrange,
-  ),
+  // tabBarTheme: TabBarTheme(
+  //   labelColor: Colors.orange,
+  //   labelStyle: const TextStyle(
+  //     fontFamily: "Satoshi",
+  //     fontSize: 15,
+  //     fontWeight: FontWeight.w700, // typing style
+  //   ),
+  //   unselectedLabelColor: Colors.orange.shade300,
+  //   indicatorSize: TabBarIndicatorSize.tab,
+  //   indicator: const UnderlineTabIndicator(
+  //     borderSide: BorderSide(width: 3.0, color: Colors.orange),
+  //   ),
+  //   //todo another indicator theme
+  //   // indicator: BoxDecoration(
+  //   //   borderRadius: BorderRadius.circular(50),
+  //   //   color: Colors.orange.withOpacity(0.2),
+  //   // ),
+  //
+  //   // labelPadding: EdgeInsets.symmetric(horizontal: 5),
+  //   indicatorColor: Colors.deepOrange,
+  // ),
 
   //todo colorScheme
   colorScheme: ColorScheme.dark(
@@ -306,6 +308,12 @@ ThemeData darkTheme = ThemeData(
 
     ///used
     onSecondary: Colors.white,
+
+    ///lang tile
+    surface: const Color(0xFF262D30),
+
+    ///hidden drawer button
+    onSurface: Colors.white,
   ),
 
   //todo floating

@@ -113,16 +113,17 @@ class _ProfilePageState extends State<ProfilePage> {
                   //todo name
                   CustomListTile(
                     iconData: Icons.person,
-                    title: 'Name',
+                    // title: 'Name',
+                    title: 'name'.tr,
                     subtitle:
                         // '${CacheHelper().getData(key: 'name') ?? 'name here'}',
-                        controller.name ?? 'Not set',
+                        controller.name ?? 'not_set'.tr,
                   ),
 
                   //todo id
                   CustomListTile(
                     iconData: Icons.badge,
-                    title: 'ID',
+                    title: 'id'.tr,
                     subtitle:
                         // '${CacheHelper().getData(key: 'id')?.substring(0, 7) ?? 'id'}...',
                         '${controller.id}',
@@ -132,19 +133,19 @@ class _ProfilePageState extends State<ProfilePage> {
                   //todo phone
                   CustomListTile(
                     iconData: Icons.phone,
-                    title: 'Phone',
+                    title: 'phone'.tr,
                     subtitle:
                         // '${CacheHelper().getData(key: 'phone') ?? 'Not set'}',
-                        controller.phone ?? 'Not set',
+                        controller.phone ?? 'not_set'.tr,
                   ),
 
                   //todo email
                   CustomListTile(
                     iconData: Icons.email,
-                    title: 'Email',
+                    title: 'email'.tr,
                     subtitle:
                         // '${CacheHelper().getData(key: 'email') ?? 'email here'}',
-                        controller.email ?? 'Not set',
+                        controller.email ?? 'not_set'.tr,
                   ),
 
                   addVerticalSpace(90),
@@ -155,7 +156,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       icon: Icon(Icons.edit,
                           color: context.theme.colorScheme.secondary),
                       label: Text(
-                        "Edit Profile",
+                        "edit_profile".tr,
                         style: TextStyle(
                             fontFamily: "Satoshi",
                             // color: Colors.white,

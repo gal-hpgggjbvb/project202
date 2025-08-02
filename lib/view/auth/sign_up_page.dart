@@ -70,7 +70,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       addVerticalSpace(20),
 
                       Text(
-                        "Hello..",
+                        // "Hello..",
+                        'hello'.tr,
                         style: TextStyle(
                             fontFamily: "Satoshi",
                             color: context.theme.primaryColorDark,
@@ -78,7 +79,8 @@ class _SignUpPageState extends State<SignUpPage> {
                             fontWeight: FontWeight.w600),
                       ),
                       Text(
-                        "Let's Make a New Account",
+                        // "Let's Make a New Account",
+                        'make_account'.tr,
                         style: TextStyle(
                             fontFamily: "Satoshi",
                             color: context.theme.primaryColorDark,
@@ -92,7 +94,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       CustomTextFormField(
                         controller: signUpController.usernameController,
                         textInputType: TextInputType.text,
-                        hintText: 'Your Name',
+                        hintText: 'sign_name'.tr,
                         maxLength: 20,
                         isPrefixIcon: true,
                         icon: Icons.person,
@@ -102,7 +104,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       CustomTextFormField(
                         controller: signUpController.usernumberController,
                         textInputType: TextInputType.phone,
-                        hintText: 'Your Phone Number',
+                        hintText: 'sign_phone'.tr,
                         maxLength: 10,
                         isPrefixIcon: true,
                         icon: Icons.phone,
@@ -112,7 +114,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       CustomTextFormField(
                           controller: signUpController.emailController,
                           textInputType: TextInputType.emailAddress,
-                          hintText: 'Your Email',
+                          hintText: 'sign_email'.tr,
                         isPrefixIcon: true,
                         icon: Icons.email,
                       ),
@@ -136,7 +138,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       CustomTextFormField(
                         controller: signUpController.passwordController,
                         textInputType: TextInputType.text,
-                        hintText: 'Your Password',
+                        hintText: 'sign_password'.tr,
                         isPassword: true,
                         isPrefixIcon: true,
                         icon: Icons.password,
@@ -176,7 +178,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       CustomTextFormField(
                         controller: signUpController.confirmPasswordController,
                         textInputType: TextInputType.text,
-                        hintText: 'Confirm Your Password',
+                        hintText: 'sign_confirm_password'.tr,
                         isPassword: true,
                         compareWithController:
                             signUpController.passwordController,
@@ -259,9 +261,9 @@ class _SignUpPageState extends State<SignUpPage> {
                                       ? const CircularProgressIndicator(
                                           color: Colors.white,
                                         )
-                                      : const Text(
-                                          "SignUp",
-                                          style: TextStyle(
+                                      : Text(
+                                          "sign_up".tr,
+                                          style: const TextStyle(
                                               fontFamily: "Satoshi",
                                               color: Colors.white,
                                               fontSize: 20,
@@ -277,7 +279,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Already Have An Account?",
+                            // "Already Have An Account?",
+                            'already_have'.tr,
                             style: TextStyle(
                               fontFamily: "Satoshi",
                               color: context.theme.colorScheme.onSecondary,
@@ -290,7 +293,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               Get.off(() => const SignInPage());
                             },
                             child: Text(
-                              "Sign In",
+                              "register".tr,
                               style: TextStyle(
                                 fontFamily: "Satoshi",
                                 color: context.theme.primaryColor,
